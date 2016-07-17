@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safewhere.Samples.RestApi.Domain", "Safewhere.Samples.RestApi.Domain\Safewhere.Samples.RestApi.Domain.csproj", "{ED2584F3-DC4D-419B-BED3-72D3624FC6A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safewhere.Samples.RestApi.UserSample", "Safewhere.Samples.RestApi.UserSample\Safewhere.Samples.RestApi.UserSample.csproj", "{400ABE6A-D8BE-4262-88FA-207C356C5CF5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED2584F3-DC4D-419B-BED3-72D3624FC6A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED2584F3-DC4D-419B-BED3-72D3624FC6A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED2584F3-DC4D-419B-BED3-72D3624FC6A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED2584F3-DC4D-419B-BED3-72D3624FC6A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{400ABE6A-D8BE-4262-88FA-207C356C5CF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{400ABE6A-D8BE-4262-88FA-207C356C5CF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{400ABE6A-D8BE-4262-88FA-207C356C5CF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{400ABE6A-D8BE-4262-88FA-207C356C5CF5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
