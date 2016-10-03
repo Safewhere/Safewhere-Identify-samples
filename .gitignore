@@ -234,3 +234,15 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+/Safewhere.Samples.STS/Deployment/Safewhere.Samples.STS.ClaimAppService/*.asax
+/Safewhere.Samples.STS/Deployment/Safewhere.Samples.STS.ClaimAppService/*.svc
+/Safewhere.Samples.STS/Deployment/Safewhere.Samples.STS.ClaimAppService/*.config
+/Safewhere.Samples.STS/Deployment/Safewhere.Samples.STS.WebsiteDemo/*.aspx
+/Safewhere.Samples.STS/Deployment/Safewhere.Samples.STS.WebsiteDemo/*.asax
+/Safewhere.Samples.STS/Deployment/Safewhere.Samples.STS.WebsiteDemo/*.config
+/Safewhere.Samples.STS/Deployment/Safewhere.Samples.STS.WebsiteDemo/*.nemlogin-template
+/Safewhere.Samples.STS/Deployment/Safewhere.Samples.STS.WebsiteDemo/*.ashx
+/Safewhere.Samples.STS/Deployment/Safewhere.Samples.STS.WebsiteDemo/images/*.png
+/Safewhere.Samples.STS/Deployment/Safewhere.Samples.STS.WebsiteDemo/images/*.gif
+/Safewhere.Samples.STS/Deployment/Safewhere.Samples.STS.WebsiteDemo/images/*.jpg
+/Safewhere.Samples.STS/Deployment/Safewhere.Samples.STS.WebsiteDemo/*.Master
