@@ -43,8 +43,7 @@ namespace Safewhere.Samples.STS.WebsiteDemo
 
         #region IAction Members
 
-        public void LoginAction(AbstractEndpointHandler handler, HttpContext context,
-            dk.nita.saml20.Saml20Assertion assertion)
+        public void LoginAction(AbstractEndpointHandler handler, HttpContext context, Saml20Assertion assertion)
         {
             if (handler == null)
             {
@@ -61,9 +60,6 @@ namespace Safewhere.Samples.STS.WebsiteDemo
                 Logging.Instance.Error("SamlPrincipalAction - LogOnAction assertion is null");
                 throw new ArgumentNullException("assertion");
             }
-            //var idpEndpoint = handler.GetEndpoint((string)context.Session[AbstractEndpointHandler.IdpTempSessionKey]);
-            //Logging.Instance.Information("SamlPricipalAction - LogOnAction: idpEndpoint Id = {0}, Name = {1} OmitAssertionSignatureCheck = {2}", idpEndpoint.Id, idpEndpoint.Name, idpEndpoint.OmitAssertionSignatureCheck);
-
             Saml2SecurityTokenHandler securityTokenHandler =
                 this.sessionAuthModule.FederationConfiguration.IdentityConfiguration.SecurityTokenHandlers[
                     typeof (Saml2SecurityToken)] as Saml2SecurityTokenHandler;
@@ -72,37 +68,17 @@ namespace Safewhere.Samples.STS.WebsiteDemo
             if (securityTokenHandler != null)
             {
                 var assertionXml = assertion.XmlAssertion;
-                System.IO.StringReader reader = new System.IO.StringReader(assertionXml.OuterXml);
-                XmlReader xReader = XmlReader.Create(reader);
-                var bootstraptoken = securityTokenHandler.ReadToken(xReader);
-                HttpContext.Current.Session["boostraptoken"] = bootstraptoken;
+                using (System.IO.StringReader reader = new System.IO.StringReader(assertionXml.OuterXml))
+                {
+                    XmlReader xReader = XmlReader.Create(reader);
+                    var bootstraptoken = securityTokenHandler.ReadToken(xReader);
+                    HttpContext.Current.Session["boostraptoken"] = bootstraptoken;
+                }
             }
-
-            //var nameClaimType = SamlPrincipalAction.DetermineNameClaimType(idpEndpoint, securityTokenHandler);
-            //var roleClaimType = SamlPrincipalAction.DetermineRoleClaimType(idpEndpoint, securityTokenHandler);
-            //Logging.Instance.Information("SamlPricipalAction - LogOnAction: nameClaimType = {0}, roleClaimType = {1}", nameClaimType, roleClaimType);
-
-            //DateTime validTo;
-            //if (assertion.Conditions != null && assertion.Conditions.NotOnOrAfter.HasValue)
-            //{
-            //    Logging.Instance.Information("Creating CreateSessionSecurityToken. Assertion.Conditions.NotOnOrAfter exists. Use it for validTo.");
-            //    validTo = assertion.Conditions.NotOnOrAfter.Value;
-            //}
-            //else
-            //{
-            //    Logging.Instance.Information("Creating CreateSessionSecurityToken. Either Assertion.Conditions is null or its NotOnOrAfter doesn't exist. Use UtcNow + SessionSecurityTokenHandler.DefaultTokenLifetime for validTo.");
-            //    validTo = DateTime.UtcNow + SessionSecurityTokenHandler.DefaultTokenLifetime;
-            //}
-
-            var principal = BuildClaimsPrincipal(assertion);
-            
-            //var sessionSecurityToken = this.sessionAuthModule.CreateSessionSecurityToken(principal, string.Empty, DateTime.UtcNow, validTo, false);
-            //this.sessionAuthModule.AuthenticateSessionSecurityToken(sessionSecurityToken, true);
-
-            //SaveNameId(context, assertion);
+            BuildClaimsPrincipal(assertion);
         }
 
-        private ClaimsPrincipal BuildClaimsPrincipal(dk.nita.saml20.Saml20Assertion assertion)
+        private void BuildClaimsPrincipal(Saml20Assertion assertion)
         {
             Saml2Assertion bootstrapAssertion = CreateSaml2Assertion(assertion); 
 
@@ -130,13 +106,12 @@ namespace Safewhere.Samples.STS.WebsiteDemo
                 }
             }
             claimsPrincipal.AddIdentity(claimsIdentity);
-            //ClaimsPrincipal.Current.AddIdentity(claimsIdentity);
             if (string.IsNullOrEmpty(claimsPrincipal.Identity.Name))
             {
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "No value set for NameClaimType: '{0}'", claimsIdentity.NameClaimType));
             }
 
-            return claimsPrincipal;
+            return;
         }
 
         private Saml2Assertion CreateSaml2Assertion(Saml20Assertion assertion)
@@ -149,17 +124,6 @@ namespace Safewhere.Samples.STS.WebsiteDemo
             }
             result.Statements.Add(new Saml2AttributeStatement(attributes));
             return result;
-        }
-
-        private static void SaveNameId(HttpContext context, dk.nita.saml20.Saml20Assertion assertion)
-        {
-            if (assertion.Subject != null &&
-                !string.IsNullOrEmpty(assertion.Subject.Value))
-            {
-                string nameId = assertion.Subject.Value;
-                Logging.Instance.Information("SamlPrincipalAction - SaveNameId nameId = {0}", nameId);
-                context.Session["http://www.oasis-open.org/committees/security"] = nameId;
-            }
         }
 
         public void LogoutAction(AbstractEndpointHandler handler, HttpContext context,
