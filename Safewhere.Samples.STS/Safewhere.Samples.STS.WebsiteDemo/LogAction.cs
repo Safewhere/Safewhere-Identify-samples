@@ -17,7 +17,7 @@ using Safewhere.Samples.STS.Common;
 
 #endregion
 
-namespace Safewhere.samples.STS.WebsiteDemo
+namespace Safewhere.Samples.STS.WebsiteDemo
 {
     public class LogAction : IAction
     {

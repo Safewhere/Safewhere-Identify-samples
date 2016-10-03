@@ -1,13 +1,10 @@
 #region
 
 using System;
-using System.IdentityModel.Services;
 using System.IdentityModel.Tokens;
-using System.IO;
 using System.Text;
 using System.Web;
 using System.Web.UI;
-using System.Xml;
 using dk.nita.saml20.config;
 using dk.nita.saml20.Logging;
 using dk.nita.saml20.protocol;
@@ -16,7 +13,7 @@ using Safewhere.Samples.STS.Common.ClaimAppService;
 
 #endregion
 
-namespace Safewhere.samples.STS.WebsiteDemo
+namespace Safewhere.Samples.STS.WebsiteDemo
 {
     public partial class WebForm1 : Page
     {

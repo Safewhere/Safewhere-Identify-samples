@@ -6,7 +6,7 @@ using dk.nita.saml20.config;
 
 #endregion
 
-namespace Safewhere.samples.STS.WebsiteDemo
+namespace Safewhere.Samples.STS.WebsiteDemo
 {
     public partial class IDPSelectionDemo : System.Web.UI.Page
     {

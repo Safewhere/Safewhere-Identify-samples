@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Safewhere.samples.STS.WebsiteDemo {
+namespace Safewhere.Samples.STS.WebsiteDemo {
     
     
     public partial class IDPSelectionDemo {

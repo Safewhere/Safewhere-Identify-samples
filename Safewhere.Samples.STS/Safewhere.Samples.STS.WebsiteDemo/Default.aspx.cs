@@ -7,7 +7,7 @@ using dk.nita.saml20.config;
 
 #endregion
 
-namespace Safewhere.samples.STS.WebsiteDemo
+namespace Safewhere.Samples.STS.WebsiteDemo
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", Justification = "This class is derived from OIOSAML.Net 2.0 and thus we would like to leave this as-is.")]
     public partial class Default : Page

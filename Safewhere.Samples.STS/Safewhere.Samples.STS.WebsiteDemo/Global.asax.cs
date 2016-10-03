@@ -8,7 +8,7 @@ using dk.nita.saml20.Utils;
 
 #endregion
 
-namespace Safewhere.samples.STS.WebsiteDemo
+namespace Safewhere.Samples.STS.WebsiteDemo
 {
     public class Global : System.Web.HttpApplication
     {
