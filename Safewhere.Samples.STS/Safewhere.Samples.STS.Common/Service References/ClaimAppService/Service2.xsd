@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://claimappservice.safewhere.local/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Safewhere.Samples.STS.ClaimAppService" />
+  <xs:element name="GetActorClaims">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetActorClaimsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Safewhere.Samples.STS.ClaimAppService" minOccurs="0" name="GetActorClaimsResult" nillable="true" type="q1:ArrayOfClaim" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetClaims">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetClaimsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Safewhere.Samples.STS.ClaimAppService" minOccurs="0" name="GetClaimsResult" nillable="true" type="q2:ArrayOfClaim" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

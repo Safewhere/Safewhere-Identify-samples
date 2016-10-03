@@ -1,0 +1,22 @@
+﻿<Dictionary>
+  <Words>
+    <Unrecognized>
+      <Word>knokker</Word>
+    </Unrecognized>
+    <Recognized>
+      <Word>Authn</Word>
+      <Word>Relogin</Word>
+      <Word>Logoff</Word>
+      <Word>Btn</Word>
+      <Word>btn</Word>
+    </Recognized>
+    <Compound>
+      <Term CompoundAlternate="LogOff">Logoff</Term>
+    </Compound>
+  </Words>
+  <Acronyms>
+    <CasingExceptions>
+      <Acronym>IDP</Acronym>
+    </CasingExceptions>
+  </Acronyms>
+</Dictionary>
