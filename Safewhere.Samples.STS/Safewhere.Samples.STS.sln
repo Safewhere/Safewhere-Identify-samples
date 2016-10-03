@@ -10,11 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{959F34
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safewhere.samples.STS.ClaimAppConsole", "Safewhere.samples.STS.ClaimAppConsole\Safewhere.samples.STS.ClaimAppConsole.csproj", "{4B1A2F31-20FE-46F4-AF1B-1CAEE4BA376D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safewhere.Samples.STS.ClaimAppConsole", "Safewhere.samples.STS.ClaimAppConsole\Safewhere.Samples.STS.ClaimAppConsole.csproj", "{4B1A2F31-20FE-46F4-AF1B-1CAEE4BA376D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safewhere.samples.STS.WebsiteDemo", "Safewhere.samples.STS.WebsiteDemo\Safewhere.samples.STS.WebsiteDemo.csproj", "{5CABB53A-798E-4725-B755-18A60ECC5D31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safewhere.Samples.STS.WebsiteDemo", "Safewhere.samples.STS.WebsiteDemo\Safewhere.Samples.STS.WebsiteDemo.csproj", "{5CABB53A-798E-4725-B755-18A60ECC5D31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safewhere.samples.STS.Common", "Safewhere.samples.STS.Common\Safewhere.samples.STS.Common.csproj", "{9CC723F7-13BF-4F8C-8BAF-15E2A7D065CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safewhere.Samples.STS.Common", "Safewhere.samples.STS.Common\Safewhere.Samples.STS.Common.csproj", "{9CC723F7-13BF-4F8C-8BAF-15E2A7D065CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safewhere.Samples.STS.ClaimAppService", "Safewhere.Samples.STS.ClaimAppService\Safewhere.Samples.STS.ClaimAppService.csproj", "{44815256-967C-4032-AD24-48732F5A9A30}"
 EndProject

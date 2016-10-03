@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" MasterPageFile="~/sp.Master" Inherits="Safewhere.samples.STS.WebsiteDemo.Default" Title="Demo Service Provider" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" MasterPageFile="~/sp.Master" Inherits="Safewhere.Samples.STS.WebsiteDemo.Default" Title="Demo Service Provider" %>
 
 <%@ Import Namespace="dk.nita.saml20.config" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

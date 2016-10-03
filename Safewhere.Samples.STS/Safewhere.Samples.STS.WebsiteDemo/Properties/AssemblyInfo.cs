@@ -10,11 +10,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("Safewhere.samples.STS.WebsiteDemo")]
+[assembly: AssemblyTitle("Safewhere.Samples.STS.WebsiteDemo")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Safewhere")]
-[assembly: AssemblyProduct("Safewhere.samples.STS.WebsiteDemo")]
+[assembly: AssemblyProduct("Safewhere.Samples.STS.WebsiteDemo")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

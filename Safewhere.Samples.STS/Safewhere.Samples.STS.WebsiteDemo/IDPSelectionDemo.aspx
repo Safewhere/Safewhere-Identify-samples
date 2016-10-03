@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="IDPSelectionDemo.aspx.cs" Inherits="Safewhere.samples.STS.WebsiteDemo.IDPSelectionDemo" MasterPageFile="~/sp.Master" Title="Demo IDP Selection" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="IDPSelectionDemo.aspx.cs" Inherits="Safewhere.Samples.STS.WebsiteDemo.IDPSelectionDemo" MasterPageFile="~/sp.Master" Title="Demo IDP Selection" %>
 
 <asp:Content runat="server" ID="Content1" ContentPlaceHolderID="head">
     <style type="text/css">

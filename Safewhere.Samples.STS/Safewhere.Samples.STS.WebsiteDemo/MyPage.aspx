@@ -1,4 +1,4 @@
-<%@ page language="C#" autoeventwireup="true" codebehind="MyPage.aspx.cs" inherits="Safewhere.samples.STS.WebsiteDemo.WebForm1" masterpagefile="~/sp.Master" %>
+<%@ page language="C#" autoeventwireup="true" codebehind="MyPage.aspx.cs" inherits="Safewhere.Samples.STS.WebsiteDemo.WebForm1" masterpagefile="~/sp.Master" %>
 
 <%@ import namespace="dk.nita.saml20.identity" %>
 <%@ import namespace="dk.nita.saml20.Schema.Core" %>

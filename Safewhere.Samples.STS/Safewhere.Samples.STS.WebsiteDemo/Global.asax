@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Safewhere.samples.STS.WebsiteDemo.Global" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Safewhere.Samples.STS.WebsiteDemo.Global" Language="C#" %>

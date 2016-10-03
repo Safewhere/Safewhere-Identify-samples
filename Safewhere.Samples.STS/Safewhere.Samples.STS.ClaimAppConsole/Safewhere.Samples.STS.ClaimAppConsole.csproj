@@ -71,9 +71,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Safewhere.samples.STS.Common\Safewhere.samples.STS.Common.csproj">
+    <ProjectReference Include="..\Safewhere.samples.STS.Common\Safewhere.Samples.STS.Common.csproj">
       <Project>{9CC723F7-13BF-4F8C-8BAF-15E2A7D065CA}</Project>
-      <Name>Safewhere.samples.STS.Common</Name>
+      <Name>Safewhere.Samples.STS.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,8 +10,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Safewhere.samples.STS.WebsiteDemo</RootNamespace>
-    <AssemblyName>Safewhere.samples.STS.WebsiteDemo</AssemblyName>
+    <RootNamespace>Safewhere.Samples.STS.WebsiteDemo</RootNamespace>
+    <AssemblyName>Safewhere.Samples.STS.WebsiteDemo</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -228,9 +228,9 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Safewhere.samples.STS.Common\Safewhere.samples.STS.Common.csproj">
+    <ProjectReference Include="..\Safewhere.samples.STS.Common\Safewhere.Samples.STS.Common.csproj">
       <Project>{9CC723F7-13BF-4F8C-8BAF-15E2A7D065CA}</Project>
-      <Name>Safewhere.samples.STS.Common</Name>
+      <Name>Safewhere.Samples.STS.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
