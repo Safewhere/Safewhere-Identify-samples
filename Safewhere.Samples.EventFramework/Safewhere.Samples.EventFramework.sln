@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safewhere.Samples.EventFramework", "Safewhere.Samples.EventFramework\Safewhere.Samples.EventFramework.csproj", "{1E8EB5A6-7FFC-485B-80A5-00FF59EFC912}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safewhere.Samples.EventFrameworkRabbitMQ", "Safewhere.Samples.EventFrameworkRabbitMQ\Safewhere.Samples.EventFrameworkRabbitMQ.csproj", "{BD501D5E-213D-45FE-A712-3D524F5345DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1E8EB5A6-7FFC-485B-80A5-00FF59EFC912}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E8EB5A6-7FFC-485B-80A5-00FF59EFC912}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E8EB5A6-7FFC-485B-80A5-00FF59EFC912}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD501D5E-213D-45FE-A712-3D524F5345DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD501D5E-213D-45FE-A712-3D524F5345DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD501D5E-213D-45FE-A712-3D524F5345DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD501D5E-213D-45FE-A712-3D524F5345DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
