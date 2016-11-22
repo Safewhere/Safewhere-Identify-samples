@@ -47,7 +47,7 @@ namespace Safewhere.Samples.STS.WebsiteDemo
             RequestSecurityTokenConfiguration rstConfig = RequestSecurityTokenConfiguration.Get();
 
             //Send request to issue security token from Samples.STS
-            var token = IdentifyStsServiceCommon.GetSecurityToken(rstConfig, bootstrapToken);
+            var token = IdentifyStsCertificateEndpointHandler.GetSecurityToken(rstConfig, bootstrapToken);
 
             //Use the issued token to execute the server on Samples.Service
             var service = IdentifyStsServiceCommon.GetClaimAppService<IService>(token, rstConfig.AppliesTo);

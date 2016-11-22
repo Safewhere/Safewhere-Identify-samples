@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
 using System.Xml;
@@ -57,6 +60,20 @@ namespace Safewhere.Samples.STS.Common
         /// </summary>
         public X509Certificate2 ClientCertificate { get; private set; }
 
+        /// <summary>
+        /// Client username, it will be available if there is no client certificate setting
+        /// </summary>
+        public string ClientUsername { get; private set; }
+
+        /// <summary>
+        ///  Client password, it will be available if there is no client certificate setting
+        /// </summary>
+        public string ClientPassword { get; private set; }
+
+        /// <summary>
+        /// Additional claims which will be sent to STS via RST
+        /// </summary>
+        public IList<Claim> Claims { get; private set; }
         #endregion
 
         #region Public
@@ -88,18 +105,61 @@ namespace Safewhere.Samples.STS.Common
 
             var clientCrendentialElement = GetChildElementFromName(section, "ClientCredential", true);
 
-            ClientCertificate = GetChildElementCertificateReferenceAsX509Certificate(clientCrendentialElement);
-
+            if (clientCrendentialElement.HasAttribute("username"))
+            {
+                ClientUsername = GetAttributeValueAsString(clientCrendentialElement, "username", true);
+                ClientPassword = GetAttributeValueAsString(clientCrendentialElement, "password", true);
+            }
+            else
+            {
+                ClientCertificate = GetChildElementCertificateReferenceAsX509Certificate(clientCrendentialElement);
+            }
+            var claimsElement = GetChildElementFromName(section, "Claims", false);
+            if (claimsElement != null)
+            {
+                var claimsListElement = GetChildrenElementsFromName(claimsElement, "Claim", false);
+                Claims = GetAllAdditionalClaims(claimsListElement);
+            }
+            
         }
-
         #endregion
 
         #region Private
 
+        private IList<Claim> GetAllAdditionalClaims(XmlNodeList claimsNodeList)
+        {
+            var claims = new List<Claim>();
+            foreach (var claimNode in claimsNodeList)
+            {
+                var claimElement = (XmlElement) claimNode;
+                var claimType = GetAttributeValueAsString(claimElement, "type", true);
+                var claimValue = GetAttributeValueAsString(claimElement, "value", true);
+                claims.Add(new Claim(claimType, claimValue));
+            }
+
+            return claims;
+        }
+        private static XmlNodeList GetChildrenElementsFromName(XmlNode parentElement, string elementName, bool required)
+        {
+            if (parentElement == null) throw new ArgumentNullException(nameof(parentElement));
+            if (elementName == null) throw new ArgumentNullException(nameof(elementName));
+
+            var element = parentElement.SelectNodes(elementName);
+
+            if (element == null)
+            {
+                if (required)
+                    throw new ApplicationException("Element must exist: " + elementName);
+
+                return null;
+            }
+
+            return element;
+        }
         private static XmlElement GetChildElementFromName(XmlNode parentElement, string elementName, bool required)
         {
-            if (parentElement == null) throw new ArgumentNullException("parentElement");
-            if (elementName == null) throw new ArgumentNullException("elementName");
+            if (parentElement == null) throw new ArgumentNullException(nameof(parentElement));
+            if (elementName == null) throw new ArgumentNullException(nameof(elementName));
 
             var element = parentElement.SelectSingleNode(elementName);
 
@@ -193,8 +253,8 @@ namespace Safewhere.Samples.STS.Common
 
         private static string GetAttributeValueAsString(XmlElement element, string attributeName, bool required)
         {
-            if (element == null) throw new ArgumentNullException("element");
-            if (attributeName == null) throw new ArgumentNullException("attributeName");
+            if (element == null) throw new ArgumentNullException(nameof(element));
+            if (attributeName == null) throw new ArgumentNullException(nameof(attributeName));
 
             var attributeValue = element.GetAttribute(attributeName);
 

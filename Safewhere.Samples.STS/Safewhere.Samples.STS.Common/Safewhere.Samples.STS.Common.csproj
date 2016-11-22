@@ -61,7 +61,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IdentifyCertificateMixedEndpointBinding.cs" />
+    <Compile Include="IdentifyCertificateEndpointBinding.cs" />
+    <Compile Include="IdentifyStsCertificateEndpointHandler.cs" />
+    <Compile Include="IdentifyStsProcessException.cs" />
+    <Compile Include="IdentifyStsUsernameEndpointHandler.cs" />
+    <Compile Include="IdentifyUsernameEndpointBinding.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="RequestSecurityTokenConfiguration.cs" />
     <Compile Include="IdentifyStsServiceCommon.cs" />
