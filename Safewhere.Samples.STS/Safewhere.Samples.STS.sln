@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safewhere.Samples.STS.Claim
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safewhere.Samples.STS.GenericProviderAppConsole", "Safewhere.Samples.STS.GenericProviderAppConsole\Safewhere.Samples.STS.GenericProviderAppConsole.csproj", "{9F625576-F815-457D-B5BE-130288136F04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safewhere.Samples.STS.GenericCredentialsValidator", "Safewhere.Samples.STS.GenericCredentialsValidator\Safewhere.Samples.STS.GenericCredentialsValidator.csproj", "{C4ADF9D9-280B-4067-B5F4-11060C71EF1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +102,22 @@ Global
 		{9F625576-F815-457D-B5BE-130288136F04}.Release64|Any CPU.Build.0 = Release|Any CPU
 		{9F625576-F815-457D-B5BE-130288136F04}.Release64|x64.ActiveCfg = Release|Any CPU
 		{9F625576-F815-457D-B5BE-130288136F04}.Release64|x64.Build.0 = Release|Any CPU
+		{C4ADF9D9-280B-4067-B5F4-11060C71EF1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4ADF9D9-280B-4067-B5F4-11060C71EF1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4ADF9D9-280B-4067-B5F4-11060C71EF1F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C4ADF9D9-280B-4067-B5F4-11060C71EF1F}.Debug|x64.Build.0 = Debug|Any CPU
+		{C4ADF9D9-280B-4067-B5F4-11060C71EF1F}.MSI|Any CPU.ActiveCfg = Release|Any CPU
+		{C4ADF9D9-280B-4067-B5F4-11060C71EF1F}.MSI|Any CPU.Build.0 = Release|Any CPU
+		{C4ADF9D9-280B-4067-B5F4-11060C71EF1F}.MSI|x64.ActiveCfg = Release|Any CPU
+		{C4ADF9D9-280B-4067-B5F4-11060C71EF1F}.MSI|x64.Build.0 = Release|Any CPU
+		{C4ADF9D9-280B-4067-B5F4-11060C71EF1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4ADF9D9-280B-4067-B5F4-11060C71EF1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4ADF9D9-280B-4067-B5F4-11060C71EF1F}.Release|x64.ActiveCfg = Release|Any CPU
+		{C4ADF9D9-280B-4067-B5F4-11060C71EF1F}.Release|x64.Build.0 = Release|Any CPU
+		{C4ADF9D9-280B-4067-B5F4-11060C71EF1F}.Release64|Any CPU.ActiveCfg = Release|Any CPU
+		{C4ADF9D9-280B-4067-B5F4-11060C71EF1F}.Release64|Any CPU.Build.0 = Release|Any CPU
+		{C4ADF9D9-280B-4067-B5F4-11060C71EF1F}.Release64|x64.ActiveCfg = Release|Any CPU
+		{C4ADF9D9-280B-4067-B5F4-11060C71EF1F}.Release64|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
