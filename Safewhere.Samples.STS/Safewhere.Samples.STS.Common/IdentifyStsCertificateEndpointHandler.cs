@@ -38,7 +38,7 @@ namespace Safewhere.Samples.STS.Common
             }
             catch (Exception ex)
             {
-                Logging.Instance.Error(ex, "There is an error responsed from ws-trust service. The test will be failed");
+                Logging.Instance.Error(ex, "There is an error responsed from ws-trust service.");
                 throw;
             }
         }

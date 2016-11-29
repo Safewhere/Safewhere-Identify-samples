@@ -30,7 +30,7 @@ namespace Safewhere.Samples.STS.Common
 
             if (string.IsNullOrEmpty(rstConfiguration.ClientUsername))
             {
-                throw new IdentifyStsProcessException("Cannot execute negotiating token request to certificate endpoint withou client username or password");
+                throw new IdentifyStsProcessException("Cannot execute negotiating token request to certificate endpoint without client username or password");
             }
 
             if (rstConfiguration.Claims != null && rstConfiguration.Claims.Any())
@@ -49,7 +49,7 @@ namespace Safewhere.Samples.STS.Common
             }
             catch (Exception ex)
             {
-                Logging.Instance.Error(ex, "There is an error responsed from ws-trust service. The test will be failed");
+                Logging.Instance.Error(ex, "There is an error responsed from ws-trust service.");
                 throw;
             }
         }

@@ -34,7 +34,18 @@ namespace Safewhere.Samples.STS.GenericCredentialsValidator
                 return validationResult;
             }
             var username = inputs[UserName];
+            var password = inputs[Password];
             var serviceIdentifier = inputs[ServiceIdentifier];
+            if (VerifyIfUserNameIsCorrect(username))
+            {
+                return new CredentialsValidationResult {ResultCode = CredentialsValidationResultCode.UnknownUserName};
+            }
+
+            if (VerifyPasswordIsCorrect(password))
+            {
+                return new CredentialsValidationResult { ResultCode = CredentialsValidationResultCode.IncorrectPassword };
+            }
+
             var logResult = new StringBuilder();
             logResult.AppendLine(
                 $"Successfully validate generic credentials for username = '{username}' with service identifier ='{serviceIdentifier}'");
@@ -51,12 +62,31 @@ namespace Safewhere.Samples.STS.GenericCredentialsValidator
 
             return new CredentialsValidationResult {ResultCode = CredentialsValidationResultCode.Success};
         }
+
+        private bool VerifyPasswordIsCorrect(string password)
+        {
+            if (password.Equals("incorrectpasswords"))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool VerifyIfUserNameIsCorrect(string username)
+        {
+            if (username.Equals("unknownusername"))
+            {
+                return false;
+            }
+            return true;
+        }
+
         private static CredentialsValidationResult ValidateInput(IDictionary<string, string> inputs)
         {
             CredentialsValidationResult validationResult = new CredentialsValidationResult();
             if (!inputs.ContainsKey(ServiceIdentifier))
             {
-                validationResult.ExternalErrorMessages.Add("Missing connection string field");
+                validationResult.ExternalErrorMessages.Add("Missing service identifier field");
                 validationResult.ResultCode = CredentialsValidationResultCode.MissingRequiredFields;
                 return validationResult;
             }
