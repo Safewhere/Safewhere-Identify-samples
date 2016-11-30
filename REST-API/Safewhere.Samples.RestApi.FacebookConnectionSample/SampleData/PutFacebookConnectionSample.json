@@ -1,0 +1,61 @@
+{
+	"doNotRegisterUsers": false,
+	"allowUserAutoRegistration": false,
+	"secondFactorAuthenticationConnectionName": "",
+	"twoFactorIdentitiesCondition": "UseTheFirstIdentity",
+	"bearingClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+	"organizationNameOfAutoCreatedUsers": null,
+	"enabled": true,
+	"accessOrganizationName": "Root",
+	"dependencyConnectionNames": [],
+	"claimTransformations": [],
+	"configuration": null,
+	"configurations": [
+		{
+			"facebookOAuthDialogEndpoint": "https://www.facebook.com/dialog/oauth",
+			"facebookMobileOAuthDialogEndpoint": "https://m.facebook.com/dialog/oauth",
+			"facebookOAuthAccessTokenEndpoint": "https://graph.facebook.com/oauth/access_token",
+			"facebookGraphUserEndpoint": "https://graph.facebook.com/me",
+			"clientId": "865304003598881",
+			"clientSecret": "1217d64d27a301f46df8beb75f95ae9c",
+			"permission": "email;first_name;last_name",
+			"performLogOutAtSingleLogOut": true,
+			"ignoredBySecondFactorRolesClaimType": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+			"ignoredBySecondFactorRoles": "",
+			"ignoreRolesCheck": false,
+			"useAsSecondFactorOnly": false,
+			"federatedSessionLifetime": 480,
+			"enabledForMobileUse": true,
+			"ipBaseHomeRealmDiscoveryFilter": "",
+			"supportsAutomaticAuthSelection": false,
+			"authenticationContextMethodClass": "",
+			"interceptorService": {
+				"useInterceptor": false,
+				"interceptorViewName": "",
+				"interceptorService": "None",
+				"interceptorDependencyService": "None",
+				"additionalSettings": [ ]
+			},
+			"authLoginStatusChecker": "~\\AuthChecker\\FacebookAuthStatusChecker.js",
+			"optOutOfPersistentCookies": false,
+			"showReturnToLoginSelectorLink": false,
+			"customAuthenticationView": "",
+			"configurationId": "bf984457-df7b-4497-be86-22113d69a02f",
+			"configurationType": "FacebookAuthentication",
+			"activationTime": {
+				"startTime": "2016-01-01T00:00:00Z",
+				"endTime": "2017-12-31T23:59:59Z"
+			}
+		}
+	],
+	"pluginType": "Facebook",
+	"connectionName": "Facebook Connection Name Sample",
+	"organizationName": "Root",
+	"connectionType": "Authentication",
+	"metadataReference": null,
+	"autoSetAllDependencies": false,
+	"name": "Facebook Connection Name Sample",
+	"description": "Facebook Connection Description Sample Updated",
+	"endpoint": "/admin/api/rest/v2/Connections",
+	"schema": "urn:scim:schemas:core:2.0:Connection"
+}

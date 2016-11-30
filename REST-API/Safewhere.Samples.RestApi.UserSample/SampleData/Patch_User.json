@@ -1,0 +1,148 @@
+{
+  "schemas": [
+    ""
+  ],
+  "userName": "User D",
+  "realName": {
+    "formatted": "",
+    "familyName": "",
+    "givenName": "",
+    "middleName": "",
+    "honorificPrefix": "",
+    "honorificSuffix": ""
+  },
+  "displayName": "User D IdN",
+  "nickName": "",
+  "title": "",
+  "userType": "",
+  "preferredLanguage": "",
+  "locale": "",
+  "timezone": "",
+  "active": false,
+  "password": "Test!234",
+  "emails": [
+    {
+      "type": "",
+      "primary": false,
+      "display": "",
+      "operation": "",
+      "value": "UserDIdN@gmail.com",
+      "employeeNumber": ""
+    }
+  ],
+  "phoneNumbers": [
+    {
+      "type": "",
+      "primary": false,
+      "display": "",
+      "operation": "",
+      "value": "",
+      "employeeNumber": ""
+    }
+  ],
+  "ims": [
+    {
+      "type": "",
+      "primary": false,
+      "display": "",
+      "operation": "",
+      "value": "",
+      "employeeNumber": ""
+    }
+  ],
+  "photos": [
+    {
+      "type": "",
+      "primary": false,
+      "display": "",
+      "operation": "",
+      "value": "",
+      "employeeNumber": ""
+    }
+  ],
+  "addresses": [
+    {
+      "formatted": "",
+      "streetAddress": "",
+      "locality": "",
+      "region": "",
+      "postalCode": "",
+      "country": ""
+    }
+  ],
+  "groups": [
+    {
+      "type": "",
+      "primary": false,
+      "display": "",
+      "operation": "",
+      "value": "Team ABC",
+      "employeeNumber": ""
+    }
+  ],
+  "entitlements": [
+    {
+      "type": "",
+      "primary": false,
+      "display": "",
+      "operation": "",
+      "value": "",
+      "employeeNumber": ""
+    }
+  ],
+  "roles": [
+    {
+      "type": "",
+      "primary": false,
+      "display": "",
+      "operation": "",
+      "value": "",
+      "employeeNumber": ""
+    }
+  ],
+  "x509Certificates": [
+  ],
+  "urn:scim:schemas:extension:enterprise:1.0": {
+    "employeeNumber": "",
+    "costCenter": "",
+    "organization": "Finance",
+    "division": "",
+    "department": "",
+    "manager": {
+      "managerId": "",
+      "displayName": ""
+    }
+  },
+  "urn:scim:schemas:extension:safewhere:identify:1.0": {
+    "forceResetPasswordAfterFirstTimeLogin": true,
+    "activationCodes": [
+      {
+        "type": "",
+        "primary": false,
+        "display": "",
+        "operation": "",
+        "value": "198765",
+        "employeeNumber": ""
+      }
+    ]
+  },
+  "oldpassword": "",
+  "id": "f5607dd3-fff1-467c-997c-74aa95adecdd",
+  "externalId": "",
+  "name": "",
+  "description": "",
+  "endpoint": "",
+  "schema": "",
+  "schemaExtensions": [
+    {
+      "schema": "",
+      "required": false
+    }
+  ],
+  "schemaExtensionsDetail": [
+    {
+      "Key": "",
+      "Value": ""
+    }
+  ]
+}

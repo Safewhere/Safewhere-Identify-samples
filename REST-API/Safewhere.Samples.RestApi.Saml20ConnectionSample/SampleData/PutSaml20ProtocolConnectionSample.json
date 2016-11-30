@@ -1,0 +1,99 @@
+{
+	"claimSets": [],
+	"configuration": {
+		"configurationType": "Saml2Protocol",
+		"entityIdentifier": "https://identify-demo3.safewhere.local/runtime/",
+		"extraEntityIdentifiers": [ ],
+		"signingCertificate": {
+			"revocationCheck": "None",
+			"storeReference": {
+				"storeName": "TrustedPeople",
+				"storeLocation": "CurrentUser"
+			},
+			"findCriterion": {
+				"findType": "FindByThumbprint",
+				"value": "3C1FD735A4035E3B78D33444DE5327C393AA282E"
+			}
+		},
+		"signingCertificateIsInStore": false,
+		"encryptionCertificate": {
+			"revocationCheck": "None",
+			"storeReference": {
+				"storeName": "TrustedPeople",
+				"storeLocation": "CurrentUser"
+			},
+			"findCriterion": {
+				"findType": "FindByThumbprint",
+				"value": "3C1FD735A4035E3B78D33444DE5327C393AA282E"
+			}
+		},
+		"encryptionCertificateIsInStore": false,
+		"singleLogOffService": {
+			"binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect",
+			"location": "https://identify-demo3.safewhere.local/runtime/saml2auth/signoffrequest.idp",
+			"responseLocation": "https://identify-demo3.safewhere.local/runtime/saml2auth/signoffresponse.idp"
+		},
+		"postBindingSingleLogOffService": {
+			"binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST",
+			"location": "https://identify-demo3.safewhere.local/runtime/saml2auth/signoffrequest.idp",
+			"responseLocation": "https://identify-demo3.safewhere.local/runtime/saml2auth/signoffresponse.idp"
+		},
+		"soapBindingSingleLogOffService": {
+			"binding": "urn:oasis:names:tc:SAML:2.0:bindings:SOAP",
+			"location": "https://identify-demo3.safewhere.local/runtime/services/signoff/saml2/soap",
+			"responseLocation": "https://identify-demo3.safewhere.local/runtime/services/signoff/saml2/soap"
+		},
+		"soapBindingBindingName": "",
+		"soapBindingBehaviorName": "",
+		"signingAlgorithm": "Sha1",
+		"authenticationListViewName": "",
+		"isPresentLoginSelector": false,
+		"metadataLocation": "",
+		"assertionConsumerServices": [
+			{
+				"binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect",
+				"location": "https://identify-demo3.safewhere.local/runtime/saml2auth/consume.idp",
+				"index": 0,
+				"isDefault": true
+			}
+		],
+		"subjectConfirmationDataRecipient": "https://identify-demo3.safewhere.local/runtime/saml2auth/consume.idp",
+		"setResponseIssuer": true,
+		"validateAuthenticationRequestAssertionConsumerServiceUrl": false,
+		"tokenLifetime": 60,
+		"showTailoredListFromCdc": false,
+		"defaultRequestedAuthenticationContextClass": "",
+		"alwaysUseDefaultRequestedAuthenticationContextClass": true,
+		"evaluateRequestedAuthenticationContext": false,
+		"samlResponseSigningSettings": "MessageAndAssertion",
+		"disableAssertionEncryption": false,
+		"setSessionNotOnOrAfter": false,
+		"commonDomainCookieReader": "",
+		"commonDomainCookieWriter": "",
+		"validateAllowCreateWhenPersistentPseudonymIsUsed": false,
+		"enableProxying": false,
+		"doNotIncludeAuthenticatingAuthorityFromIdentityProvider": false,
+		"requesterId": "",
+		"useRequesterIdInProxiedAuthnRequest": false,
+		"subjectClaimTypeAttribute": "",
+		"defaultSubjectClaimType": "",
+		"audienceRestriction": "",
+		"fixedRelayStateWhenReturningUnsolicitedResponse": "",
+		"handleHomeRealmDiscovery": "ProceedToNextMechanism",
+		"disableAutomaticAuthSelectionIfNotSupportedByAllLoginModules": false,
+		"autoHRDTimeout": 1000,
+		"allowUserOverrideAutoHRD": false,
+		"interceptorService": {
+			"useInterceptor": false,
+			"interceptorViewName": "",
+			"interceptorService": "",
+			"interceptorDependencyService": "",
+			"additionalSettings": [ ]
+		}
+	},
+
+"pluginType": "Saml20",
+"connectionType": "Protocol",
+"connectionName": "SAMl20 Protocol With Configuration",
+"name": "SAMl20 Protocol With Configuration"
+}

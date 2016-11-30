@@ -1,0 +1,22 @@
+[
+{
+  "ClaimType": "Free 1",
+  "VariableName": ""
+},
+{
+  
+  "ClaimType": "Free 2",
+   "VariableName": ""
+},
+{
+  "ClaimType": "Free 3",
+  "VariableName": ""
+},
+{
+  "OptionalValues": [
+    "Value 1", "Value 2"
+  ],
+  "ClaimType": "Opt 4",
+  "VariableName": ""
+}
+]

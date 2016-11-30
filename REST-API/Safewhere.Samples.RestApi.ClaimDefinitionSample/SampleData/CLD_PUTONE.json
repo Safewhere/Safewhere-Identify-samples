@@ -1,0 +1,14 @@
+{
+  "claimType": "Claim 01",
+  "AccessOrganizationName": "Root",
+  "Description": " Updated ",
+  "UserEditable": false,
+  "FriendlyName": " Claim1UpdatedUpdated ",
+  "Sensitive": false,
+  "ShowAsColumnOnUserList": true,
+  "CountSpecification": "Multiple",
+  "VariableName": " VarClaim1Updated ",
+  "RestrictedSubOrganizationView": false,
+  "AvoidIssue": true,
+  "ClaimValueSpace": "FreeClaimValueSpace"
+}

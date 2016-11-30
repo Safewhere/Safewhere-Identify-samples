@@ -1,0 +1,9 @@
+﻿{
+  "name": "Transformation",
+  "organizationName": "Root",
+  "claimOptions": [
+    {
+      "claimType": "uri:test:name"      
+    }
+  ]
+}

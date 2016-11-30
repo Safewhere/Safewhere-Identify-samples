@@ -1,0 +1,87 @@
+{
+    "doNotRegisterUsers": false,
+    "allowUserAutoRegistration": false,
+    "secondFactorAuthenticationConnectionName": "",
+    "twoFactorIdentitiesCondition": "None",
+    "bearingClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+    "organizationNameOfAutoCreatedUsers": null,
+    "userTemplateClaims": [],
+    "enabled": true,
+    "accessOrganizationName": "Root",
+    "dependencyConnectionNames": [],
+    "claimTransformations": [],
+    "configuration": null,
+    "configurations": [
+        {
+            "liveIdOAuthAccessTokenEndpoint": "https://oauth.live.com/token",
+            "liveIdOAuthDialogEndpoint": "https://oauth.live.com/authorize",
+            "liveIdMobileOAuthDialogEndpoint": "https://oauth.live.com/authorize",
+            "liveIdGraphUserEndpoint": "https://apis.live.net/v5.0/me",
+            "consumerKey": "clientidclientidclientid",
+            "consumerSecret": "consumersecretcodeconsumersecretcodeconsumersecretcode",
+            "performLogOutAtSingleLogOut": true,
+            "ignoredBySecondFactorRolesClaimType": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+            "ignoredBySecondFactorRoles": "",
+            "ignoreRolesCheck": false,
+            "useAsSecondFactorOnly": false,
+            "federatedSessionLifetime": 280,
+            "enabledForMobileUse": true,
+            "ipBaseHomeRealmDiscoveryFilter": "",
+            "supportsAutomaticAuthSelection": false,
+            "authenticationContextMethodClass": "",
+            "interceptorService": {
+                "useInterceptor": false,
+                "interceptorViewName": "",
+                "interceptorService": "Safewhere.IdentityProvider.RuntimeModel.Interceptors.AuthenticationUserProfileSelectorInterceptorService, Safewhere.IdentityProvider.RuntimeModel",
+                "interceptorDependencyService": "Safewhere.External.Samples.SingleUserProfileService, Safewhere.External.Samples",
+                "additionalSettings": [
+                    {
+                        "Key": "additionalSettingsKey",
+                        "Value": "additionalSettingsValue"
+                    },
+                    {
+                        "Key": "additionalSettingsKey1",
+                        "Value": "additionalSettingsValue1"
+                    },
+                    {
+                        "Key": "additionalSettingsKey2",
+                        "Value": "additionalSettingsValue2"
+                    }
+                ]
+            },
+            "authLoginStatusChecker": "",
+            "optOutOfPersistentCookies": false,
+            "showReturnToLoginSelectorLink": false,
+            "customAuthenticationView": "",
+            "configurationId": "58d9e464-ab97-4d62-a5f2-42b634370939",
+            "configurationType": "LiveIdAuthentication",
+            "activationTime": {
+                "startTime": "0001-01-01T00:00:00Z",
+                "endTime": "9999-12-31T23:59:59Z"
+            }
+        }
+    ],
+    "pluginType": "LiveId",
+    "issuesRoles": false,
+    "allowedIpAddresses": [],
+    "connectionName": "LiveIdConnection",
+    "organizationName": "Root",
+    "connectionType": "Authentication",
+    "metadataReference": null,
+    "autoSetAllDependencies": false,
+    "id": "c865b8b9-b99d-4598-8860-27e4c9ee6a3b",
+    "externalId": null,
+    "meta": {
+        "created": "0001-01-01T00:00:00",
+        "lastModified": "0001-01-01T00:00:00",
+        "location": "/admin/api/rest/v2/connections/c865b8b9-b99d-4598-8860-27e4c9ee6a3b",
+        "version": null,
+        "attributes": null
+    },
+    "name": "LiveIdConnection",
+    "description": "A description of the connection for administrative purposes.A description of the connection for administrative purposes.A description of the connection for administrative purposes.",
+    "endpoint": "/admin/api/rest/v2/Connections",
+    "schema": "urn:scim:schemas:core:2.0:Connection",
+    "schemaExtensions": null,
+    "schemaExtensionsDetail": null
+}

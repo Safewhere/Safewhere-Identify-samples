@@ -1,0 +1,66 @@
+[
+    {
+        "ClaimType": "Free 1",
+        "AccessOrganizationName": "Root",
+        "Description": "Updated",
+        "UserEditable": true,
+        "FriendlyName": "",
+        "AvoidUpsize": true,
+        "Sensitive": false,
+        "ShowAsColumnOnUserList": true,
+        "CountSpecification": "",
+        "VariableName": "",
+        "RestrictedSubOrganizationView": true,
+        "AvoidIssue": true,
+        "ClaimValueSpace": ""
+    },
+    {
+        "ClaimType": "Free 2",
+        "AccessOrganizationName": "Root",
+        "Description": "Updated",
+        "UserEditable": true,
+        "FriendlyName": "Claim Free 5",
+        "AvoidUpsize": true,
+        "Sensitive": true,
+        "ShowAsColumnOnUserList": true,
+        "CountSpecification": "",
+        "VariableName": "UpdatedFree5",
+        "RestrictedSubOrganizationView": true,
+        "AvoidIssue": false,
+        "ClaimValueSpace": ""
+    },
+    {
+        "OptionalValues": [
+            "Opt1",
+            "Opt2"
+        ],
+        "ClaimType": "Opt 4",
+        "AccessOrganizationName": "Root",
+        "Description": "Updated",
+        "UserEditable": true,
+        "FriendlyName": "Claim Opt 4",
+        "AvoidUpsize": true,
+        "Sensitive": true,
+        "ShowAsColumnOnUserList": true,
+        "CountSpecification": "",
+        "VariableName": "UpdateOpt4",
+        "RestrictedSubOrganizationView": false,
+        "AvoidIssue": false,
+        "ClaimValueSpace": ""
+    },
+    {
+        "ClaimType": "Free 3",
+        "AccessOrganizationName": "Root",
+        "Description": "Updated",
+        "UserEditable": true,
+        "FriendlyName": "",
+        "AvoidUpsize": true,
+        "Sensitive": false,
+        "ShowAsColumnOnUserList": true,
+        "CountSpecification": "",
+        "VariableName": "",
+        "RestrictedSubOrganizationView": true,
+        "AvoidIssue": true,
+        "ClaimValueSpace": ""
+    }
+]

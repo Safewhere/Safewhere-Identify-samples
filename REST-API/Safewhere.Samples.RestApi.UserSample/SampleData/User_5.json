@@ -1,0 +1,39 @@
+{
+  "userName": "User 5",
+  "displayName": "User 5",
+  "active": true,
+  "groups": [
+    {
+      "type": "",
+      "primary": false,
+      "display": "",
+      "operation": "",
+      "value": "Group 2",
+      "employeeNumber": ""
+    }
+  ],
+  "urn:scim:schemas:extension:enterprise:1.0": {
+    "employeeNumber": "",
+    "costCenter": "",
+    "organization": "Organization 2",
+    "division": "",
+    "department": "",
+    "manager": {
+      "managerId": "",
+      "displayName": ""
+    }
+  },
+    "urn:scim:schemas:extension:safewhere:identify:1.0": {
+        "Claims": [
+            {
+                "type": "Claim1",
+                "primary": false,
+                "display": "",
+                "operation": "",
+                "value": "ValueClaim1",
+                "employeeNumber": ""
+            }
+        ]
+    },
+    "id": "b3a1ab0c-3f8e-474d-9fd5-5b2b9f75b30f"
+}

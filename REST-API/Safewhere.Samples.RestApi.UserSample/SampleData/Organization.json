@@ -1,0 +1,8 @@
+﻿{
+    "displayName": "Organization 1",
+    "name": "Organization 1",
+    "accessOrganizationName": "Root",
+    "passwordExpiryDays": 10,
+    "expiryDisallowLoginDays": 13,
+    "forceResetPasswordDefaultValue": true
+}

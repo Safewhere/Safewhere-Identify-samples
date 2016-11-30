@@ -1,0 +1,21 @@
+[
+    {
+        "Op": "replace",
+        "Path": "",
+        "value": {
+            "description": "Saml2 Pro Test",
+            "enabled": true
+        }
+    },
+      {
+    "Op": "replace",
+    "Path": "Configurations",
+    "value": {
+      "singleSignOnArtifactResolution": {
+        "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect/replace",
+        "location": "http://localhost/replace",
+        "responseLocation": "http://localhost/replace"
+      }
+    }
+  }
+]

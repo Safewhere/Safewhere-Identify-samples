@@ -1,0 +1,30 @@
+[
+    {
+        "Op": "replace",
+        "Path": "",
+        "value": {
+            "description": "Saml2 Pro Test",
+            "enabled": true
+        }
+    },
+    {
+    "Op": "add",
+    "Path": "Configurations",
+    "value": {
+      "assertionConsumerServices": [
+        {
+          "Binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect",
+          "Location": "http://localhost/",
+          "Index": 2,
+          "IsDefault": false
+        },
+        {
+          "Binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST",
+          "Location": "http://test.com/",
+          "Index": 3,
+          "IsDefault": false
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,53 @@
+﻿{
+	"id": "137f94a8-d21e-47b4-89d0-f152b375b924",
+	"name": "Ldap Connection",
+	"enabled": true,
+	"pluginType": "Ldap",
+	"description": "Ldap Connection Description Update",
+	"connectionType": "Authentication",
+	"doNotRegisterUsers": false,
+	"allowUserAutoRegistration": false,
+	"secondFactorAuthenticationConnectionName": "",
+	"twoFactorIdentitiesCondition": "UseTheFirstIdentity",
+	"bearingClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+	"organizationNameOfAutoCreatedUsers": null,
+	"userTemplateClaims": [ ],
+	"accessOrganizationName": "Root",
+	"dependencyConnectionNames": [ ],
+	"claimTransformations": [ ],
+	"configuration": {
+		"configurationType": "LdapAuthentication",
+		"authenticationType": "Integrated",
+		"userIdentityLdapAttributeName": "Company",
+		"primaryAccountLdapAttributeName": "Department",
+		"ignoredBySecondFactorRolesClaimType": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+		"ignoredBySecondFactorRoles": "",
+		"ignoreRolesCheck": false,
+		"useAsSecondFactorOnly": false,
+		"federatedSessionLifetime": 480,
+		"enabledForMobileUse": true,
+		"ipBaseHomeRealmDiscoveryFilter": "",
+		"supportsAutomaticAuthSelection": false,
+		"authenticationContextMethodClass": "",
+		"authLoginStatusCheckerPath": "",
+		"interceptorService": {
+			"useInterceptor": false,
+			"interceptorViewName": "",
+			"interceptorService": "",
+			"interceptorDependencyService": "",
+			"additionalSettings": [ ]
+		}
+	},
+    "externalId": null,
+    "meta": {
+        "created": "0001-01-01T00:00:00",
+        "lastModified": "0001-01-01T00:00:00",
+        "location": "/admin/api/rest/v2/connecions/137f94a8-d21e-47b4-89d0-f152b375b924",
+        "version": null,
+        "attributes": null
+    },
+    "endpoint": "/admin/api/rest/v2/connections",
+    "schema": "urn:scim:schemas:core:2.0:Authentication",
+    "schemaExtensions": null,
+    "schemaExtensionsDetail": null
+}

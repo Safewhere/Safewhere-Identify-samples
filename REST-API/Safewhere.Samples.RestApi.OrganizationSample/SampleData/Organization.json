@@ -1,0 +1,8 @@
+﻿{
+    "displayName": "OrganizationTest DisplayName",
+    "name": "OrganizationTestName",
+    "accessOrganizationName": "Root",
+    "passwordExpiryDays": 10,
+    "expiryDisallowLoginDays": 13,
+    "forceResetPasswordDefaultValue": true
+}

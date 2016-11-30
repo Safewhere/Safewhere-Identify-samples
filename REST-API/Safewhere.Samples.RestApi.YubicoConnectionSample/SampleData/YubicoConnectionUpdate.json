@@ -1,0 +1,74 @@
+﻿{
+    "doNotRegisterUsers": true,
+    "allowUserAutoRegistration": false,
+    "secondFactorAuthenticationConnectionName": "",
+    "twoFactorIdentitiesCondition": "None",
+    "bearingClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+    "organizationNameOfAutoCreatedUsers": null,
+    "userTemplateClaims": [],
+    "enabled": true,
+    "accessOrganizationName": "Root",
+    "dependencyConnectionNames": [
+    ],
+    "claimTransformations": [],
+    "configuration": null,
+    "configurations": [
+        {
+            "clientId": "clientidclientidclientid",
+            "apiKey": "apikeyapikeyapikey",
+            "sync": "70",
+            "nonce": "7",
+            "userAgent": "useragentuseragentuseragentuseragent",
+            "isTestMode": false,
+            "ignoredBySecondFactorRolesClaimType": "",
+            "ignoredBySecondFactorRoles": "",
+            "ignoreRolesCheck": false,
+            "useAsSecondFactorOnly": true,
+            "federatedSessionLifetime": 480,
+            "enabledForMobileUse": true,
+            "ipBaseHomeRealmDiscoveryFilter": "",
+            "supportsAutomaticAuthSelection": false,
+            "authenticationContextMethodClass": "",
+            "interceptorService": {
+                "useInterceptor": false,
+                "interceptorViewName": "",
+                "interceptorService": "None",
+                "interceptorDependencyService": "None",
+                "additionalSettings": []
+            },
+            "authLoginStatusChecker": "",
+            "optOutOfPersistentCookies": false,
+            "showReturnToLoginSelectorLink": false,
+            "customAuthenticationView": "",
+            "configurationId": "1dc96cbb-5c10-41fe-964e-699e265caeda",
+            "configurationType": "YubicoAuthentication",
+            "activationTime": {
+                "startTime": "0001-01-01T00:00:00Z",
+                "endTime": "9999-12-31T23:59:59Z"
+            }
+        }
+    ],
+    "pluginType": "Yubico",
+    "issuesRoles": false,
+    "allowedIpAddresses": [],
+    "connectionName": "Yubico",
+    "organizationName": "Root",
+    "connectionType": "Authentication",
+    "metadataReference": null,
+    "autoSetAllDependencies": false,
+    "id": "53a66da9-81a2-46e2-9457-6719a6235327",
+    "externalId": null,
+    "meta": {
+        "created": "0001-01-01T00:00:00",
+        "lastModified": "0001-01-01T00:00:00",
+        "location": "/admin/api/rest/v2/connections/53a66da9-81a2-46e2-9457-6719a6235327",
+        "version": null,
+        "attributes": null
+    },
+    "name": "Yubico",
+    "description": "A description of the connection for administrative purposes.A description of the connection for administrative purposes.A description of the connection for administrative purposes.",
+    "endpoint": "/admin/api/rest/v2/Connections",
+    "schema": "urn:scim:schemas:core:2.0:Connection",
+    "schemaExtensions": null,
+    "schemaExtensionsDetail": null
+}

@@ -1,0 +1,14 @@
+{
+  "ClaimType": "Claim1",
+  "Name": "Claim1",
+  "FriendlyName": "Claim1",
+  "AvoidIssue": true,
+  "ClaimValueSpace": "Claim Value Space 1",
+  "CountSpecification": "Count Specification 1",
+  "Sensitive": false,
+  "AccessOrganizationName": "Finance",
+  "ShowAsColumnOnUserList": false,
+  "RestrictedSubOrganizationView": true,
+  "UserEditable": false,
+  "VariableName": ""
+}

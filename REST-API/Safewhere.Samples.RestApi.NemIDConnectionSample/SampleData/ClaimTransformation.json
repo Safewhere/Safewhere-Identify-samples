@@ -1,0 +1,13 @@
+{
+    "transformationName": "ExcludeIdentifyTransformation 2",
+    "organizationName": "",
+    "claimOptions": [
+        {
+            "claimType": "http://sts.safewhere.com/certificate",
+            "options": [
+                "Value 1",
+                "Value 2"
+            ]
+        }
+    ]
+}

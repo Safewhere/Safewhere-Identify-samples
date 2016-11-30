@@ -1,0 +1,14 @@
+[
+  {
+    "Op": "replace",
+    "Path": "",
+ value:{
+  "displayName": "asdlfasdfgh",
+  "urn:scim:schemas:extension:enterprise:1.0.organization": "Root",
+  "active": false,
+  "urn:scim:schemas:extension:safewhere:identify:1.0.forceResetPasswordAfterFirstTimeLogin": false,
+  "groups.value": "",
+  "x509Certificates.value":""
+ }
+  }
+]

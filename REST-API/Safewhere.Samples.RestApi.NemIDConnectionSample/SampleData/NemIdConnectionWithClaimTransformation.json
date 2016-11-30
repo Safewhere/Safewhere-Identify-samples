@@ -1,0 +1,87 @@
+{
+    "doNotRegisterUsers": false,
+    "allowUserAutoRegistration": false,
+    "secondFactorAuthenticationConnectionName": "",
+    "twoFactorIdentitiesCondition": "None",
+    "bearingClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+    "organizationNameOfAutoCreatedUsers": null,
+    "userTemplateClaims": [],
+    "enabled": true,
+    "accessOrganizationName": "Root",
+    "dependencyConnectionNames": [],
+    "claimTransformations": [],
+    "configuration": null,
+    "configurations": [
+        {
+            "signingCertificate": {
+                "isSelfSigned": false,
+                "revocationCheck": "None",
+                "storeReference": {
+                    "storeName": "My",
+                    "storeLocation": "LocalMachine"
+                },
+                "findCriterion": {
+                    "findType": "FindByThumbprint",
+                    "value": "48191f1916fe7d77d039cb9d4b5bf70e248faa7c"
+                }
+            },
+            "nemIdAppletOperation": "OpenLogon2",
+            "digestAlgorithm": "sha256",
+            "includeRawCertificateClaim": false,
+            "appletClassName": "dk.pbs.applet.bootstrap.BootApplet",
+            "ocesAppletEndpoint": "https://opensign.danid.dk/",
+            "logOnTo": "",
+            "issuerDistinguishedNameFilterValue": "",
+            "subjectDistinguishedNameFilterValue": "",
+            "serialNumberFilterValue": "",
+            "challengeProviderContext": "None",
+            "challengeProviderConfiguration": null,
+            "enableWhoIsLra": false,
+            "claimTypeToTestWhoIsLra": "dk:gov:saml:attribute:CvrNumberIdentifier",
+            "nemIdCertificateRevocationCheckSetting": "None",
+            "ocesEnvironment": "OcesIiDanidEnvPreprod",
+            "iframeUrlBase": "https://appletk.danid.dk/",
+            "ignoredBySecondFactorRolesClaimType": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+            "ignoredBySecondFactorRoles": "",
+            "ignoreRolesCheck": false,
+            "useAsSecondFactorOnly": false,
+            "federatedSessionLifetime": 480,
+            "enabledForMobileUse": true,
+            "ipBaseHomeRealmDiscoveryFilter": "192.168.1.1;192.168.1.2;192.168.0.0-192.168.1.255",
+            "supportsAutomaticAuthSelection": false,
+            "authenticationContextMethodClass": "",
+            "interceptorService": {
+                "useInterceptor": false,
+                "interceptorViewName": "",
+                "interceptorService": "None",
+                "interceptorDependencyService": "None",
+                "additionalSettings": []
+            },
+            "authLoginStatusChecker": "",
+            "optOutOfPersistentCookies": false,
+            "showReturnToLoginSelectorLink": false,
+            "customAuthenticationView": "",
+            "configurationId": "91dc70ee-f5b7-437c-9f1a-caf5052e20ad",
+            "configurationType": "NemIdAuthentication",
+            "activationTime": {
+                "startTime": "0001-01-01T00:00:00Z",
+                "endTime": "9999-12-31T23:59:59Z"
+            }
+        }
+    ],
+    "pluginType": "NemId",
+    "issuesRoles": false,
+    "allowedIpAddresses": [],
+    "connectionName": "NemIDAuthenticationConnection",
+    "organizationName": "Root",
+    "connectionType": "Authentication",
+    "metadataReference": null,
+    "autoSetAllDependencies": false,
+    "externalId": null,
+    "name": "NemIDAuthenticationConnection",
+    "description": "",
+    "endpoint": "/admin/api/rest/v2/Connections",
+    "schema": "urn:scim:schemas:core:2.0:Connection",
+    "schemaExtensions": null,
+    "schemaExtensionsDetail": null
+}

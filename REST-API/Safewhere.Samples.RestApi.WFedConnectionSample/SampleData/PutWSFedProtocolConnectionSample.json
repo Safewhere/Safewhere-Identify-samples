@@ -1,0 +1,150 @@
+{
+  "usePersistentPseudonym": true,
+  "createdWithCustomizedHomeRealmDiscoverySelection": true,
+  "rememberConsent": true,
+  "scopes": [
+    {
+      "name": "identify*scope",
+      "code": "identify*scope",
+      "description": "identify*scope",
+      "required": true
+    }
+  ],
+  "claimSets": [  ],
+  "appliedHomeRealmDiscoveryRules": [
+    "Whr parameter",
+    "Identify-initiated common domain cookie",
+    "Persistent cookie",
+    "Show tailored IDPs list from CDC",
+    "Common domain cookie",
+    "Ip-based HRD",
+    "Auto HRD"
+  ],
+  "enabled": true,
+  "accessOrganizationName": "",
+  "dependencyConnectionNames": [
+    "Username & password"
+  ],
+  "claimTransformations": [],
+  "configuration": {
+    "handleHomeRealmDiscovery": "ProceedToDefaultMachenisms",
+    "entityIdentifier": "https://identify-demo3.safewhere.local/runtime/",
+    "extraEntityIdentifiers": [
+      {
+        "entityIdentifier": "https://identify-demo2.safewhere.local/runtime/"
+      }
+    ],
+    "entityIdComparisonType": "Equal",
+    "passiveEndpointAddress": "https://identify-demo3.safewhere.local/runtime/WSfedauth/consume.idp",
+    "signOutReplyEndpointAddress": "https://identify-demo3.safewhere.local/runtime/WSfedauth/consume.idp",
+    "encryptionCertificate": {
+      "isSelfSigned": false,
+      "revocationCheck": "None",
+      "storeReference": {
+        "storeName": "TrustedPeople",
+        "storeLocation": "CurrentUser"
+      },
+      "findCriterion": {
+        "findType": "FindByThumbprint",
+        "value": "3C1FD735A4035E3B78D33444DE5327C393AA282E"
+      }
+    },
+    "encryptionCertificateIsInStore": false,
+    "encryptionCertificateRevocationCheck": "None",
+	"useSaml11TokenProfile11": true,
+    "defaultTokenLifetime": 160,
+    "maximumTokenLifetime": 160,
+	"handleHomeRealmDiscovery": "ProceedToDefaultMachenisms",
+    "disableAutomaticAuthSelectionIfNotSupportedByAllLoginModules": true,
+    "autoHRDTimeout": 1000,
+    "allowUserOverrideAutoHRD": true,
+    "authenticationListViewName": "WSFed authentication list view name",
+    "metadataLocation": "https://identify-demo3.safewhere.local/runtime/WSfedauth/metadata.idp",
+    "audienceRestriction": "Restriction 12345 ancd",
+    "supportOIOWSTrustProfile": false,
+    "bootstrapTokenTimestamp": 120,
+    "assuranceLevelRequired": 50,
+    "assuranceLevelClaimType": "urn:oasis:names:tc:SAML:attribute:assurance-certification:test",
+    "BootstrapTokenTrustedIssuers": [
+      {
+        "isSelfSigned": false,
+        "revocationCheck": "None",
+        "storeReference": {
+          "storeName": "TrustedPeople",
+          "storeLocation": "LocalMachine"
+        },
+        "findCriterion": {
+          "findType": "FindByThumbprint",
+          "value": "15 3e 97 1c 6b ae cc 4e 4e c6 8d 82 69 30 39 01 65 4a 02 a6"
+        }
+      }
+    ],
+    "receivedSecurityTokenEncryptionCertificate": {
+      "isSelfSigned": false,
+      "revocationCheck": "None",
+      "storeReference": {
+        "storeName": "TrustedPeople",
+        "storeLocation": "CurrentUser"
+      },
+      "findCriterion": {
+        "findType": "FindByThumbprint",
+        "value": "3C1FD735A4035E3B78D33444DE5327C393AA282E"
+      }
+    },
+    "isPresentLoginSelector": true,
+    "actasAuthorizationRequiredClaimType": "",
+    "actasAuthorizationRequiredClaimValue": "",
+    "authenticationConnection": "Username & password",
+    "feedMiddleUserClaimsToPipeline": true,
+    "mergeMiddleUserClaimsToIssuedClaims": true,
+    "receivedSecurityTokenIdentityClaimTypeAttributeName": "SecurityTokenIdentityClaimType",
+    "receivedSecurityTokenIdentityClaimValueAttributeName": "SecurityTokenIdentityClaimValue",
+    "receivedSecurityTokenIdentityDefaultClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+    "oboAuthorizationRequiredClaimType": "",
+    "oboAuthorizationRequiredClaimValue": "",
+    "encryptToken": true,
+    "signingAlgorithm": "Sha256",
+    "allowRunningAuthenticationPipelineFor256Endpoint": true,
+    "validateIfClientCertificateIsExpired": true,
+    "actasAuthorizationClaimRules": [
+		{
+        "claimType": "claim 1",
+        "value": "value 1"
+      }
+	],
+    "interceptorService": {
+      "useInterceptor": true,
+      "interceptorViewName": "Interceptor Main View",
+      "interceptorService": "Safewhere.External.Samples.PartnerSelectionInterceptorService, Safewhere.External.Samples",
+      "interceptorDependencyService": "Safewhere.External.Samples.LocalStoreUserProfileService, Safewhere.External.Samples",
+      "additionalSettings": [
+        {
+          "Key": "abcd",
+          "Value": "ef ads"
+        }
+      ]
+    },
+	"configurationType": "WSFederationProtocol"
+  },
+  "pluginType": "WSFederation",
+  "connectionName": null,
+  "organizationName": null,
+  "connectionType": "Protocol",
+  "metadataReference": null,
+  "autoSetAllDependencies": false,
+  "id": "0a794adf-1992-430d-a6c6-d1331d5b3ed1",
+  "externalId": null,
+  "meta": {
+    "created": "0001-01-01T00:00:00",
+    "lastModified": "0001-01-01T00:00:00",
+    "location": "/admin/api/rest/v2/connections/0a794adf-1992-430d-a6c6-d1331d5b3ed1",
+    "version": null,
+    "attributes": null
+  },
+  "name": "Protocol WSFederation 0009",
+  "description": "Protocol WSFederation 0009 Description",
+  "endpoint": "/admin/api/rest/v2/Connections",
+  "schema": "urn:scim:schemas:core:2.0:Connection",
+  "schemaExtensions": null,
+  "schemaExtensionsDetail": null
+}

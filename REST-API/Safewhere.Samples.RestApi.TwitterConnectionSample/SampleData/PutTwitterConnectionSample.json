@@ -1,0 +1,44 @@
+{
+	"doNotRegisterUsers": true,
+	"bearingClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+	"enabled": true,
+	"accessOrganizationName": "Root",
+	"configuration": null,
+	"configurations": [
+		{
+			"twitterOAuthRequestTokenEndpoint": "https://api.twitter.com/oauth/request_token",
+			"twitterOAuthAccessTokenEndpoint": "https://api.twitter.com/oauth/access_token",
+			"twitterOAuthDialogEndpoint": "https://api.twitter.com/oauth/authenticate",
+			"twitterMobileOAuthDialogEndpoint": "https://api.twitter.com/oauth/authenticate",
+			"twitterGraphUserEndpoint": "https://api.twitter.com/1/users",
+			"consumerKey": "123456",
+			"consumerSecret": "7890",
+			"performLogOutAtSingleLogOut": false,
+			"ignoredBySecondFactorRolesClaimType": "Device Activation Code Claim",
+			"ignoredBySecondFactorRoles": "",
+			"ignoreRolesCheck": true,
+			"useAsSecondFactorOnly": true,
+			"federatedSessionLifetime": 480,
+			"enabledForMobileUse": true,
+			"optOutOfPersistentCookies": false,
+			"showReturnToLoginSelectorLink": false,
+			"customAuthenticationView": "",
+			"configurationId": "6c048309-ff07-406a-bc46-3dd2ca40e4f7",
+			"configurationType": "TwitterAuthentication",
+			"activationTime": {
+				"startTime": "0001-01-01T00:00:00Z",
+				"endTime": "9999-12-31T23:59:59Z"
+			}
+		}
+	],
+	"pluginType": "Twitter",
+	"connectionName": "Twitter Connection Name Sample",
+	"organizationName": "Root",
+	"connectionType": "Authentication",
+	"metadataReference": null,
+	"autoSetAllDependencies": false,
+	"name": "Twitter Connection Name Sample",
+	"description": "Twitter Connection Description Sample Updated",
+	"endpoint": "/admin/api/rest/v2/Connections",
+	"schema": "urn:scim:schemas:core:2.0:Connection"
+}

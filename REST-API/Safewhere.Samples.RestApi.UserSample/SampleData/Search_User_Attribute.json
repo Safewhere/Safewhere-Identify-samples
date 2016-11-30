@@ -1,0 +1,4 @@
+﻿{
+  "Attributes": "claims,username,emails,displayName",
+  "ExcludedAttributes": "",
+}

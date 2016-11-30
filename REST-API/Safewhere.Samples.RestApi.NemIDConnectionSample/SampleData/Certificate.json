@@ -1,0 +1,19 @@
+{
+    "Certificates": [
+        {
+            "isSelfSigned": false,
+            "name": "SigningCertificate",
+            "revocationCheck": "None",
+            "rawData": null,
+            "storeReference": {
+                "storeName": "TrustedPeople",
+                "storeLocation": "LocalMachine"
+            },
+            "findCriterion": {
+                "findType": "FindByThumbprint",
+                "value": "01dfc91d6b189b2bd7a56ce90cc67ee2b7cc5dce"
+            }
+        }
+    ],
+    "ConnectionName": "NemIDAuthenticationConnection"
+}

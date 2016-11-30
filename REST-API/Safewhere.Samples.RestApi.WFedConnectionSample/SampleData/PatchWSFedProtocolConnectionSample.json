@@ -1,0 +1,28 @@
+[
+    {
+        "Op": "replace",
+        "Path": "",
+        "value": {
+            "description": "Saml2 Pro Test",
+            "enabled": true
+        }
+    },
+    {
+    "Op": "replace",
+    "Path": "Configurations",
+    "value": {
+      "receivedSecurityTokenEncryptionCertificate": {
+        "isSelfSigned": false,
+        "revocationCheck": "None",
+        "storeReference": {
+          "storeName": "TrustedPeople",
+          "storeLocation": "CurrentUser"
+        },
+        "findCriterion": {
+          "findType": "FindByThumbprint",
+          "value": "3C1FD735A4035E3B78D33444DE5327C393AA282E"
+        }
+      }
+    }
+  }
+]

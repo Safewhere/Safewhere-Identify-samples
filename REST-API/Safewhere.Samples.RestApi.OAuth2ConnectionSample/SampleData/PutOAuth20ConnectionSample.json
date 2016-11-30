@@ -1,0 +1,62 @@
+{
+	"usePersistentPseudonym": false,
+	"createdWithCustomizedHomeRealmDiscoverySelection": false,
+	"rememberConsent": false,
+	"scopes": [
+		{
+			"name": "identify*scim",
+			"code": "identify*scim",
+			"description": "identify*scim",
+			"required": true
+		}
+	],
+	"claimSets": [ ],
+	"appliedHomeRealmDiscoveryRules": [ ],
+	"enabled": true,
+	"accessOrganizationName": "Root",
+	"dependencyConnectionNames": [],
+	"claimTransformations": [ ],
+	"configurations": [
+		{
+			"clientId": "oauth2_clientId",
+			"clientSecret": "oauth2_clientSecret",
+			"redirectUrl": "https://identify-demo.safewhere.local/admin",
+			"appName": "OAuth2 Protocol REST API Auto Test",
+			"appLogoUrl": "",
+			"appAudience": "https://identify-demo.safewhere.local/runtime/",
+			"implicitFlow": false,
+			"codeFlow": true,
+			"useAsOpenId": false,
+			"jwsAlgorithm": "RSASigning",
+			"symmetricSigningKey": "GtNy6Jp4gscZvc65xvt8F5HkpSVjOLPlWk0pLDHr0NI=",
+			"tokenSecurityMode": "None",
+			"tokenLifetime": 60,
+			"allowRefreshToken": true,
+			"refreshTokenLifetime": 60,
+			"openIdLogoutRedirectUrl": "https://client.example.com/loggedout",
+			"performSessionStatusNotification": true,
+			"attemptAutomaticAuthSelection": false,
+			"encryptionCertificateRevocationCheck": "None",
+			"handleHomeRealmDiscovery": "ProceedToNextMechanism",
+			"disableAutomaticAuthSelectionIfNotSupportedByAllLoginModules": false,
+			"autoHRDTimeout": 1000,
+			"allowUserOverrideAutoHRD": false,
+			"interceptorService": null,
+			"configurationType": "OAuthProtocol",
+			"activationTime": {
+				"startTime": "2016-08-10 08:00:00",
+				"endTime": "2018-08-19 09:00:00"
+			}
+		}
+	],
+	"pluginType": "OAuth20",
+	"connectionName": "OAuth20 Connection Name Sample",
+	"organizationName": "Root",
+	"connectionType": "Protocol",
+	"metadataReference": null,
+	"autoSetAllDependencies": false,
+	"name": "OAuth20 Connection Name Sample",
+	"description": "OAuth20 Connection Description Sample Updated",
+	"endpoint": "/admin/api/rest/v2/Connections",
+	"schema": "urn:scim:schemas:core:2.0:Connection"
+}

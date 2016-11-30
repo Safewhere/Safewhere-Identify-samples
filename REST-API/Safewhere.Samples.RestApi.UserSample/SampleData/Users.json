@@ -1,0 +1,134 @@
+﻿[
+  {
+    "userName": "User 1",
+    "displayName": "User 1",
+    "active": true,
+    "groups": [
+      {
+        "type": "",
+        "primary": false,
+        "display": "",
+        "operation": "",
+        "value": "Group 1",
+        "employeeNumber": ""
+      }
+    ],
+    "urn:scim:schemas:extension:enterprise:1.0": {
+      "employeeNumber": "",
+      "costCenter": "",
+      "organization": "Root",
+      "division": "",
+      "department": "",
+      "manager": {
+        "managerId": "",
+        "displayName": ""
+      }
+    },
+    "urn:scim:schemas:extension:safewhere:identify:1.0": {
+      "Claims": [
+        {
+          "type": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+          "primary": false,
+          "display": "",
+          "operation": "",
+          "value": "ValueClaim1",
+          "employeeNumber": ""
+        }
+      ]
+    },
+    "id": "b3a1ab0c-3f8e-474d-9fd5-5b2b9f75b30a"
+  },
+  {
+    "userName": "User 2",
+    "displayName": "User 2",
+    "active": true,
+    "groups": [
+      {
+        "type": "",
+        "primary": false,
+        "display": "",
+        "operation": "",
+        "value": "Group 1",
+        "employeeNumber": ""
+      }
+    ],
+    "urn:scim:schemas:extension:enterprise:1.0": {
+      "employeeNumber": "",
+      "costCenter": "",
+      "organization": "Organization 1",
+      "division": "",
+      "department": "",
+      "manager": {
+        "managerId": "",
+        "displayName": ""
+      }
+    },
+   "id": "b3a1ab0c-3f8e-474d-9fd5-5b2b9f75b30b"
+  },
+  {
+    "userName": "User 3",
+    "displayName": "User 3",
+    "active": true,
+    "groups": [
+      {
+        "type": "",
+        "primary": false,
+        "display": "",
+        "operation": "",
+        "value": "Group 1",
+        "employeeNumber": ""
+      }
+    ],
+    "urn:scim:schemas:extension:enterprise:1.0": {
+      "employeeNumber": "",
+      "costCenter": "",
+      "organization": "Root",
+      "division": "",
+      "department": "",
+      "manager": {
+        "managerId": "",
+        "displayName": ""
+      }
+    },
+    "urn:scim:schemas:extension:safewhere:identify:1.0": {
+      "Claims": [
+        {
+          "type": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+          "primary": false,
+          "display": "",
+          "operation": "",
+          "value": "ValueClaim1",
+          "employeeNumber": ""
+        }
+      ]
+    },
+    "id": "b3a1ab0c-3f8e-474d-9fd5-5b2b9f75b30c"
+  },
+  {
+    "userName": "User 4",
+    "displayName": "User 4",
+    "active": true,
+    "groups": [
+      {
+        "type": "",
+        "primary": false,
+        "display": "",
+        "operation": "",
+        "value": "Group 1",
+        "employeeNumber": ""
+      }
+    ],
+    "urn:scim:schemas:extension:enterprise:1.0": {
+      "employeeNumber": "",
+      "costCenter": "",
+      "organization": "Organization 1",
+      "division": "",
+      "department": "",
+      "manager": {
+        "managerId": "",
+        "displayName": ""
+      }
+    },
+    "id": "b3a1ab0c-3f8e-474d-9fd5-5b2b9f75b30d"
+  }
+]

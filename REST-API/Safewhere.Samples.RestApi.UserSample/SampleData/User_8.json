@@ -1,0 +1,27 @@
+{
+  "userName": "User 8",
+  "displayName": "User 8",
+  "active": true,
+  "groups": [
+    {
+      "type": "",
+      "primary": false,
+      "display": "",
+      "operation": "",
+      "value": "Group 2",
+      "employeeNumber": ""
+    }
+  ],
+  "urn:scim:schemas:extension:enterprise:1.0": {
+    "employeeNumber": "",
+    "costCenter": "",
+    "organization": "Organization 3",
+    "division": "",
+    "department": "",
+    "manager": {
+      "managerId": "",
+      "displayName": ""
+    }
+  },
+    "id": "b3a1ab0c-3f8e-474d-9fd5-5b2b9f75b31c"
+}

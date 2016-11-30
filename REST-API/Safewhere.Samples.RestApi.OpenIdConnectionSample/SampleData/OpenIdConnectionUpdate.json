@@ -1,0 +1,69 @@
+{
+    "doNotRegisterUsers": false,
+    "allowUserAutoRegistration": false,
+    "secondFactorAuthenticationConnectionName": "",
+    "twoFactorIdentitiesCondition": "None",
+    "bearingClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+    "organizationNameOfAutoCreatedUsers": null,
+    "userTemplateClaims": [],
+    "enabled": true,
+    "accessOrganizationName": "Root",
+    "dependencyConnectionNames": [
+    ],
+    "claimTransformations": [],
+    "configuration": null,
+    "configurations": [
+        {
+            "isOpenIdAuthenticationConnectionConfigurationSection": "OpenIdAuthenticationConnectionConfigurationSection",
+            "ignoredBySecondFactorRolesClaimType": "",
+            "ignoredBySecondFactorRoles": "",
+            "ignoreRolesCheck": false,
+            "useAsSecondFactorOnly": false,
+            "federatedSessionLifetime": 440,
+            "enabledForMobileUse": true,
+            "ipBaseHomeRealmDiscoveryFilter": "192.168.1.1;192.168.1.2;192.168.0.0-192.168.1.255",
+            "supportsAutomaticAuthSelection": false,
+            "authenticationContextMethodClass": "",
+            "interceptorService": {
+                "useInterceptor": false,
+                "interceptorViewName": "",
+                "interceptorService": "None",
+                "interceptorDependencyService": "None",
+                "additionalSettings": []
+            },
+            "authLoginStatusChecker": "",
+            "optOutOfPersistentCookies": false,
+            "showReturnToLoginSelectorLink": false,
+            "customAuthenticationView": "",
+            "configurationId": "a8c6c756-2693-474c-84ac-6b499fea6312",
+            "configurationType": "OpenIdAuthentication",
+            "activationTime": {
+                "startTime": "0001-01-01T00:00:00Z",
+                "endTime": "9999-12-31T23:59:59Z"
+            }
+        }
+    ],
+    "pluginType": "OpenId",
+    "issuesRoles": false,
+    "allowedIpAddresses": [],
+    "connectionName": "OpenIdConnection",
+    "organizationName": "Root",
+    "connectionType": "Authentication",
+    "metadataReference": null,
+    "autoSetAllDependencies": false,
+    "id": "6e933351-d323-4dfc-b8c3-8ad7b01a9918",
+    "externalId": null,
+    "meta": {
+        "created": "0001-01-01T00:00:00",
+        "lastModified": "0001-01-01T00:00:00",
+        "location": "/admin/api/rest/v2/connections/6e933351-d323-4dfc-b8c3-8ad7b01a9918",
+        "version": null,
+        "attributes": null
+    },
+    "name": "OpenIdConnection",
+    "description": "updated Description",
+    "endpoint": "/admin/api/rest/v2/Connections",
+    "schema": "urn:scim:schemas:core:2.0:Connection",
+    "schemaExtensions": null,
+    "schemaExtensionsDetail": null
+}

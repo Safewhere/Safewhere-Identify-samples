@@ -1,0 +1,7 @@
+
+{
+   "ConnectionName": "OpenIdConnection",
+   "ClaimTransformations": [
+    "ExcludeIdentifyTransformation 2","ExcludeIdentifyTransformation 3"
+  ]
+}

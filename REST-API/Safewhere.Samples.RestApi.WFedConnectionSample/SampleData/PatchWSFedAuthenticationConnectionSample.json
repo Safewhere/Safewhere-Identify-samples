@@ -1,0 +1,9 @@
+[
+  {
+    "Op": "replace",
+    "Path": "",
+    "value": {
+      "description": "SAML 2.0 Authentication Description"
+    }
+  }
+]

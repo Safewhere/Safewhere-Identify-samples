@@ -1,0 +1,178 @@
+{
+	"doNotRegisterUsers": false,
+	"allowUserAutoRegistration": false,
+	"secondFactorAuthenticationConnectionName": "",
+	"twoFactorIdentitiesCondition": "None",
+	"bearingClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+	"organizationNameOfAutoCreatedUsers": null,
+	"userTemplateClaims": [ ],
+	"enabled": true,
+	"accessOrganizationName": "Root",
+	"dependencyConnectionNames": [ ],
+	"claimTransformations": [ ],
+	"configuration": {
+		"configurationType": "Saml2Authentication",
+		"entityIdentifier": "https://identify-demo3.safewhere.local/runtime/",
+		"defaultNameIdFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
+		"signingCertificate": {
+			"revocationCheck": "None",
+			"storeReference": {
+				"storeName": "TrustedPeople",
+				"storeLocation": "CurrentUser"
+			},
+			"findCriterion": {
+				"findType": "FindByThumbprint",
+				"value": "3C1FD735A4035E3B78D33444DE5327C393AA282E"
+			}
+		},
+		"signingCertificateIsInStore": true,
+		"encryptionCertificate": {
+			"revocationCheck": "None",
+			"storeReference": {
+				"storeName": "TrustedPeople",
+				"storeLocation": "CurrentUser"
+			},
+			"findCriterion": {
+				"findType": "FindByThumbprint",
+				"value": "3C1FD735A4035E3B78D33444DE5327C393AA282E"
+			}
+		},
+		"encryptionCertificateIsInStore": true,
+		"singleLogOffService": {
+			"binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect",
+			"location": "https://identify-demo36d765276-c090-4878999a8-b0191301cb39.safewhere.local/runtime/saml2/issue.idp",
+			"responseLocation": "https://identify-demo36d765276-c090-4878999a8-b0191301cb39.safewhere.local/runtime/saml2/signoff.idp"
+		},
+		"postBindingSingleLogOffService": {
+			"binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST",
+			"location": "https://identify-demo36d765276-c090-4878999a8-b0191301cb39.safewhere.local/runtime/saml2/issue.idp",
+			"responseLocation": "https://identify-demo36d765276-c090-4878999a8-b0191301cb39.safewhere.local/runtime/saml2/signoff.idp"
+		},
+		"soapBindingSingleLogOffService": {
+			"binding": "urn:oasis:names:tc:SAML:2.0:bindings:SOAP",
+			"location": "https://identify-demo36d765276-c090-4878999a8-b0191301cb39.safewhere.local/runtime/services/signoff/saml2/soap",
+			"responseLocation": "https://identify-demo36d765276-c090-4878999a8-b0191301cb39.safewhere.local/runtime/services/signoff/saml2/soap"
+		},
+		"soapBindingBindingName": "SOAP binding binding name:",
+		"soapBindingBehaviorName": "SOAP binding behavior name:",
+		"signingAlgorithm": "Sha256",
+		"metadataLocation": "https://identify-demo36d765276-c090-4878999a8-b0191301cb39.safewhere.local/runtime/saml2/metadata.idp",
+		"singleSignOnService": {
+			"binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect",
+			"location": "https://identify-demo36d765276-c090-4878999a8-b0191301cb39.safewhere.local/runtime/saml2/issue.idp",
+			"responseLocation": "https://identify-demo36d765276-c090-4878999a8-b0191301cb39.safewhere.local/runtime/saml2/issue.idp"
+		},
+		"singleSignOnArtifactResolution": {
+			"binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect",
+			"location": "http://localhost/",
+			"responseLocation": "http://localhost/"
+		},
+		"alwaysOverrideWithDefaultNameIdFormat": false,
+		"useIfNoNameIdFormatIsSpecified": false,
+		"setNameIdPolicyToThatOfAuthnRequest": false,
+		"setAuthenticationRequestAssertionConsumerServiceUrl": false,
+		"validateSubjectConfirmationDataRecipient": false,
+		"rejectedAuthenticationContextMethodClasses": "",
+		"alwaysOverrideSessionNotOnOrAfterWithFederatedSessionLifetime": true,
+		"authLoginStatusCheckerPath": "~\\AuthChecker\\Saml2PreAuthStatusChecker.js",
+		"setRequestedAuthnContextToAuthnRequest": false,
+		"authenticationContextMethodClassMapping": null,
+		"encryptionCertificateRevocationCheck": "CheckChain",
+		"signingCertificateRevocationCheck": "CheckEndCert",
+		"samlProfiles": "OioSaml",
+		"artifactBindingSingleLogOffService": {
+			"binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact",
+			"location": "https://identify-demo36d765276-c090-4878999a8-b0191301cb39.safewhere.local/runtime/saml2/issue.idp",
+			"responseLocation": "https://identify-demo36d765276-c090-4878999a8-b0191301cb39.safewhere.local/runtime/saml2/signoff.idp"
+		},
+		"otherEncryptionCertificates": [
+			{
+				"revocationCheck": "None",
+				"storeReference": {
+					"storeName": "TrustedPeople",
+					"storeLocation": "CurrentUser"
+				},
+				"findCriterion": {
+					"findType": "FindByThumbprint",
+					"value": "3C1FD735A4035E3B78D33444DE5327C393AA282E"
+				}
+			}
+		],
+		"otherSigningCertificates": [
+			{
+				"revocationCheck": "None",
+				"storeReference": {
+					"storeName": "TrustedPeople",
+					"storeLocation": "CurrentUser"
+				},
+				"findCriterion": {
+					"findType": "FindByThumbprint",
+					"value": "3C1FD735A4035E3B78D33444DE5327C393AA282E"
+				}
+			}
+		],
+		"artifactResolutionServices": [
+			{
+				"binding": "urn:oasis:names:tc:SAML:2.0:bindings:SOAP",
+				"location": "https://identify-demo36d765276-c090-4878999a8-b0191301cb39.safewhere.local/runtime/services/artifact/saml2/soap",
+				"index": 2,
+				"isDefault": true
+			},
+			{
+				"binding": "urn:oasis:names:tc:SAML:2.0:bindings:SOAP",
+				"location": "https://identify-demo36d765276-c090-4878999a8-b0191301cb39.safewhere.local/runtime/services/artifact/saml2/soap",
+				"index": 0,
+				"isDefault": false
+			},
+			{
+				"binding": "urn:oasis:names:tc:SAML:2.0:bindings:SOAP",
+				"location": "https://identify-demo36d765276-c090-4878999a8-b0191301cb39.safewhere.local/runtime/services/artifact/saml2/soap",
+				"index": 3,
+				"isDefault": false
+			}
+		],
+		"connectionAdditionalSettings": [
+			{
+				"Key": "testkey1",
+				"Value": "testvalue1"
+			},
+			{
+				"Key": "testkey2",
+				"Value": "testvalue2"
+			}
+		],
+		"soapBindingCustomSetting": "SOAP binding binding customization:",
+		"soapBehaviorCustomSetting": "SOAP binding behavior customization:",
+		"ignoredBySecondFactorRolesClaimType": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+		"ignoredBySecondFactorRoles": "",
+		"ignoreRolesCheck": false,
+		"useAsSecondFactorOnly": false,
+		"federatedSessionLifetime": 480,
+		"enabledForMobileUse": true,
+		"ipBaseHomeRealmDiscoveryFilter": "",
+		"supportsAutomaticAuthSelection": false,
+		"authenticationContextMethodClass": "",
+		"interceptorService": {
+			"useInterceptor": false,
+			"interceptorViewName": "",
+			"interceptorService": "",
+			"interceptorDependencyService": "",
+			"additionalSettings": [ ]
+		},
+		"authLoginStatusChecker": null
+	},
+    "pluginType": "Saml20",
+    "connectionName": "SAMl20 Authentication",
+    "organizationName": "Root",
+    "connectionType": "Authentication",
+    "metadataReference": null,
+    "autoSetAllDependencies": false,
+    "id": "edb3ee6e-f6d9-44c6-8d4c-a4f8c81e05c4",
+    "externalId": null,
+    "name": "SAMl20 Authentication Full Configuration",
+    "description": "A description of the connection for administrative purposes.",
+    "endpoint": "/admin/api/rest/v2/Connections",
+    "schema": "urn:scim:schemas:core:2.0:Connections",
+    "schemaExtensions": null,
+    "schemaExtensionsDetail": null
+}

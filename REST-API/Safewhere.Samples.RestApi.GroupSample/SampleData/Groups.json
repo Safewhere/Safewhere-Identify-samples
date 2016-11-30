@@ -1,0 +1,78 @@
+﻿[
+    {
+        "accessOrganizationName": "Root",
+        "claimValues": [
+            {
+                "claimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+                "value": "testtest"
+            },
+            {
+                "claimType": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                "value": "ClaimAdmin"
+            },
+            {
+                "claimType": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                "value": "UserAdmin"
+            }
+        ],
+        "name": "Test Group 1",
+        "description": "this is description 1"
+    },
+    {
+        "accessOrganizationName": "Root",
+        "claimValues": [
+            {
+                "claimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+                "value": "testtest"
+            },
+            {
+                "claimType": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                "value": "ClaimAdmin"
+            },
+            {
+                "claimType": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                "value": "UserAdmin"
+            }
+        ],
+        "name": "Test Group 2",
+        "description": "this is description 2"
+    },
+    {
+        "accessOrganizationName": "Root",
+        "claimValues": [
+            {
+                "claimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+                "value": "testtest"
+            },
+            {
+                "claimType": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                "value": "ClaimAdmin"
+            },
+            {
+                "claimType": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                "value": "UserAdmin"
+            }
+        ],
+        "name": "Test Group 3",
+        "description": "this is description 3"
+    },
+    {
+        "accessOrganizationName": "Root",
+        "claimValues": [
+            {
+                "claimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+                "value": "testtest"
+            },
+            {
+                "claimType": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                "value": "ClaimAdmin"
+            },
+            {
+                "claimType": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                "value": "UserAdmin"
+            }
+        ],
+        "name": "Test Group 4",
+        "description": "this is description 4"
+    }
+]

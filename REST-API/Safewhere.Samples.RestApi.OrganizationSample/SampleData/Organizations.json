@@ -1,0 +1,31 @@
+﻿[
+    {
+        "displayName": "OrganizationTest DisplayName 1",
+        "name": "OrganizationTestName1",
+        "accessOrganizationName": "Root",
+        "passwordExpiryDays": 11,
+        "expiryDisallowLoginDays": 12,
+        "forceResetPasswordDefaultValue": true
+    },{
+        "displayName": "OrganizationTest DisplayName 2",
+        "name": "OrganizationTestName2",
+        "accessOrganizationName": "OrganizationTestName1",
+        "passwordExpiryDays": 13,
+        "expiryDisallowLoginDays": 14,
+        "forceResetPasswordDefaultValue": false
+    },{
+        "displayName": "OrganizationTest DisplayName 3",
+        "name": "OrganizationTestName3",
+        "accessOrganizationName": "OrganizationTestName1",
+        "passwordExpiryDays": 15,
+        "expiryDisallowLoginDays": 16,
+        "forceResetPasswordDefaultValue": true
+    },{
+        "displayName": "OrganizationTest DisplayName 4",
+        "name": "OrganizationTestName4",
+        "accessOrganizationName": "OrganizationTestName1",
+        "passwordExpiryDays": 17,
+        "expiryDisallowLoginDays": 18,
+        "forceResetPasswordDefaultValue": false
+    }
+]
