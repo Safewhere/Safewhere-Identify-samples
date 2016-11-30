@@ -11,7 +11,7 @@ namespace Safewhere.Samples.STS.GenericCredentialsValidator
 {
     public class UsernamePasswordGenericCredentialsValidator : IGenericCredentialsValidator
     {
-        const string ServiceIdentifier = "serviceIdentifier";
+        const string ServiceIdentifier = "__serviceIdentifier";
         const string UserName = "username";
         const string Password = "password";
         const string AdditionalClaims = "additionalclaim";
