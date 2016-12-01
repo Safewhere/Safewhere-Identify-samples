@@ -1,10 +1,15 @@
-﻿using System.Net;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Safewhere.Samples.STS.Common
 {
-    public class IdentifyCertificateMixedEndpointBinding : Binding
+    public class IdentifyUsernameEndpointBinding: Binding
     {
         public override BindingElementCollection CreateBindingElements()
         {
@@ -21,9 +26,7 @@ namespace Safewhere.Samples.STS.Common
         {
             var result = new HttpsTransportBindingElement
             {
-                AuthenticationScheme = AuthenticationSchemes.Anonymous,
-                RequireClientCertificate = true,
-                MaxReceivedMessageSize = 0x200000L
+                AuthenticationScheme = AuthenticationSchemes.Digest
             };
 
             return result;
@@ -39,7 +42,7 @@ namespace Safewhere.Samples.STS.Common
 
         private static SecurityBindingElement CreateSecurityBindingElement()
         {
-            var result = SecurityBindingElement.CreateCertificateOverTransportBindingElement();
+            var result = SecurityBindingElement.CreateUserNameOverTransportBindingElement();
             result.MessageSecurityVersion =
                    MessageSecurityVersion
                        .WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10;
