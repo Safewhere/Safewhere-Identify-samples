@@ -36,12 +36,12 @@ namespace Safewhere.Samples.STS.GenericCredentialsValidator
             var username = inputs[UserName];
             var password = inputs[Password];
             var serviceIdentifier = inputs[ServiceIdentifier];
-            if (VerifyIfUserNameIsCorrect(username))
+            if (!VerifyIfUserNameIsCorrect(username, logWriter))
             {
                 return new CredentialsValidationResult {ResultCode = CredentialsValidationResultCode.UnknownUserName};
             }
 
-            if (VerifyPasswordIsCorrect(password))
+            if (!VerifyPasswordIsCorrect(password, logWriter))
             {
                 return new CredentialsValidationResult { ResultCode = CredentialsValidationResultCode.IncorrectPassword };
             }
@@ -63,19 +63,21 @@ namespace Safewhere.Samples.STS.GenericCredentialsValidator
             return new CredentialsValidationResult {ResultCode = CredentialsValidationResultCode.Success};
         }
 
-        private bool VerifyPasswordIsCorrect(string password)
+        private bool VerifyPasswordIsCorrect(string password, IIdentifyLogWriter logWriter)
         {
-            if (password.Equals("incorrectpasswords"))
+            if (password.Equals("incorrectpassword", StringComparison.InvariantCultureIgnoreCase))
             {
+                logWriter.WriteError($"Incorrect passord {password}");
                 return false;
             }
             return true;
         }
 
-        private bool VerifyIfUserNameIsCorrect(string username)
+        private bool VerifyIfUserNameIsCorrect(string username, IIdentifyLogWriter logWriter)
         {
-            if (username.Equals("unknownusername"))
+            if (username.Equals("unknownusername", StringComparison.InvariantCultureIgnoreCase))
             {
+                logWriter.WriteError($"Incorrect passord {username}");
                 return false;
             }
             return true;
