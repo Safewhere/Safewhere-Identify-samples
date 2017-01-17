@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -50,17 +51,18 @@ namespace Safewhere.Samples.STS.GenericCredentialsValidator
             logResult.AppendLine(
                 $"Successfully validate generic credentials for username = '{username}' with service identifier ='{serviceIdentifier}'");
             logResult.AppendLine("");
-
+            var identity = new ClaimsIdentity(AuthenticationTypes.Password);
             foreach (var input in inputs)
             {
                 if (input.Key.StartsWith(AdditionalClaims, StringComparison.InvariantCultureIgnoreCase))
                 {
+                    identity.AddClaim(new Claim(input.Key, input.Value));
                     logResult.AppendLine($"Additional claims received: type = '{input.Key}' - value ='{input.Value}'");
                 }
             }
-            logWriter.WriteInformation(logResult); 
+            logWriter.WriteInformation(logResult);
 
-            return new CredentialsValidationResult {ResultCode = CredentialsValidationResultCode.Success};
+            return new CredentialsValidationResult {ResultCode = CredentialsValidationResultCode.Success, ClaimsPrincipal = new ClaimsPrincipal(identity) };
         }
 
         private bool VerifyPasswordIsCorrect(string password, IIdentifyLogWriter logWriter)
