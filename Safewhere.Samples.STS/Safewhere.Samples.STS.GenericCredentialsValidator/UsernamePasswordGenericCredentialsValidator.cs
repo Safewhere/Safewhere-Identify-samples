@@ -34,6 +34,7 @@ namespace Safewhere.Samples.STS.GenericCredentialsValidator
                 validationResult.ShowErrorViewWhenResultCodeIsNotSuccess = false;
                 return validationResult;
             }
+            
             var username = inputs[UserName];
             var password = inputs[Password];
             var serviceIdentifier = inputs[ServiceIdentifier];
@@ -58,6 +59,10 @@ namespace Safewhere.Samples.STS.GenericCredentialsValidator
                 {
                     identity.AddClaim(new Claim(input.Key, input.Value));
                     logResult.AppendLine($"Additional claims received: type = '{input.Key}' - value ='{input.Value}'");
+                    if (input.Value.Equals("exception"))
+                    {
+                        throw new GenericProviderSampleException("Generic provider exception is thrown on UsernamePasswordGenericCredentialsValidator as requested");
+                    }
                 }
             }
             logWriter.WriteInformation(logResult);

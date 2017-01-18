@@ -37,6 +37,7 @@ namespace Safewhere.Samples.STS.GenericProviderAppConsole
             catch (Exception ex)
             {
                 Console.WriteLine("Exception thrown: " + ex);
+
             }
             Console.ReadLine();
         }
