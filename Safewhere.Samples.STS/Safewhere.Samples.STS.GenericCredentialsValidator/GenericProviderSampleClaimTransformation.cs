@@ -30,10 +30,6 @@ namespace Safewhere.Samples.STS.GenericCredentialsValidator
             {
                 throw new ArgumentNullException(nameof(principal));
             }
-            if (inputs != null && inputs.ContainsKey("Should_Throw_Exception"))
-            {
-                throw new GenericProviderSampleException("Generic provider exception is thrown on GenericProviderSampleClaimTransformation as requested");
-            }
             if (principal.Claims.Any(claim => claim.Value.Equals("ctexception")))
             {
                 throw new GenericProviderSampleException("Generic provider exception is thrown on GenericProviderSampleClaimTransformation as requested");
