@@ -52,6 +52,7 @@ namespace Safewhere.Samples.STS.GenericCredentialsValidator
             logResult.AppendLine(
                 $"Successfully validate generic credentials for username = '{username}' with service identifier ='{serviceIdentifier}'");
             logResult.AppendLine("");
+            // For this example, we are returning only claims whose types start with "additionalClaims". In reality, here is where you put on your business logic code to return claims.
             var identity = new ClaimsIdentity(AuthenticationTypes.Password);
             foreach (var input in inputs)
             {
