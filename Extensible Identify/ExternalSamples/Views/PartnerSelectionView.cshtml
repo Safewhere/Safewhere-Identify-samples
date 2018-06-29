@@ -1,0 +1,31 @@
+﻿@using Safewhere.IdentityProvider.RuntimeModel
+@using Safewhere.IdentityProviderModel
+@using System.Web.Mvc.Html
+@using Safewhere.External.Samples
+
+@model PartnerSelectionModel
+
+@section TitleHeader{
+    Partner Selection
+}
+@section InitScript{
+
+}
+@section TitleContent{
+    Partner Selection
+}
+@section MainContent{
+    <h2>You are acessing Identify*Portal. Please select which Partner you want to manage</h2>
+    <form method="post">
+        @foreach (var partner in Model.Partners)
+        {
+            @Html.RadioButton("partners", partner)
+            @Html.Label(partner)
+            <br />
+        }
+        <br />
+        <input type="submit" value="OK" tabindex="1" />
+
+        @Html.Partial("RenderFormParameters", new RenderFormParametersModel(Model.ContextId))
+    </form>
+}

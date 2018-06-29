@@ -1,0 +1,1836 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Safewhere.External</name>
+    </assembly>
+    <members>
+        <member name="T:Safewhere.External.Authentication.CredentialsValidationResult">
+            <summary>
+            Result object which is returned by <see cref="M:Safewhere.External.Authentication.IGenericCredentialsValidator.Validate(System.Web.Mvc.ControllerContext,System.Collections.Generic.IDictionary{System.String,System.String},Safewhere.External.IIdentifyLogWriter)"/>
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Authentication.CredentialsValidationResult.#ctor">
+            <summary>
+            Default constructor which initializes <see cref="P:Safewhere.External.Authentication.CredentialsValidationResult.ExternalErrorMessages"/> to an empty list.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Authentication.CredentialsValidationResult.ResultCode">
+            <summary>
+            Returns an instance of <see cref="T:Safewhere.External.Authentication.CredentialsValidationResultCode"/> which can be used to check if this result object
+            is successful or fail and what the exact error is.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Authentication.CredentialsValidationResult.UserIdentity">
+            <summary>
+            Returns identity of the logged in user.
+            </summary>
+            <remarks>Of all the key/value pairs which Identify passes to an external provider,
+            there should always be one which is the user’s identity. For example, it can be either a username, email or CPR. 
+            The external provider validator <see cref="T:Safewhere.External.Authentication.IGenericCredentialsValidator"/>
+            is responsible for setting that value to the UserIdentity property so that Identify can use it to build identity bearing claim.
+            </remarks>
+        </member>
+        <member name="P:Safewhere.External.Authentication.CredentialsValidationResult.ClaimsPrincipal">
+            <summary>
+            Returns claims principal of the logged in user
+            </summary>
+            <remarks>
+            Instead returning a user identify which Identify can use to build identity bearing claim, an external provider validator can build a ClaimsPrincipal object itself.
+            When this property is not null, Identify will use this one instead of the UserIdentity property.
+            </remarks>
+        </member>
+        <member name="P:Safewhere.External.Authentication.CredentialsValidationResult.ExternalErrorMessages">
+            <summary>
+            Returns additional error messages from a generic provider validator <see cref="T:Safewhere.External.Authentication.IGenericCredentialsValidator"/> back to Identify.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Authentication.CredentialsValidationResult.ShowErrorViewWhenResultCodeIsNotSuccess">
+            <summary>
+            When user's credentials validation fails, if this property is set to true, Identify will show the configured error view. Otherwise, Identify will show the login view again.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Authentication.CredentialsValidationResult.AlternativeViewNameWhenResultCodeIsNotSuccess">
+            <summary>
+            When user's credentials validation fails, an external provider may want to show an alternative view. Set this property to that alternative view's name to instruct Identify to do so.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Authentication.CredentialsValidationResult.ValidationActionResult">
+            <summary>
+            This property provides another way for the external provider to return result to Identify. When this property has a value, it will take top precedence. The other properties are ignored.
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Authentication.CredentialsValidationResultCode">
+            <summary>
+            An instance of this type indicates validation result of a <see cref="T:Safewhere.External.Authentication.IGenericCredentialsValidator"/>
+            </summary>
+        </member>
+        <member name="F:Safewhere.External.Authentication.CredentialsValidationResultCode.None">
+            <summary>
+            Initial state. Usually means no state has been assigned.
+            </summary>
+        </member>
+        <member name="F:Safewhere.External.Authentication.CredentialsValidationResultCode.Success">
+            <summary>
+            Validation succeeded.
+            </summary>
+        </member>
+        <member name="F:Safewhere.External.Authentication.CredentialsValidationResultCode.UserDisabled">
+            <summary>
+            The user is disabled.
+            </summary>
+        </member>
+        <member name="F:Safewhere.External.Authentication.CredentialsValidationResultCode.UserLocked">
+            <summary>
+            The user is locked out.
+            </summary>
+        </member>
+        <member name="F:Safewhere.External.Authentication.CredentialsValidationResultCode.UnknownUserName">
+            <summary>
+            Unknown user name.
+            </summary>
+        </member>
+        <member name="F:Safewhere.External.Authentication.CredentialsValidationResultCode.IncorrectPassword">
+            <summary>
+            Incorrect password.
+            </summary>
+        </member>
+        <member name="F:Safewhere.External.Authentication.CredentialsValidationResultCode.UnknownError">
+            <summary>
+            Any other types of errors.
+            </summary>
+        </member>
+        <member name="F:Safewhere.External.Authentication.CredentialsValidationResultCode.MissingRequiredFields">
+            <summary>
+            The validator doesn't have all the required input parameters to perform user validation.
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Authentication.GenericProviderAuthenticationModel">
+            <summary>
+            A model object which is used to passed validation result to the view. The view itself will decide what and how the error messages will be shown.
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Authentication.GenericProviderAuthenticationModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Authentication.GenericProviderAuthenticationModel.UserDisabled">
+            <summary>
+            The user is disabled.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Authentication.GenericProviderAuthenticationModel.UserLocked">
+            <summary>
+            The user is locked out.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Authentication.GenericProviderAuthenticationModel.UnknownUserName">
+            <summary>
+            Unknown user name.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Authentication.GenericProviderAuthenticationModel.IncorrectPassword">
+            <summary>
+            Incorrect password.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Authentication.GenericProviderAuthenticationModel.UnknownError">
+            <summary>
+            Any other types of errors. In most cases, ErrorMessages and ExternalErrorMessages may contain details about what the real errors are
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Authentication.GenericProviderAuthenticationModel.MissingRequiredFields">
+            <summary>
+            The validator doesn't have all the required input parameters to perform user validation.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Authentication.GenericProviderAuthenticationModel.ErrorMessages">
+            <summary>
+            Contains error messages about errors which happen on the Identify side
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Authentication.GenericProviderAuthenticationModel.ExternalErrorMessages">
+            <summary>
+            Contains error messages about errors which happen on the external validator side
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Authentication.IGenericCredentialsValidator">
+            <summary>
+            Defines methods which are used to validate user credentials passed from a generic authentication connection.
+            </summary>
+            <remarks>
+            Safewhere*Identify has authentication provider called Generic Provider for External Authentication. The purpose of the plugin is to make it easier for
+            a customer to quickly implement an authentication plugin.
+            The general idea is that Identify will collect all possible inputs and pass them to an generic validator implementation of this interface. The implementation will validate user's credentials
+            based on all the inputs and return a result object of type <see cref="T:Safewhere.External.Authentication.CredentialsValidationResult"/>
+            There are two sources of inputs:
+              1. Static settings which are configured on the Authentication connection UI.
+              2. User inputs via the main login view.
+            
+            Sample code: See Safewhere.External.Samples.DummyGenericValidatorUsernamePassword
+            </remarks>
+        </member>
+        <member name="M:Safewhere.External.Authentication.IGenericCredentialsValidator.Validate(System.Web.Mvc.ControllerContext,System.Collections.Generic.IDictionary{System.String,System.String},Safewhere.External.IIdentifyLogWriter)">
+            <summary>
+            Validates user's credentials and returns validation result
+            </summary>
+            <param name="cc">ControllerContext</param>
+            <param name="inputs">Contains inputs from two sources:
+              1. Static settings which are configured on the Authentication connection UI.
+              2. User inputs via the main login view.
+            </param>
+            <param name="logWriter">A logger instance which can be used to log errors as well as other meaningful events to Safewhere event log. <see cref="T:Safewhere.External.IIdentifyLogWriter"/></param>
+            <returns>A object of type <see cref="T:Safewhere.External.Authentication.CredentialsValidationResult"/></returns>
+        </member>
+        <member name="T:Safewhere.External.Authentication.NamespaceDoc">
+            <summary>
+            The <see cref="N:Safewhere.External.Authentication"/> namespace contains types which help build external authentication connections for generic provider.
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.ClaimsTransformation.DummyExternalClaimsTransformation">
+            <summary>
+            A dummy implementation of <see cref="T:Safewhere.External.ClaimsTransformation.IExternalClaimsTransformation"/> which simply returns the input principal.
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.ClaimsTransformation.DummyExternalClaimsTransformation.Transform(System.Security.Claims.ClaimsPrincipal,System.Collections.Generic.IDictionary{System.String,System.String},Safewhere.External.ClaimsTransformation.IExternalClaimTransformationPipelineContext)">
+            <summary>
+            
+            </summary>
+            <param name="principal">An instance of ClaimsPrincipal which is about to be issued to a relying party.</param>
+            <param name="inputs">key-value pairs additional settings</param>
+            <param name="pipelineContext">A pipeline context object that contains data for a claims transformation pipeline execution</param>
+            <returns></returns>
+        </member>
+        <member name="T:Safewhere.External.ClaimsTransformation.IExternalClaimTransformationPipelineContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.ClaimsTransformation.IExternalClaimTransformationPipelineContext.IsRegisteredUser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.ClaimsTransformation.IExternalClaimsTransformation">
+            <summary>
+            This interface defines the basic functionality of a claims transformation.
+            </summary>
+            <remarks>
+            An implementation of this interface is called an external claims transformation and can be injected into Identify's claims transformation pipeline.
+            </remarks>
+        </member>
+        <member name="M:Safewhere.External.ClaimsTransformation.IExternalClaimsTransformation.Transform(System.Security.Claims.ClaimsPrincipal,System.Collections.Generic.IDictionary{System.String,System.String},Safewhere.External.ClaimsTransformation.IExternalClaimTransformationPipelineContext)">
+            <summary>
+            Performs transformation against a claims principal.
+            </summary>
+            <param name="principal">A claims principal instance to transform</param>
+            <param name="inputs"></param>
+            <param name="pipelineContext"></param>
+            <returns>The transformed claims principal.</returns>
+        </member>
+        <member name="T:Safewhere.External.ClaimsTransformation.ClaimsTransformationException">
+            <summary>
+            Throws an exception of this type when a fatal error happens during transforming a claims principal in <see cref="M:Safewhere.External.ClaimsTransformation.IExternalClaimsTransformation.Transform(System.Security.Claims.ClaimsPrincipal,System.Collections.Generic.IDictionary{System.String,System.String},Safewhere.External.ClaimsTransformation.IExternalClaimTransformationPipelineContext)"/>
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.ClaimsTransformation.ClaimsTransformationException.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.ClaimsTransformation.ClaimsTransformationException.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Safewhere.External.ClaimsTransformation.ClaimsTransformationException.#ctor(System.String,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="inner"></param>
+        </member>
+        <member name="M:Safewhere.External.ClaimsTransformation.ClaimsTransformationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Safewhere.External.ClaimsTransformation.NamespaceDoc">
+            <summary>
+            The <see cref="N:Safewhere.External.ClaimsTransformation"/> namespace contains types which help build external claims transformation rules.
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.ExternalTypeMetadataAttribute">
+            <summary>
+            This attribute provides two metadata fields to Identify: default display name and text resource key.
+            </summary>
+            <remarks>
+            When an external type is decorated with this attribute, Identify
+            will use the metadata to display the external type with its friendly name to UI instead of using the .NET qualified name.
+            Identify will add support for this attribute in a near release version.
+            </remarks>
+        </member>
+        <member name="M:Safewhere.External.ExternalTypeMetadataAttribute.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="defaultDisplayName">Default display name of a type. If this value is null or empty, fallback to .NET qualified name.</param>
+        </member>
+        <member name="M:Safewhere.External.ExternalTypeMetadataAttribute.#ctor(System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="defaultDisplayName">Default display name of a type</param>
+            <param name="textResourceKey">Key to use to look up for localized name of the display name. If this key is null or empty, fallback to the display name.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="P:Safewhere.External.ExternalTypeMetadataAttribute.DefaultDisplayName">
+            <summary>
+            Default display name of a type.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.ExternalTypeMetadataAttribute.TextResourceKey">
+            <summary>
+            Key to use to look up for localized name of the display name.
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Model.ActivationTime">
+            <summary>
+            An activation time of a resource, e.g. a user context, a connection, or a claim definition. 
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ActivationTime.StartTime">
+            <summary>
+            When, in UTC, a resource begins active
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ActivationTime.EndTime">
+            <summary>
+            When, in UTC, a resource stops being active
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Model.ExtendedClaim">
+            <summary>
+            Extends <see cref="T:System.Security.Claims.Claim"/> with activation time and extended values
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.ExtendedClaim.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Safewhere.External.Model.ExtendedClaim"/> class with the specified claim type, and value.
+            </summary>
+            <param name="type">The claim type.</param><param name="value">The claim value.</param><exception cref="T:System.ArgumentNullException"><paramref name="type"/> or <paramref name="value"/> is null.</exception>
+        </member>
+        <member name="M:Safewhere.External.Model.ExtendedClaim.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Safewhere.External.Model.ExtendedClaim"/> class with the specified claim type, value, and value type.
+            </summary>
+            <param name="type">The claim type.</param><param name="value">The claim value.</param><param name="valueType">The claim value type. If this parameter is null, then <see cref="F:System.Security.Claims.ClaimValueTypes.String"/> is used.</param><exception cref="T:System.ArgumentNullException"><paramref name="type"/> or <paramref name="value"/> is null.</exception>
+        </member>
+        <member name="M:Safewhere.External.Model.ExtendedClaim.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Safewhere.External.Model.ExtendedClaim"/> class with the specified claim type, value, value type, and issuer.
+            </summary>
+            <param name="type">The claim type.</param><param name="value">The claim value.</param><param name="valueType">The claim value type. If this parameter is null, then <see cref="F:System.Security.Claims.ClaimValueTypes.String"/> is used.</param><param name="issuer">The claim issuer. If this parameter is empty or null, then <see cref="F:System.Security.Claims.ClaimsIdentity.DefaultIssuer"/> is used.</param><exception cref="T:System.ArgumentNullException"><paramref name="type"/> or <paramref name="value"/> is null.</exception>
+        </member>
+        <member name="M:Safewhere.External.Model.ExtendedClaim.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Safewhere.External.Model.ExtendedClaim"/> class with the specified claim type, value, value type, issuer,  and original issuer.
+            </summary>
+            <param name="type">The claim type.</param><param name="value">The claim value.</param><param name="valueType">The claim value type. If this parameter is null, then <see cref="F:System.Security.Claims.ClaimValueTypes.String"/> is used.</param><param name="issuer">The claim issuer. If this parameter is empty or null, then <see cref="F:System.Security.Claims.ClaimsIdentity.DefaultIssuer"/> is used.</param><param name="originalIssuer">The original issuer of the claim. If this parameter is empty or null, then the <see cref="P:System.Security.Claims.Claim.OriginalIssuer"/> property is set to the value of the <see cref="P:System.Security.Claims.Claim.Issuer"/> property.</param><exception cref="T:System.ArgumentNullException"><paramref name="type"/> or <paramref name="value"/> is null.</exception>
+        </member>
+        <member name="M:Safewhere.External.Model.ExtendedClaim.#ctor(System.String,System.String,System.String,System.String,System.String,System.Security.Claims.ClaimsIdentity)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Safewhere.External.Model.ExtendedClaim"/> class with the specified claim type, value, value type, issuer, original issuer and subject.
+            </summary>
+            <param name="type">The claim type.</param><param name="value">The claim value.</param><param name="valueType">The claim value type. If this parameter is null, then <see cref="F:System.Security.Claims.ClaimValueTypes.String"/> is used.</param><param name="issuer">The claim issuer. If this parameter is empty or null, then <see cref="F:System.Security.Claims.ClaimsIdentity.DefaultIssuer"/> is used.</param><param name="originalIssuer">The original issuer of the claim. If this parameter is empty or null, then the <see cref="P:System.Security.Claims.Claim.OriginalIssuer"/> property is set to the value of the <see cref="P:System.Security.Claims.Claim.Issuer"/> property.</param><param name="subject">The subject that this claim describes.</param><exception cref="T:System.ArgumentNullException"><paramref name="type"/> or <paramref name="value"/> is null.</exception>
+        </member>
+        <member name="P:Safewhere.External.Model.ExtendedClaim.Context">
+            <summary>
+            Contains a string which defines context of this claim object. The concrete interpretation is up to specific systems
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ExtendedClaim.ExtendedContext">
+            <summary>
+            Contains a string which defines extended context of this claim object. The concrete interpretation is up to specific systems
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ExtendedClaim.ActivationStartTime">
+            <summary>
+            Defines the duration in which is claim object is active. Some system may choose to filter out all the inactive claims
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ExtendedClaim.ActivationEndTime">
+            <summary>
+            Defines the duration in which is claim object is active. Some system may choose to filter out all the inactive claims
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ExtendedClaim.ExtendedValues">
+            <summary>
+            Contains a string which defines extended values of this claim object. The concrete interpretation is up to specific systems
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ExtendedClaim.Version">
+            <summary>
+            Contains a string which defines Version of this claim object. The concrete interpretation is up to specific systems. Some may use this property to indicate if a claim is using Saml11 or Saml20 claim type
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Model.IdentifyClaimContract">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Model.ProtocolConnectionContract">
+            <summary>
+            Currently, ProtocolConnectionContract only contains properties that all connection types have.
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Model.UserContext">
+            <summary>
+            Represents a context of user. A user may have 0..* user contexts. If a user some user contexts, the user is only active when
+            one of the context is valid.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.UserContext.Id">
+            <summary>
+            The unique id of this user context. This property is required to e.g. delete an UserContext.
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.UserContext.ClaimType">
+            <summary>
+            The claim type this user context represents
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.UserContext.ClaimValue">
+            <summary>
+            The claim type's value this user context represents
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.UserContext.ActivationTime">
+            <summary>
+            A UTC time ranges, when an object is enabled. The startTime must less than endTime and endTime is not less than now
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.UserContext.CertificateThumbprint">
+            <summary>
+            The X509Certificate thumprint this user context represents. The X509Certificate thunprint must belong to one of a item in list x509Certificates
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Model.AuthenticationConnectionContract">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.AuthenticationConnectionContract.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.AuthenticationConnectionContract.#ctor(Safewhere.External.Model.AuthenticationConnectionContract)">
+            <summary>
+            
+            </summary>
+            <param name="other"></param>
+        </member>
+        <member name="P:Safewhere.External.Model.AuthenticationConnectionContract.OrganizationId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.AuthenticationConnectionContract.AllowUserAutoRegistration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.AuthenticationConnectionContract.DoNotRegisterUsers">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.AuthenticationConnectionContract.BearingClaimType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Model.ClaimContract">
+            <summary>
+            Represents a claim object with type and value.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimContract.ClaimType">
+            <summary>
+            Contains type of this claim object
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimContract.Value">
+            <summary>
+            Contains type of this value object
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimContract.Context">
+            <summary>
+            Contains a string which defines context of this claim object. The concrete interpretation is up to specific systems
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimContract.ExtendedContext">
+            <summary>
+            Contains a string which defines extended context of this claim object. The concrete interpretation is up to specific systems
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimContract.ActivationStartTime">
+            <summary>
+            Defines the duration in which is claim object is active. Some system may choose to filter out all the inactive claims
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimContract.ActivationEndTime">
+            <summary>
+            Defines the duration in which is claim object is active. Some system may choose to filter out all the inactive claims
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimContract.ExtendedValues">
+            <summary>
+            Contains a string which defines extended values of this claim object. The concrete interpretation is up to specific systems
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimContract.Version">
+            <summary>
+            Contains a string which defines Version of this claim object. The concrete interpretation is up to specific systems. Some may use this property to indicate if a claim is using Saml11 or Saml20 claim type
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.ClaimContract.Equals(Safewhere.External.Model.ClaimContract)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <returns>
+            true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
+            </returns>
+            <param name="other">An object to compare with this object.</param>
+        </member>
+        <member name="M:Safewhere.External.Model.ClaimContract.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to the current object.
+            </summary>
+            <returns>
+            true if the specified object  is equal to the current object; otherwise, false.
+            </returns>
+            <param name="obj">The object to compare with the current object. </param>
+        </member>
+        <member name="M:Safewhere.External.Model.ClaimContract.GetHashCode">
+            <summary>
+            Serves as the default hash function. 
+            </summary>
+            <returns>
+            A hash code for the current object.
+            </returns>
+        </member>
+        <member name="T:Safewhere.External.Model.ClaimDefinitionContract">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.ClaimDefinitionContract.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.ClaimDefinitionContract.#ctor(Safewhere.External.Model.ClaimDefinitionContract)">
+            <summary>
+            
+            </summary>
+            <param name="other"></param>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.ClaimType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.AccessOrganizationId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.UserEditable">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.FriendlyName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.AvoidUpsize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.Sensitive">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.ShowAsColumnOnUserList">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.CountSpecification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.VariableName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.RestrictedSubOrganizationView">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.Context">
+            <summary>
+            Contains a string which defines context of this claim object. The concrete interpretation is up to specific systems
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.ExtendedContext">
+            <summary>
+            Contains a string which defines extended context of this claim object. The concrete interpretation is up to specific systems
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.ActivationStartTime">
+            <summary>
+            Defines the duration in which is claim object is active. Some system may choose to filter out all the inactive claims
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.ActivationEndTime">
+            <summary>
+            Defines the duration in which is claim object is active. Some system may choose to filter out all the inactive claims
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.ExtendedValues">
+            <summary>
+            Contains a string which defines extended values of this claim object. The concrete interpretation is up to specific systems
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ClaimDefinitionContract.Version">
+            <summary>
+            Contains a string which defines Version of this claim object. The concrete interpretation is up to specific systems. Some may use this property to indicate if a claim is using Saml11 or Saml20 claim type
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.ClaimDefinitionContract.Clone">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Model.ClaimDefinitionContract.WithId(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Safewhere.External.Model.GroupClaimDefinitionContract">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.GroupClaimDefinitionContract.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.GroupClaimDefinitionContract.#ctor(Safewhere.External.Model.GroupClaimDefinitionContract)">
+            <summary>
+            
+            </summary>
+            <param name="other"></param>
+        </member>
+        <member name="P:Safewhere.External.Model.GroupClaimDefinitionContract.Values">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.GroupClaimDefinitionContract.Clone">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Safewhere.External.Model.OptionalClaimDefinitionContract">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.OptionalClaimDefinitionContract.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.OptionalClaimDefinitionContract.#ctor(Safewhere.External.Model.OptionalClaimDefinitionContract)">
+            <summary>
+            
+            </summary>
+            <param name="other"></param>
+        </member>
+        <member name="P:Safewhere.External.Model.OptionalClaimDefinitionContract.Values">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.OptionalClaimDefinitionContract.Clone">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Safewhere.External.Model.UserContract">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.UserContract.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.UserContract.Claims">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.UserContract.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.UserContract.IdentifyUserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.UserContract.OrganizationId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.UserContract.GroupName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.UserContract.Enabled">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.UserContract.ForceResetPasswordAfterFirstTimeLogin">
+            <summary>
+            Only applicable when creating users
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.UserContract.Password">
+            <summary>
+            On creation: leave empty to autog-generate. Set to a value to force using the set value.
+            On retrieval: always empty
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Model.ConnectionContract">
+            <summary>
+            An external contract which represents the Connection object from Identify
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.ConnectionContract.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.ConnectionContract.#ctor(Safewhere.External.Model.ConnectionContract)">
+            <summary>
+            
+            </summary>
+            <param name="other"></param>
+        </member>
+        <member name="P:Safewhere.External.Model.ConnectionContract.Description">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ConnectionContract.AccessOrganizationId">
+            <summary>
+            Access organization id
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ConnectionContract.Enabled">
+            <summary>
+            Whether a connect is enabled or disabled
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ConnectionContract.Id">
+            <summary>
+            Internal Id of a connection
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ConnectionContract.Name">
+            <summary>
+            Name of a connection
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ConnectionContract.PlugInId">
+            <summary>
+            PlugIn Id of a connection
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ConnectionContract.Context">
+            <summary>
+            Generic context data of a connection. How this can be used is up to a specific custom use case
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ConnectionContract.IssuesRoles">
+            <summary>
+            If a connection can issue role. This is reserved for future use
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ConnectionContract.AllowedIPAddresses">
+            <summary>
+            IP addresses that are preferred by this connection
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.ConnectionContract.ExtendedContext">
+            <summary>
+            Generic context data of a connection. How this can be used is up to a specific custom use case
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Model.FreeClaimDefinitionContract">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.FreeClaimDefinitionContract.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.FreeClaimDefinitionContract.#ctor(Safewhere.External.Model.FreeClaimDefinitionContract)">
+            <summary>
+            
+            </summary>
+            <param name="other"></param>
+        </member>
+        <member name="M:Safewhere.External.Model.FreeClaimDefinitionContract.Clone">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Safewhere.External.Model.OrganizationContract">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.OrganizationContract.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.OrganizationContract.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.OrganizationContract.ParentName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.OrganizationContract.PasswordExpiryDays">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.OrganizationContract.ExpiryDisallowLoginDays">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Services.IIdentifyProtocolConnectionService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyProtocolConnectionService.GetProtocolConnection(System.String)">
+            <summary>
+            Find a connection using connection Name
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyProtocolConnectionService.GetProtocolConnection(System.Guid)">
+            <summary>
+            Find a connection using connection Name
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyProtocolConnectionService.GetProtocolConnectionByEntityId(System.String)">
+            <summary>
+            Find a connection using entity id. Applicable for connections that have entity ids only.
+            </summary>
+            <param name="entityId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Safewhere.External.Services.IPasswordPolicyValidationCommand">
+            <summary>
+            Validate user's password plugged-in command
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.IPasswordPolicyValidationCommand.IsValid(System.Guid,System.Collections.Generic.IList{System.Security.Claims.Claim},System.String)">
+            <summary>
+            Validate user's password plugged-in command
+            </summary>
+            <param name="userId"></param>
+            <param name="userClaims"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Safewhere.External.Services.IIdentifyEndpointContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Services.IIdentifyEndpointContext.AuthenticationConnection">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Services.IIdentifyAuthenticationConnectionService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyAuthenticationConnectionService.GetAuthenticationConnection(System.String)">
+            <summary>
+            Find a connection using connection Name
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyAuthenticationConnectionService.GetAuthenticationConnection(System.Guid)">
+            <summary>
+            Find a connection using connection id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyAuthenticationConnectionService.GetAuthenticationConnectionByEntityId(System.String)">
+            <summary>
+            Find a connection using entity id. Applicable for connections that have entity ids only.
+            </summary>
+            <param name="entityId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Safewhere.External.Services.IIdentifyClaimDefinitionService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyClaimDefinitionService.CreateClaimDefinition(Safewhere.External.Model.ClaimDefinitionContract)">
+            <summary>
+            
+            </summary>
+            <param name="claimDefinition"></param>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyClaimDefinitionService.GetClaimDefinition(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="claimType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyClaimDefinitionService.UpdateClaimDefinition(Safewhere.External.Model.ClaimDefinitionContract)">
+            <summary>
+            
+            </summary>
+            <param name="claimDefinition"></param>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyClaimDefinitionService.DeleteClaimDefinition(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="claimType"></param>
+        </member>
+        <member name="T:Safewhere.External.Services.IIdentifyContainer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyContainer.Resolve(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="typeName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyContainer.TryResolve``1(``0@)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyContainer.ResolveAll``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Safewhere.External.Services.IIdentifyRedirectPathService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.RedirectPath(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.RedirectWithContextId(System.Web.Mvc.ControllerContext,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="cc"></param>
+            <param name="redirectPath"></param>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.RedirectWithContextId(System.Web.Mvc.ControllerContext,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="cc"></param>
+            <param name="redirectPath"></param>
+            <param name="applyRedirectPath"></param>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.BuildRedirectResultWithContextId(System.Web.Mvc.ControllerContext,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="cc"></param>
+            <param name="redirectPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.BuildRedirectResultWithContextId(System.Web.Mvc.ControllerContext,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="cc"></param>
+            <param name="redirectPath"></param>
+            <param name="applyRedirectPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.BuildRedirectPathWithContextId(System.Web.Mvc.ControllerContext,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="cc"></param>
+            <param name="redirectPath"></param>
+            <param name="applyRedirectPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.BuildRedirectPathWithContextId(System.Web.Mvc.ControllerContext,System.String,System.Boolean,System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="cc"></param>
+            <param name="redirectPath"></param>
+            <param name="applyRedirectPath"></param>
+            <param name="withAuthenticationConnectionId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Safewhere.External.Services.ClaimDefinitionContractExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.ClaimDefinitionContractExtensions.SelectClaimValueFrom(Safewhere.External.Model.FreeClaimDefinitionContract,System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            
+            </summary>
+            <param name="claimDefinitionContract"></param>
+            <param name="claimsPrincipal"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Safewhere.External.Services.ClaimDefinitionContractExtensions.SelectClaimValueFrom(Safewhere.External.Model.ClaimDefinitionContract,System.Collections.Generic.IEnumerable{System.Security.Claims.Claim})">
+            <summary>
+            
+            </summary>
+            <param name="claimDefinitionContract"></param>
+            <param name="claims"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.ClaimDefinitionContractExtensions.CreateValue(Safewhere.External.Model.ClaimDefinitionContract,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="claimDefinitionContract"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.ClaimDefinitionContractExtensions.WithValue(Safewhere.External.Model.ClaimContract,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="claimContract"></param>
+            <param name="newValue"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Safewhere.External.Services.IIdentifyUserCredentialService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyUserCredentialService.Verify(Safewhere.External.Model.ClaimContract,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="identityBearingClaim"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyUserCredentialService.GetUserByUserName(System.String,System.String)">
+            <summary>
+            This method returns the first match
+            </summary>
+            <param name="bearingClaimType"></param>
+            <param name="userName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Safewhere.External.Services.IIdentifyUserService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyUserService.UpdateUser(Safewhere.External.Model.UserContract,Safewhere.External.Model.ClaimContract)">
+            <summary>
+            User identityclaim to find out what user to update
+            </summary>
+            <param name="userContract"></param>
+            <param name="identityClaimContract"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyUserService.UpdateUser(Safewhere.External.Model.UserContract)">
+            <summary>
+            Use Id to find out what user to update
+            </summary>
+            <param name="userContract"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyUserService.GetUser(Safewhere.External.Model.ClaimContract,System.Boolean)">
+            <summary>
+            TODO: should throw when multiple match
+            </summary>
+            <param name="identityClaimContract"></param>
+            <param name="throwWhenMultipleMatch"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyUserService.GetAllUsers">
+            <summary>
+            Warning: use with care
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyUserService.CreateUser(Safewhere.External.Model.UserContract)">
+            <summary>
+            
+            </summary>
+            <param name="userContract"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyUserService.DeleteUser(Safewhere.External.Model.ClaimContract)">
+            <summary>
+            
+            </summary>
+            <param name="identityClaimContract"></param>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyUserService.Verify(Safewhere.External.Model.ClaimContract,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="identityBearingClaim"></param>
+            <param name="password"></param>
+            <param name="isUserNameCaseSensitive"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyUserService.UpdatePassword(System.Guid,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="password"></param>
+        </member>
+        <member name="T:Safewhere.External.Services.IIdentifyRegistrationContainer">
+            <summary>
+            A container that can be used to register custom components. All components will have singleton lifestyle.
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyRegistrationContainer.Register``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyRegistrationContainer.Register(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyRegistrationContainer.Register``1(``0)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Safewhere.External.IIdentifyLogWriter">
+            <summary>
+            Defines a set of methods which can be used to log meaningful events to Safewhere's event log.
+            </summary>
+            <remarks>
+            Implementation of this interface is provided by Identify. External services is not supposed to implement this interface.
+            </remarks>
+        </member>
+        <member name="M:Safewhere.External.IIdentifyLogWriter.WriteError(System.Object)">
+            <summary>
+            Writes an error event. Default event id is 0.
+            </summary>
+            <param name="message">Message to write.</param>
+        </member>
+        <member name="M:Safewhere.External.IIdentifyLogWriter.WriteError(System.Int32,System.Object)">
+            <summary>
+            Writes an error event with a specific event id.
+            </summary>
+            <param name="messageId">event id to use</param>
+            <param name="message">message id</param>
+        </member>
+        <member name="M:Safewhere.External.IIdentifyLogWriter.WriteInformation(System.Object)">
+            <summary>
+            Writes an information event. Default event id is 0.
+            </summary>
+            <param name="message">Message to write.</param>
+        </member>
+        <member name="M:Safewhere.External.IIdentifyLogWriter.WriteInformation(System.Int32,System.Object)">
+            <summary>
+            Writes an information event with a specific event id.
+            </summary>
+            <param name="messageId">event id to use</param>
+            <param name="message">message id</param>
+        </member>
+        <member name="M:Safewhere.External.IIdentifyLogWriter.WriteWarning(System.Object)">
+            <summary>
+            Writes a warning event. Default event id is 0.
+            </summary>
+            <param name="message">Message to write.</param>
+        </member>
+        <member name="M:Safewhere.External.IIdentifyLogWriter.WriteWarning(System.Int32,System.Object)">
+            <summary>
+            Writes a warning event with a specific event id.
+            </summary>
+            <param name="messageId">event id to use</param>
+            <param name="message">message id</param>
+        </member>
+        <member name="M:Safewhere.External.IIdentifyLogWriter.WriteDebug(System.Object)">
+            <summary>
+            Writes a debug event. Debug log doesn't have message id.
+            </summary>
+            <param name="message">Message to write.</param>
+        </member>
+        <member name="T:Safewhere.External.Interceptors.IAuthenticationInterceptorService">
+            <summary>
+            This interface defines methods which are used to intercept login flows on the authentication side.
+            </summary>
+            <remarks>
+            A typical login flow in Identify is:
+            1. A user accesses a service provider and is redirected to Identify. Identify then redirects the user to an authentication provider where he or she will enter credentials to login.
+            
+            2. The provider returns a token to Identify. Identify validates the token and creates a local authentication session (*)
+            
+            3. The token is then passed (**) to claims transformation pipeline and returned to the service provider.
+            Please note that (*) happens on the authentication side while (**) happens on the protocol side.
+            
+            Some example use cases about what an interceptor may want to do are:
+            - Check if a token meets some custom conditions. For example, a login user must belong to some specific organizations.
+            - Display a UI to ask a user for more information.
+            - Use the token to look up for matched accounts (aka profiles) in the Identify's local user store or in an AD. If there are multiple matches, display a UI which lists all the profiles so that the user can pick one.
+            </remarks>
+        </member>
+        <member name="M:Safewhere.External.Interceptors.IAuthenticationInterceptorService.Intercept(System.Web.Mvc.ControllerContext,System.Security.Claims.ClaimsPrincipal,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
+            <summary>
+            Intercepts an login flow on the authentication side.
+            </summary>
+            <param name="cc">The controllercontext object of the current request</param>
+            <param name="principal">A claims principal which Identify receives from an upstream Identity Provider</param>
+            <param name="input">Static settings which are configured on the authentication connection UI. Each specific implementation requires different static settings.
+            For example, an interceptor which needs to access a database will need a connection string, while one which needs to access an AD store will need to know where the AD server is</param>
+            <param name="contextId">Each login a user does with Identify will have a context id.</param>
+            <param name="viewName">Name of the main view which an interceptor may want to display to a user.
+            Interceptors which want to have more than one configurable views can use the input parameter instead.</param>
+            <returns>A null value means that this interceptor has done its job and doesn't want to intercept the login flow.</returns>
+            <remarks>
+            When an authentication or a protocol connection is configured to use an interceptor, Identify will call this method of the interceptor.
+            This is the chance for the interceptor to do whatever it wants to do before Identify takes control back and proceeds to the next step.
+            </remarks>
+        </member>
+        <member name="M:Safewhere.External.Interceptors.IAuthenticationInterceptorService.OnPostBack(System.Web.Mvc.ControllerContext,System.Security.Claims.ClaimsPrincipal,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
+            <summary>
+            In the event of the login flow was intercepted and a UI is shown to a user, this method is called to handle data which the user submits.
+            </summary>
+            <param name="cc">The controllercontext object of the current request</param>
+            <param name="principal">A claims principal which Identify receives from an upstream Identity Provider</param>
+            <param name="input">Static settings which are configured on the authentication connection UI. Each specific implementation requires different static settings.
+            For example, an interceptor which needs to access a database will need a connection string, while one which needs to access an AD store will need to know where the AD server is</param>
+            <param name="contextId">Each login a user does with Identify will have a context id.</param>
+            <param name="viewName">Name of the main view which an interceptor may want to display to a user.
+            Interceptors which want to have more than one configurable views can use the input parameter instead.</param>
+            <returns>A null value means that this interceptor has done whatever it wants to based on data submitted from the user and the login flow should proceed.
+            Otherwise, return an ActionResult to continue to intercept the login flow.</returns>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:Safewhere.External.Interceptors.IAuthenticationInterceptorService.MustHaveInputKeys">
+            <summary>
+            Defines a list of must-have static settings which system administrator must be configured for this interceptor on the authentication connection UI.
+            </summary>
+            <remarks>
+            This attribute will be supported in a near future release.
+            </remarks>
+        </member>
+        <member name="T:Safewhere.External.Interceptors.InterceptorDependencyServiceAttribute">
+            <summary>
+            Indicates that decorated type is a dependency of an interceptor service type.
+            </summary>
+            <remarks>
+            An interceptor may need some dependency services. For example, an interceptor which wants to look up for user profiles in a store may need a dependency service which can access that store.
+            While it can hard code the dependency service, the ability to wire it up at runtime opens another interesting use case: we can easily switch from an SQL store to an LDAP store without modifying code
+            of the interceptor.
+            
+            Dependency services should be marked with this attribute so that Identify can look them up and bind to UI correctly.
+            Please note that Identify only supports one dependency service for an interceptor. If you want to configure more than one dependencies, please make use of the additional settings feature.
+            </remarks>
+        </member>
+        <member name="T:Safewhere.External.Interceptors.InterceptorException">
+            <summary>
+            Throws an exception of this type when a fatal error happens inside an interceptor
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Interceptors.InterceptorException.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Interceptors.InterceptorException.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Safewhere.External.Interceptors.InterceptorException.#ctor(System.String,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="inner"></param>
+        </member>
+        <member name="M:Safewhere.External.Interceptors.InterceptorException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Safewhere.External.Interceptors.IProtocolInterceptorService">
+            <summary>
+            This interface defines methods which are used to intercept login flows on the protocol side.
+            </summary>
+            <remarks>
+            A typical login flow in Identify is:
+            1. A user accesses a service provider and is redirected to Identify. Identify then redirects the user to an authentication provider where he or she will enter credentials to login.
+            
+            2. The provider returns a token to Identify. Identify validates the token and creates a local authentication session (*)
+            
+            3. The token is then passed (**) to claims transformation pipeline and returned to the service provider.
+            Please note that (*) happens on the authentication side while (**) happens on the protocol side.
+            
+            Some example use cases about what an interceptor may want to do are:
+            - Check if a token meets some custom conditions. For example, a login user must belong to some specific organizations.
+            - Display a UI to ask a user for more information.
+            - Use the token to look up for matched accounts (aka profiles) in the Identify's local user store or in an AD. If there are multiple matches, display a UI which lists all the profiles so that the user can pick one.
+            </remarks>
+        </member>
+        <member name="M:Safewhere.External.Interceptors.IProtocolInterceptorService.Intercept(System.Web.Mvc.ControllerContext,System.Security.Claims.ClaimsPrincipal,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
+            <summary>
+            Intercepts an login flow on the protocol side.
+            </summary>
+            <param name="cc">The controllercontext object of the current request</param>
+            <param name="principal">A claims principal which Identify receives from an upstream Identity Provider</param>
+            <param name="input">Static settings which are configured on the protocol connection UI. Each specific implementation requires different static settings.
+            For example, an interceptor which needs to access a database will need a connection string, while one which needs to access an AD store will need to know where the AD server is</param>
+            <param name="contextId">Each login a user does with Identify will have a context id.</param>
+            <param name="viewName">Name of the main view which an interceptor may want to display to a user.
+            Interceptors which want to have more than one configurable views can use the input parameter instead.</param>
+            <returns>A null value means that this interceptor has done its job and doesn't want to intercept the login flow.</returns>
+            <remarks>
+            When an authentication or a protocol connection is configured to use an interceptor, Identify will call this method of the interceptor.
+            This is the chance for the interceptor to do whatever it wants to do before Identify takes control back and proceeds to the next step.
+            </remarks>
+        </member>
+        <member name="M:Safewhere.External.Interceptors.IProtocolInterceptorService.OnPostBack(System.Web.Mvc.ControllerContext,System.Security.Claims.ClaimsPrincipal,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
+            <summary>
+            In the event of the login flow was intercepted and a UI is shown to a user, this method is called to handle data which the user submits.
+            </summary>
+            <param name="cc">The controllercontext object of the current request</param>
+            <param name="principal">A claims principal which Identify receives from an upstream Identity Provider</param>
+            <param name="input">Static settings which are configured on the protocol  connection UI. Each specific implementation requires different static settings.
+            For example, an interceptor which needs to access a database will need a connection string, while one which needs to access an AD store will need to know where the AD server is</param>
+            <param name="contextId">Each login a user does with Identify will have a context id.</param>
+            <param name="viewName">Name of the main view which an interceptor may want to display to a user.
+            Interceptors which want to have more than one configurable views can use the input parameter instead.</param>
+            <returns>A null value means that this interceptor has done whatever it wants to based on data submitted from the user and the login flow should proceed.
+            Otherwise, return an ActionResult to continue to intercept the login flow.</returns>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:Safewhere.External.Interceptors.IProtocolInterceptorService.MustHaveInputKeys">
+            <summary>
+            Defines a list of must-have static settings which system administrator must be configured for this interceptor on the protocol connection UI.
+            This attribute is not in use in Identify 4.1 yet.
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Interceptors.NamespaceDoc">
+            <summary>
+            The <see cref="N:Safewhere.External.Interceptors"/> namespace contains types which help build interceptors which can hook into login flows and do cool stuff.
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.NamespaceDoc">
+            <summary>
+            The <see cref="N:Safewhere.External"/> namespace contains types which help build a lot of cool extensions for Safewhere*Identify such as external claims transformations, generic provider for external authentication connections, interceptors and more.
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.PrimaryServiceTypeAttribute">
+            <summary>
+            This attribute is used to indicates what abstract type should be used as the "primary" type.
+            </summary>
+            <remarks>
+            Usually, a class can implement more than one interfaces and sometimes also implement an abstract class. Meanwhile, Identify uses IoC extensively and it needs to know
+            as what service type a class should be registered to its container. This attribute is used for that particular purpose.
+            </remarks>
+        </member>
+        <member name="M:Safewhere.External.PrimaryServiceTypeAttribute.#ctor(System.Type)">
+            <summary>
+            Attribute's constructor
+            </summary>
+            <param name="primaryServiceType">Type of the primary type</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="P:Safewhere.External.PrimaryServiceTypeAttribute.PrimaryServiceType">
+            <summary>
+            Gets the primary service type
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Configuration.ISystemSettings">
+            <summary>
+            An interface which represents Identify core configuration (aka System Setup). However, since system setup has many many settings and new settings are added all the times,
+            defining all the settings here is not practical. As a result, this interface is intentionally let empty.
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Configuration.IPlugInSetup">
+            <summary>
+            An interface which defines a mechanism for plugins or external code to add startup-time initialization code to Identify.
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Configuration.IPlugInSetup.Setup(Safewhere.External.Services.IIdentifyRegistrationContainer,Safewhere.External.Services.IIdentifyContainer,Safewhere.External.Configuration.ISystemSettings)">
+            <summary>
+            This method is called during startup-time (aka Application_Start) to perform necessary initialization.
+            </summary>
+            <param name="identifyRegistrationContainer">A container that can be used to register custom components to Identify's root container.</param>
+            <param name="rootContainer">A container object which is a wrapper around the root container of Identify.</param>
+            <param name="systemSettings">Contains the core configuration object (aka System Setup). Refer to <see cref="T:Safewhere.External.Configuration.ISystemSettings"/> for more details</param>
+        </member>
+        <member name="M:Safewhere.External.Configuration.IPlugInSetup.Update(Safewhere.External.Services.IIdentifyRegistrationContainer,Safewhere.External.Services.IIdentifyContainer,Safewhere.External.Configuration.ISystemSettings)">
+            <summary>
+            This method is called when system set up is changed to give a plugin a chance to update things that were initialized before
+            </summary>
+            <param name="identifyRegistrationContainer">A container that can be used to register custom components to Identify's root container.</param>
+            <param name="rootContainer">A container object which is a wrapper around the root container of Identify.</param>
+            <param name="systemSettings">Contains the core configuration object (aka System Setup). Refer to <see cref="T:Safewhere.External.Configuration.ISystemSettings"/> for more details</param>
+        </member>
+        <member name="T:Safewhere.External.ParameterBag">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.ParameterBag.Get``1(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Safewhere.External.ParameterBag.Add(System.Collections.Generic.KeyValuePair{System.String,System.Object}[])">
+            <summary>
+            
+            </summary>
+            <param name="parameters"></param>
+        </member>
+        <member name="T:Safewhere.External.Tokens.IExtensibleSecurityTokenResolverFactory">
+            <summary>
+            Defines a factory which is used to create a <see cref="T:System.IdentityModel.Selectors.SecurityTokenResolver"/> e.g. <see cref="T:System.IdentityModel.Tokens.X509CertificateStoreTokenResolver"/>
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Tokens.IExtensibleSecurityTokenResolverFactory.BuildStoreResolver(Safewhere.External.ParameterBag)">
+            <summary>
+            Builds a <see cref="T:System.IdentityModel.Selectors.SecurityTokenResolver"/>
+            </summary>
+            <param name="parameterBag">A bag of parameters passed from calling code. For <see cref="T:System.IdentityModel.Tokens.X509CertificateStoreTokenResolver"/> the bag may contain storeLocation and storeName</param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Tokens.IExtensibleSecurityTokenResolverFactory.BuildEncryptionKeyResolver(System.IdentityModel.Selectors.SecurityTokenResolver,System.Collections.Generic.IList{Safewhere.External.Tokens.ISubEncryptingSecurityTokenResolver})">
+            <summary>
+            
+            </summary>
+            <param name="wrappedSecurityTokenResolver"></param>
+            <param name="subEncryptionResolvers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Tokens.IExtensibleSecurityTokenResolverFactory.BuildSigningKeyResolver(System.IdentityModel.Selectors.SecurityTokenResolver,System.Collections.Generic.IList{Safewhere.External.Tokens.ISubSigningSecurityTokenResolver})">
+            <summary>
+            
+            </summary>
+            <param name="wrappedSecurityTokenResolver"></param>
+            <param name="subSigningResolvers"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Safewhere.External.Tokens.ISubEncryptingSecurityTokenResolver">
+            <summary>
+            Implements this to make sub resolver that can resolve security token for decrypting a ciphered message
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Tokens.ISubEncryptingSecurityTokenResolver.ParentSecurityTokenResolver">
+            <summary>
+            Gets and sets the parent SecurityTokenResolver. This property will be set by code that wire up sub resolvers with a parent SecurityTokenResolver
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Tokens.ISubEncryptingSecurityTokenResolver.DoTryResolveSecurityKeyCore(System.IdentityModel.Tokens.SecurityKeyIdentifierClause,System.IdentityModel.Tokens.SecurityKey@)">
+            <summary>
+            Resolves a SecurityKey from a clause. When the primary store resolver can't resolve the key itself, it will call to the sub resolvers for help.
+            </summary>
+            <param name="keyIdentifierClause"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Tokens.ISubEncryptingSecurityTokenResolver.DoTryResolveTokenCore(System.IdentityModel.Tokens.SecurityKeyIdentifier,System.IdentityModel.Tokens.SecurityToken@)">
+            <summary>
+            Resolves a SecurityToken from an security key identifier. When the primary store resolver can't resolve the key itself, it will call to the sub resolvers for help.
+            </summary>
+            <param name="keyIdentifier"></param>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Safewhere.External.Tokens.ISubSigningSecurityTokenResolver">
+            <summary>
+            Implements this to make sub resolver that can resolve security token for verifying signature of a message
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Tokens.ISubSigningSecurityTokenResolver.ParentSecurityTokenResolver">
+            <summary>
+            Gets and sets the parent SecurityTokenResolver. This property will be set by code that wire up sub resolvers with a parent SecurityTokenResolver
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Tokens.ISubSigningSecurityTokenResolver.DoTryResolveSecurityKeyCore(System.IdentityModel.Tokens.SecurityKeyIdentifierClause,System.IdentityModel.Tokens.SecurityKey@)">
+            <summary>
+            Resolves a SecurityKey from a clause. When the primary store resolver can't resolve the key itself, it will call to the sub resolvers for help.
+            </summary>
+            <param name="keyIdentifierClause"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Tokens.ISubSigningSecurityTokenResolver.DoTryResolveTokenCore(System.IdentityModel.Tokens.SecurityKeyIdentifier,System.IdentityModel.Tokens.SecurityToken@)">
+            <summary>
+            Resolves a SecurityToken from an security key identifier. When the primary store resolver can't resolve the key itself, it will call to the sub resolvers for help.
+            </summary>
+            <param name="keyIdentifier"></param>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Safewhere.External.UserProfiles.ExternalUserCredentialsResult">
+            <summary>
+            Result message returned by the IExternalUserCredentialsService service
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.UserProfiles.ExternalUserCredentialsResult.VerificationResult">
+            <summary>
+            Whether the credentials is valid
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.UserProfiles.ExternalUserCredentialsResult.ErrorMessage">
+            <summary>
+            Additional error message
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.UserProfiles.ExternalUserCredentialsVerification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Safewhere.External.UserProfiles.ExternalUserCredentialsVerification.InvalidCredentials">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Safewhere.External.UserProfiles.ExternalUserCredentialsVerification.ValidCredentials">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Safewhere.External.UserProfiles.ExternalUserCredentialsVerification.MaxAttemptExceeded">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.UserProfiles.IExternalUserCredentialsService">
+            <summary>
+            This interface defines methods which are used to verify if user credentials are valid in an external store.
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.UserProfiles.IExternalUserCredentialsService.Verify(System.Web.Mvc.ControllerContext,System.Security.Claims.ClaimsPrincipal,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String,System.String)">
+            <summary>
+            Verify user credentials in an external user store based on data passed from the caller interceptor.
+            </summary>
+            <param name="cc">The controllercontext object of the current request</param>
+            <param name="principal">A claims principal</param>
+            <param name="input">Passed from the interceptor.</param>
+            <param name="userName">username</param>
+            <param name="password">password</param>
+            <param name="contextId">Each login a user does with Identify will have a context id.</param>
+            <returns>
+             ExternalUserCredentialsResult
+             - IsValidCredentials is true if user credentials is correct.
+             - IsValidCredentials is false if it is not.
+            </returns>
+        </member>
+        <member name="P:Safewhere.External.UserProfiles.IExternalUserCredentialsService.MustHaveInputKeys">
+            <summary>
+            Defines a list of must-have static settings which system administrator must be configured for this interceptor on the protocol connection UI.
+            This attribute is not in use in Identify 4.1 yet.
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.UserProfiles.PasswordPolicyException">
+            <summary>
+            Throws an exception of this type when a password which doesn't meet password complexity requirements is set to a user
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.UserProfiles.PasswordPolicyException.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.UserProfiles.PasswordPolicyException.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Safewhere.External.UserProfiles.PasswordPolicyException.#ctor(System.String,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="inner"></param>
+        </member>
+        <member name="M:Safewhere.External.UserProfiles.PasswordPolicyException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Safewhere.External.UserProfiles.IIdentifyLocalStore">
+            <summary>
+            This interface defines methods which are used to look up the local user store of Identify for accounts which match a search criteria.
+            </summary>
+            <remarks>
+            Identify provides an implementation which interacts with the local user store of Identify by using an LdapWS proxy.
+            This interface is primarily used for injecting a service from Identify back to external services and thus end users shouldn't be bothered with this. In other words,
+            end users should never find a need to implement this interface. Directly querying store by using ADO.NET or an ORM is more convenient.
+            See Safewhere.External.Samples.LocalStoreUserProfileService
+            </remarks>
+        </member>
+        <member name="M:Safewhere.External.UserProfiles.IIdentifyLocalStore.GetUsers(System.String,System.String)">
+            <summary>
+            Returns a list of users, each user is stored in an IDictionary
+            </summary>
+            <param name="identityClaimType">A free claim type which should be used to look up for users</param>
+            <param name="identityClaimValue">Identity value which the free claim type should have</param>
+            <returns></returns>
+        </member>
+        <member name="T:Safewhere.External.UserProfiles.IUserProfileService">
+            <summary>
+            This interface defines a dependency service which that interceptor uses to look up for user accounts.
+            </summary>
+            <remarks>
+            Identify has a built-in interceptor <see cref="T:Safewhere.External.Interceptors.IProtocolInterceptorService"/> <seealso cref="T:Safewhere.External.Interceptors.IAuthenticationInterceptorService"/> which is used
+            to look up user accounts from a store which match a received token, e.g. user accounts in AD which has the same email found in a token.
+            This is the interface which a user should implement to customize behavior of the "interactively select user profiles" feature.
+            </remarks>
+        </member>
+        <member name="M:Safewhere.External.UserProfiles.IUserProfileService.GetUserProfiles(System.Web.Mvc.ControllerContext,System.Security.Claims.ClaimsPrincipal,System.Collections.Generic.IDictionary{System.String,System.String},System.String)">
+            <summary>
+            Looks up user profiles from a store based on data passed from the caller interceptor.
+            </summary>
+            <param name="cc">The controllercontext object of the current request</param>
+            <param name="principal">A claims principal</param>
+            <param name="input">Passed from the interceptor.</param>
+            <param name="contextId">Each login a user does with Identify will have a context id.</param>
+            <returns>All the matched user accounts.
+            It is perfectly fine to return a subclass of UserProfile to add more user's attributes. Doing this means that you will also need to customize the view file to
+            reflect newly added fields.
+            </returns>
+        </member>
+        <member name="M:Safewhere.External.UserProfiles.IUserProfileService.Transform(System.Web.Mvc.ControllerContext,System.Security.Claims.ClaimsPrincipal,System.Collections.Generic.IDictionary{System.String,System.String},System.String,Safewhere.External.UserProfiles.UserProfile)">
+            <summary>
+            Transforms ClaimsPrincipal based on the selected user profile.
+            </summary>
+            <param name="cc">The controllercontext object of the current request</param>
+            <param name="principal">A claims principal</param>
+            <param name="input">Passed from the interceptor.</param>
+            <param name="contextId">Each login a user does with Identify will have a context id.</param>
+            <param name="selectedUserProfile">The selected user profile.</param>
+        </member>
+        <member name="P:Safewhere.External.UserProfiles.IUserProfileService.ShowUserProfileSelectorWhenUserHasASingleProfile">
+            <summary>
+            Should the caller interceptor shows all the user profiles selector view to a user when there is only one profile found
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.UserProfiles.IUserProfileService.MustHaveInputKeys">
+            <summary>
+            Defines a list of must-have static settings which system administrator must be configured for this interceptor on the protocol connection UI.
+            This attribute is not in use in Identify 4.1 yet.
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.UserProfiles.IIdentifyLdapStore">
+            <summary>
+            This interface defines methods which are used to look up an LDAP store for accounts which match a search criteria.
+            </summary>
+            <remarks>
+            Identify provides an implementation which interacts with an LDAP store by using an LdapWS proxy.
+            This interface is primarily used for injecting a service from Identify back to external services and thus end users shouldn't be bothered with this. In other words,
+            end users should never find a need to implement this interface.
+            See Safewhere.External.Samples.LdapUserProfileService for an example.
+            </remarks>
+        </member>
+        <member name="M:Safewhere.External.UserProfiles.IIdentifyLdapStore.GetUsers(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Returns a list of users, each user is stored in an IDictionary
+            </summary>
+            <param name="identityAttributeName">Name of an LDAP attribute to look up for users.</param>
+            <param name="identityAttributeValue">Value which the LDAP attribute should have.</param>
+            <param name="ldapwsServerName">LdapWS server name which is configured on the Identify side.</param>
+            <param name="additionalAttributes">additional LDAP attributes which should be fetched from LDAP</param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.UserProfiles.IIdentifyLdapStore.GetUserAttributes(System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Returns a dictionary of user's attributes and values.
+            </summary>
+            <param name="distinguishName"></param>
+            <param name="ldapwsServerName"></param>
+            <param name="attributeNames"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.UserProfiles.IIdentifyLdapStore.ValidateUserCredentials(System.String,System.String,System.String,System.String)">
+            <summary>
+            Validates user's credentials
+            </summary>
+            <param name="identityAttributeName">Name of an LDAP attribute to look up for users.</param>
+            <param name="identityAttributeValue">Value which the LDAP attribute should have.</param>
+            <param name="password">Password to validate</param>
+            <param name="ldapwsServerName">LdapWS server name which is configured on the Identify side.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.UserProfiles.IIdentifyLdapStore.UpdatePassword(System.String,System.String,System.String)">
+            <summary>
+            Resets user's password
+            </summary>
+            <param name="distinguishName"></param>
+            <param name="password">Password to validate</param>
+            <param name="ldapwsServerName">LdapWS server name which is configured on the Identify side.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Safewhere.External.UserProfiles.NamespaceDoc">
+            <summary>
+            The <see cref="N:Safewhere.External.UserProfiles"/> namespace contains types which help build external services which in turn can be used for the "interactive user profiles selection" feature.
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.UserProfiles.UserProfile">
+            <summary>
+            This class contains basic information about a user profile.
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.UserProfiles.UserProfile.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.UserProfiles.UserProfile.Identity">
+            <summary>
+            Not really username. This is the attribute which is used to search for matching users. It may be email, social security number...
+            This property must have a value.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.UserProfiles.UserProfile.Email">
+            <summary>
+            Email address. This property is optional.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.UserProfiles.UserProfile.DisplayName">
+            <summary>
+            Display name. This property is optional.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.UserProfiles.UserProfile.PhotoUrl">
+            <summary>
+            Url to an internet-accessible photo of the profile. This property is optional.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.UserProfiles.UserProfile.ProviderId">
+            <summary>
+            Id of the in use Identity Provider. This property is optional.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.UserProfiles.UserProfile.Attributes">
+            <summary>
+            Just in case more data is required
+            </summary>
+        </member>
+    </members>
+</doc>

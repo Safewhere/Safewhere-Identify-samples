@@ -1,0 +1,46 @@
+﻿@using System.Globalization
+@using System.Web.Mvc.Html
+@using System.Web.Mvc
+@using System.Reflection
+@using System.Diagnostics
+@using Resources
+
+@{
+    ViewBag.Title = "";
+}
+
+@section TitleHeader{
+    @GenericProviderResources.GenericProviderUserLoginPageTitle
+}
+
+@section LinkToLoginSelector{
+
+}
+
+@section MainContent{
+
+    <div class="form-box">
+        <div class="form-top">
+            <div class="form-top-left text-left">
+                <h4>
+                    @GenericProviderResources.GenericProviderPleaseEnterLogInInformationLabel
+                </h4>
+            </div>
+        </div>
+        <div class="form-bottom">
+            <form role="form" method="post" class="login-form">
+
+                <div class="form-group">
+                    <input type="text" placeholder="Cpr claim type" class="form-username form-control required" id="CprClaimType" name="CprClaimType">
+                </div>
+                <div class="form-group">
+                    <input type="number" name="CprNumber" style="height:50px" placeholder="Cpr Number" class="form-username form-control required" id="CprNumber">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn">OK</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+}

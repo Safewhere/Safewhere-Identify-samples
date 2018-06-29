@@ -1,0 +1,3 @@
+- The IIdentify... prefix is used for services that are defined in and passed from Identify to external code.
+- The IExternal... prefix is used for services that are defined outside of Identify and is plugged into Identify.
+- The IExtensible... prefix is used for services that can be defined inside as well as outside of Identify and will be used in Identify.

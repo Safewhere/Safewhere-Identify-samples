@@ -1,0 +1,50 @@
+﻿@using Safewhere.IdentityProvider.RuntimeModel
+@using Safewhere.IdentityProviderModel
+@using Safewhere.Web.Mvc
+@{
+    ViewBag.Title = "";
+}
+@model ProfileListModel
+@section TitleHeader{
+    @*Login Page*@
+    @Resources.RuntimeModelResources.RuntimeModelAuthenticationListView_TitleHeader
+}
+@section InitScript{
+    <script type="text/javascript" language="javascript">
+        function SetSelectedIdentityToHiddenField() {
+            var selectedValue = "";
+            var selected = $("input[type='radio'][name='identities']:checked");
+            if (selected.length > 0)
+                selectedValue = selected.val();
+            $("#__selectedIdentity").val(selectedValue);
+        }
+    </script>
+}
+@section TitleContent{
+    @*Login Page*@
+    @* TODO: new text resource *@
+    @Resources.RuntimeModelResources.RuntimeModelAuthenticationListView_TitleContent
+}
+@section MainContent{
+    <h2>Please pick your profile </h2>
+    <form method="post">
+        <ul style="list-style:none;padding-left:0;">
+        @foreach (var profile in Model.UserProfiles)
+        {
+            <li style="display:flex; line-height:16px;">
+            @Html.RadioButton("identities", @profile.Identity, false, new { onclick = "SetSelectedIdentityToHiddenField();" })
+                @if (!string.IsNullOrEmpty(profile.PhotoUrl))
+                {
+            @Html.Image(profile.PhotoUrl, "Photo", "50");
+                }
+            <text>@profile.DisplayName (@profile.Identity)</text>
+            <text>@profile.Email</text>
+            </li>
+        }
+            </ul>
+        <input type="submit" value="OK" tabindex="3" style="width:60px;" />
+        @Html.Hidden("__selectedIdentity", string.Empty, new { id = "__selectedIdentity" })
+
+        @Html.Partial("RenderFormParameters", new RenderFormParametersModel(Model.ContextId))
+    </form>
+}

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>Getting started</name>
+  </assembly>
+  <members>
+    <member name="T:WhatHere">
+      <summary>
+        Not sure what this will look like
+      </summary>
+    </member>
+  </members>
+</doc>

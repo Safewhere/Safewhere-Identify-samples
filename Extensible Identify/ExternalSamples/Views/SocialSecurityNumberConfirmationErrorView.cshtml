@@ -1,0 +1,22 @@
+﻿@using System.Web.Mvc
+@section TitleHeader{
+    Social Security Number Interceptor
+}
+@section InitScript{
+
+}
+@section TitleContent{
+    Social Security Number Interceptor
+}
+@section MainContent{
+    <h2>Please enter your social security number </h2>
+    <p style="color:red;">The code you entered is invalid. Please enter a valid code below.</p>
+    <p>Valid numbers: 1122, 1234, 6678, 0601, 2010</p>
+    <form method="post">
+        <input type="text" name="socialnumber" />
+        <br /><br />
+        <input type="submit" value="OK" tabindex="3" />
+
+        @Html.Partial("RenderFormParameters", new RenderFormParametersModel(Model.ContextId))
+    </form>
+}
