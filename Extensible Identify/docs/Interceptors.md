@@ -84,6 +84,6 @@ Notice that there is a call to AntiForgeryToken in the sample. You will need it 
 This sample solution has 3 examples for interceptors:
 - [Authentication connection's interceptor](../ExternalSamples/SocialSecurityNumberConfirmationInterceptorService.cs)
 - [Protocol connection's interceptor](../ExternalSamples/PartnerSelectionInterceptorService.cs )
-- [A workthrough to implement a new interceptor](/interceptor-workthrough.md)
+- [A workthrough to implement a new interceptor](/docs/interceptor-walkthrough.md)
 
 ## Q&A
