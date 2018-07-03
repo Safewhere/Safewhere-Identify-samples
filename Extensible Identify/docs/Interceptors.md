@@ -2,8 +2,8 @@
 
 Interceptor is one of extensible points of Safewhere Identify that allows for intercepting login flows when:
 
-- [Authentication connection's interceptor](/CodeReferences/IAuthenticationInterceptorService.cs): this type of interceptor is invoked after Identify receives a token, but before Identify creates a login session for a user. This enables some good use cases such as custom validation rules for claims that an Identity Provider has to return, or asking a user for more user information before creating a login session.  
-- [Protocol connection's interceptor](/CodeReferences/IProtocolInterceptorService.cs ): this type of interceptor is invoked before claims transformation pipeline is run. The advantage of an intercepter versus a custom claims transformation is that you can implement use cases that need user interactions. 
+- [Authentication connection's interceptor](CodeReferences/IAuthenticationInterceptorService.cs): this type of interceptor is invoked after Identify receives a token, but before Identify creates a login session for a user. This enables some good use cases such as custom validation rules for claims that an Identity Provider has to return, or asking a user for more user information before creating a login session.  
+- [Protocol connection's interceptor](/Extensible%20Identify/docs/CodeReferences/IProtocolInterceptorService.cs ): this type of interceptor is invoked before claims transformation pipeline is run. The advantage of an intercepter versus a custom claims transformation is that you can implement use cases that need user interactions. 
 
 As you can probably see now, the two interfaces have identical members and only the interface names differ. We chose that design to simplify how Identify can initiate the interceptor objects internally. 
 
