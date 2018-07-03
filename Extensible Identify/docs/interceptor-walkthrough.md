@@ -396,4 +396,4 @@ Model: DemoProfileListModel
 1. Build your project and copy out dll with all dependiency dlls to C:\Program Files\Safewhere\Identify\Tenants\[your Identify instance name]\runtime\bin folder 
 2. Copy the view file to C:\Program Files\Safewhere\Identify\Tenants\[your Identify instance name]\runtime\Views\PlugIn\ folder 
 3. Setting on connection: [to be updated with screenshot from Safewhere Admin]
-4. Output: ![profile selector](/images/profile-selector.png)
+4. Output: ![profile selector](images/profile-selector.png)
