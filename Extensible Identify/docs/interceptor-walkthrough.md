@@ -332,6 +332,20 @@ Using the attribute [InterceptorDependencyService] to specify this service is an
 @using System.Web.Mvc.Html
 @using Safewhere.External.Samples
 
+@model DemoProfileListModel
+
+@section InitScript{
+    <script type="text/javascript" language="javascript">
+        function SetSelectedIdentityToHiddenField() {
+            var selectedValue = "";
+            var selected = $("input[type='radio'][name='identities']:checked");
+            if (selected.length > 0)
+                selectedValue = selected.val();
+            $("#__selectedIdentity").val(selectedValue);
+        }
+    </script>
+}
+
 @section MainContent{ 
   
     <div class="nav-box-50"> 
@@ -340,6 +354,8 @@ Using the attribute [InterceptorDependencyService] to specify this service is an
   
             <h4>Please Pick your profile </h4> 
             <form role="form" method="post" class="login-form"> 
+			    @Safewhere.Web.Mvc.Security.HtmlHelper.AntiForgeryToken()
+				
                 @foreach (var profile in Model.UserProfiles) 
                 { 
                     <div class="login-form-select-profile"> 
@@ -395,5 +411,11 @@ Model: DemoProfileListModel
 
 1. Build your project and copy out dll with all dependiency dlls to C:\Program Files\Safewhere\Identify\Tenants\[your Identify instance name]\runtime\bin folder 
 2. Copy the view file to C:\Program Files\Safewhere\Identify\Tenants\[your Identify instance name]\runtime\Views\PlugIn\ folder 
-3. Setting on connection: [to be updated with screenshot from Safewhere Admin]
+3. Setting on connection: ![profile selector](images/protocol-connection-interceptor.png)
+
+- Check the “Intercept login flow” check-box.
+- Leave the “Name of the main view” text box blank to use the default view which is DemoProfileSelectionList.cshtml in this case
+- In the Interceptor type name drop-down list, select “Me.Interceptor.DemoUserProfileSelectorInterceptorService, Safewhere.IdentityProvider.RuntimeModel”
+- In the Interceptor’s dependency type drop-down list, select “Me.Interceptor.DummyUserProfileService, Me.Interceptor“.
+
 4. Output: ![profile selector](images/profile-selector.png)
