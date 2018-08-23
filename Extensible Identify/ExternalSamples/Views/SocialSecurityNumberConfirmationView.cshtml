@@ -5,23 +5,33 @@
 
 @model ModelWithContextId
 
+
 @section TitleHeader{
     Social Security Number Interceptor
 }
 @section InitScript{
 
 }
-@section TitleContent{
-    Social Security Number Interceptor
-}
-@section MainContent{
-    <h2>Please enter your social security number </h2>
-    <p>Valid numbers: 1122, 1234, 6678, 0601, 2010</p>
-    <form method="post">
-        <input type="text" name="socialnumber" />
-        <br /><br />
-        <input type="submit" value="OK" tabindex="3" />
 
-        @Html.Partial("RenderFormParameters", new RenderFormParametersModel(Model.ContextId))
-    </form>
+@section MainContent{
+    <div class="form-box">
+        <div class="form-top">
+            <div class="form-top-left text-left">
+                <h4>
+                    Social Security Number Interceptor
+                </h4>
+                <div class="text-justify help-text inner-list">Please enter your social security number. Valid numbers: 1122, 1234, 6678, 0601, 2010.</div>
+            </div>
+        </div>
+        <div class="form-bottom">
+            <form method="post">
+                <input class="form-control" type="text" name="socialnumber" />
+                <br />
+                <div class="form-group">
+                    <button type="submit" class="btn" tabindex="3">OK</button>
+                </div>
+                @Html.Partial("RenderFormParameters", new RenderFormParametersModel(Model.ContextId))
+            </form>
+        </div>
+    </div>
 }
