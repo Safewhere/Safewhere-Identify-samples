@@ -17,9 +17,9 @@ namespace Safewhere.External.Samples
         private readonly IDictionary<string, object> messageProperties;
 
         /// <summary>
-        /// Instantiates a new IdentifyEndpointContextService object
+        /// Instantiates a new ActiveContextService object
         /// </summary>
-        /// <param name="messageProperties">HttpContext object</param>
+        /// <param name="messageProperties">Pass in an OperationContext.Current.IncomingMessageProperties object</param>
         public ActiveContextService(IDictionary<string, object> messageProperties)
         {
             if (messageProperties == null)
@@ -46,7 +46,7 @@ namespace Safewhere.External.Samples
         }
 
         /// <summary>
-        /// Simple API to return entity id of a protocol connection. For OAuth 2.0/OpenId Connect connection, the clientid is returned
+        /// Simple API to return entity id of a protocol connection
         /// </summary>
         public string ProtocolConnectionEntityId
         {

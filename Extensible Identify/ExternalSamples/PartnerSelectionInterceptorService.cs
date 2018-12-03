@@ -46,7 +46,10 @@ namespace Safewhere.External.Samples
 
             var partners = GetPartners(principal, input);
             if (partners.Count <= 1)
+            {
+                AddConnectionEntityIdentifiers(cc, principal);
                 return null;
+            }
 
             model.Partners = partners;
             var viewResult = new ViewResult
