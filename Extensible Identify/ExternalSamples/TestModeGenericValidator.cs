@@ -34,6 +34,7 @@ namespace Safewhere.External.Samples
             }
 
             ClaimsPrincipal principal = this.BuildPrincipal(cprClaimType, cprNumber);
+            AddConnectionEntityIdentifiers(cc, principal);
             return new CredentialsValidationResult
             {
                 ResultCode = CredentialsValidationResultCode.Success,
@@ -74,6 +75,22 @@ namespace Safewhere.External.Samples
             vprName = context.Controller.ValueProvider.GetValue(key);
 
             return (vprName != null && !string.IsNullOrEmpty(vprName.AttemptedValue));
+        }
+
+        /// <summary>
+        /// It is an example how to access protocol connection id and entityId in external modules
+        /// </summary>
+        /// <param name="cc"></param>
+        /// <param name="claimsPrincipal"></param>
+        private void AddConnectionEntityIdentifiers(ControllerContext cc, ClaimsPrincipal claimsPrincipal)
+        {
+            var epService = new PassiveContextService(cc.HttpContext);
+            Guid protocolConnectionId = epService.ProtocolConnectionId;
+            string protocolConnectionEntityId = epService.ProtocolConnectionEntityId;
+
+            ClaimsIdentity identity = (ClaimsIdentity)claimsPrincipal.Identity;
+            identity.AddClaim(new Claim("urn:TestModeGenericValidator:AuthenticationConnectionEntityId", epService.AuthenticationConnectionEntityId));
+            identity.AddClaim(new Claim("urn:TestModeGenericValidator:ProtocolConnectionEntityId", epService.ProtocolConnectionEntityId));
         }
     }
 }

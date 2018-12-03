@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -87,12 +88,22 @@ namespace Safewhere.External.Samples
             {
                 return Intercept(cc, principal, input, contextId, viewName);
             }
+
+            AddConnectionEntityIdentifiers(cc, principal);
             return null;
         }
 
         public IEnumerable<string> MustHaveInputKeys
         {
             get { return new List<string>(); }
+        }
+
+        private void AddConnectionEntityIdentifiers(ControllerContext cc, ClaimsPrincipal claimsPrincipal)
+        {
+            ClaimsIdentity identity = (ClaimsIdentity)claimsPrincipal.Identity;
+            var epService = new PassiveContextService(cc.HttpContext);
+            identity.AddClaim(new Claim("urn:SocialSecurityNumberConfirmationInterceptorService:AuthenticationConnectionEntityId", epService.AuthenticationConnectionEntityId));
+            identity.AddClaim(new Claim("urn:SocialSecurityNumberConfirmationInterceptorService:ProtocolConnectionEntityId", epService.ProtocolConnectionEntityId));
         }
     }
 }
