@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Claims;
+using System.Web;
 using Safewhere.External.ClaimsTransformation;
 
 namespace Safewhere.External.Samples
@@ -50,6 +51,8 @@ namespace Safewhere.External.Samples
                                                                      "A new claim is added: [{0},{1}]", type.FullName,
                                                                      type.AssemblyQualifiedName));
                 }
+
+                AddConnectionEntityIdentifiers(principal);
             }
             catch (InvalidOperationException ex)   // this exception type is caught for illustration purpose only
             {
@@ -58,6 +61,17 @@ namespace Safewhere.External.Samples
             }
 
             return principal;
+        }
+
+        private void AddConnectionEntityIdentifiers(ClaimsPrincipal claimsPrincipal)
+        {
+            ClaimsIdentity identity = (ClaimsIdentity)claimsPrincipal.Identity;
+            if (HttpContext.Current != null)
+            {
+                var epService = new PassiveContextService(new HttpContextWrapper(HttpContext.Current));
+                identity.AddClaim(new Claim("urn:AddDummyClaimTransformation:AuthenticationConnectionEntityId", epService.AuthenticationConnectionEntityId));
+                identity.AddClaim(new Claim("urn:AddDummyClaimTransformation:ProtocolConnectionEntityId", epService.ProtocolConnectionEntityId));
+            }
         }
     }
 }

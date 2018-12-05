@@ -87,6 +87,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveContextService.cs" />
+    <Compile Include="STSAddDummyClaimTransformation.cs" />
     <Compile Include="AddDummyClaimTransformation.cs" />
     <Compile Include="AnotherAddDummyClaimTransformation.cs" />
     <Compile Include="ModelWithContextId.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="DummyGenericValidatorUsernamePassword.cs" />
     <Compile Include="DummyUserRepository.cs" />
     <Compile Include="NamespaceDoc.cs" />
+    <Compile Include="PassiveContextService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ExternalSamplesResources.Designer.cs">
       <AutoGen>True</AutoGen>
