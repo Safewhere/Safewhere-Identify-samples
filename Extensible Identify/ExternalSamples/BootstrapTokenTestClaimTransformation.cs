@@ -8,11 +8,11 @@ using Safewhere.External.ClaimsTransformation;
 
 namespace Safewhere.External.Samples
 {
-    public class BoostrapTokenTestClaimTransformation
+    public class BootstrapTokenTestClaimTransformation
     {
         private readonly IIdentifyLogWriter identifyLogWriter;
 
-        public BoostrapTokenTestClaimTransformation(IIdentifyLogWriter identifyLogWriter)
+        public BootstrapTokenTestClaimTransformation(IIdentifyLogWriter identifyLogWriter)
         {
             this.identifyLogWriter = identifyLogWriter ?? throw new ArgumentNullException("identifyLogWriter");
         }
@@ -30,17 +30,17 @@ namespace Safewhere.External.Samples
 
                 if (identity == null)
                 {
-                    identifyLogWriter.WriteDebug("Identify having boostrap context is null");
+                    identifyLogWriter.WriteDebug("No Identify has BootstrapContext");
                     return principal;
                 }
 
                 var bootstrapContext = identity.BootstrapContext as BootstrapContext;
                 if (bootstrapContext == null)
                 {
-                    identifyLogWriter.WriteDebug("Boostrap context has invalid format");
+                    identifyLogWriter.WriteDebug("The identity.BootstrapContext object is not of BootstrapContext type.");
                     return principal;
                 }
-                identifyLogWriter.WriteDebug("Boostrap context is valid");
+                identifyLogWriter.WriteDebug("The identity.BootstrapContext is valid");
 
             }
             catch (InvalidOperationException ex)   // this exception type is caught for illustration purpose only
