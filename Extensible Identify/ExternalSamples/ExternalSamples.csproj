@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveContextService.cs" />
+    <Compile Include="BoostrapTokenTestClaimTransformation.cs" />
     <Compile Include="STSAddDummyClaimTransformation.cs" />
     <Compile Include="AddDummyClaimTransformation.cs" />
     <Compile Include="AnotherAddDummyClaimTransformation.cs" />
