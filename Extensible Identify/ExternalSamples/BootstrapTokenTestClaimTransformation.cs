@@ -8,7 +8,7 @@ using Safewhere.External.ClaimsTransformation;
 
 namespace Safewhere.External.Samples
 {
-    public class BootstrapTokenTestClaimTransformation
+    public class BootstrapTokenTestClaimTransformation: IExternalClaimsTransformation
     {
         private readonly IIdentifyLogWriter identifyLogWriter;
 
