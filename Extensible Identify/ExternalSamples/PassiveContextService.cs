@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel.Channels;
 using System.Web;
 
@@ -111,6 +112,20 @@ namespace Safewhere.External.Samples
                     return string.Empty;
 
                 return EndpointContext.AuthenticationContext.Configuration.RetrieveEntityId();
+            }
+        }
+
+        /// <summary>
+        /// Simple API to return the RequesterId value of the scoping of a SAML 2.0 AuthnRequest message
+        /// </summary>
+        public IEnumerable<Uri> ScopingRequesterId
+        {
+            get
+            {
+                dynamic temporaryContext = TemporaryProtocolContext;
+                dynamic requestedAuthenticationContextModel = temporaryContext.RequestedAuthenticationContextModel;
+                IEnumerable<Uri> requesterId = requestedAuthenticationContextModel.RequesterId;
+                return requesterId;
             }
         }
     }
