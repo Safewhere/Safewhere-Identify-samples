@@ -6,17 +6,16 @@ Safewhere's SAML 2.0 for WIF component has 3 cookies that are set by Asp.Net/WIF
 - Forms Authentication cookie.
 - FedAuth cookie.
 
-If you doesn't want to support old browsers, you can follow instructions at http://docs.safewhere.com/samesite-cookies/ to update your applications.
+If you doesn't want to support old browsers, you can follow instructions at http://docs.safewhere.com/samesite-cookies/ to set the cookies to None by default.
 
 ## Web forms applications
 
 If you do want to support old browsers for your Asp.Net *web forms* applications, the idea is that you can use an IHttpModule to modify the cookies. You can use the Safewhere.Samples.SameSiteHttpModule sample project for testing purpose:
 
-1. Install .NET 4.7.2 or 4.8 on your server.
+1. Install .NET 4.7.2 or 4.8 on your server as well as your development machine.
 2. Compile the Safewhere.Samples.SameSiteHttpModule project.
 3. Drop the Safewhere.Samples.SameSiteHttpModule.dll into the bin folder of your application.
-4. Follow instructions at http://docs.safewhere.com/samesite-cookies/ to set the cookies to None by default.
-5. Add `Safewhere.Samples.SameSiteHttpModule.SameSiteHttpModule` to your application's web.config file:
+4. Add `Safewhere.Samples.SameSiteHttpModule.SameSiteHttpModule` to your application's web.config file:
 
 		```XML
 		  <system.webServer>
@@ -28,7 +27,6 @@ If you do want to support old browsers for your Asp.Net *web forms* applications
 			<validation validateIntegratedModeConfiguration="false"/>
 		  </system.webServer>
 		```
-6. Note that the first login after your application starts may have cookies modified by the module correctly. This is a known issue of Asp.Net. From the second login, everything works as expected.
 
 ## MVC applications
 
