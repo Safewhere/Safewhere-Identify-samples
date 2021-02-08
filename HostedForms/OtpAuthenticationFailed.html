@@ -1,0 +1,20 @@
+{% extends "SiteLayout" %}
+
+{% block "content" %}
+<div class="form-box">
+    <div class="form-top">
+        <div class="form-top-left text-left">
+            <h4>{{ Resources.OtpResources.OtpAuthenticationFailedView_TitleContent }}</h4>
+        </div>
+    </div>
+    <div class="form-bottom">
+        <div class="text-center" style="padding: 10px 25px 0px 25px; text-align: justify !important;">
+            {{ Resources.OtpResources.OtpAuthenticationFailedView_Content }}
+        </div>
+        <br/>
+        <div class="text-center">
+            {{ ReturnToLoginSelectorLink }}
+        </div>
+    </div>
+</div> 
+{% endblock %}   

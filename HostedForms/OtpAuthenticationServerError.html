@@ -1,0 +1,53 @@
+﻿{% extends "SiteLayout" %}
+
+{% block "titleheader"  %}
+{{Resources.OtpResources.OtpAuthenticationFailedView_OTPErrorViewTitleHeader}}
+{% endblock %}
+
+{% block "content" %}
+<div class="form-box">
+    <div class="form-top">
+        <div class="form-top-left text-center">
+            <h4>{{Resources.OtpResources.OtpAuthenticationFailedView_OTPErrorViewTitleHeader}}</h4>
+        </div>
+    </div>
+    <div class="form-bottom">
+        <div class="text-danger os2faktor-error-message">
+            {{ Model.ErrorMessage }}
+        </div>
+        {% if Model.IsShowLinkToChooseOtpMethods %}
+                 <hr />
+                <div class="text-center">
+                    <h6>
+                        {{Resources.OtpResources.OtpAuthenticationView_ChooseAnotherAuthenticators}}
+                    </h6>
+                </div>
+                {% for otp in Model.AvailableOtpMethods %}
+                    <div style="padding: 0 28px;">
+                        <p style="margin-bottom: 0.5rem !important">
+                            {% if otp.IsAuthenticatorType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+
+                            {% if otp.IsOs2faktorType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+
+                            {% if otp.IsEmailType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+
+                            {% if otp.IsSmsType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+
+                            {% if otp.IsWebAuthn %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+    </div>
+</div>
+{% endblock %} 
