@@ -1,0 +1,34 @@
+﻿{% extends "SiteLayout" %}
+
+{% block "content" %}
+    <div class="form-box">
+        <div class="form-top">
+            <div class="form-top-left text-left">
+                <h4>{{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLogin}}</h4>
+            </div>
+            <div class="small">
+                {{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorPickDeviceHelpText}}
+            </div>
+        </div>
+        <div class="form-bottom">
+            <form id="loginForm" style = "padding:0px; padding-top:16px" method="POST" action="/runtime/otpauth/os2faktor/client?ici_ci={{Model.ContextId}}">
+                {{ Csrf }}
+                <input id="deviceId" type="hidden" name="DeviceId" />
+                {% for device in Model.Devices %}
+                    <div style="padding: 0 28px;">
+                        <b>{{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorDeviceId}} ({{device.DeviceId}})</b>
+                        <br>
+                        <p><a id="{{device.DeviceId}}" href="javascript:setDeviceId('{{device.DeviceId}}')">{{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorPickDeviceLoginVia}} {{device.Type}}</a></p>
+                        <hr />
+                    </div>
+                {% endfor %}
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var setDeviceId = function (value) {
+            $("#deviceId")[0].value = value;
+            $("#loginForm").submit();
+        };
+    </script>
+{% endblock %} 

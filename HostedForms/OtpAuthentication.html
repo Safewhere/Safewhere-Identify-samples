@@ -1,0 +1,111 @@
+{% extends "SiteLayout" %}
+
+{% block "titleheader"  %}
+{{Resources.OtpResources.OtpAuthenticationView_TitleHeader}}
+{% endblock %}
+
+{% block "titlecontent"  %}
+{{Resources.OtpResources.OtpAuthenticationView_TitleContent}}
+{% endblock %}
+
+{% block "content" %}
+<div class="nav-box-50">
+        <div class="form-top">
+            <div class="form-top-left text-left">
+                {% if Model.HelpText != null && Model.HelpText != ""%}
+                    <div class="text-justify help-text inner-list">{{Model.HelpText}}</div>
+                {% endif %}
+                <h4>
+                    {% if Model.IsEmailType %}
+                    <text>{{Resources.OtpResources.OtpAuthenticationView_EmailModeContent}} {{Model.ContactInfo}}</text>
+                    {% else %}
+                    <text>{{Resources.OtpResources.OtpAuthenticationView_SMSModeContent}} {{Model.ContactInfo}}</text>
+                    {% endif %}
+                    <br />
+                    {{Resources.OtpResources.OtpAuthenticationView_PleaseEnterOTP}}
+                </h4>
+            </div>
+        </div>
+        <div class="form-bottom">
+            <form role="form" method="post" class="login-form" action="/runtime/otpauth/twofactor/validate?ici_ci={{Model.ContextId}}">
+                {{ Csrf }}
+
+                {% if Model.ErrorMessage != null && Model.ErrorMessage != ""%}
+                    <div class="form-group small">
+                        <span for="errorMessageLb" class="text-danger">
+                            {{Model.ErrorMessage}}
+                        </span>
+                    </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <label class="sr-only" for="form-password">{{Resources.OtpResources.OtpAuthenticationView_OneTimePassword}}</label>
+                    <input type="password" name="password" placeholder="{{Resources.OtpResources.OtpAuthenticationView_OneTimePassword}}..." class="form-username form-control required" id="form-password">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn">{{Resources.OtpResources.OtpAuthenticationView_OK}}</button>
+                </div>
+                {% if Model.SecondsUntilUserCanRequestANewOtp > 0 %}
+                    <a id="requestOTPLink" style="cursor:default" href="javascript: void(0)">
+                        {{Resources.OtpResources.OtpAuthenticationView_YouCanRequestAnotherOtpIn}} <span id='countdown'></span> {{Resources.OtpResources.OtpAuthenticationView_Seconds}}
+                    </a>
+                {% endif %}
+
+                {% if Model.IsTestMode %}
+                    {{Model.OtpCode}}
+                {% endif %}
+            </form>
+
+            {% if Model.IsShowLinkToChooseOtpMethods %}
+                <hr />
+                <div class="text-center">
+                    <h6>
+                        {{Resources.OtpResources.OtpAuthenticationView_ChooseAnotherAuthenticators}}
+                    </h6>
+                </div>
+                {% for otp in Model.AvailableOtpMethods %}
+                    <div style="padding: 0 28px;">
+                        <p style="margin-bottom: 0.5rem !important">
+                            {% if otp.IsAuthenticatorType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+
+                            {% if otp.IsOs2faktorType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+
+                            {% if otp.IsEmailType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+
+                            {% if otp.IsSmsType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+
+                            {% if otp.IsWebAuthn %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %} 
+
+{% block "initscript"  %}
+<script type="text/javascript">
+    var timeleft = parseInt("{{Model.SecondsUntilUserCanRequestANewOtp}}");
+    var downloadTimer = setInterval(function () {
+        document.getElementById("countdown").innerHTML = timeleft;
+        timeleft -= 1;
+        if (timeleft < 0) {
+            clearInterval(downloadTimer);
+            document.getElementById("requestOTPLink").innerHTML = "{{Resources.OtpResources.OtpAuthenticationView_RequestNewOTPCode}}";
+            document.getElementById("requestOTPLink").href = "javascript: location.reload()";
+            document.getElementById("requestOTPLink").style = "cursor:pointer";
+        }
+    }, 1000);
+</script>
+{% endblock %}

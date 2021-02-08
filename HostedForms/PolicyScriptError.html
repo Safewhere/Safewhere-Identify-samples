@@ -1,0 +1,19 @@
+{% extends "SiteLayout" %}
+{% block "titleheader"  %}
+{{Resources.RuntimeModelResources.RuntimeModelPolicyScriptErrorView_TitleHeader}}
+{% endblock %}
+{% block "content" %}
+<div class="nav-box-50">
+        <div class="form-top">
+            <div class="form-top-left text-left">
+                <h4>
+                    {{Resources.RuntimeModelResources.RuntimeModelPolicyScriptErrorView_TitleHeader}}
+                </h4>
+                <h5>
+                    {{Model.Message}}
+                </h5>
+            </div>
+        </div>
+        <div class="form-bottom"></div>
+    </div>
+{% endblock %}  

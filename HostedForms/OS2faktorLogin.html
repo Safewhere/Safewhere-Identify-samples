@@ -1,0 +1,46 @@
+{% extends "SiteLayout" %}
+
+{% block "content" %}
+<div class="nav-box-50">
+        <div class="form-bottom">
+            <form id="loginForm" role="form" method="post" class="login-form" action="/runtime/otpauth/twofactor/validate?ici_ci={{Model.ContextId}}">
+                {{ Csrf }}
+                <div id="loginArea">
+                    <div class="fieldMargin bigText">{{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLogin}}</div>
+
+                    <div id="pageIntroductionText">
+                        <span id="outside-browser" style="display: none;">
+                            <p>
+                                {{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginPageIntroductionOutsideBrowser}}
+                            </p>
+
+                            <h2 style="width: 150px; margin: 20px auto; padding: 10px 0px; border: 1px solid black; text-align: center;">{{Model.Challenge}}</h2>
+                        </span>
+
+                        <span id="inside-browser" style="display: none;">
+                            <p>
+                                {{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginPageIntroductionInsideBrowser}}
+                            </p>
+
+                            <br />
+
+                            <a href="{{Model.RedirectUrl}}" target="_blank">
+                                <span class="submit">{{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginButton}}</span>
+                            </a>
+                        </span>
+                    </div>
+
+                    <script type="text/javascript" language="JavaScript">
+                        //<![CDATA[
+                        window.pollingUrl = "{{Model.PollingUrl}}";
+                        window.redirectUrl = "{{Model.RedirectUrl}}";
+                        window.pollingTimeout = "{{Model.PollingTimeout}}";
+                        //]]>
+                    </script>
+                    <script src="/runtime/scripts/plugins/OS2faktor.js">
+                    </script>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}   

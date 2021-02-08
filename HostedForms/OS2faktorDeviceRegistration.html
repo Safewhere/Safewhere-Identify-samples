@@ -1,0 +1,76 @@
+{% extends "SiteLayout" %}
+
+{% block "titleheader"  %}
+{{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationTitleHeader}}
+{% endblock %}
+
+{% block "content" %}
+<div class="form-box">
+    <div class="form-top">
+        <div class="form-top-left text-left">
+            <h4>
+                {{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationTitleHeader}}
+            </h4>
+            <div style="line-height: 18px" class="small">
+                {{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationHelpText}}
+                <a href="https://os2faktor.dk">https://os2faktor.dk</a>
+            </div>
+        </div>
+    </div>
+    <div class="form-bottom">
+        {% if Model.ErrorMessage != null && Model.ErrorMessage != "" %}
+            <div class="form-group" style="text-align:center">
+                <span for="errorMessageLb" class="text-danger">
+                    {{Model.ErrorMessage}}
+                </span>
+            </div>
+        {% else %}
+            <br/>
+        {% endif %}
+
+        <div class="os2faktor-helptext">
+            <p>
+                {{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationDeviceIdRegisterHelpText}}
+            </p>
+            <br />
+            <p>
+                {{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationMultiDeviceIdsHelpText}}
+            </p>
+        </div>
+
+        <form id="deviceRegistration" class="login-form" method="POST" action="/runtime/otpauth/os2faktor/deviceregistration?ici_ci={{Model.ContextId}}">
+            {{ Csrf }}
+
+            <div class="form-group">
+                <input class="form-control required" id="deviceIds" type="text" autocomplete="off" name="DeviceIds" value="{{Model.DeviceIds}}" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">{{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationRegister}}</button>
+            </div>
+            <script src="/runtime/assets/js/scripts.js"></script>
+        </form>
+
+        {% if Model.IsShowLinkToChooseOtpMethods %}
+                <hr/>
+                <div class="text-center">
+                    <h6>
+                        {{Resources.OtpResources.OnboardAnotherOtpMethods_NeedAnotherWayToSecureYourAccount}}
+                    </h6>
+                </div>
+                {% for otp in Model.OnboardAnotherMethods %}
+                    <div style="padding: 0 28px;">
+                        <p style="margin-bottom: 0.5rem !important">
+                            {% if otp.IsAuthenticatorType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+                            
+                            {% if otp.IsWebAuthn %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}   

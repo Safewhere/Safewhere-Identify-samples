@@ -1,0 +1,36 @@
+{% extends "SiteLayout" %}
+
+{% block "titleheader"  %}
+{{Resources.OtpResources.YubicoAuthenticationView_TitleHeader}}
+{% endblock %}
+
+{% block "content" %}
+<div class="form-box">
+    <div class="form-top">
+        <div class="form-top-left text-left">
+            {% if HelpText != null && HelpText != ""%}
+            <div class="text-justify help-text inner-list">{{HelpText}}</div>
+            {% endif %}
+            <h4>
+                {{Resources.OtpResources.YubicoAuthenticationView_TitleContent}}
+            </h4>
+            <div class="small">
+                {{Resources.OtpResources.YubicoAuthenticationView_PleaseEnterYubikey}}
+            </div>
+        </div>
+    </div>
+    <div class="form-bottom">
+        <form method="post" class="login-form">
+            <span style="color:red">{{ErrorMessage}}</span>
+            <br />
+            <div class="form-group">
+                <label class="sr-only" for="form-username">{{Resources.OtpResources.YubicoAuthenticationView_OneTimePassword}}</label>
+                <input type="text" name="yubikey" placeholder="{{Resources.OtpResources.YubicoAuthenticationView_OneTimePassword}}" class="form-username form-control required">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn">OK</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,67 @@
+﻿{% extends "SiteLayout" %}
+
+{% block "sidebar" %}
+<link rel="stylesheet" href="runtime/assets/css/simple-sidebar.css">
+<div id="sidebar-wrapper">
+    <div class="vertical-centered">
+        <div class="nav-box">
+            <p class="form-bottom nav-bottom">
+            <p>
+                <img src="runtime/assets/img/safewhere_logo.png" alt="Safewhere" />
+            </p>
+            <form role="form" method="post" class="login-form">
+
+                <div class="text-center form-group">
+                    <strong>
+                        <span class="text-info">{{ Model.Message }}</span>
+                    </strong>
+                </div>
+
+                {% for l in Model.AuthenticationLinks %}
+                <div class="center-block inner-list">
+                    <a role="button" class="text-center btn btn-link-2 btn-blue" href="{{ l.Url }}">{{ l.Text }}</a>
+                    {% if l.HelpText != "" %}
+                    <div class="text-justify help-text inner-list">{{ l.HelpText }}</div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </form>
+            {% if Model.UserNamePasswordActionLink != "" %}
+            <div class="text-center form-group">
+                <strong>
+                    <span class="text-info"> {{Resources.RuntimeModelResources.AuthenticationList_Or}} </span>
+                </strong>
+            </div>
+
+            <form role="form" method="post" class="login-form" action="{{ Model.UserNamePasswordActionLink }}">
+
+                {{ Csrf }}
+
+                <div class="form-group">
+                    <label class="sr-only" for="form-username">{{Resources.RuntimeModelResources.AuthenticationList_UserNamePasswordUsernameLabel}}</label>
+                    <input type="text" name="name" placeholder="{{Resources.RuntimeModelResources.AuthenticationList_UserNamePasswordUsernameLabel}}" value="" class="form-username form-control required" id="form-username">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="form-password">{{Resources.RuntimeModelResources.AuthenticationList_UserNamePasswordPasswordLabel}}</label>
+                    <input type="password" name="password" placeholder="{{Resources.RuntimeModelResources.AuthenticationList_UserNamePasswordPasswordLabel}}" class="form-password form-control required" id="form-password">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn" style="width: 100%">{{Resources.RuntimeModelResources.AuthenticationList_Ok}}</button>
+                </div>
+                <div class="text-center">
+                    <span class="text-danger">
+                        <a href="{{ Model.ForgotPasswordLink }}">{{Resources.RuntimeModelResources.UserNamePasswordForgotPasswordClickHereLabel}}</a>
+                    </span>
+                </div>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block "content" %}
+<div class="form-box">
+    <link rel="stylesheet" href="runtime/assets/css/full-sidebar.css">
+</div>
+{% endblock %}

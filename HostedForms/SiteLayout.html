@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="runtime/assets/ico/safewhere.ico">
+
+    <title>
+        {% if Title != null && Title != ""%}
+        {{ Title }}
+        {% else %}
+        {% block "titleheader"  %}
+        {% endblock %}
+        {% endif %}
+    </title>
+
+    <base href="{{ VirtualDirectory }}/">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="runtime/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="runtime/assets/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="runtime/assets/css/form-elements.css">
+    <link rel="stylesheet" href="runtime/assets/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!--
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="runtime/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="runtime/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="runtime/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="runtime/assets/ico/apple-touch-icon-57-precomposed.png">
+    -->
+</head>
+
+<body>
+    <div class="acms-header-loginmethod">
+            {% block "linktologinselector"  %}
+            {% endblock %}
+    </div>
+
+    <div class="acms-header">
+            {% block "titlecontent"  %}
+            {% endblock %}
+    </div>
+
+    <script src="runtime/assets/js/jquery-3.5.0.min.js"></script>
+    <script src="runtime/assets/bootstrap/js/bootstrap.min.js"></script>
+    {% block "initscript"  %}
+    {% endblock %}
+    <div id="wrapper">
+        {% block "sidebar"  %}
+        {% endblock %}
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+
+                            <div class="acms-header">
+                                <div class="right text-right copyright">
+                                    <span>{{Copyright}}</span>
+                                </div>
+                            </div>
+
+                            <div class="vertical-centered">
+                                {% block "content"  %}
+                                {% endblock %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="runtime/assets/js/scripts.js"></script>
+
+    <!--[if lt IE 10]>
+    <script src="assets/js/placeholder.js"></script>
+    <![endif]-->
+    {{ MiniProfiler}}
+</body>
+
+</html>

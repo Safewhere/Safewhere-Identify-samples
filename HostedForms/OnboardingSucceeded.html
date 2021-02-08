@@ -1,0 +1,70 @@
+﻿{% extends "SiteLayout" %}
+
+{% block "content" %}
+    <div class="form-box" style="max-width: 560px">
+        <div class="form-top">
+            <div class="form-top-left text-left">
+                {% if Model.IsOnboarding %}
+                    <h4>
+                        {{Resources.OtpResources.OtpRecoveryCode_AlmostThere}}
+                    </h4>
+                {% else %}
+                    <h5>
+                        {{Resources.OtpResources.OtpRecoveryCode_NewCodeGenerated}}
+                    </h5>
+                {% endif %}
+                <div class="small">
+                    {{Resources.OtpResources.OtpRecoveryCode_AdviceMessage}}
+                </div>
+            </div>
+        </div>
+        <div class="form-bottom">
+            <form>
+                <div class="form-group" style="border: solid 1px;margin-bottom: 4px;">
+                    <h4 id="recovery-code" class="text-center recovery-code-text" style="padding: 8px; margin-top: 8px;">
+                        {{Model.RecoveryCode}}
+                    </h4>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-default btn-copycode"
+                    onclick="copyTextToClipboard('{{Model.RecoveryCode}}'); return false;"
+                            style="background: transparent;border: solid 1px;color: #888;border-radius: 0px;">
+                        {{Resources.OtpResources.OtpRecoveryCode_CopyCode}}
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label><input type='checkbox' onclick='handleClick(this);'> {{Resources.OtpResources.OtpRecoveryCode_ConfirmMessage}}</label>
+                </div>
+
+                <div class="form-group">
+                    <button id="continue-btn" onclick='doContinue("{{Model.RedirectPath}}"); return false;' disabled class="btn btn-default">{{Resources.OtpResources.OtpRecoveryCode_Continue}}</button>
+                </div>
+
+            </form>
+            <script type="text/javascript">
+                function handleClick(cb) {
+                    $('#continue-btn').prop("disabled", !cb.checked);
+                }
+
+                function doContinue(redirectPath) {
+                    window.location.href = redirectPath;
+                }
+
+                function copyTextToClipboard(text) {
+                    var textArea = document.createElement("textarea");
+                    textArea.value = text;
+                    textArea.style.top = "0";
+                    textArea.style.left = "0";
+                    textArea.style.position = "fixed";
+
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                }
+            </script>
+        </div>
+    </div>
+{% endblock %}   
+

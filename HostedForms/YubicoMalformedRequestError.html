@@ -1,0 +1,95 @@
+{% extends "SiteLayout" %}
+
+{% block "titleheader"  %}
+{{Resources.OtpResources.YubicoMalformedView_Title}}
+{% endblock %}
+
+{% block "content" %}
+<div class="nav-box-50">
+        <div class="form-top">
+            <div class="form-top-left text-left">
+                <h4>
+                    {% if QueryStringMessage != null && QueryStringMessage != "" %}
+                    {{QueryStringMessage}}
+                    {% else %}
+                    {{Resources.OtpResources.YubicoMalformedView_Content}}
+                    {% endif %}
+                </h4>
+                {% if Model != null && Model.Details != null %}
+                    <br />
+                    <h4>
+                        {{Model.Message}}
+                    </h4>
+                    <ul>
+                        {% for detail in Model.Details %}
+                        <li>{{detail}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-bottom">
+                <script>
+                        var commentRemainingCharacter = "{{ Resources.RuntimeModelResources.RuntimeModelUserCommentRemainingCharacter }}";
+                    </script>
+                    
+                    <script type="text/javascript" src="runtime/Scripts/correlation_error.js">
+                    </script>
+                    
+                    <div id="divProcessing" style="display: none;">
+                        <h4>{{ Resources.RuntimeModelResources.RuntimeModelProcessing }}</h4>
+                    </div>
+                    <div id="divCorrelationError">
+                        {% if Model.CorrelationError == null%}
+                        <form role="form" method="post" class="login-form" action="runtime/ErrorReport/Report">
+    
+                            {{ Csrf }}
+                        
+                            <h4>
+                                {{Resources.RuntimeModelResources.RuntimeModelUserComment}}
+                            </h4>
+                            <div class="form-group">
+                                <div class="textarea-stypeWith80">
+                                    <textarea id="UserComment" name="UserComment" cols = "80" rows = "10" maxlength = "1000" class="textarea-stypeWidth100 required" draggable="false"></textarea>
+                                </div>
+                        
+                                <div id="char-counter">(<strong>1000 </strong>{{Resources.RuntimeModelResources.RuntimeModelUserCommentRemainingCharacter}})</div>
+                            </div>
+                        
+                            <input id="ErrorData" name="ErrorData" type="hidden" value="{{ Model.ErrorMessage64BaseString }}" />
+                            <input id="RequestUrl" name="RequestUrl" type="hidden" value="{{ Model.RequestUrl }}" />
+                        
+                            <div class="form-group">
+                                <label for="captcha" class="small">
+                                    {{Resources.RuntimeModelResources.RuntimeModelCorelationReportEnterCaptchaLabel_Enter}} {{ Captchar }}
+                                    {{Resources.RuntimeModelResources.RuntimeModelCorelationReportEnterCaptchaLabel_Below}}
+                                </label><br />
+                                <input type="text" name="captcha" placeholder="Code..." class="textarea-stypeWidth100 required" id="form-captcha">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn">{{Resources.RuntimeModelResources.RuntimeModelSendError}}</button>
+                            </div>
+                        </form>
+                        {% else %}
+                        <p>
+                            <h4>
+                                {{Resources.RuntimeModelResources.RuntimeModelUserReportCorrelationErrorComplete}}
+                            </h4>
+                            <h4>
+                                {{Resources.RuntimeModelResources.RuntimeModelCorrelationId}}
+                            </h4>
+                    
+                            {{Model.CorrelationError.CorrelationId}}
+                            <br />
+                    
+                            <h4>
+                                {{Resources.RuntimeModelResources.RuntimeModelIssuedDate}}
+                            </h4>
+                    
+                            {{Model.CorrelationError.IssuedDate}}
+                        </p>
+                        {% endif %}
+                    </div>
+        </div>
+    </div>
+{% endblock %} 
