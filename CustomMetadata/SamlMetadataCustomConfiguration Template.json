@@ -36,6 +36,23 @@
                 "Language": ""
             }]
         },
+        "CustomUseContactPerson": false,
+        "CustomContactPerson": {
+            "Type": "",
+            "Company": "",
+            "GivenName" :"",
+            "Surname": "",
+            "EmailAddresses" : [
+                "",
+                "",
+                ""
+            ],
+            "TelephoneNumbers" : [
+                "",
+                "",
+                ""
+            ]
+        },
         "EncryptionAlgorithms": []
     },
     "nemlogin3": {
@@ -75,6 +92,23 @@
                 "Language": ""
             }]
         },
+        "CustomUseContactPerson": false,
+        "CustomContactPerson": {
+            "Type": "",
+            "Company": "",
+            "GivenName" :"",
+            "Surname": "",
+            "EmailAddresses" : [
+                "",
+                "",
+                ""
+            ],
+            "TelephoneNumbers" : [
+                "",
+                "",
+                ""
+            ]
+        },
         "EncryptionAlgorithms": []
     },
     "kombit": {
@@ -113,6 +147,23 @@
                 "Uri": "",
                 "Language": ""
             }]
+        },
+        "UseCustomContactPerson": false,
+        "CustomContactPerson": {
+            "Type": "",
+            "Company": "",
+            "GivenName" :"",
+            "Surname": "",
+            "EmailAddresses" : [
+                "",
+                "",
+                ""
+            ],
+            "TelephoneNumbers" : [
+                "",
+                "",
+                ""
+            ]
         },
         "EncryptionAlgorithms": []
     }

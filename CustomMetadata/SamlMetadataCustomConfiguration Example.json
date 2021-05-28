@@ -1,0 +1,332 @@
+{
+    "nemlogin2": {
+        "IncludeArtifactEndpoints": true,
+        "IncludeAuthenticationContextMethodClasses": true,
+        "IncludeContactPerson": true,
+        "NameIdentifierFormats": [
+            "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
+            "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"
+        ],
+        "IdentityProviderSupportedAttributes": [
+            {
+                "FriendlyName": "IdentityProviderSupportedAttributes FriendlyName",
+                "Name": "IdentityProviderSupportedAttributes Real Name",
+                "NameFormat": "http://identity-provider-supported-attributes.nameformat.eu",
+                "OriginalIssuer": "IdentityProviderSupportedAttributes OriginalIssuer",
+                "AttributeValueXsiType": "http://www.w3.org/2001/XMLSchema#string",
+                "Values": [
+                    "https://data.gov.dk/model/core/specVersion",
+                    "https://data.gov.dk/concept/core/nsis/loa",
+                    "https://data.gov.dk/model/core/eid/professional/rid",
+                    "https://data.gov.dk/model/core/eid/professional/orgName"
+                ]
+            }
+        ],
+        "ServiceProviderRequestedAttributes": [
+            {
+                "IsRequired": true,
+                "FriendlyName": "ServiceProviderRequestedAttributes FriendlyName",
+                "Name": "ServiceProviderRequestedAttributes Real Name",
+                "NameFormat": "http://service-provider-requested-attributes.nameformat.eu",
+                "OriginalIssuer": "ServiceProviderRequestedAttributes OriginalIssuer",
+                "AttributeValueXsiType": "http://www.w3.org/2001/XMLSchema#string",
+                "Values": [
+                    "https://data.gov.dk/model/core/specVersion",
+                    "https://data.gov.dk/concept/core/nsis/loa",
+                    "https://data.gov.dk/model/core/eid/professional/rid",
+                    "https://data.gov.dk/model/core/eid/professional/orgName"
+                ]
+            }
+        ],
+        "UseCustomOrganization": true,
+        "CustomOrganization": {
+            "DisplayNames": [
+                {
+                    "Name": "hhp@globeteam.com",
+                    "Language": "nl"
+                }
+            ],
+            "Names": [
+                {
+                    "Name": "nemlogin2",
+                    "Language": "da"
+                }
+            ],
+            "Urls": [
+                {
+                    "Uri": "http://hhpglobeteam.safewhere.eu",
+                    "Language": "fr"
+                }
+            ]
+        }
+    },
+    "nemlogin3": {
+        "IncludeArtifactEndpoints": false,
+        "IncludeAuthenticationContextMethodClasses": false,
+        "IncludeContactPerson": true,
+        "NameIdentifierFormats": [
+            "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"
+        ],
+        "IdentityProviderSupportedAttributes": [
+            {
+                "FriendlyName": "SpecVer",
+                "Name": "https://data.gov.dk/model/core/specVersion",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "SpecVer",
+                "Name": "https://data.gov.dk/model/core/eid/bootstrapToken",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "Privileges",
+                "Name": "https://data.gov.dk/model/core/eid/privilegesIntermediate",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "NsisLevelOfAssurance",
+                "Name": "https://data.gov.dk/concept/core/nsis/loa",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "IdentityAssuranceLevel",
+                "Name": "https://data.gov.dk/concept/core/nsis/ial",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "AuthenticationAssuranceLevel",
+                "Name": "https://data.gov.dk/concept/core/nsis/aal",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "FullName",
+                "Name": "https://data.gov.dk/model/core/eid/fullName",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "FirstName",
+                "Name": "https://data.gov.dk/model/core/eid/firstName",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "LastName",
+                "Name": "https://data.gov.dk/model/core/eid/lastName",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "Alias",
+                "Name": "https://data.gov.dk/model/core/eid/alias",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "Email",
+                "Name": "https://data.gov.dk/model/core/eid/email",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "Cpr",
+                "Name": "https://data.gov.dk/model/core/eid/cprNumber",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "Age",
+                "Name": "https://data.gov.dk/model/core/eid/age",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "CprUUID",
+                "Name": "https://data.gov.dk/model/core/eid/cprUuid",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "DateOfBirth",
+                "Name": "https://data.gov.dk/model/core/eid/dateOfBirth",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "Pid",
+                "Name": "https://data.gov.dk/model/core/eid/person/pid",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "ProfessionalPersistentUUID",
+                "Name": "https://data.gov.dk/model/core/eid/professional/uuid/persistent",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "Rid",
+                "Name": "https://data.gov.dk/model/core/eid/professional/rid",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "Cvr",
+                "Name": "https://data.gov.dk/model/core/eid/professional/cvr",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "OrganizationName",
+                "Name": "https://data.gov.dk/model/core/eid/professional/orgName",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "ProductionUnit",
+                "Name": "https://data.gov.dk/model/core/eid/professional/productionUnit",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "SeNumber",
+                "Name": "https://data.gov.dk/model/core/eid/professional/seNumber",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "FriendlyName": "AuthorizedToRepresent",
+                "Name": "https://data.gov.dk/model/core/eid/professional/authorizedToRepresent",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            }
+        ],
+        "ServiceProviderRequestedAttributes": [
+            {
+                "IsRequired": true,
+                "FriendlyName": "SpecVer",
+                "Name": "https://data.gov.dk/model/core/specVersion",
+                "NameFormat": ""
+            },
+            {
+                "IsRequired": true,
+                "FriendlyName": "NsisLevelOfAssurance",
+                "Name": "https://data.gov.dk/concept/core/nsis/loa",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "IsRequired": true,
+                "FriendlyName": "Cvr",
+                "Name": "https://data.gov.dk/model/core/eid/professional/cvr",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "IsRequired": true,
+                "FriendlyName": "OrganizationName",
+                "Name": "https://data.gov.dk/model/core/eid/professional/orgName",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            }
+        ],
+        "UseCustomOrganization": true,
+        "CustomOrganization": {
+            "DisplayNames": [
+                {
+                    "Name": "hhp@globeteam.com",
+                    "Language": "nl"
+                }
+            ],
+            "Names": [
+                {
+                    "Name": "nemlogin3",
+                    "Language": "da"
+                }
+            ],
+            "Urls": [
+                {
+                    "Uri": "http://hhpglobeteam.safewhere.eu",
+                    "Language": "fr"
+                }
+            ]
+        },
+        "CustomUseContactPerson": true,
+        "CustomContactPerson": {
+            "DisplayNames": [
+                {
+                    "Name": "hhp@globeteam.com",
+                    "Language": "nl"
+                }
+            ],
+            "Names": [
+                {
+                    "Name": "nemlogin3",
+                    "Language": "da"
+                }
+            ],
+            "Urls": [
+                {
+                    "Uri": "http://hhpglobeteam.safewhere.eu",
+                    "Language": "fr"
+                }
+            ]
+        }
+        ,
+        "EncryptionAlgorithms": [
+            "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+            "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+            "http://www.w3.org/2009/xmlenc11#aes128-gcm",
+            "http://www.w3.org/2009/xmlenc11#aes192-gcm",
+            "http://www.w3.org/2009/xmlenc11#aes256-gcm"
+        ]
+    },
+    "kombit": {
+        "IncludeArtifactEndpoints": true,
+        "IncludeAuthenticationContextMethodClasses": true,
+        "IncludeContactPerson": true,
+        "NameIdentifierFormats": [
+            "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
+            "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"
+        ],
+        "IdentityProviderSupportedAttributes": [
+            {
+                "FriendlyName": "IdentityProviderSupportedAttributes FriendlyName",
+                "Name": "IdentityProviderSupportedAttributes Real Name",
+                "NameFormat": "http://identity-provider-supported-attributes.nameformat.eu",
+                "OriginalIssuer": "IdentityProviderSupportedAttributes OriginalIssuer",
+                "AttributeValueXsiType": "http://www.w3.org/2001/XMLSchema#string",
+                "Values": [
+                    "https://data.gov.dk/model/core/specVersion",
+                    "https://data.gov.dk/concept/core/nsis/loa",
+                    "https://data.gov.dk/model/core/eid/professional/rid",
+                    "https://data.gov.dk/model/core/eid/professional/orgName"
+                ]
+            }
+        ],
+        "ServiceProviderRequestedAttributes": [
+            {
+                "IsRequired": true,
+                "FriendlyName": "ServiceProviderRequestedAttributes FriendlyName",
+                "Name": "ServiceProviderRequestedAttributes Real Name",
+                "NameFormat": "http://service-provider-requested-attributes.nameformat.eu",
+                "OriginalIssuer": "ServiceProviderRequestedAttributes OriginalIssuer",
+                "AttributeValueXsiType": "http://www.w3.org/2001/XMLSchema#string",
+                "Values": [
+                    "https://data.gov.dk/model/core/specVersion",
+                    "https://data.gov.dk/concept/core/nsis/loa",
+                    "https://data.gov.dk/model/core/eid/professional/rid",
+                    "https://data.gov.dk/model/core/eid/professional/orgName"
+                ]
+            }
+        ],
+        "UseCustomOrganization": true,
+        "CustomOrganization": {
+            "DisplayNames": [
+                {
+                    "Name": "hhp@globeteam.com",
+                    "Language": "nl"
+                }
+            ],
+            "Names": [
+                {
+                    "Name": "kombit",
+                    "Language": "da"
+                }
+            ],
+            "Urls": [
+                {
+                    "Uri": "http://hhpglobeteam.safewhere.eu",
+                    "Language": "fr"
+                }
+            ]
+        },
+        "EncryptionAlgorithms": [
+            "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+            "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+            "http://www.w3.org/2009/xmlenc11#aes128-gcm",
+            "http://www.w3.org/2009/xmlenc11#aes192-gcm",
+            "http://www.w3.org/2009/xmlenc11#aes256-gcm"
+        ]
+    }
+}
