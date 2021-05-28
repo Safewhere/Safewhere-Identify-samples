@@ -36,7 +36,7 @@
                 "Language": ""
             }]
         },
-        "CustomUseContactPerson": false,
+        "UseCustomContactPerson": false,
         "CustomContactPerson": {
             "Type": "",
             "Company": "",
@@ -92,7 +92,7 @@
                 "Language": ""
             }]
         },
-        "CustomUseContactPerson": false,
+        "UseCustomContactPerson": false,
         "CustomContactPerson": {
             "Type": "",
             "Company": "",

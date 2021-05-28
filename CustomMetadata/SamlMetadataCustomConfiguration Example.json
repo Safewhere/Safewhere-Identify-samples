@@ -58,7 +58,35 @@
                     "Language": "fr"
                 }
             ]
-        }
+        },
+        "UseCustomContactPerson": true,
+        "CustomContactPerson": {
+            "DisplayNames": [
+                {
+                    "Name": "hhp@globeteam.com",
+                    "Language": "nl"
+                }
+            ],
+            "Names": [
+                {
+                    "Name": "nemlogin3",
+                    "Language": "da"
+                }
+            ],
+            "Urls": [
+                {
+                    "Uri": "http://hhpglobeteam.safewhere.eu",
+                    "Language": "fr"
+                }
+            ]
+        },
+        "EncryptionAlgorithms": [
+            "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+            "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+            "http://www.w3.org/2009/xmlenc11#aes128-gcm",
+            "http://www.w3.org/2009/xmlenc11#aes192-gcm",
+            "http://www.w3.org/2009/xmlenc11#aes256-gcm"
+        ]
     },
     "nemlogin3": {
         "IncludeArtifactEndpoints": false,
@@ -231,7 +259,7 @@
                 }
             ]
         },
-        "CustomUseContactPerson": true,
+        "UseCustomContactPerson": true,
         "CustomContactPerson": {
             "DisplayNames": [
                 {
@@ -251,8 +279,7 @@
                     "Language": "fr"
                 }
             ]
-        }
-        ,
+        },
         "EncryptionAlgorithms": [
             "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
             "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
@@ -327,6 +354,27 @@
             "http://www.w3.org/2009/xmlenc11#aes128-gcm",
             "http://www.w3.org/2009/xmlenc11#aes192-gcm",
             "http://www.w3.org/2009/xmlenc11#aes256-gcm"
-        ]
+        ],
+        "UseCustomContactPerson": true,
+        "CustomContactPerson": {
+            "DisplayNames": [
+                {
+                    "Name": "hhp@globeteam.com",
+                    "Language": "nl"
+                }
+            ],
+            "Names": [
+                {
+                    "Name": "nemlogin3",
+                    "Language": "da"
+                }
+            ],
+            "Urls": [
+                {
+                    "Uri": "http://hhpglobeteam.safewhere.eu",
+                    "Language": "fr"
+                }
+            ]
+        }
     }
 }
