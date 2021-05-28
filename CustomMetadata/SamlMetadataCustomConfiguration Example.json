@@ -237,31 +237,6 @@
                 "FriendlyName": "OrganizationName",
                 "Name": "https://data.gov.dk/model/core/eid/professional/orgName",
                 "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
-            },
-            {
-                "FriendlyName": "KombitSpecVer",
-                "Name": "dk:gov:saml:attribute:KombitSpecVer",
-                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
-            },
-            {
-                "FriendlyName": "Privileges_intermediate",
-                "Name": "dk:gov:saml:attribute:Privileges_intermediate",
-                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
-            },
-            {
-                "FriendlyName": "AssuranceLevel",
-                "Name": "dk:gov:saml:attribute:AssuranceLevel",
-                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
-            },
-            {
-                "FriendlyName": "SpecVer",
-                "Name": "dk:gov:saml:attribute:SpecVer",
-                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
-            },
-            {
-                "FriendlyName": "CvrNumberIdentifier",
-                "Name": "dk:gov:saml:attribute:CvrNumberIdentifier",
-                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
             }
         ],
         "ServiceProviderRequestedAttributes": [
@@ -305,36 +280,6 @@
                 "IsRequired": true,
                 "FriendlyName": "OrganizationName",
                 "Name": "https://data.gov.dk/model/core/eid/professional/orgName",
-                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
-            },
-            {
-                "IsRequired": true,
-                "FriendlyName": "KombitSpecVer",
-                "Name": "dk:gov:saml:attribute:KombitSpecVer",
-                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
-            },
-            {
-                "IsRequired": true,
-                "FriendlyName": "Privileges_intermediate",
-                "Name": "dk:gov:saml:attribute:Privileges_intermediate",
-                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
-            },
-            {
-                "IsRequired": true,
-                "FriendlyName": "AssuranceLevel",
-                "Name": "dk:gov:saml:attribute:AssuranceLevel",
-                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
-            },
-            {
-                "IsRequired": true,
-                "FriendlyName": "SpecVer",
-                "Name": "dk:gov:saml:attribute:SpecVer",
-                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
-            },
-            {
-                "IsRequired": true,
-                "FriendlyName": "CvrNumberIdentifier",
-                "Name": "dk:gov:saml:attribute:CvrNumberIdentifier",
                 "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
             }
         ],
