@@ -9,13 +9,13 @@
         <div class="form-top">
             <div class="form-top-left text-left">
                 <h4>
-                    {% if QueryStringMessage != null && QueryStringMessage != "" %}
+                    {% if QueryStringMessage != null and QueryStringMessage != "" %}
                     {{QueryStringMessage}}
                     {% else %}
                     {{Resources.OtpResources.OtpMalformedView_Content}}
                     {% endif %}
                 </h4>
-                {% if Model != null && Model.Details != null %}
+                {% if Model != null and Model.Details != null %}
                     <br />
                     <h4>
                         {{Model.Message}}

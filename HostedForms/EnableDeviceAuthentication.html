@@ -1,0 +1,117 @@
+{% extends "SiteLayout" %}
+
+{% block "titleheader"  %}
+{{Resources.OtpResources.OtpAuthenticationView_TitleHeader}}
+{% endblock %}
+
+{% block "content" %}
+<div class="form-box" style="max-width: 560px">
+    <div class="form-top">
+        <div class="form-top-left text-left">
+            <h4>
+                {% if Model.RequiredRecoveryCode %}
+                    {{Resources.OtpResources.OtpEnableDeviceAuthentication_AdditionalRegister}}
+                {% else %}
+                    {{Resources.OtpResources.OtpEnableDeviceAuthentication_Register}}
+                {% endif %}
+            </h4>
+        </div>
+    </div>
+    <div class="form-bottom">
+        {% if Model.ErrorMessage != null and Model.ErrorMessage != ""%}
+            <div class="form-group" style="text-align:center">
+                <span for="errorMessageLb" class="text-danger">
+                    {{Model.ErrorMessage}}
+                </span>
+            </div>
+        {% endif %}
+
+        <form method="post" action="/runtime/otpauth/twofactor/validate?ici_ci={{Model.ContextId}}" style="padding: 0px 25px; margin-bottom: 2rem">
+            {{ Csrf }}
+
+            {% if Model.RequiredRecoveryCode %}
+                <div class="form-group">
+                    {{Resources.OtpResources.OtpEnableDeviceAuthentication_RegisterWithRecoveryCode}}
+                </div>
+                <div class="form-group">
+                    <input type="text" name="recoverycode" autocomplete="off" class="form-password form-control required" id="form-recoverycode">
+                    <input id="requiredrecoverycode" name="requiredrecoverycode" type="hidden" value="true" />
+                </div>
+            {% else %}
+                <div class="form-group">
+                    {{Resources.OtpResources.OtpEnableDeviceAuthentication_RegisterTitle}}
+                </div>
+            {% endif %}
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">{{Resources.OtpResources.OtpEnableDeviceAuthentication_RegisterButton}}</button>
+            </div>
+
+            {% if Model.RequiredRecoveryCode and Model.OfferResetSecondFactorMethod %}
+                <input id="resetSecondFactorMethod" type="hidden" name="resetSecondFactorMethod" value="false" />
+                <h6 class="text-center" style="padding: 10px 0px 10px 0px; margin: 0px;">{{Resources.OtpResources.OtpRecoveryCodeView_OR}}</h6>
+                <button id="btnResetSecondFactorMethod" onclick="$('#resetSecondFactorMethod').val('true');" type="submit" class="btn btn-default text-overflow" style="margin-bottom: 25px;">{{Resources.OtpResources.OtpRecoveryCodeView_ResetSecondFactorMethod}}</button>
+            {% endif %}
+        </form>
+
+        {% if Model.IsShowLinkToChooseOtpMethods %}
+            <hr/>
+            {% if Model.RequiredRecoveryCode %}
+                <div class="text-center">
+                    <h6>
+                        {{Resources.OtpResources.OtpAuthenticationView_ChooseAnotherAuthenticators}}
+                    </h6>
+                </div>
+                {% for otp in Model.AvailableOtpMethods %}
+                    <div style="padding: 0 28px;">
+                        <p style="margin-bottom: 0.5rem !important">
+                            {% if otp.IsAuthenticatorType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+
+                            {% if otp.IsOs2faktorType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+
+                            {% if otp.IsEmailType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+
+                            {% if otp.IsSmsType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+
+                            {% if otp.IsWebAuthn %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endfor %}
+            
+            {% else %}
+                <div class="text-center">
+                    <h6>
+                        {{Resources.OtpResources.OnboardAnotherOtpMethods_NeedAnotherWayToSecureYourAccount}}
+                    </h6>
+                </div>
+                {% for otp in Model.OnboardAnotherMethods %}
+                    <div style="padding: 0 28px;">
+                        <p style="margin-bottom: 0.5rem !important">
+                            {% if otp.IsAuthenticatorType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+
+                            {% if otp.IsOs2faktorType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+
+                            {% if otp.IsWebAuthn %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

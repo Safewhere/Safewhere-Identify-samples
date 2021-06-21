@@ -4,49 +4,280 @@
 {{Resources.OtpResources.OtpAuthenticationView_TitleHeader}}
 {% endblock %}
 
+{% block "initscript"  %}
+<link rel="stylesheet" href="runtime/assets/css/webauthn-wizards.css">
+{% endblock %}
+
+
+
 {% block "content" %}
-<div id="registerForm" class="form-box" style="max-width: 560px">
-    <div class="form-top">
-        <div class="form-top-left text-center">
-            <h4>
-                {{Resources.OtpResources.OtpWebAuthenticationView_EnableWebAuthenViewTitleHeader}}
-            </h4>
-        </div>
-    </div>
+
+<div class="form-box" style="max-width: 700px; width: fit-content;">
     <div class="form-bottom">
-        {% if Model.ErrorMessage != null && Model.ErrorMessage != ""%}
-            <div class="form-group" style="text-align:center">
-                <span for="errorMessageLb" class="text-danger">
-                    {{Model.ErrorMessage}}
-                </span>
+        
+        <!-- Step 1: Set up web authentification -->
+        <fieldset id="set-up-web-authentification" class="text-center">
+            <h4>{{Resources.OtpResources.EnableWebAuthn_Step1SetupWebAuthnHelpText}}</h4>
+            <div class="margin-content-step full-width-buttons">
+                <div class="wizard-step-description-text">{{Resources.OtpResources.EnableWebAuthn_Step1DescriptionHelpText}}</div>
+                <button id="onboard-with-wizard" type="button" class="btn">{{Resources.OtpResources.EnableWebAuthn_Step1WithWizardHelpText}}</button>
+                <div class="wizard-step-or-text">{{Resources.OtpResources.OtpRecoveryCodeView_OR}}</div>
+                <button id="onboard-without-wizard" type="button" class="btn">{{Resources.OtpResources.EnableWebAuthn_Step1WithoutWizardHelpText}}</button>
             </div>
-        {% endif %}
+        </fieldset>
 
-        <div class="form-group text-center" style="margin-top: 1rem;">
-            <div id="onboardingErrorAtClientSide" class="text-danger" style="display: none">
+        <!-- Step 2: Choose device -->
+        <fieldset id="choose-device" class="text-center">
+            <h4>{{Resources.OtpResources.EnableWebAuthn_Step2ChooseDeviceHelpText}}</h4>
+            <div class="margin-content-step full-width-buttons">
+                <div class="wizard-step-description-text">{{Resources.OtpResources.EnableWebAuthn_Step2DescriptionHelpText}} <br /> {{Resources.OtpResources.EnableWebAuthn_Step2Description1HelpText}}</div>
+                <button id="onboard-with-wizard-windows-pc" type="button" class="btn">{{Resources.OtpResources.EnableWebAuthn_Step2ChooseDeviceWindowsPCHelpText}} <br /> <span>{{Resources.OtpResources.EnableWebAuthn_Step2ChooseDeviceWindowsPCWindows10HelpText}}</span></button><br /><br />
+                <button id="onboard-with-wizard-android-smartphone" type="button" class="btn">{{Resources.OtpResources.EnableWebAuthn_Step2ChooseDeviceAndroidSmartphoneHelpText}} <br /> <span>{{Resources.OtpResources.EnableWebAuthn_Step2ChooseDeviceAndroidSmartphoneRecommendedVersionsHelpText}}</span></button><br /><br />
+                <button id="onboard-with-wizard-iphone-or-ipad" type="button" class="btn">{{Resources.OtpResources.EnableWebAuthn_Step2ChooseDeviceAppleDevicesHelpText}} <br /> <span>{{Resources.OtpResources.EnableWebAuthn_Step2ChooseDeviceRecommenedAppleDevicesHelpText}}</span></button><br /><br />
+                <button id="onboard-with-wizard-fido-keys" type="button" class="btn">{{Resources.OtpResources.EnableWebAuthn_Step2ChooseDeviceFIDO2KeysHelpText}} <br /> <span>{{Resources.OtpResources.EnableWebAuthn_Step2ChooseDeviceFIDO2KeysDevicesThatHaveUSBPortHelpText}}</span></button>
+                <div class="wizard-step-or-text">{{Resources.OtpResources.OtpRecoveryCodeView_OR}}</div>
+                <button id="onboard-with-wizard-go-back" type="button" class="btn btn-previous choose-device">{{Resources.OtpResources.EnableWebAuthn_ChooseDevicesGoBackHelpText}}</button>
             </div>
+        </fieldset>
 
-            <p style="padding: 0px 25px 0px 25px; text-align: justify; margin-bottom: 0px;">
-                {% assign var0 = '{0\}' %} 
-                {{ Resources.OtpResources.OtpWebAuthenticationView_EnableWebAuthenViewDescription | Replace: var0, '<a target="_blank" href="http://docs.safewhere.com/identify-how-to-set-up-two-factor-with-webauthn-otp/">this link</a>' }}
-            </p>
+        <!-- Windows PC wizard -->
+        <div id="windows-pc-wizard">
+            <fieldset class="devices-group text-center">
+                <h4>{{Resources.OtpResources.EnableWebAuthn_Step3GoToSettingHelpText}}</h4>
+                <div class="margin-content-step">
+                    <img style="max-width: 100% !important" src="runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode}}/windows-pc-step3.png" alt="Safewhere" />
+                    <div class="wizard-step-description-text">{{Resources.OtpResources.EnableWebAuthn_WindowsPCStep3ClickStartHelpText}} <br /> {{Resources.OtpResources.EnableWebAuthn_WindowsPCStep3ClickSettingsHelpText}} <br /> {{Resources.OtpResources.EnableWebAuthn_WindowsPCStep3ClickAccountsHelpText}}</div>
+                    <div class="wizard-buttons">
+                        <button type="button" class="btn btn-previous windows-pc">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
+                        <button type="button" class="btn btn-next windows-pc">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                    </div>
+                </div>
+            </fieldset>
 
-            <form id="registerWebAuth" method="post" action="/runtime/otpauth/webauth/registerSuccessed?ici_ci={{Model.ContextId}}" style="padding-bottom: 15px">
-                {{ Csrf }}
-                <button id="btnRegister" class="btn btn-default">
-                    {{Resources.OtpResources.OtpWebAuthenticationView_EnableWebAuthenViewRegisterButtonText}}
-                </button>
-            </form>
+            <fieldset class="devices-group text-center">
+                <h4>{{Resources.OtpResources.EnableWebAuthn_WindowsPCStep4AddLoginHelpText}}</h4>
+                <div class="margin-content-step">
+                    <img style="max-width: 100% !important" src="runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode}}/windows-pc-step4.png" alt="Safewhere" />
+                    <div class="wizard-step-description-text">{{Resources.OtpResources.EnableWebAuthn_WindowsPCStep4SignInOptionHelpText}} <br /> {{Resources.OtpResources.EnableWebAuthn_WindowsPCStep4ClickSetupHelpText}} <br /> {{Resources.OtpResources.EnableWebAuthn_WindowsPCStep4ClickSetupAndFollowTheInstructionHelpText}}</div>
+                    <div class="wizard-buttons">
+                        <button type="button" class="btn btn-previous windows-pc">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
+                        <button type="button" class="btn btn-next windows-pc">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                    </div>
+                </div>
+            </fieldset>
 
-            <a id="takeAnActionCountDown" style="cursor:default; display: none" href="javascript: void(0)">
+            <fieldset class="devices-group text-center">
+                <h4>{{Resources.OtpResources.EnableWebAuthn_WindowsPCStep5YourDeviceIsAllSetHelpText}}</h4>
+                <div class="margin-content-step">
+                    <div class="wizard-step-description-text"><span class="bolder500">{{Resources.OtpResources.EnableWebAuthn_WindowsPCStep5CongratulationsHelpText}}</span> <br /> {{Resources.OtpResources.EnableWebAuthn_WindowsPCStep5YouAreHaveNowAddedHelpText}} <br /><br /> {{Resources.OtpResources.EnableWebAuthn_WindowsPCStep5LoginFromThisDeviceHelpText}} <br /><br /> {{Resources.OtpResources.EnableWebAuthn_WindowsPCStep5NoteInProcessHelpText}}</div>
+                </div>
+                <div class="wizard-buttons">
+                    <button type="button" class="btn btn-previous windows-pc">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
+                    <button type="button" class="btn btn-next windows-pc">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                </div>
+            </fieldset>
+        </div>
+
+        <!-- Android Smartphone wizard -->
+        <div id="android-smart-phone-wizard">
+            <fieldset class="devices-group text-center">
+                <h4>{{Resources.OtpResources.EnableWebAuthn_Step3GoToSettingHelpText}}</h4>
+                <div class="margin-content-step">
+                    <img src="runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode}}/android-smartphone-step3.png" alt="Safewhere" />
+                    <div class="wizard-step-description-text">{{Resources.OtpResources.EnableWebAuthn_AndroidSmartphoneStep3OpenYourSmartphoneHelpText}}</div>
+                    <div class="wizard-buttons">
+                        <button type="button" class="btn btn-previous android-smart-phone">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
+                        <button type="button" class="btn btn-next android-smart-phone">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="devices-group text-center">
+                <h4>{{Resources.OtpResources.EnableWebAuthn_AndroidSmartphoneStep4OAddFingerprintLoginHelpText}}</h4>
+                <div class="margin-content-step">
+                    <img src="runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode}}/android-smartphone-step4.png" alt="Safewhere" />
+                    <div class="wizard-step-description-text">{{Resources.OtpResources.EnableWebAuthn_AndroidSmartphoneStep4OAddSelectFingerprintHelpText}}</div>
+                    <div class="wizard-buttons">
+                        <button type="button" class="btn btn-previous android-smart-phone">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
+                        <button type="button" class="btn btn-next android-smart-phone">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="devices-group text-center">
+                <h4>{{Resources.OtpResources.EnableWebAuthn_AndroidSmartphoneStep5OEnterPasswordHelpText}}</h4>
+                <div class="margin-content-step">
+                    <img src="runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode}}/android-smartphone-step5.png" alt="Safewhere" />
+                    <div class="wizard-step-description-text">{{Resources.OtpResources.EnableWebAuthn_AndroidSmartphoneStep5LoginWithYourConfiguredDeviceHelpText}}</div>
+                    <div class="wizard-buttons">
+                        <button type="button" class="btn btn-previous android-smart-phone">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
+                        <button type="button" class="btn btn-next android-smart-phone">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="devices-group text-center">
+                <h4>{{Resources.OtpResources.EnableWebAuthn_AndroidSmartphoneStep6OChangeNameHelpText}}</h4>
+                <div class="margin-content-step">
+                    <img src="runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode}}/android-smartphone-step6.png" alt="Safewhere" />
+                    <div class="wizard-step-description-text">{{Resources.OtpResources.EnableWebAuthn_AndroidSmartphoneStep6OptionalHelpText}}</div>
+                    <div class="wizard-buttons">
+                        <button type="button" class="btn btn-previous android-smart-phone">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
+                        <button type="button" class="btn btn-next android-smart-phone">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="devices-group text-center">
+                <h4>{{Resources.OtpResources.EnableWebAuthn_AndroidSmartphoneStep7YourDeviceIsAllSetHelpText}}</h4>
+                <div class="margin-content-step">
+                    <div class="wizard-step-description-text"><span class="bolder500">{{Resources.OtpResources.EnableWebAuthn_AndroidSmartphoneStep7CongratHelpText}}</span> <br /> {{Resources.OtpResources.EnableWebAuthn_AndroidSmartphoneStep7CongratAddedFingerprintHelpText}} <br /><br /> {{Resources.OtpResources.EnableWebAuthn_AndroidSmartphoneStep7CongratAddedYouWillOnlyBeAbleToLoginHelpText}} <br /><br /> {{Resources.OtpResources.EnableWebAuthn_AndroidSmartphoneStep7CongratNoteHelpText}}</div>
+                </div>
+                <div class="wizard-buttons">
+                    <button type="button" class="btn btn-previous android-smart-phone">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
+                    <button type="button" class="btn btn-next android-smart-phone">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                </div>
+            </fieldset>
+        </div>
+
+        <!-- iPhone or iPad wizard -->
+        <div id="iphone-or-ipad-wizard">
+            <fieldset class="devices-group text-center">
+                <h4>{{Resources.OtpResources.EnableWebAuthn_Step3GoToSettingHelpText}}</h4>
+                <div class="margin-content-step">
+                    <img src="runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode}}/iphone-ipad-step3.png" alt="Safewhere" />
+                    <div class="wizard-step-description-text">{{Resources.OtpResources.EnableWebAuthn_IphoneIpadStep3OpenYourSmartphoneHelpText}}</div>
+                    <div class="wizard-buttons">
+                        <button type="button" class="btn btn-previous iphone-or-ipad">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
+                        <button type="button" class="btn btn-next iphone-or-ipad">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="devices-group text-center">
+                <h4>{{Resources.OtpResources.EnableWebAuthn_IphoneIpadStep4EnterPasscodeHelpText}}</h4>
+                <div class="margin-content-step">
+                    <img src="runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode}}/iphone-ipad-step4.png" alt="Safewhere" />
+                    <div class="wizard-step-description-text">{{Resources.OtpResources.EnableWebAuthn_IphoneIpadStep4OEnterYourPasscodeHelpText}}</div>
+                    <div class="wizard-buttons">
+                        <button type="button" class="btn btn-previous iphone-or-ipad">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
+                        <button type="button" class="btn btn-next iphone-or-ipad">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="devices-group text-center">
+                <h4>{{Resources.OtpResources.EnableWebAuthn_IphoneIpadStep5OAddFingerprintLoginHelpText}}</h4>
+                <div class="margin-content-step">
+                    <img src="runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode}}/iphone-ipad-step5.png" alt="Safewhere" />
+                    <div class="wizard-step-description-text">{{Resources.OtpResources.EnableWebAuthn_IphoneIpadStep5AddFingerprintInstructionLoginHelpText}}</div>
+                    <div class="wizard-buttons">
+                        <button type="button" class="btn btn-previous iphone-or-ipad">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
+                        <button type="button" class="btn btn-next iphone-or-ipad">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="devices-group text-center">
+                <h4>{{Resources.OtpResources.EnableWebAuthn_IphoneIpadStep6ChangeNameHelpText}}</h4>
+                <div class="margin-content-step">
+                    <img src="runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode}}/iphone-ipad-step6.png" alt="Safewhere" />
+                    <div class="wizard-step-description-text">{{Resources.OtpResources.EnableWebAuthn_IphoneIpadStep6OChangeNameOptionalHelpText}}</div>
+                    <div class="wizard-buttons">
+                        <button type="button" class="btn btn-previous iphone-or-ipad">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
+                        <button type="button" class="btn btn-next iphone-or-ipad">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="devices-group text-center">
+                <h4>{{Resources.OtpResources.EnableWebAuthn_IphoneIpadStep7YourDeviceIsAllSetHelpText}}</h4>
+                <div class="margin-content-step">
+                    <div class="wizard-step-description-text"><span class="bolder500">{{Resources.OtpResources.EnableWebAuthn_IphoneIpadStep7CongratHelpText}}</span> <br /> {{Resources.OtpResources.EnableWebAuthn_IphoneIpadStep7CongratAddedFingerprintHelpText}} <br /><br /> {{Resources.OtpResources.EnableWebAuthn_IphoneIpadStep7CongratAddedYouWillOnlyBeAbleToLoginHelpText}} <br /><br /> {{Resources.OtpResources.EnableWebAuthn_IphoneIpadStep7CongratNoteHelpText}}</div>
+                </div>
+                <div class="wizard-buttons">
+                    <button type="button" class="btn btn-previous iphone-or-ipad">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
+                    <button type="button" class="btn btn-next iphone-or-ipad">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                </div>
+            </fieldset>
+        </div>
+
+        <!-- FIDO2 keys wizard -->
+        <div id="fido2-keys-wizard">
+            <fieldset class="devices-group text-center">
+                <h4>{{Resources.OtpResources.EnableWebAuthn_FIDO2Keys3PutFIDO2KeyInUSBPortHelpText}}</h4>
+                <div class="margin-content-step">
+                    <div id="block_container" style="display: flex;">
+                        <div id="left" style="width: 70%;">
+                            <img style="max-width: 100% !important" src="runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode}}/fido2-keys-step3-left.png" alt="Safewhere" /><br /><br />
+                            <b style="font-weight: bold;">{{Resources.OtpResources.EnableWebAuthn_FIDO2Keys3TitleTextLeft}}</b> <br />
+                            <span>{{Resources.OtpResources.EnableWebAuthn_FIDO2Keys3DescriptionTextLeft}}</span>
+                        </div>
+                        <div id="right" style="width: 70%;">
+                            <img style="max-width: 100% !important" src="runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode}}/fido2-keys-step3-right.png" alt="Safewhere" /><br /><br />
+                            <b style="font-weight: bold;">{{Resources.OtpResources.EnableWebAuthn_FIDO2Keys3TitleTextRight}}</b> <br />
+                            <span>{{Resources.OtpResources.EnableWebAuthn_FIDO2Keys3DescriptionTextRight}}</span>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="wizard-buttons">
+                        <button type="button" class="btn btn-previous fido2-keys">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
+                        <button type="button" class="btn btn-next fido2-keys">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <!-- Final step: Log in -->
+        <fieldset id="final-step-login" class="devices-group text-center">
+            <h4>{{Resources.OtpResources.EnableWebAuthn_LoginHelpText}}</h4>
+            {% if Model.ErrorMessage != null and Model.ErrorMessage != "" %}
+                <div id="error-message" class="form-group">
+                    <span for="errorMessageLb" class="text-danger">
+                        {{Model.ErrorMessage}}
+                    </span>
+                </div>
+            {% endif %}
+
+            <a id="takeAnActionCountDown" class="bolder500" style="cursor:default; display: none; color: cornflowerblue;" href="javascript: void(0)">
                 {% assign var1 = '{0\}' %} 
                 {{ Resources.OtpResources.OtpWebAuthenticationView_EnableWebAuthenViewActionCountDown | Replace: var1, "<span id='countdown'></span>" }}
             </a>
-        </div>
+            <div id="onboardingErrorAtClientSide" class="text-danger" style="display: none">
+                Error at client side
+            </div>
 
+            <div class="margin-content-step" style="margin-top: 60px; margin-bottom: 60px;">
+                <div class="wizard-step-description-text">{{Resources.OtpResources.EnableWebAuthn_YourSecondAuthenticationMethodWillPopupHelpText}} <br /> {{Resources.OtpResources.EnableWebAuthn_DependOnWhatDeviceYourAreUsingHelpText}} <br /><br /> {{Resources.OtpResources.EnableWebAuthn_DependOnAndroidDeviceYourAreUsingHelpText}} <br /> {{Resources.OtpResources.EnableWebAuthn_DependOnIPhoneDeviceYourAreUsingHelpText}}<br /> {{Resources.OtpResources.EnableWebAuthn_DependOnWindowsPCDeviceYourAreUsingHelpText}}<br />{{Resources.OtpResources.EnableWebAuthn_DependOnMacBookDeviceYourAreUsingHelpText}}</div>
+                <form id="registerWebAuth" method="post" action="/runtime/otpauth/webauth/registerSuccessed?ici_ci={{Model.ContextId}}" class="no-padding">
+                    {{ Csrf }}
+                    <div class="wizard-buttons-final-step">
+                        <button id="btnRegister" class="btn btn-next">{{Resources.OtpResources.OtpWebAuthenticationView_EnableWebAuthenViewRegisterButtonText}}</button>
+                    </div>
+                </form>
+            </div>
+            <div class="wizard-step-description-text">{{Resources.OtpResources.EnableWebAuthn_OnboardWindowsDoesNotPopupHelpText}}</div>
+            <div class="wizard-buttons-final-step">
+                <button class="btn btn-go-to-choose-device">{{Resources.OtpResources.EnableWebAuthn_GetHelpSettingUpAuthenticatorHelpText}}</button>
+            </div>
+        </fieldset>
+
+            <script src="/runtime/scripts/plugins/webauthn-wizards.js"></script>
+
+            {% if Model.ContextId != "preview_context" %}
+                <script type="text/javascript" language="JavaScript">
+                    //<![CDATA[
+                        window.contextIdOfEnableWebAuthnViewModel = "{{Model.ContextId}}";
+                        window.onboardDialogTimeout = parseInt('{{Model.OnboardDialogTimeout}}', 10);
+                        window.commonErrorMessage = "{{Resources.OtpResources.EnableWebauthnView_CommonErrorMessage}}";
+                    //]]>
+                </script>
+                <script src="/runtime/scripts/plugins/webauth.mfa.helpers.js"></script>
+                <script src="/runtime/scripts/plugins/webauth.mfa.register.js"></script>
+            {% else %}
+                <script type="text/javascript" language="JavaScript">
+                    $('#takeAnActionCountDown').show();
+                    $('#onboardingErrorAtClientSide').show();
+                    $('form').bind('submit', function(e) {
+                        e.preventDefault();
+                    });
+                </script>
+            {% endif %}
 
         {% if Model.IsShowLinkToChooseOtpMethods %}
-                <hr/>
+
                 <div class="text-center">
                     <h6>
                         {{Resources.OtpResources.OnboardAnotherOtpMethods_NeedAnotherWayToSecureYourAccount}}
@@ -62,20 +293,18 @@
                             {% if otp.IsOs2faktorType %}
                                 <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
                             {% endif %}
+
+                            {% if otp.IsDeviceAuthentication %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
                         </p>
                     </div>
                 {% endfor %}
         {% endif %}
     </div>
 </div>
+
 <img id="displayBox" src="/runtime/assets/img/loader.svg" style="cursor: default; display: none; opacity:0.8">
-<script type="text/javascript" language="JavaScript">
-    //<![CDATA[
-        window.contextIdOfEnableWebAuthnViewModel = "{{Model.ContextId}}";
-        window.onboardDialogTimeout = parseInt('{{Model.OnboardDialogTimeout}}', 10);
-        window.commonErrorMessage = "{{Resources.OtpResources.EnableWebauthnView_CommonErrorMessage}}";
-    //]]>
-</script>
-<script src="/runtime/scripts/plugins/webauth.mfa.helpers.js"></script>
-<script src="/runtime/scripts/plugins/webauth.mfa.register.js"></script>
+
+
 {% endblock %}

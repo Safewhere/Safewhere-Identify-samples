@@ -1,16 +1,16 @@
 {% extends "SiteLayout" %}
 
 {% block "content" %}
-<div class="form-box">
+<div class="form-box" style="max-width: 600px">
     <div class="form-top">
-        <div class="form-top-left text-left">
+        <div class="form-top-left text-center">
             <h4>
                 {{Resources.OtpResources.OtpWebAuthenticationView_LoginWithWebAuthnViewTitleHeader}}
             </h4>
         </div>
     </div>
     <div class="form-bottom">
-        {% if Model.ErrorMessage != null && Model.ErrorMessage != ""%}
+        {% if Model.ErrorMessage != null and Model.ErrorMessage != ""%}
         <div class="form-group" style="text-align:center">
             <span id="authenticationErrorAtClient" for="errorMessageLb" class="text-danger">
                 {{Model.ErrorMessage}}
@@ -21,9 +21,16 @@
         <div class="form-group text-center" style="margin-top: 1rem;">
             <div id="authenticationErrorAtClientSide" class="text-danger" style="display: none">
             </div>
-            <p class="login-with-webauthn-description">
-                {{Resources.OtpResources.OtpWebAuthenticationView_LoginWithWebAuthnViewDescription}}
-            </p>
+
+            {% if Model.NumberOfSkippingDays > 0 %}
+                <p class="login-with-webauthn-description">
+                    {{Resources.OtpResources.OtpWebAuthenticationView_LoginWithWebAuthnViewDescription}}
+                </p>
+            {% else %}
+                <p class="login-with-webauthn-description" style="padding: 100px 70px 100px 70px;">
+                    {{Resources.OtpResources.OtpWebAuthenticationView_LoginWithWebAuthnViewDescription}}
+                </p>
+            {% endif %}
 
         <form id="authenticationWebAuth" method="post" action="/runtime/otpauth/twofactor/validate?ici_ci={{Model.ContextId}}" style="padding-bottom: 15px">
             {{ Csrf }}
@@ -32,6 +39,14 @@
             <button id="btnLogin" class="btn btn-default">
                 Login
             </button>
+            {% if Model.NumberOfSkippingDays > 0 %}
+                <div class="form-group" style="text-align:left; margin-top: 1rem">
+                    <label><input type='checkbox' name="dont-ask-for-N-days">
+                        {% assign var1 = '{0\}' %} 
+                        {{ Resources.OtpResources.OtpAuthentication_DontAskAgainForNDays | Replace: var1, Model.NumberOfSkippingDaysString }}
+                    </label>
+                </div>
+            {% endif %}
         </form>
 
         <a id="takeAnActionCountDown" style="cursor:default; display: none" href="javascript: void(0)">
@@ -47,19 +62,24 @@
     window.contextIdOfLoginWithWebAuthnViewModel = "{{Model.ContextId}}";
     window.authenticationDialogTimeout = parseInt('{{Model.AuthenticationDialogTimeout}}', 10);
     window.isLoginOnIOSDevice = isIOSDevice();
+    window.offerNSkippingDays = parseInt("{{Model.NumberOfSkippingDays}}") > 0;
     //]]>
 </script>
 <script src="/runtime/scripts/plugins/webauth.mfa.login.js"></script>
 <script type="text/javascript" language="JavaScript">
     var isIOSDevice = isIOSDevice();
-    if (!isIOSDevice) {
+    if (!isIOSDevice && !window.offerNSkippingDays) {
         document.getElementById("btnLogin").style.display = 'none';
     }
 
     document.addEventListener('readystatechange', (event) => {
         // when all dependent resources such as stylesheets and images are loaded, we will automatically execute the handleSignInSubmit(); (except the iOS devices)
-        if (document.readyState === 'complete' && !isIOSDevice && window.contextIdOfLoginWithWebAuthnViewModel !== "preview_context") {
+        if (document.readyState === 'complete' && !isIOSDevice && !window.offerNSkippingDays && window.contextIdOfLoginWithWebAuthnViewModel !== "preview_context") {
             handleSignInSubmit();
+        }
+
+        if (window.isLoginOnIOSDevice || window.offerNSkippingDays) {
+            document.getElementById('authenticationWebAuth').addEventListener('submit', handleSignInSubmit);
         }
     });
 </script>
