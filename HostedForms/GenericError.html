@@ -1,0 +1,39 @@
+{% extends "SiteLayout" %}
+{% block "titleheader"  %}
+{{Resources.RuntimeModelResources.RuntimeModelAuthenticationListView_TitleHeader}}
+{% endblock %}
+{% block "content" %}
+<div class="form-box">
+    <div class="form-top">
+        <div class="form-top-left text-left">
+            <h4>
+                {{Model.Title}}
+            </h4>
+        </div>
+    </div>
+    <div class="form-bottom">
+        <form role="form" method="post" class="login-form">
+            <div class="text-center">
+                <span class="text-danger">
+                    <span class="form-group small">
+                        <span for="errorMessageLb" class="text-danger">
+                            {{Model.ErrorMessage}}
+                        </span>
+                    </span>
+                </span>
+            </div>
+        </form>
+        <div class="text-center">
+            {% if Model.OfferReturnToSelectorLink %}
+            <div class="text-center">
+                <div class="form-group">
+                    <span for="attemptsLeftMessageLb">
+                        {{ ReturnToLoginSelectorLink }}
+                    </span>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}  
