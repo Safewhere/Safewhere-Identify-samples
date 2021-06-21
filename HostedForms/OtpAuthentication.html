@@ -12,7 +12,7 @@
 <div class="nav-box-50">
         <div class="form-top">
             <div class="form-top-left text-left">
-                {% if Model.HelpText != null && Model.HelpText != ""%}
+                {% if Model.HelpText != null and Model.HelpText != ""%}
                     <div class="text-justify help-text inner-list">{{Model.HelpText}}</div>
                 {% endif %}
                 <h4>
@@ -30,7 +30,7 @@
             <form role="form" method="post" class="login-form" action="/runtime/otpauth/twofactor/validate?ici_ci={{Model.ContextId}}">
                 {{ Csrf }}
 
-                {% if Model.ErrorMessage != null && Model.ErrorMessage != ""%}
+                {% if Model.ErrorMessage != null and Model.ErrorMessage != ""%}
                     <div class="form-group small">
                         <span for="errorMessageLb" class="text-danger">
                             {{Model.ErrorMessage}}
@@ -46,6 +46,16 @@
                 <div class="form-group">
                     <button type="submit" class="btn">{{Resources.OtpResources.OtpAuthenticationView_OK}}</button>
                 </div>
+
+                {% if Model.NumberOfSkippingDays > 0 %}
+                    <div class="form-group">
+                        <label><input type='checkbox' name="dont-ask-for-N-days">
+                            {% assign var1 = '{0\}' %} 
+                            {{ Resources.OtpResources.OtpAuthentication_DontAskAgainForNDays | Replace: var1, Model.NumberOfSkippingDaysString }}
+                        </label>
+                    </div>
+                {% endif %}
+
                 {% if Model.SecondsUntilUserCanRequestANewOtp > 0 %}
                     <a id="requestOTPLink" style="cursor:default" href="javascript: void(0)">
                         {{Resources.OtpResources.OtpAuthenticationView_YouCanRequestAnotherOtpIn}} <span id='countdown'></span> {{Resources.OtpResources.OtpAuthenticationView_Seconds}}
@@ -84,6 +94,10 @@
                             {% endif %}
 
                             {% if otp.IsWebAuthn %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+
+                            {% if otp.IsDeviceAuthentication %}
                                 <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
                             {% endif %}
                         </p>

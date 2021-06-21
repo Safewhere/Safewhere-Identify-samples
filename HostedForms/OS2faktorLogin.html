@@ -10,8 +10,8 @@
 
                     <div id="pageIntroductionText">
                         <span id="outside-browser" style="display: none;">
-                            <p>
-                                {{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginPageIntroductionOutsideBrowser}}
+                            <p> 
+                                {{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginPageIntroductionOutsideBrowser}} <a target="_blank" href="{{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginPageIntroductionOutsideBrowserDocSite}}">{{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginPageIntroductionOutsideBrowserDocSite}}</a>
                             </p>
 
                             <h2 style="width: 150px; margin: 20px auto; padding: 10px 0px; border: 1px solid black; text-align: center;">{{Model.Challenge}}</h2>
@@ -29,6 +29,15 @@
                             </a>
                         </span>
                     </div>
+
+                    {% if Model.NumberOfSkippingDays > 0 %}
+                        <div class="form-group">
+                            <label><input type='checkbox' name="dont-ask-for-N-days">
+                                {% assign var1 = '{0\}' %} 
+                                {{ Resources.OtpResources.OtpAuthentication_DontAskAgainForNDays | Replace: var1, Model.NumberOfSkippingDaysString }}
+                            </label>
+                        </div>
+                    {% endif %}
 
                     <script type="text/javascript" language="JavaScript">
                         //<![CDATA[

@@ -41,6 +41,10 @@
                             {% if otp.IsAuthenticatorType %}
                                 <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
                             {% endif %}
+
+                            {% if otp.IsDeviceAuthentication %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
                         </p>
                     </div>
                 {% endfor %}

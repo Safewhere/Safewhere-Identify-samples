@@ -24,11 +24,19 @@
             {{ Csrf }}
 
             <div class="form-group">
-                <input type="text" name="recoverycode" autocomplete="off" class="form-password form-control required" id="form-recoverycode">
+                <input id="txtRecoveryCode type="text" name="recoverycode" autocomplete="off" class="form-password form-control required">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-default">{{Resources.OtpResources.EnableAuthenticator_LogIn}}</button>
+                <button id="btnLogin" type="submit" class="btn btn-default">{{Resources.OtpResources.EnableAuthenticator_LogIn}}</button>
+
+            {% if Model.OfferResetSecondFactorMethod %}
+                <input id="resetSecondFactorMethod" type="hidden" name="resetSecondFactorMethod" value="false" />
+                <h6 class="text-center" style="padding: 10px 0px 10px 0px; margin: 0px;"> OR </h6>
+                <button id="btnResetSecondFactorMethod" onclick="$('#resetSecondFactorMethod').val('true');" type="submit" class="btn btn-default text-overflow">{{Resources.OtpResources.OtpRecoveryCodeView_ResetSecondFactorMethod}}</button>
+            {% endif %}
+
             </div>
+
             {{FormParameters}}
             <div class="form-group">
                 <a href="/runtime/otpauth/twofactor/login?ici_ci={{Model.ContextId}}">{{Resources.OtpResources.OtpRecoveryCode_Back}}</a>
