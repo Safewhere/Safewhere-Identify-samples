@@ -1,0 +1,89 @@
+﻿@using Safewhere.Web.Mvc
+@using System.Web.Mvc.Html
+@using Safewhere.IdentityProvider.Otp
+@using Safewhere.IdentityProvider.Otp.Authenticator
+@using Safewhere.IdentityProvider.RuntimeModel
+
+@model EnableAuthenticatorViewModel
+
+@section TitleHeader{
+    @*Login Page*@
+    @Resources.OtpResources.OtpAuthenticationView_TitleHeader
+}
+
+@section InitScript{
+    <script src="~/Scripts/jquery.qrcode.js"></script>
+    <script src="~/Scripts/qrcode.js"></script>
+}
+
+@section MainContent{
+    <div class="form-box" style="max-width: 560px">
+        <div class="form-top">
+            <div class="form-top-left text-left">
+                <h4>
+                    @Resources.OtpResources.EnableAuthenticator_UseAuthenticatorAppFollowingSteps
+                </h4>
+            </div>
+        </div>
+        <div class="form-bottom">
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <div class="form-group" style="text-align:center">
+                    <span for="errorMessageLb" class="text-danger">
+                        @Model.ErrorMessage
+                    </span>
+                </div>
+            }
+            <ol class="list" style="padding-right: 28px">
+                <li>
+                    <p>
+                        @Html.Raw(string.Format(Resources.OtpResources.EnableAuthenticator_ScanQRCodeOrEnterKeyHelpText, "<kbd>" + HttpUtility.HtmlEncode(@Model.SharedKey) + "</kbd>"))
+                    </p>
+                    <div class="form-group text-center unset-margin-bottom">
+                        <div id="qrCodeOfWithoutWizard" style="display: inline-block; margin-top: 10px" class="text-center"></div>
+                        <div id="qrCodeData" data-url="@Model.AuthenticatorUri"></div>
+                    </div>
+                </li>
+                <li>
+                    <p>
+                        @Resources.OtpResources.EnableAuthenticator_ScannedTheQACodeHelpText
+                    </p>
+                </li>
+            </ol>
+
+            @{
+                var showOnboardAnotherMethods = Model.OnboardAnotherMethods != null && Model.OnboardAnotherMethods.Count > 0;
+                var style = showOnboardAnotherMethods ? "padding: 0px 25px" : "";
+            }
+
+            <form method="post" action="/runtime/otpauth/twofactor/validate?ici_ci=@Model.ContextId" style="@style">
+                @Safewhere.Web.Mvc.Security.HtmlHelper.AntiForgeryToken()
+                <div class="form-group">
+                    <input type="text" name="password" autocomplete="off" class="form-password form-control required" id="form-password">
+                </div>
+                <button type="submit" class="btn btn-default">@Resources.OtpResources.EnableAuthenticator_VerifyText</button>
+                @Html.Partial("RenderFormParameters", new RenderFormParametersModel(Model.ContextId))
+            <script type="text/javascript">
+                            jQuery('#qrCodeOfWithoutWizard').qrcode({
+                                text: "@Html.Raw(Model.AuthenticatorUri)",
+                                width: 200,
+                                height: 200
+                            });
+            </script>
+
+            </form>
+
+            @if (showOnboardAnotherMethods)
+            {
+                <hr/>
+                var chooseAnotherOtpMethodViewModel = new ChooseAnotherOtpMethodViewModel
+                {
+                    OnboardingOtpTypes = Model.OnboardAnotherMethods,
+                    ContextId = Model.ContextId
+                };
+                @Html.Partial("OnboardAnotherOtpMethods", chooseAnotherOtpMethodViewModel)
+            }
+        </div>
+    </div>
+}
+

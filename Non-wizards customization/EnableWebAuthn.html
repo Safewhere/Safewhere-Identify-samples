@@ -1,0 +1,81 @@
+{% extends "SiteLayout" %}
+
+{% block "titleheader"  %}
+{{Resources.OtpResources.OtpAuthenticationView_TitleHeader}}
+{% endblock %}
+
+{% block "content" %}
+<div id="registerForm" class="form-box" style="max-width: 560px">
+    <div class="form-top">
+        <div class="form-top-left text-center">
+            <h4>
+                {{Resources.OtpResources.OtpWebAuthenticationView_EnableWebAuthenViewTitleHeader}}
+            </h4>
+        </div>
+    </div>
+    <div class="form-bottom">
+        {% if Model.ErrorMessage != null && Model.ErrorMessage != ""%}
+            <div class="form-group" style="text-align:center">
+                <span for="errorMessageLb" class="text-danger">
+                    {{Model.ErrorMessage}}
+                </span>
+            </div>
+        {% endif %}
+
+        <div class="form-group text-center" style="margin-top: 1rem;">
+            <div id="onboardingErrorAtClientSide" class="text-danger" style="display: none">
+            </div>
+
+            <p style="padding: 0px 25px 0px 25px; text-align: justify; margin-bottom: 0px;">
+                {% assign var0 = '{0\}' %} 
+                {{ Resources.OtpResources.OtpWebAuthenticationView_EnableWebAuthenViewDescription | Replace: var0, '<a target="_blank" href="http://docs.safewhere.com/identify-how-to-set-up-two-factor-with-webauthn-otp/">this link</a>' }}
+            </p>
+
+            <form id="registerWebAuth" method="post" action="/runtime/otpauth/webauth/registerSuccessed?ici_ci={{Model.ContextId}}" style="padding-bottom: 15px">
+                {{ Csrf }}
+                <button id="btnRegister" class="btn btn-default">
+                    {{Resources.OtpResources.OtpWebAuthenticationView_EnableWebAuthenViewRegisterButtonText}}
+                </button>
+            </form>
+
+            <a id="takeAnActionCountDown" style="cursor:default; display: none" href="javascript: void(0)">
+                {% assign var1 = '{0\}' %} 
+                {{ Resources.OtpResources.OtpWebAuthenticationView_EnableWebAuthenViewActionCountDown | Replace: var1, "<span id='countdown'></span>" }}
+            </a>
+        </div>
+
+
+        {% if Model.IsShowLinkToChooseOtpMethods %}
+                <hr/>
+                <div class="text-center">
+                    <h6>
+                        {{Resources.OtpResources.OnboardAnotherOtpMethods_NeedAnotherWayToSecureYourAccount}}
+                    </h6>
+                </div>
+                {% for otp in Model.OnboardAnotherMethods %}
+                    <div style="padding: 0 28px;">
+                        <p style="margin-bottom: 0.5rem !important">
+                            {% if otp.IsAuthenticatorType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+
+                            {% if otp.IsOs2faktorType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<img id="displayBox" src="/runtime/assets/img/loader.svg" style="cursor: default; display: none; opacity:0.8">
+<script type="text/javascript" language="JavaScript">
+    //<![CDATA[
+        window.contextIdOfEnableWebAuthnViewModel = "{{Model.ContextId}}";
+        window.onboardDialogTimeout = parseInt('{{Model.OnboardDialogTimeout}}', 10);
+        window.commonErrorMessage = "{{Resources.OtpResources.EnableWebauthnView_CommonErrorMessage}}";
+    //]]>
+</script>
+<script src="/runtime/scripts/plugins/webauth.mfa.helpers.js"></script>
+<script src="/runtime/scripts/plugins/webauth.mfa.register.js"></script>
+{% endblock %}
