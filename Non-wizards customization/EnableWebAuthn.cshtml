@@ -1,0 +1,69 @@
+﻿@using Safewhere.Web.Mvc
+@using System.Web.Mvc.Html
+@using Safewhere.IdentityProvider.Otp
+@using Safewhere.IdentityProvider.Otp.WebAuthentication
+@using Safewhere.IdentityProvider.RuntimeModel
+
+@model EnableWebAuthnViewModel
+
+@section TitleHeader{
+    @Resources.OtpResources.OtpAuthenticationView_TitleHeader
+}
+
+@section MainContent{
+    <div id="registerForm" class="form-box" style="max-width: 560px">
+        <div class="form-top">
+            <div class="form-top-left text-center">
+                <h4>
+                    @Resources.OtpResources.OtpWebAuthenticationView_EnableWebAuthenViewTitleHeader
+                </h4>
+            </div>
+        </div>
+        <div class="form-bottom">
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <div class="form-group" style="text-align:center">
+                    <span for="errorMessageLb" class="text-danger">
+                        @Model.ErrorMessage
+                    </span>
+                </div>
+            }
+
+            <div class="form-group text-center" style="margin-top: 1rem;">
+                <div id="onboardingErrorAtClientSide" class="text-danger" style="display: none">
+                    error message
+                </div>
+                <p style="padding: 0px 25px 0px 25px; text-align: left; margin-bottom: 0px;">
+                    @Html.Raw(string.Format(Resources.OtpResources.OtpWebAuthenticationView_EnableWebAuthenViewDescription, "<a target='_blank' href='http://docs.safewhere.com/identify-how-to-set-up-two-factor-with-webauthn-otp/'>this link</a>"))
+                </p>
+
+                <form id="registerWebAuth" method="post" action="/runtime/otpauth/webauth/registerSuccessed?ici_ci=@Model.ContextId" style="padding-bottom: 15px">
+                    @Safewhere.Web.Mvc.Security.HtmlHelper.AntiForgeryToken()
+                    <button id="btnRegister" class="btn btn-default">@Resources.OtpResources.OtpWebAuthenticationView_EnableWebAuthenViewRegisterButtonText</button>
+                </form>
+
+                <a id="takeAnActionCountDown" style="cursor:default; display: none" href="javascript: void(0)">@Html.Raw(string.Format(Resources.OtpResources.OtpWebAuthenticationView_EnableWebAuthenViewActionCountDown, "<span id='countdown'></span>"))</a>
+            </div>
+            @if (Model.OnboardAnotherMethods != null && Model.OnboardAnotherMethods.Count > 0)
+            {
+                var chooseAnotherOtpMethodViewModel = new ChooseAnotherOtpMethodViewModel
+                {
+                    OnboardingOtpTypes = Model.OnboardAnotherMethods,
+                    ContextId = Model.ContextId
+                };
+                @Html.Partial("OnboardAnotherOtpMethods", chooseAnotherOtpMethodViewModel)
+            }
+        </div>
+    </div>
+    <img id="displayBox" src="@Url.Content("~/assets/img/loader.svg")" style="cursor: default; display: none; opacity:0.8">
+    <script type="text/javascript" language="JavaScript">
+                        //<![CDATA[
+                            window.contextIdOfEnableWebAuthnViewModel = "@Model.ContextId";
+                            window.onboardDialogTimeout = @Model.OnboardDialogTimeout;
+                            window.commonErrorMessage = "@Resources.OtpResources.EnableWebauthnView_CommonErrorMessage";
+                        //]]>
+    </script>
+    <script src="/runtime/scripts/plugins/webauth.mfa.helpers.js"></script>
+    <script src="/runtime/scripts/plugins/webauth.mfa.register.js"></script>
+}
+

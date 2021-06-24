@@ -1,0 +1,90 @@
+{% extends "SiteLayout" %}
+
+{% block "titleheader"  %}
+{{Resources.OtpResources.OtpAuthenticationView_TitleHeader}}
+{% endblock %}
+
+{% block "initscript"  %}
+<script src="runtime/scripts/jquery.qrcode.js"></script>
+<script src="runtime/scripts/qrcode.js"></script>
+{% endblock %}
+
+{% block "content" %}
+<div class="form-box" style="max-width: 560px">
+    <div class="form-top">
+        <div class="form-top-left text-left">
+            <h4>
+                HOSTED FORM {{Resources.OtpResources.EnableAuthenticator_UseAuthenticatorAppFollowingSteps}}
+            </h4>
+        </div>
+    </div>
+    <div class="form-bottom">
+        {% if Model.ErrorMessage != null && Model.ErrorMessage != "" %}
+            <div class="form-group" style="text-align:center">
+                <span for="errorMessageLb" class="text-danger">
+                    {{Model.ErrorMessage}}
+                </span>
+            </div>
+        {% endif %}
+        <ol class="list" style="padding-right: 28px">
+            <li>
+                <p>
+                    {% assign var1 = '{0\}' %} 
+                    {% assign var2 = "<kbd>{0}</kbd>" | Replace: var1, Model.SharedKey %}
+                    {{Resources.OtpResources.EnableAuthenticator_ScanQRCodeOrEnterKeyHelpText | Replace: var1, var2 }}
+                </p>
+                <div id="qrCode" class="text-center"></div>
+                <div id="qrCodeData" data-url="{{Model.AuthenticatorUri}}"></div>
+            </li>
+            <div class="form-group text-center unset-margin-bottom">
+                    <div id="qrCodeOfWithoutWizard" style="display: inline-block; margin-top: 10px" class="text-center"></div>
+                    <div id="qrCodeData" data-url="{{Model.AuthenticatorUri}}"></div>
+            </div>
+            <li>
+                <p>
+                    {{Resources.OtpResources.EnableAuthenticator_ScannedTheQACodeHelpText}}
+                </p>
+            </li>
+        </ol>
+        <form method="post" action="/runtime/otpauth/twofactor/validate?ici_ci={{Model.ContextId}}" style="{{Model.StylingVerifyForm}}">
+            {{ Csrf }}
+            <div class="form-group">
+                <input type="text" name="password" autocomplete="off" class="form-password form-control required" id="form-password">
+            </div>
+            <button type="submit" class="btn btn-default">{{Resources.OtpResources.EnableAuthenticator_VerifyText}}</button>
+            
+            {{FormParameters}}
+
+            <script type="text/javascript">
+                    jQuery('#qrCodeOfWithoutWizard').qrcode({
+                        text: "{{Model.AuthenticatorUri}}",
+                        width: 200,
+                        height: 200
+                    });
+            </script>
+        </form>
+
+        {% if Model.IsShowLinkToChooseOtpMethods %}
+                <hr/>
+                <div class="text-center">
+                    <h6>
+                        {{Resources.OtpResources.OnboardAnotherOtpMethods_NeedAnotherWayToSecureYourAccount}}
+                    </h6>
+                </div>
+                {% for otp in Model.OnboardAnotherMethods %}
+                    <div style="padding: 0 28px;">
+                        <p style="margin-bottom: 0.5rem !important">
+                            {% if otp.IsOs2faktorType %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+
+                            {% if otp.IsWebAuthn %}
+                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
