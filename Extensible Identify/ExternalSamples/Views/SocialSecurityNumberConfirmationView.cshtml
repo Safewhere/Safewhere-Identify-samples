@@ -9,9 +9,6 @@
 @section TitleHeader{
     Social Security Number Interceptor
 }
-@section InitScript{
-
-}
 
 @section MainContent{
     <div class="form-box">
@@ -25,6 +22,7 @@
         </div>
         <div class="form-bottom">
             <form method="post">
+                @Html.AntiForgeryToken()
                 <input class="form-control" type="text" name="socialnumber" />
                 <br />
                 <div class="form-group">
