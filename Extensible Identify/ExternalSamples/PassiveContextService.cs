@@ -48,11 +48,31 @@ namespace Safewhere.External.Samples
         /// <summary>
         /// Returns a context object that potentially contains a lot of 
         /// </summary>
+        [Obsolete("Since Identify 5.12, please use the SessionLoginContext property instead. For backward compatible, you can use this when maintainance an older version of Identify.")]
         public dynamic TemporaryProtocolContext
         {
             get
             {
                 return httpContext.Items[TemporaryContextKey];
+            }
+        }
+
+        /// <summary>
+        /// Returns a context object that potentially contains a lot of 
+        /// </summary>
+        public dynamic SessionLoginContext
+        {
+            get
+            {
+                if (httpContext == null)
+                {
+                    throw new ArgumentNullException("httpContext");
+                }
+
+                if (httpContext.Items.Contains(TemporaryContextKey))
+                    return httpContext.Items[TemporaryContextKey];
+
+                return null;
             }
         }
 
@@ -63,7 +83,7 @@ namespace Safewhere.External.Samples
         {
             get
             {
-                dynamic temporaryContext = TemporaryProtocolContext;
+                dynamic temporaryContext = SessionLoginContext;
                 dynamic contextIdKey = temporaryContext.ContextIdKey;
                 string contextId = contextIdKey.ContextId;
                 Guid protocolConnectionId = contextIdKey.ProtocolConnectionId;
@@ -78,7 +98,7 @@ namespace Safewhere.External.Samples
         {
             get
             {
-                dynamic temporaryContext = TemporaryProtocolContext;
+                dynamic temporaryContext = SessionLoginContext;
                 dynamic contextIdKey = temporaryContext.ContextIdKey;
                 string contextId = contextIdKey.ContextId;
                 Guid protocolConnectionId = contextIdKey.ProtocolConnectionId;
@@ -122,7 +142,7 @@ namespace Safewhere.External.Samples
         {
             get
             {
-                dynamic temporaryContext = TemporaryProtocolContext;
+                dynamic temporaryContext = SessionLoginContext;
                 dynamic requestedAuthenticationContextModel = temporaryContext.RequestedAuthenticationContextModel;
                 IEnumerable<Uri> requesterId = requestedAuthenticationContextModel.RequesterId;
                 return requesterId;
