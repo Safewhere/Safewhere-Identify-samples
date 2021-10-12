@@ -48,7 +48,7 @@ namespace Safewhere.External.Samples
         /// <summary>
         /// Returns a context object that potentially contains a lot of 
         /// </summary>
-        [Obsolete("Since Identify 5.12, please use the SessionLoginContext property instead. For backward compatible, you can use this when maintainance an older version of Identify.")]
+        [Obsolete("If you are on Identify version 5.12 or newer, please use the SessionLoginContext property instead. This property is obsolete and is kept for the sake of backward compatibility. We will remove it in a future version.")]
         public dynamic TemporaryProtocolContext
         {
             get
