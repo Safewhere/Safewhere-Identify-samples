@@ -125,27 +125,39 @@
         ],
         "ServiceProviderRequestedAttributes": [
             {
-                "IsRequired": true,
+                "IsRequired": false,
                 "FriendlyName": "SpecVer",
                 "Name": "https://data.gov.dk/model/core/specVersion",
                 "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
             },
             {
-                "IsRequired": true,
+                "IsRequired": false,
                 "FriendlyName": "NsisLevelOfAssurance",
                 "Name": "https://data.gov.dk/concept/core/nsis/loa",
                 "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
             },
             {
-                "IsRequired": true,
+                "IsRequired": false,
                 "FriendlyName": "Cvr",
                 "Name": "https://data.gov.dk/model/core/eid/professional/cvr",
                 "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
             },
             {
-                "IsRequired": true,
+                "IsRequired": false,
                 "FriendlyName": "OrganizationName",
                 "Name": "https://data.gov.dk/model/core/eid/professional/orgName",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "IsRequired": false,
+                "FriendlyName": "CPRNumber",
+                "Name": "https://data.gov.dk/model/core/eid/cprNumber",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "IsRequired": false,
+                "FriendlyName": "Persistent",
+                "Name": "https://data.gov.dk/model/core/eid/professional/uuid/persistent",
                 "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
             }
         ],
@@ -153,20 +165,20 @@
         "CustomOrganization": {
             "DisplayNames": [
                 {
-                    "Name": "hhp@globeteam.com",
-                    "Language": "nl"
+                    "Name": "Safewhere",
+                    "Language": "da"
                 }
             ],
             "Names": [
                 {
-                    "Name": "nemlogin3",
+                    "Name": "Safewhere",
                     "Language": "da"
                 }
             ],
             "Urls": [
                 {
-                    "Uri": "http://hhpglobeteam.safewhere.eu",
-                    "Language": "fr"
+                    "Uri": "https://safewhere.com",
+                    "Language": "da"
                 }
             ]
         },
@@ -174,17 +186,11 @@
         "CustomContactPerson": {
             "Type": "Technical",
             "Company": "Safewhere",
-            "GivenName" :"John",
-            "Surname": "Doe",
             "EmailAddresses" : [
-                "johndoe1@safewhere.com",
-                "johndoe2@safewhere.com",
-                "johndoe3@safewhere.com"
+                "support@safewhere.com"
             ],
             "TelephoneNumbers" : [
-                "000-TEMP",
-                "001-TEMP",
-                "002-TEMP"
+                "+4582131145"
             ]
         },
         "EncryptionAlgorithms": [
@@ -284,23 +290,23 @@
             }
         ],
         "UseCustomOrganization": true,
-        "CustomOrganization": {
+         "CustomOrganization": {
             "DisplayNames": [
                 {
-                    "Name": "hhp@globeteam.com",
-                    "Language": "nl"
+                    "Name": "Safewhere",
+                    "Language": "da"
                 }
             ],
             "Names": [
                 {
-                    "Name": "kombit",
+                    "Name": "Safewhere",
                     "Language": "da"
                 }
             ],
             "Urls": [
                 {
-                    "Uri": "http://hhpglobeteam.safewhere.eu",
-                    "Language": "fr"
+                    "Uri": "https://safewhere.com",
+                    "Language": "da"
                 }
             ]
         },
@@ -308,17 +314,11 @@
         "CustomContactPerson": {
             "Type": "Technical",
             "Company": "Safewhere",
-            "GivenName" :"John",
-            "Surname": "Doe",
             "EmailAddresses" : [
-                "johndoe1@safewhere.com",
-                "johndoe2@safewhere.com",
-                "johndoe3@safewhere.com"
+                "support@safewhere.com"
             ],
             "TelephoneNumbers" : [
-                "000-TEMP",
-                "001-TEMP",
-                "002-TEMP"
+                "+4582131145"
             ]
         },
         "EncryptionAlgorithms": [
