@@ -1,7 +1,7 @@
 {% extends "SiteLayout" %}
 
 {% block "titleheader"  %}
-{{Resources.OtpResources.OtpAuthenticationView_TitleHeader}}
+{{Resources.OtpResources.OtpAuthenticationView_TitleHeader | Escape }}
 {% endblock %}
 
 {% block "initscript"  %}
@@ -17,142 +17,142 @@
     <div class="form-bottom">
         <!-- Step 1: Set up authenticator app -->
         <fieldset id="set-up-authenticator-app" class="text-center">
-            <h4>{{Resources.OtpResources.EnableAuthenticator_ChooseOptionStep1HelpText}}</h4>
+            <h4>{{Resources.OtpResources.EnableAuthenticator_ChooseOptionStep1HelpText | Escape }}</h4>
             <div class="margin-content-step full-width-buttons">
-                <button id="onboard-with-wizard" type="button" class="btn">{{Resources.OtpResources.EnableAuthenticator_Option1HelpText}}</button>
-                <div class="wizard-step-or-options-text">{{Resources.OtpResources.OtpRecoveryCodeView_OR}}</div>
-                <button id="onboard-without-wizard" type="button" class="btn">{{Resources.OtpResources.EnableAuthenticator_Option2HelpText}}</button>
+                <button id="onboard-with-wizard" type="button" class="btn">{{Resources.OtpResources.EnableAuthenticator_Option1HelpText | Escape }}</button>
+                <div class="wizard-step-or-options-text">{{Resources.OtpResources.OtpRecoveryCodeView_OR | Escape }}</div>
+                <button id="onboard-without-wizard" type="button" class="btn">{{Resources.OtpResources.EnableAuthenticator_Option2HelpText | Escape }}</button>
             </div>
         </fieldset>
 
         <!-- Option 1: Receive help setting up an authenticator app -->
         <div id="wizard">
             <fieldset class="devices-group text-center">
-                <h4 class="text-center font-size-of-wizards-step">{{Resources.OtpResources.EnableAuthenticator_Option1Step2HelpText}}</h4>
+                <h4 class="text-center font-size-of-wizards-step">{{Resources.OtpResources.EnableAuthenticator_Option1Step2HelpText | Escape }}</h4>
                 <div class="form-group text-center bolder content-step-2">
-                    {{Resources.OtpResources.EnableAuthenticator_DownloadAuthenticatorAppOnSmartPhoneHelpText}}
+                    {{Resources.OtpResources.EnableAuthenticator_DownloadAuthenticatorAppOnSmartPhoneHelpText | Escape }}
                     <br />
                     <br />
-                    {{Resources.OtpResources.EnableAuthenticator_AuthenticatorAppWebSiteLocationHelpText}}
+                    {{Resources.OtpResources.EnableAuthenticator_AuthenticatorAppWebSiteLocationHelpText | Escape }}
                     <br />
                     <a href="https://www.microsoft.com/en-us/account/authenticator" target="_blank">https://www.microsoft.com/en-us/account/authenticator</a>
                     <br />
                     <br />
-                    {{Resources.OtpResources.EnableAuthenticator_TheFollowingGuideIsForHelpText}}
+                    {{Resources.OtpResources.EnableAuthenticator_TheFollowingGuideIsForHelpText | Escape }}
                 </div>
                 <div class="wizard-buttons">
-                    <button type="button" class="btn btn-previous wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
-                    <button type="button" class="btn btn-next wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                    <button type="button" class="btn btn-previous wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}</button>
+                    <button type="button" class="btn btn-next wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton | Escape }}</button>
                 </div>
             </fieldset>
 
             <fieldset class="devices-group text-center">
-                <h4 class="text-center font-size-of-wizards-step">{{Resources.OtpResources.EnableAuthenticator_Option1Step3HelpText}}</h4>
+                <h4 class="text-center font-size-of-wizards-step">{{Resources.OtpResources.EnableAuthenticator_Option1Step3HelpText | Escape }}</h4>
                 <div class="form-group text-center margin-content-step">
-                    <img class="img-step" src="runtime/images/secondfactor/authenticator/{{Model.CurrentUILanguageCode}}/step3-option1-@2x-nobg.png" alt="Safewhere" />
+                    <img class="img-step" src="runtime/images/secondfactor/authenticator/{{Model.CurrentUILanguageCode | Escape }}/step3-option1-@2x-nobg.png" alt="Safewhere" />
                     <div class="form-group bolder500">
-                        {{Resources.OtpResources.EnableAuthenticator_Step3Option1OpenAuthenticatorAndClickAddAccountHelpText}}
+                        {{Resources.OtpResources.EnableAuthenticator_Step3Option1OpenAuthenticatorAndClickAddAccountHelpText | Escape }}
                     </div>
                 </div>
                 <div class="wizard-buttons">
-                    <button type="button" class="btn btn-previous wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
-                    <button type="button" class="btn btn-next wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                    <button type="button" class="btn btn-previous wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}</button>
+                    <button type="button" class="btn btn-next wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton | Escape }}</button>
                 </div>
             </fieldset>
 
             <fieldset class="devices-group text-center">
-                <h4 class="text-center font-size-of-wizards-step">{{Resources.OtpResources.EnableAuthenticator_Option1Step4HelpText}}</h4>
+                <h4 class="text-center font-size-of-wizards-step">{{Resources.OtpResources.EnableAuthenticator_Option1Step4HelpText | Escape }}</h4>
                 <div class="form-group text-center margin-content-step">
-                    <img class="img-step" src="runtime/images/secondfactor/authenticator/{{Model.CurrentUILanguageCode}}/step4-option1-@2x-nobg.png" alt="Safewhere" />
+                    <img class="img-step" src="runtime/images/secondfactor/authenticator/{{Model.CurrentUILanguageCode | Escape }}/step4-option1-@2x-nobg.png" alt="Safewhere" />
                     <div class="form-group bolder500">
-                        {{Resources.OtpResources.EnableAuthenticator_Step4Option1ChooseAccountTypeHelpText}}
+                        {{Resources.OtpResources.EnableAuthenticator_Step4Option1ChooseAccountTypeHelpText | Escape }}
                     </div>
                 </div>
                 <div class="wizard-buttons">
-                    <button type="button" class="btn btn-previous wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
-                    <button type="button" class="btn btn-next wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                    <button type="button" class="btn btn-previous wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}</button>
+                    <button type="button" class="btn btn-next wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton | Escape }}</button>
                 </div>
             </fieldset>
 
             <fieldset class="devices-group text-center">
-                <h4 class="text-center font-size-of-wizards-step">{{Resources.OtpResources.EnableAuthenticator_Option1Step5HelpText}}</h4>
+                <h4 class="text-center font-size-of-wizards-step">{{Resources.OtpResources.EnableAuthenticator_Option1Step5HelpText | Escape }}</h4>
                 <div class="form-group text-center bolder500 margin-content-step">
                     <div class="form-group unset-margin-bottom guideline-text-color">
-                        {{Resources.OtpResources.EnableAuthenticator_Step5Option1ScanQRCodeTypeHelpText}}
+                        {{Resources.OtpResources.EnableAuthenticator_Step5Option1ScanQRCodeTypeHelpText | Escape }}
                     </div>
                     <div style="display: none" id="qr-code-onboard-with-wizard" class="form-group text-center">
                         <div id="qrCodeOfWizard" class="text-center"></div>
-                        <div id="qrCodeData" data-url="{{Model.AuthenticatorUri}}"></div>
+                        <div id="qrCodeData" data-url="{{Model.AuthenticatorUri | Escape }}"></div>
                     </div>
-                    <img id="step5-img" style="display: none" class="img-step unset-margin-bottom" src="runtime/images/secondfactor/authenticator/{{Model.CurrentUILanguageCode}}/step5-option1-@2x-nobg.png" alt="Safewhere" />
+                    <img id="step5-img" style="display: none" class="img-step unset-margin-bottom" src="runtime/images/secondfactor/authenticator/{{Model.CurrentUILanguageCode | Escape }}/step5-option1-@2x-nobg.png" alt="Safewhere" />
                     <canvas id="canvasresult" class="unset-margin-bottom"></canvas>
-                    <div class="text-center wizard-step-or-wizards-text guideline-text-color">{{Resources.OtpResources.OtpRecoveryCodeView_OR}}</div>
+                    <div class="text-center wizard-step-or-wizards-text guideline-text-color">{{Resources.OtpResources.OtpRecoveryCodeView_OR | Escape }}</div>
                     <div class="form-group unset-margin-bottom guideline-text-color">
-                        {{Resources.OtpResources.EnableAuthenticator_Step5Option1EnterCodeManuallyHelpText}}
+                        {{Resources.OtpResources.EnableAuthenticator_Step5Option1EnterCodeManuallyHelpText | Escape }}
                     </div>
                     <div class="form-group text-center">
-                        <kbd>{{Model.SharedKey}}</kbd>
+                        <kbd>{{Model.SharedKey | Escape }}</kbd>
                         <button type="button" class="btn btn-default btn-copy-code">
-                            {{Resources.OtpResources.OtpRecoveryCode_CopyCode}}
+                            {{Resources.OtpResources.OtpRecoveryCode_CopyCode | Escape }}
                         </button>
                     </div>
                     <script type="text/javascript">
                         jQuery('#qrCodeOfWizard').qrcode({
-                            text: "{{Model.AuthenticatorUri}}",
+                            text: "{{Model.AuthenticatorUri | Escape }}",
                             width: 155,
                             height: 155
                         });
                     </script>
                 </div>
                 <div class="wizard-buttons">
-                    <button type="button" class="btn btn-previous wizard"> {{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}} </button>
-                    <button type="button" class="btn btn-next wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                    <button type="button" class="btn btn-previous wizard"> {{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton | Escape }} </button>
+                    <button type="button" class="btn btn-next wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton | Escape }}</button>
                 </div>
             </fieldset>
 
             <fieldset class="devices-group text-center">
-                <h4 class="text-center font-size-of-wizards-step">{{Resources.OtpResources.EnableAuthenticator_Option1Step6HelpText}}</h4>
+                <h4 class="text-center font-size-of-wizards-step">{{Resources.OtpResources.EnableAuthenticator_Option1Step6HelpText | Escape }}</h4>
                 <div class="form-group text-center margin-content-step">
-                    <img class="img-step" src="runtime/images/secondfactor/authenticator/{{Model.CurrentUILanguageCode}}/step6-option1-@2x-nobg.png" alt="Safewhere" />
+                    <img class="img-step" src="runtime/images/secondfactor/authenticator/{{Model.CurrentUILanguageCode | Escape }}/step6-option1-@2x-nobg.png" alt="Safewhere" />
                     <div class="form-group bolder500">
-                        {{Resources.OtpResources.EnableAuthenticator_Step6Option1TheAccountHasBeenAddedHelpText}}
+                        {{Resources.OtpResources.EnableAuthenticator_Step6Option1TheAccountHasBeenAddedHelpText | Escape }}
                     </div>
                 </div>
                 <div class="wizard-buttons">
-                    <button type="button" class="btn btn-previous wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
-                    <button type="button" class="btn btn-next wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton}}</button>
+                    <button type="button" class="btn btn-previous wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}</button>
+                    <button type="button" class="btn btn-next wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardNextButton | Escape }}</button>
                 </div>
             </fieldset>
 
             <fieldset class="devices-group text-center">
-                <h4 class="text-center font-size-of-wizards-step">{{Resources.OtpResources.EnableAuthenticator_Option1Step7HelpText}}</h4>
+                <h4 class="text-center font-size-of-wizards-step">{{Resources.OtpResources.EnableAuthenticator_Option1Step7HelpText | Escape }}</h4>
 
                 {% if Model.ErrorMessage != null and Model.ErrorMessage != "" %}
                     <div id="wizard-error-message" class="form-group text-center">
                         <span for="errorMessageLb" class="text-danger">
-                            {{Model.ErrorMessage}}
+                            {{Model.ErrorMessage | Escape }}
                         </span>
                     </div>
                 {% endif %}
-                <form id="form-with-wizard" class="no-padding" method="post" action="/runtime/otpauth/twofactor/validate?ici_ci={{Model.ContextId}}" role="form">
+                <form id="form-with-wizard" class="no-padding" method="post" action="/runtime/otpauth/twofactor/validate?ici_ci={{Model.ContextId | Escape }}" role="form">
                     {{ Csrf }}
                     <div class="form-group text-center bolder500  margin-content-step">
-                        <img class="img-step" src="runtime/images/secondfactor/authenticator/{{Model.CurrentUILanguageCode}}/step7-option1-@2x-nobg.png" alt="Safewhere" />
+                        <img class="img-step" src="runtime/images/secondfactor/authenticator/{{Model.CurrentUILanguageCode | Escape }}/step7-option1-@2x-nobg.png" alt="Safewhere" />
                         <div class="form-group bolder500">
-                            {{Resources.OtpResources.EnableAuthenticator_Step7Option1TheAccountHasBeenAddedHelpText}}
+                            {{Resources.OtpResources.EnableAuthenticator_Step7Option1TheAccountHasBeenAddedHelpText | Escape }}
                             <br />
                             <span style="color: dimgrey;">
-                                {{Resources.OtpResources.EnableAuthenticator_Step7Option1EnterTheCodeInTheBoxBelowHelpText}}
+                                {{Resources.OtpResources.EnableAuthenticator_Step7Option1EnterTheCodeInTheBoxBelowHelpText | Escape }}
                             </span>
                             <input id="isOnboardWithWizard" type="hidden" name="isOnboardWithWizard" value="false" />
                             <input id="wizardPassword" name="password" type="text" autocomplete="off" class="form-password form-control required">
                         </div>
                     </div>
                     <div class="wizard-buttons-final-step">
-                        <button id="btn-previous-final" type="button" class="btn btn-previous wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
-                        <button id="wizardSubmit" name="wizardSubmit" type="submit" onclick="$('#isOnboardWithWizard').val('true'); $('#withoutWizardPassword').attr('name', 'passwordDeactived');" class="btn btn-submit">{{Resources.OtpResources.EnableAuthenticator_Confirm}}</button>
+                        <button id="btn-previous-final" type="button" class="btn btn-previous wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}</button>
+                        <button id="wizardSubmit" name="wizardSubmit" type="submit" onclick="$('#isOnboardWithWizard').val('true'); $('#withoutWizardPassword').attr('name', 'passwordDeactived');" class="btn btn-submit">{{Resources.OtpResources.EnableAuthenticator_Confirm | Escape }}</button>
                     </div>
-                    {{FormParameters}}
+                    {{ FormParameters }}
                 </form>
             </fieldset>
         </div>
@@ -160,54 +160,54 @@
         <!-- Option 2: I already have an authenticator app -->
         <div id="without-wizard">
             <fieldset class="devices-group text-center">
-                <h4 class="text-center font-size-of-wizards-step">{{Resources.OtpResources.EnableAuthenticator_Option2Step2HelpText}}</h4>
+                <h4 class="text-center font-size-of-wizards-step">{{Resources.OtpResources.EnableAuthenticator_Option2Step2HelpText | Escape }}</h4>
 
                 {% if Model.ErrorMessage != null and Model.ErrorMessage != "" %}
                     <div id="without-wizard-error-message"  class="form-group text-center">
                         <span for="errorMessageLb" class="text-danger">
-                            {{Model.ErrorMessage}}
+                            {{Model.ErrorMessage | Escape }}
                         </span>
                     </div>
                 {% endif %}
 
                 <div class="form-group text-center unset-margin-bottom">
-                    {{Resources.OtpResources.EnableAuthenticator_ScanQRCodeHelpText}}
+                    {{Resources.OtpResources.EnableAuthenticator_ScanQRCodeHelpText | Escape }}
                     <div id="qrCodeOfWithoutWizard" style="display: inline-block; margin-top: 10px" class="text-center"></div>
-                    <div id="qrCodeData" data-url="{{Model.AuthenticatorUri}}"></div>
+                    <div id="qrCodeData" data-url="{{Model.AuthenticatorUri | Escape }}"></div>
                 </div>
 
-                <div class="text-center wizard-step-or-wizards-text">{{Resources.OtpResources.OtpRecoveryCodeView_OR}}</div>
+                <div class="text-center wizard-step-or-wizards-text">{{Resources.OtpResources.OtpRecoveryCodeView_OR | Escape }}</div>
 
                 <div class="form-group text-center unset-margin-bottom">
-                    {{Resources.OtpResources.EnableAuthenticator_EnterKeyHelpText}}
+                    {{Resources.OtpResources.EnableAuthenticator_EnterKeyHelpText | Escape }}
                 </div>
 
                 <div class="form-group text-center">
-                    <kbd>{{Model.SharedKey}}</kbd>
+                    <kbd>{{Model.SharedKey | Escape }}</kbd>
                     <button type="button" class="btn btn-default btn-copy-code">
-                        {{Resources.OtpResources.OtpRecoveryCode_CopyCode}}
+                        {{Resources.OtpResources.OtpRecoveryCode_CopyCode | Escape }}
                     </button>
                 </div>
                 <div class="form-group text-center unset-margin-bottom">
-                    {{Resources.OtpResources.EnableAuthenticator_UniqueCodeFromAuthenticatorAppHelpText}}
+                    {{Resources.OtpResources.EnableAuthenticator_UniqueCodeFromAuthenticatorAppHelpText | Escape }}
                     <br />
-                    {{Resources.OtpResources.EnableAuthenticator_UniqueCodeFromAuthenticatorAppEnterTheCodeHelpText}}
+                    {{Resources.OtpResources.EnableAuthenticator_UniqueCodeFromAuthenticatorAppEnterTheCodeHelpText | Escape }}
                 </div>
-                <form id="form-without-wizard" method="post" action="/runtime/otpauth/twofactor/validate?ici_ci={{Model.ContextId}}" role="form" class="wizard no-padding">
+                <form id="form-without-wizard" method="post" action="/runtime/otpauth/twofactor/validate?ici_ci={{Model.ContextId | Escape }}" role="form" class="wizard no-padding">
                     {{ Csrf }}
                     <div class="form-group">
                         <input id="withoutWizardPassword" name="password" type="text" autocomplete="off" class="form-password form-control required">
                     </div>
                     <div class="wizard-buttons-final-step">
-                        <button id="btn-previous-final" type="button" class="btn btn-previous without-wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton}}</button>
-                        <button id="withoutWizardSubmit" name="withoutWizardSubmit" type="submit" onclick="$('#wizardPassword').attr('name', 'passwordDeactived');" class="btn btn-default btn-submit">{{Resources.OtpResources.EnableAuthenticator_Confirm}}</button>
+                        <button id="btn-previous-final" type="button" class="btn btn-previous without-wizard">{{Resources.OtpResources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}</button>
+                        <button id="withoutWizardSubmit" name="withoutWizardSubmit" type="submit" onclick="$('#wizardPassword').attr('name', 'passwordDeactived');" class="btn btn-default btn-submit">{{Resources.OtpResources.EnableAuthenticator_Confirm | Escape }}</button>
                     </div>
-                    {{FormParameters}}
+                    {{ FormParameters }}
                 </form>
 
                 <script type="text/javascript">
                     jQuery('#qrCodeOfWithoutWizard').qrcode({
-                        text: "{{Model.AuthenticatorUri}}",
+                        text: "{{Model.AuthenticatorUri | Escape }}",
                         width: 200,
                         height: 200
                     });
@@ -216,11 +216,11 @@
         </div>
             <script type="text/javascript" language="JavaScript">
                 //<![CDATA[
-                    window.commonErrorMessage = "{{Model.ErrorMessage}}";
-                    window.isOnboardWithWizard = "{{Model.IsOboardingWithWizard}}";
-                    window.contextIdOfEnableAuthenticatorViewModel = "{{Model.ContextId}}";
-                    window.copyCodeButtonTextResource = "{{Resources.OtpResources.OtpRecoveryCode_CopyCode}}";
-                    window.copiedCodeButtonTextResource = "{{Resources.OtpResources.OtpRecoveryCode_CopiedCode}}";
+                    window.commonErrorMessage = "{{Model.ErrorMessage | Escape }}";
+                    window.isOnboardWithWizard = "{{Model.IsOboardingWithWizard | Escape }}";
+                    window.contextIdOfEnableAuthenticatorViewModel = "{{Model.ContextId | Escape }}";
+                    window.copyCodeButtonTextResource = "{{Resources.OtpResources.OtpRecoveryCode_CopyCode | Escape }}";
+                    window.copiedCodeButtonTextResource = "{{Resources.OtpResources.OtpRecoveryCode_CopiedCode | Escape }}";
                 //]]>
             </script>
             <script src="runtime/scripts/plugins/authenticator-wizards.js"></script>
@@ -228,22 +228,22 @@
         {% if Model.IsShowLinkToChooseOtpMethods %}
                 <div class="text-center">
                     <h6>
-                        {{Resources.OtpResources.OnboardAnotherOtpMethods_NeedAnotherWayToSecureYourAccount}}
+                        {{Resources.OtpResources.OnboardAnotherOtpMethods_NeedAnotherWayToSecureYourAccount | Escape }}
                     </h6>
                 </div>
                 {% for otp in Model.OnboardAnotherMethods %}
                     <div style="padding: 0 28px;">
                         <p style="margin-bottom: 0.5rem !important">
                             {% if otp.IsOs2faktorType %}
-                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                                <a href="{{otp.ChangeTokenProviderUrl | Escape }}">{{otp.ChangeTokenProviderText | Escape }}</a>
                             {% endif %}
 
                             {% if otp.IsWebAuthn %}
-                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                                <a href="{{otp.ChangeTokenProviderUrl | Escape }}">{{otp.ChangeTokenProviderText | Escape }}</a>
                             {% endif %}
 
                             {% if otp.IsDeviceAuthentication %}
-                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                                <a href="{{otp.ChangeTokenProviderUrl | Escape }}">{{otp.ChangeTokenProviderText | Escape }}</a>
                             {% endif %}
                         </p>
                     </div>

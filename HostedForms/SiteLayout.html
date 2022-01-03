@@ -10,14 +10,14 @@
 
     <title>
         {% if Title != null and Title != ""%}
-        {{ Title }}
+        {{ Title  | Escape }}
         {% else %}
         {% block "titleheader"  %}
         {% endblock %}
         {% endif %}
     </title>
 
-    <base href="{{ VirtualDirectory }}/">
+    <base href="{{ VirtualDirectory  | Escape }}/">
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
@@ -64,7 +64,7 @@
 
                             <div class="acms-header">
                                 <div class="right text-right copyright">
-                                    <span>{{Copyright}}</span>
+                                    <span>{{Copyright | Escape }}</span>
                                 </div>
                             </div>
 
@@ -84,7 +84,7 @@
     <!--[if lt IE 10]>
     <script src="assets/js/placeholder.js"></script>
     <![endif]-->
-    {{ MiniProfiler}}
+    {{ MiniProfiler | Escape }}
 </body>
 
 </html>

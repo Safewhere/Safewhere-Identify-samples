@@ -1,7 +1,7 @@
 {% extends "SiteLayout" %}
 
 {% block "titleheader"  %}
-{{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationTitleHeader}}
+{{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationTitleHeader | Escape }}
 {% endblock %}
 
 {% block "content" %}
@@ -9,10 +9,10 @@
     <div class="form-top">
         <div class="form-top-left text-left">
             <h4>
-                {{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationTitleHeader}}
+                {{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationTitleHeader | Escape }}
             </h4>
             <div style="line-height: 18px" class="small">
-                {{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationHelpText}}
+                {{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationHelpText | Escape }}
                 <a href="https://os2faktor.dk">https://os2faktor.dk</a>
             </div>
         </div>
@@ -21,7 +21,7 @@
         {% if Model.ErrorMessage != null and Model.ErrorMessage != "" %}
             <div class="form-group" style="text-align:center">
                 <span for="errorMessageLb" class="text-danger">
-                    {{Model.ErrorMessage}}
+                    {{Model.ErrorMessage | Escape }}
                 </span>
             </div>
         {% else %}
@@ -30,22 +30,22 @@
 
         <div class="os2faktor-helptext">
             <p>
-                {{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationDeviceIdRegisterHelpText}}
+                {{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationDeviceIdRegisterHelpText | Escape }}
             </p>
             <br />
             <p>
-                {{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationMultiDeviceIdsHelpText}}
+                {{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationMultiDeviceIdsHelpText | Escape }}
             </p>
         </div>
 
-        <form id="deviceRegistration" class="login-form" method="POST" action="/runtime/otpauth/os2faktor/deviceregistration?ici_ci={{Model.ContextId}}">
+        <form id="deviceRegistration" class="login-form" method="POST" action="/runtime/otpauth/os2faktor/deviceregistration?ici_ci={{Model.ContextId | Escape }}">
             {{ Csrf }}
 
             <div class="form-group">
-                <input class="form-control required" id="deviceIds" type="text" autocomplete="off" name="DeviceIds" value="{{Model.DeviceIds}}" />
+                <input class="form-control required" id="deviceIds" type="text" autocomplete="off" name="DeviceIds" value="{{Model.DeviceIds | Escape }}" />
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-default">{{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationRegister}}</button>
+                <button type="submit" class="btn btn-default">{{Resources.OtpResources.OtpAuthenticationFailedView_DeviceRegistrationRegister | Escape }}</button>
             </div>
             <script src="/runtime/assets/js/scripts.js"></script>
         </form>
@@ -54,22 +54,22 @@
                 <hr/>
                 <div class="text-center">
                     <h6>
-                        {{Resources.OtpResources.OnboardAnotherOtpMethods_NeedAnotherWayToSecureYourAccount}}
+                        {{Resources.OtpResources.OnboardAnotherOtpMethods_NeedAnotherWayToSecureYourAccount | Escape }}
                     </h6>
                 </div>
                 {% for otp in Model.OnboardAnotherMethods %}
                     <div style="padding: 0 28px;">
                         <p style="margin-bottom: 0.5rem !important">
                             {% if otp.IsAuthenticatorType %}
-                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                                <a href="{{otp.ChangeTokenProviderUrl | Escape }}">{{otp.ChangeTokenProviderText | Escape }}</a>
                             {% endif %}
                             
                             {% if otp.IsWebAuthn %}
-                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                                <a href="{{otp.ChangeTokenProviderUrl | Escape }}">{{otp.ChangeTokenProviderText | Escape }}</a>
                             {% endif %}
 
                             {% if otp.IsDeviceAuthentication %}
-                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                                <a href="{{otp.ChangeTokenProviderUrl | Escape }}">{{otp.ChangeTokenProviderText | Escape }}</a>
                             {% endif %}
                         </p>
                     </div>

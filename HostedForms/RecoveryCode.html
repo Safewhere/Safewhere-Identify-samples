@@ -1,14 +1,18 @@
 ﻿{% extends "SiteLayout" %}
 
+{% block "titleheader" %}
+{{Resources.OtpResources.OtpAuthenticationView_TitleHeader | Escape }}
+{% endblock %}
+
 {% block "content" %}
     <div class="form-box">
         <div class="form-top">
             <div class="form-top-left text-left">
                 <h4>
-                    {{Resources.OtpResources.OtpRecoveryCode_Title}}: {{Model.DisplayName}}
+                    {{Resources.OtpResources.OtpRecoveryCode_Title | Escape }}: {{Model.DisplayName | Escape }}
                 </h4>
                 <div class="small">
-                    {{Resources.OtpResources.OtpRecoveryCode_Label}}
+                    {{Resources.OtpResources.OtpRecoveryCode_Label | Escape }}
                 </div>
             </div>
         </div>
@@ -16,30 +20,30 @@
             {% if ErrorMessage != "" %}
                 <div class="form-group" style="text-align:center">
                     <span for="errorMessageLb" class="text-danger">
-                        {{Model.ErrorMessage}}
+                        {{Model.ErrorMessage | Escape }}
                     </span>
                 </div>
             {% endif %}
-        <form method="post" action="/runtime/otpauth/twofactor/validaterecoverycode?ici_ci={{Model.ContextId}}">
+        <form method="post" action="/runtime/otpauth/twofactor/validaterecoverycode?ici_ci={{Model.ContextId | Escape }}">
             {{ Csrf }}
 
             <div class="form-group">
                 <input id="txtRecoveryCode type="text" name="recoverycode" autocomplete="off" class="form-password form-control required">
             </div>
             <div class="form-group">
-                <button id="btnLogin" type="submit" class="btn btn-default">{{Resources.OtpResources.EnableAuthenticator_LogIn}}</button>
+                <button id="btnLogin" type="submit" class="btn btn-default">{{Resources.OtpResources.EnableAuthenticator_LogIn | Escape }}</button>
 
             {% if Model.OfferResetSecondFactorMethod %}
                 <input id="resetSecondFactorMethod" type="hidden" name="resetSecondFactorMethod" value="false" />
                 <h6 class="text-center" style="padding: 10px 0px 10px 0px; margin: 0px;"> OR </h6>
-                <button id="btnResetSecondFactorMethod" onclick="$('#resetSecondFactorMethod').val('true');" type="submit" class="btn btn-default text-overflow">{{Resources.OtpResources.OtpRecoveryCodeView_ResetSecondFactorMethod}}</button>
+                <button id="btnResetSecondFactorMethod" onclick="$('#resetSecondFactorMethod').val('true');" type="submit" class="btn btn-default text-overflow">{{Resources.OtpResources.OtpRecoveryCodeView_ResetSecondFactorMethod | Escape }}</button>
             {% endif %}
 
             </div>
 
-            {{FormParameters}}
+            {{ FormParameters }}
             <div class="form-group">
-                <a href="/runtime/otpauth/twofactor/login?ici_ci={{Model.ContextId}}">{{Resources.OtpResources.OtpRecoveryCode_Back}}</a>
+                <a href="/runtime/otpauth/twofactor/login?ici_ci={{Model.ContextId | Escape }}">{{Resources.OtpResources.OtpRecoveryCode_Back | Escape }}</a>
             </div>
         </form>
         </div>
