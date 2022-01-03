@@ -1,0 +1,45 @@
+﻿{% extends "SiteLayout" %}
+
+{% block "titleheader" %}
+{{ Resources.RuntimeModelResources.RuntimeModelRestartLoginView_TitleHeader | Escape }}
+{% endblock %}
+
+{% block "content" %}
+<div class="form-box">
+    <div class="form-top">
+        <div class="form-top-left text-left">
+            <h4>{{ Resources.RuntimeModelResources.RuntimeModelRestartLoginView_TitleHeader | Escape }}</h4>
+        </div>
+    </div>
+    <div class="form-bottom" style="padding-left: 25px; padding-right: 25px;">
+        {% if Model.RequestType != "" %}
+            <div class="text-left text-danger">
+                {{ Resources.RuntimeModelResources.RuntimeModelRestartLoginView_ErrorMessage | Escape }}
+            </div>
+            {% if Model.RequestType == Model.WebRequestMethodsGet %}
+            <div class="form-group" style="margin-top: 1rem">
+                <a href="{{ Model.Link | Escape }}" class="btn" style="width: 100%">{{ Resources.RuntimeModelResources.RuntimeModelRestartLoginView_TitleHeader | Escape }}</a>
+            </div>
+            {% endif %}
+
+            {% if Model.RequestType == Model.WebRequestMethodsPost %}
+                <form action="{{ Model.Link | Escape }}" method="post" id="selectorPageForm" style="padding: unset;">
+                    
+                    {{ Csrf }}
+
+                    {{ FormParameters }}
+                    
+                    <input type="hidden" name="forceShowLoginChooser" value="true" />
+                    <div class="form-group" style="margin-top: 1rem">
+                        <button type="submit" class="btn">{{ Resources.RuntimeModelResources.RuntimeModelRestartLoginView_TitleHeader | Escape }}</button>
+                    </div>
+                </form>
+            {% endif %}
+        {% else %}
+            <div class="text-left text-danger">
+                {{ Resources.RuntimeModelResources.RuntimeModelErrorView_ContentLabel | Escape }}
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

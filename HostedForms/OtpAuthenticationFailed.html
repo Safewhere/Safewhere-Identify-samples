@@ -1,15 +1,19 @@
 {% extends "SiteLayout" %}
 
+{% block "titleheader" %}
+{{Resources.OtpResources.OtpAuthenticationFailedView_TitleHeader | Escape }}
+{% endblock %}
+
 {% block "content" %}
 <div class="form-box">
     <div class="form-top">
         <div class="form-top-left text-left">
-            <h4>{{ Resources.OtpResources.OtpAuthenticationFailedView_TitleContent }}</h4>
+            <h4>{{ Resources.OtpResources.OtpAuthenticationFailedView_TitleContent  | Escape }}</h4>
         </div>
     </div>
     <div class="form-bottom">
         <div class="text-center" style="padding: 10px 25px 0px 25px; text-align: justify !important;">
-            {{ Resources.OtpResources.OtpAuthenticationFailedView_Content }}
+            {{ Resources.OtpResources.OtpAuthenticationFailedView_Content  | Escape }}
         </div>
         <br/>
         <div class="text-center">

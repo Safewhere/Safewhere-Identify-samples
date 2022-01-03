@@ -1,52 +1,56 @@
 {% extends "SiteLayout" %}
 
+{% block "titleheader" %}
+{{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorErrorViewTitleHeader | Escape }}
+{% endblock %}
+
 {% block "content" %}
 <div class="nav-box-50">
         <div class="form-top">
             <div class="form-top-left text-left">
                 <h4>
-                    {{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorErrorViewErrorHeader}}
+                    {{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorErrorViewErrorHeader | Escape }}
                 </h4>
             </div>
         </div>
         <div class="form-bottom">
             <div class="text-center text-danger">
                 <div class="os2faktor-error-message">
-                    {{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorNoDeviceErrorMessage}}
+                    {{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorNoDeviceErrorMessage | Escape }}
                 </div>
             </div>
             {% if Model.IsShowLinkToChooseOtpMethods %}
                 <hr />
                 <div class="text-center">
                     <h6>
-                        {{Resources.OtpResources.OtpAuthenticationView_ChooseAnotherAuthenticators}}
+                        {{Resources.OtpResources.OtpAuthenticationView_ChooseAnotherAuthenticators | Escape }}
                     </h6>
                 </div>
                 {% for otp in Model.AvailableOtpMethods %}
                     <div style="padding: 0 28px;">
                         <p style="margin-bottom: 0.5rem !important">
                             {% if otp.IsAuthenticatorType %}
-                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                                <a href="{{otp.ChangeTokenProviderUrl | Escape }}">{{otp.ChangeTokenProviderText | Escape }}</a>
                             {% endif %}
 
                             {% if otp.IsOs2faktorType %}
-                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                                <a href="{{otp.ChangeTokenProviderUrl | Escape }}">{{otp.ChangeTokenProviderText | Escape }}</a>
                             {% endif %}
 
                             {% if otp.IsEmailType %}
-                                 <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                                 <a href="{{otp.ChangeTokenProviderUrl | Escape }}">{{otp.ChangeTokenProviderText | Escape }}</a>
                             {% endif %}
 
                             {% if otp.IsSmsType %}
-                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                                <a href="{{otp.ChangeTokenProviderUrl | Escape }}">{{otp.ChangeTokenProviderText | Escape }}</a>
                             {% endif %}
 
                             {% if otp.IsWebAuthn %}
-                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                                <a href="{{otp.ChangeTokenProviderUrl | Escape }}">{{otp.ChangeTokenProviderText | Escape }}</a>
                             {% endif %}
 
                             {% if otp.IsDeviceAuthentication %}
-                                <a href="{{otp.ChangeTokenProviderUrl}}">{{otp.ChangeTokenProviderText}}</a>
+                                <a href="{{otp.ChangeTokenProviderUrl | Escape }}">{{otp.ChangeTokenProviderText | Escape }}</a>
                             {% endif %}
                         </p>
                     </div>
