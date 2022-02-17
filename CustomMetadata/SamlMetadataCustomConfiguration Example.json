@@ -13,7 +13,7 @@
                 "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
             },
             {
-                "FriendlyName": "SpecVer",
+                "FriendlyName": "bootstrapToken",
                 "Name": "https://data.gov.dk/model/core/eid/bootstrapToken",
                 "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
             },
@@ -124,30 +124,54 @@
             }
         ],
         "ServiceProviderRequestedAttributes": [
-            {
-                "IsRequired": true,
-                "FriendlyName": "SpecVer",
-                "Name": "https://data.gov.dk/model/core/specVersion",
-                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
-            },
-            {
-                "IsRequired": true,
-                "FriendlyName": "NsisLevelOfAssurance",
-                "Name": "https://data.gov.dk/concept/core/nsis/loa",
-                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
-            },
-            {
-                "IsRequired": true,
-                "FriendlyName": "Cvr",
-                "Name": "https://data.gov.dk/model/core/eid/professional/cvr",
-                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
-            },
-            {
-                "IsRequired": true,
-                "FriendlyName": "OrganizationName",
-                "Name": "https://data.gov.dk/model/core/eid/professional/orgName",
-                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
-            }
+			{
+			   "IsRequired": false,
+			   "FriendlyName": "SpecVer",
+			   "Name": "https://data.gov.dk/model/core/specVersion",
+			   "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+			  },
+			  {
+			   "IsRequired": true,
+			   "FriendlyName": "NsisLevelOfAssurance",
+			   "Name": "https://data.gov.dk/concept/core/nsis/loa",
+			   "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+			  },
+			  {
+			   "IsRequired": false,
+			   "FriendlyName": "Cvr",
+			   "Name": "https://data.gov.dk/model/core/eid/professional/cvr",
+			   "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+			  },
+			  {
+			   "IsRequired": false,
+			   "FriendlyName": "OrganizationName",
+			   "Name": "https://data.gov.dk/model/core/eid/professional/orgName",
+			   "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+			  },
+			  {
+			   "IsRequired": true,
+			   "FriendlyName": "CPRNumber",
+			   "Name": "https://data.gov.dk/model/core/eid/cprNumber",
+			   "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+			  },
+			  {
+			   "IsRequired": false,
+			   "FriendlyName": "Privileges",
+			   "Name": "https://data.gov.dk/model/core/eid/privilegesIntermediate",
+			   "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+			  },
+			  {
+			   "IsRequired": false,
+			   "FriendlyName": "Persistent",
+			   "Name": "https://data.gov.dk/model/core/eid/professional/uuid/persistent",
+			   "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+			  },
+			  {
+			   "IsRequired": false,
+			   "FriendlyName": "Email",
+			   "Name": "https://data.gov.dk/model/core/eid/email",
+			   "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+			  }
         ],
         "UseCustomOrganization": true,
         "CustomOrganization": {
