@@ -13,7 +13,7 @@
                 "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
             },
             {
-                "FriendlyName": "SpecVer",
+                "FriendlyName": "bootstrapToken",
                 "Name": "https://data.gov.dk/model/core/eid/bootstrapToken",
                 "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
             },
@@ -125,7 +125,7 @@
         ],
         "ServiceProviderRequestedAttributes": [
             {
-                "IsRequired": true,
+                "IsRequired": false,
                 "FriendlyName": "SpecVer",
                 "Name": "https://data.gov.dk/model/core/specVersion",
                 "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
@@ -137,15 +137,39 @@
                 "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
             },
             {
-                "IsRequired": true,
+                "IsRequired": false,
                 "FriendlyName": "Cvr",
                 "Name": "https://data.gov.dk/model/core/eid/professional/cvr",
                 "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
             },
             {
-                "IsRequired": true,
+                "IsRequired": false,
                 "FriendlyName": "OrganizationName",
                 "Name": "https://data.gov.dk/model/core/eid/professional/orgName",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "IsRequired": true,
+                "FriendlyName": "CPRNumber",
+                "Name": "https://data.gov.dk/model/core/eid/cprNumber",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "IsRequired": false,
+                "FriendlyName": "Privileges",
+                "Name": "https://data.gov.dk/model/core/eid/privilegesIntermediate",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "IsRequired": false,
+                "FriendlyName": "Persistent",
+                "Name": "https://data.gov.dk/model/core/eid/professional/uuid/persistent",
+                "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+            },
+            {
+                "IsRequired": false,
+                "FriendlyName": "Email",
+                "Name": "https://data.gov.dk/model/core/eid/email",
                 "NameFormat": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
             }
         ],
@@ -174,14 +198,14 @@
         "CustomContactPerson": {
             "Type": "Technical",
             "Company": "Safewhere",
-            "GivenName" :"John",
+            "GivenName": "John",
             "Surname": "Doe",
-            "EmailAddresses" : [
+            "EmailAddresses": [
                 "johndoe1@safewhere.com",
                 "johndoe2@safewhere.com",
                 "johndoe3@safewhere.com"
             ],
-            "TelephoneNumbers" : [
+            "TelephoneNumbers": [
                 "000-TEMP",
                 "001-TEMP",
                 "002-TEMP"
@@ -308,14 +332,14 @@
         "CustomContactPerson": {
             "Type": "Technical",
             "Company": "Safewhere",
-            "GivenName" :"John",
+            "GivenName": "John",
             "Surname": "Doe",
-            "EmailAddresses" : [
+            "EmailAddresses": [
                 "johndoe1@safewhere.com",
                 "johndoe2@safewhere.com",
                 "johndoe3@safewhere.com"
             ],
-            "TelephoneNumbers" : [
+            "TelephoneNumbers": [
                 "000-TEMP",
                 "001-TEMP",
                 "002-TEMP"
