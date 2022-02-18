@@ -4,50 +4,60 @@
         "IncludeAuthenticationContextMethodClasses": true,
         "IncludeContactPerson": true,
         "NameIdentifierFormats": [],
-        "IdentityProviderSupportedAttributes": [{
-            "FriendlyName": "",
-            "Name": "",
-            "NameFormat": "",
-            "OriginalIssuer": "",
-            "AttributeValueXsiType": "",
-            "Values": []
-        }],
-        "ServiceProviderRequestedAttributes": [{
-            "IsRequired": true,
-            "FriendlyName": "",
-            "Name": "",
-            "NameFormat": "",
-            "OriginalIssuer": "",
-            "AttributeValueXsiType": "",
-            "Values": []
-        }],
+        "IdentityProviderSupportedAttributes": [
+            {
+                "FriendlyName": "",
+                "Name": "",
+                "NameFormat": "",
+                "OriginalIssuer": "",
+                "AttributeValueXsiType": "",
+                "Values": []
+            }
+        ],
+        "ServiceProviderRequestedAttributes": [
+            {
+                "IsRequired": true,
+                "FriendlyName": "",
+                "Name": "",
+                "NameFormat": "",
+                "OriginalIssuer": "",
+                "AttributeValueXsiType": "",
+                "Values": []
+            }
+        ],
         "UseCustomOrganization": true,
         "CustomOrganization": {
-            "DisplayNames": [{
-                "Name": "",
-                "Language": ""
-            }],
-            "Names": [{
-                "Name": "",
-                "Language": ""
-            }],
-            "Urls": [{
-                "Uri": "",
-                "Language": ""
-            }]
+            "DisplayNames": [
+                {
+                    "Name": "",
+                    "Language": ""
+                }
+            ],
+            "Names": [
+                {
+                    "Name": "",
+                    "Language": ""
+                }
+            ],
+            "Urls": [
+                {
+                    "Uri": "",
+                    "Language": ""
+                }
+            ]
         },
         "UseCustomContactPerson": false,
         "CustomContactPerson": {
             "Type": "",
             "Company": "",
-            "GivenName" :"",
+            "GivenName": "",
             "Surname": "",
-            "EmailAddresses" : [
+            "EmailAddresses": [
                 "",
                 "",
                 ""
             ],
-            "TelephoneNumbers" : [
+            "TelephoneNumbers": [
                 "",
                 "",
                 ""
@@ -60,50 +70,60 @@
         "IncludeAuthenticationContextMethodClasses": true,
         "IncludeContactPerson": true,
         "NameIdentifierFormats": [],
-        "IdentityProviderSupportedAttributes": [{
-            "FriendlyName": "",
-            "Name": "",
-            "NameFormat": "",
-            "OriginalIssuer": "",
-            "AttributeValueXsiType": "",
-            "Values": []
-        }],
-        "ServiceProviderRequestedAttributes": [{
-            "IsRequired": true,
-            "FriendlyName": "",
-            "Name": "",
-            "NameFormat": "",
-            "OriginalIssuer": "",
-            "AttributeValueXsiType": "",
-            "Values": []
-        }],
+        "IdentityProviderSupportedAttributes": [
+            {
+                "FriendlyName": "",
+                "Name": "",
+                "NameFormat": "",
+                "OriginalIssuer": "",
+                "AttributeValueXsiType": "",
+                "Values": []
+            }
+        ],
+        "ServiceProviderRequestedAttributes": [
+            {
+                "IsRequired": true,
+                "FriendlyName": "",
+                "Name": "",
+                "NameFormat": "",
+                "OriginalIssuer": "",
+                "AttributeValueXsiType": "",
+                "Values": []
+            }
+        ],
         "UseCustomOrganization": true,
         "CustomOrganization": {
-            "DisplayNames": [{
-                "Name": "",
-                "Language": ""
-            }],
-            "Names": [{
-                "Name": "",
-                "Language": ""
-            }],
-            "Urls": [{
-                "Uri": "",
-                "Language": ""
-            }]
+            "DisplayNames": [
+                {
+                    "Name": "",
+                    "Language": ""
+                }
+            ],
+            "Names": [
+                {
+                    "Name": "",
+                    "Language": ""
+                }
+            ],
+            "Urls": [
+                {
+                    "Uri": "",
+                    "Language": ""
+                }
+            ]
         },
         "UseCustomContactPerson": false,
         "CustomContactPerson": {
             "Type": "",
             "Company": "",
-            "GivenName" :"",
+            "GivenName": "",
             "Surname": "",
-            "EmailAddresses" : [
+            "EmailAddresses": [
                 "",
                 "",
                 ""
             ],
-            "TelephoneNumbers" : [
+            "TelephoneNumbers": [
                 "",
                 "",
                 ""
@@ -116,50 +136,60 @@
         "IncludeAuthenticationContextMethodClasses": true,
         "IncludeContactPerson": true,
         "NameIdentifierFormats": [],
-        "IdentityProviderSupportedAttributes": [{
-            "FriendlyName": "",
-            "Name": "",
-            "NameFormat": "",
-            "OriginalIssuer": "",
-            "AttributeValueXsiType": "",
-            "Values": []
-        }],
-        "ServiceProviderRequestedAttributes": [{
-            "IsRequired": true,
-            "FriendlyName": "",
-            "Name": "",
-            "NameFormat": "",
-            "OriginalIssuer": "",
-            "AttributeValueXsiType": "",
-            "Values": []
-        }],
+        "IdentityProviderSupportedAttributes": [
+            {
+                "FriendlyName": "",
+                "Name": "",
+                "NameFormat": "",
+                "OriginalIssuer": "",
+                "AttributeValueXsiType": "",
+                "Values": []
+            }
+        ],
+        "ServiceProviderRequestedAttributes": [
+            {
+                "IsRequired": true,
+                "FriendlyName": "",
+                "Name": "",
+                "NameFormat": "",
+                "OriginalIssuer": "",
+                "AttributeValueXsiType": "",
+                "Values": []
+            }
+        ],
         "UseCustomOrganization": true,
         "CustomOrganization": {
-            "DisplayNames": [{
-                "Name": "",
-                "Language": ""
-            }],
-            "Names": [{
-                "Name": "",
-                "Language": ""
-            }],
-            "Urls": [{
-                "Uri": "",
-                "Language": ""
-            }]
+            "DisplayNames": [
+                {
+                    "Name": "",
+                    "Language": ""
+                }
+            ],
+            "Names": [
+                {
+                    "Name": "",
+                    "Language": ""
+                }
+            ],
+            "Urls": [
+                {
+                    "Uri": "",
+                    "Language": ""
+                }
+            ]
         },
         "UseCustomContactPerson": false,
         "CustomContactPerson": {
             "Type": "",
             "Company": "",
-            "GivenName" :"",
+            "GivenName": "",
             "Surname": "",
-            "EmailAddresses" : [
+            "EmailAddresses": [
                 "",
                 "",
                 ""
             ],
-            "TelephoneNumbers" : [
+            "TelephoneNumbers": [
                 "",
                 "",
                 ""
