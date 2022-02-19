@@ -1,7 +1,7 @@
 {% extends "SiteLayout" %}
 
 {% block "titleheader"  %}
-{{Resources.OtpResources.YubicoAuthenticationView_TitleHeader}}
+{{Resources.OtpResources.YubicoAuthenticationView_TitleHeader | Escape }}
 {% endblock %}
 
 {% block "content" %}
@@ -9,23 +9,23 @@
     <div class="form-top">
         <div class="form-top-left text-left">
             {% if HelpText != null and HelpText != ""%}
-            <div class="text-justify help-text inner-list">{{HelpText}}</div>
+            <div class="text-justify help-text inner-list">{{HelpText | Escape }}</div>
             {% endif %}
             <h4>
-                {{Resources.OtpResources.YubicoAuthenticationView_TitleContent}}
+                {{Resources.OtpResources.YubicoAuthenticationView_TitleContent | Escape }}
             </h4>
             <div class="small">
-                {{Resources.OtpResources.YubicoAuthenticationView_PleaseEnterYubikey}}
+                {{Resources.OtpResources.YubicoAuthenticationView_PleaseEnterYubikey | Escape }}
             </div>
         </div>
     </div>
     <div class="form-bottom">
         <form method="post" class="login-form">
-            <span style="color:red">{{ErrorMessage}}</span>
+            <span style="color:red">{{ErrorMessage | Escape }}</span>
             <br />
             <div class="form-group">
-                <label class="sr-only" for="form-username">{{Resources.OtpResources.YubicoAuthenticationView_OneTimePassword}}</label>
-                <input type="text" name="yubikey" placeholder="{{Resources.OtpResources.YubicoAuthenticationView_OneTimePassword}}" class="form-username form-control required">
+                <label class="sr-only" for="form-username">{{Resources.OtpResources.YubicoAuthenticationView_OneTimePassword | Escape }}</label>
+                <input type="text" name="yubikey" placeholder="{{Resources.OtpResources.YubicoAuthenticationView_OneTimePassword | Escape }}" class="form-username form-control required">
             </div>
             <div class="form-group">
                 <button type="submit" class="btn">OK</button>

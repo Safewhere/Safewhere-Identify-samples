@@ -1,11 +1,15 @@
 {% extends "SiteLayout" %}
 
+{% block "titleheader" %}
+{{Resources.OtpResources.OtpWebAuthenticationView_LoginWithWebAuthnViewTitleHeader | Escape }}
+{% endblock %}
+
 {% block "content" %}
 <div class="form-box" style="max-width: 600px">
     <div class="form-top">
         <div class="form-top-left text-center">
             <h4>
-                {{Resources.OtpResources.OtpWebAuthenticationView_LoginWithWebAuthnViewTitleHeader}}
+                {{Resources.OtpResources.OtpWebAuthenticationView_LoginWithWebAuthnViewTitleHeader | Escape }}
             </h4>
         </div>
     </div>
@@ -13,7 +17,7 @@
         {% if Model.ErrorMessage != null and Model.ErrorMessage != ""%}
         <div class="form-group" style="text-align:center">
             <span id="authenticationErrorAtClient" for="errorMessageLb" class="text-danger">
-                {{Model.ErrorMessage}}
+                {{Model.ErrorMessage | Escape }}
             </span>
         </div>
         {% endif %}
@@ -24,18 +28,18 @@
 
             {% if Model.NumberOfSkippingDays > 0 %}
                 <p class="login-with-webauthn-description">
-                    {{Resources.OtpResources.OtpWebAuthenticationView_LoginWithWebAuthnViewDescription}}
+                    {{Resources.OtpResources.OtpWebAuthenticationView_LoginWithWebAuthnViewDescription | Escape }}
                 </p>
             {% else %}
-                <p class="login-with-webauthn-description" style="padding: 100px 70px 100px 70px;">
-                    {{Resources.OtpResources.OtpWebAuthenticationView_LoginWithWebAuthnViewDescription}}
+                <p class="login-with-webauthn-description" style="padding: 100px 25px 100px 25px;">
+                    {{Resources.OtpResources.OtpWebAuthenticationView_LoginWithWebAuthnViewDescription | Escape }}
                 </p>
             {% endif %}
 
-        <form id="authenticationWebAuth" method="post" action="/runtime/otpauth/twofactor/validate?ici_ci={{Model.ContextId}}" style="padding-bottom: 15px">
+        <form id="authenticationWebAuth" method="post" action="/runtime/otpauth/twofactor/validate?ici_ci={{Model.ContextId | Escape }}" style="padding-bottom: 15px">
             {{ Csrf }}
             <input id="password" name="password" type="hidden" value="" />
-            {{FormParameters}}
+            {{ FormParameters }}
             <button id="btnLogin" class="btn btn-default">
                 Login
             </button>
@@ -43,7 +47,7 @@
                 <div class="form-group" style="text-align:left; margin-top: 1rem">
                     <label><input type='checkbox' name="dont-ask-for-N-days">
                         {% assign var1 = '{0\}' %} 
-                        {{ Resources.OtpResources.OtpAuthentication_DontAskAgainForNDays | Replace: var1, Model.NumberOfSkippingDaysString }}
+                        {{ Resources.OtpResources.OtpAuthentication_DontAskAgainForNDays | Replace: var1, Model.NumberOfSkippingDaysString  | Escape }}
                     </label>
                 </div>
             {% endif %}
@@ -59,10 +63,10 @@
 <script src="/runtime/scripts/plugins/webauth.mfa.helpers.js"></script>
 <script type="text/javascript" language="JavaScript">
     //<![CDATA[
-    window.contextIdOfLoginWithWebAuthnViewModel = "{{Model.ContextId}}";
-    window.authenticationDialogTimeout = parseInt('{{Model.AuthenticationDialogTimeout}}', 10);
+    window.contextIdOfLoginWithWebAuthnViewModel = "{{Model.ContextId | Escape }}";
+    window.authenticationDialogTimeout = parseInt('{{Model.AuthenticationDialogTimeout }}', 10);
     window.isLoginOnIOSDevice = isIOSDevice();
-    window.offerNSkippingDays = parseInt("{{Model.NumberOfSkippingDays}}") > 0;
+    window.offerNSkippingDays = parseInt("{{Model.NumberOfSkippingDays }}") > 0;
     //]]>
 </script>
 <script src="/runtime/scripts/plugins/webauth.mfa.login.js"></script>

@@ -1,5 +1,9 @@
 ﻿{% extends "SiteLayout" %}
 
+{% block "titleheader" %}
+{{Resources.RuntimeModelResources.RuntimeModelAuthenticationListView_TitleHeader | Escape }}
+{% endblock %}
+
 {% block "sidebar" %}
 <link rel="stylesheet" href="runtime/assets/css/simple-sidebar.css">
 <div id="sidebar-wrapper">
@@ -13,44 +17,60 @@
 
                 <div class="text-center form-group">
                     <strong>
-                        <span class="text-info">{{ Model.Message }}</span>
+                        <span class="text-info">{{ Model.Message  | Escape }}</span>
                     </strong>
                 </div>
 
                 {% for l in Model.AuthenticationLinks %}
                 <div class="center-block inner-list">
-                    <a role="button" class="text-center btn btn-link-2 btn-blue" href="{{ l.Url }}">{{ l.Text }}</a>
+                    <a role="button" class="text-center btn btn-link-2 btn-blue arrow" onclick="doContinue('{{ l.Url | Escape }}')" href="javascript:void(0)">{{ l.Text | Escape }}</a>
                     {% if l.HelpText != "" %}
-                    <div class="text-justify help-text inner-list">{{ l.HelpText }}</div>
+                    <div class="text-justify help-text inner-list">{{ l.HelpText  | Escape }}</div>
                     {% endif %}
                 </div>
                 {% endfor %}
+                
+    			{% if Model.OfferRememberUserChoiceOfIdentityProvider == true %}
+    			<input id="cbRememberIdP" name="Remember" type="checkbox" type="checkbox" style="margin: 3px 3px 3px 4px;" /> {{Model.OfferRememberUserChoiceOfIdentityProviderHelpText}}
+    			<br />
+    			{% endif %}
+    			
+                <script type="text/javascript">
+                    function doContinue(url) {
+                        {% if Model.OfferRememberUserChoiceOfIdentityProvider == true %}
+                            window.location.href = url + '&remember=' + $('#cbRememberIdP').is(':checked');
+                        {% else %}
+                            window.location.href = url + '&remember=unspecified';
+                        {% endif %}
+                    }
+                </script>
+
             </form>
             {% if Model.UserNamePasswordActionLink != "" %}
             <div class="text-center form-group">
                 <strong>
-                    <span class="text-info"> {{Resources.RuntimeModelResources.AuthenticationList_Or}} </span>
+                    <span class="text-info"> {{Resources.RuntimeModelResources.AuthenticationList_Or | Escape }} </span>
                 </strong>
             </div>
 
-            <form role="form" method="post" class="login-form" action="{{ Model.UserNamePasswordActionLink }}">
+            <form role="form" method="post" class="login-form" action="{{ Model.UserNamePasswordActionLink  | Escape }}">
 
                 {{ Csrf }}
 
                 <div class="form-group">
-                    <label class="sr-only" for="form-username">{{Resources.RuntimeModelResources.AuthenticationList_UserNamePasswordUsernameLabel}}</label>
-                    <input type="text" name="name" placeholder="{{Resources.RuntimeModelResources.AuthenticationList_UserNamePasswordUsernameLabel}}" value="" class="form-username form-control required" id="form-username">
+                    <label class="sr-only" for="form-username">{{Resources.RuntimeModelResources.AuthenticationList_UserNamePasswordUsernameLabel | Escape }}</label>
+                    <input type="text" name="name" placeholder="{{Resources.RuntimeModelResources.AuthenticationList_UserNamePasswordUsernameLabel | Escape }}" value="" class="form-username form-control required" id="form-username">
                 </div>
                 <div class="form-group">
-                    <label class="sr-only" for="form-password">{{Resources.RuntimeModelResources.AuthenticationList_UserNamePasswordPasswordLabel}}</label>
-                    <input type="password" name="password" placeholder="{{Resources.RuntimeModelResources.AuthenticationList_UserNamePasswordPasswordLabel}}" class="form-password form-control required" id="form-password">
+                    <label class="sr-only" for="form-password">{{Resources.RuntimeModelResources.AuthenticationList_UserNamePasswordPasswordLabel | Escape }}</label>
+                    <input type="password" name="password" placeholder="{{Resources.RuntimeModelResources.AuthenticationList_UserNamePasswordPasswordLabel | Escape }}" class="form-password form-control required" id="form-password">
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn" style="width: 100%">{{Resources.RuntimeModelResources.AuthenticationList_Ok}}</button>
+                    <button type="submit" class="btn" style="width: 100%">{{Resources.RuntimeModelResources.AuthenticationList_Ok | Escape }}</button>
                 </div>
                 <div class="text-center">
                     <span class="text-danger">
-                        <a href="{{ Model.ForgotPasswordLink }}">{{Resources.RuntimeModelResources.UserNamePasswordForgotPasswordClickHereLabel}}</a>
+                        <a href="{{ Model.ForgotPasswordLink  | Escape }}">{{Resources.RuntimeModelResources.UserNamePasswordForgotPasswordClickHereLabel | Escape }}</a>
                     </span>
                 </div>
             </form>
