@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Safewhere.External.Interceptors;
+using Safewhere.External.Model;
 
 namespace Safewhere.External.Samples
 {
@@ -26,7 +27,7 @@ namespace Safewhere.External.Samples
             "1122", "1234", "6678", "0601", "2010"
         };
 
-        public ActionResult Intercept(System.Web.Mvc.ControllerContext cc, System.Security.Claims.ClaimsPrincipal principal, IDictionary<string, string> input, string contextId, string viewName)
+        public ActionResult Intercept(ControllerContext cc, ClaimsPrincipal principal, IIdentifyRequestInformation requestInformation, IDictionary<string, string> input, string contextId, string viewName)
         {
             if (cc == null)
             {
@@ -61,7 +62,7 @@ namespace Safewhere.External.Samples
             return viewResult;
         }
 
-        public ActionResult OnPostBack(System.Web.Mvc.ControllerContext cc, System.Security.Claims.ClaimsPrincipal principal, IDictionary<string, string> input, string contextId, string viewName)
+        public ActionResult OnPostBack(ControllerContext cc, ClaimsPrincipal principal, IIdentifyRequestInformation requestInformation, IDictionary<string, string> input, string contextId, string viewName)
         {
             if (cc == null)
             {
@@ -86,7 +87,7 @@ namespace Safewhere.External.Samples
             //Verify the number
             if (!ValidNumbers.Any(n => n == socialnumber.Trim()))
             {
-                return Intercept(cc, principal, input, contextId, viewName);
+                return Intercept(cc, principal, requestInformation, input, contextId, viewName);
             }
 
             AddConnectionEntityIdentifiers(cc, principal);

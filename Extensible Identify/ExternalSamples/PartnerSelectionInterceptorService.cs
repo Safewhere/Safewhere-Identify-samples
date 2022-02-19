@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Safewhere.External.Interceptors;
+using Safewhere.External.Model;
 
 namespace Safewhere.External.Samples
 {
@@ -18,7 +19,7 @@ namespace Safewhere.External.Samples
         private const string DestinationPartnerClaimType = "DestinationPartnerClaimType";
         private const string ValidValueRegEx = "ValidValueRegEx";
 
-        public ActionResult Intercept(ControllerContext cc, ClaimsPrincipal principal, IDictionary<string, string> input, string contextId,
+        public ActionResult Intercept(ControllerContext cc, ClaimsPrincipal principal, IIdentifyRequestInformation requestInformation, IDictionary<string, string> input, string contextId,
         string viewName)
         {
             if (cc == null)
@@ -83,7 +84,7 @@ namespace Safewhere.External.Samples
              .ToList();
         }
 
-        public ActionResult OnPostBack(ControllerContext cc, ClaimsPrincipal principal, IDictionary<string, string> input, string contextId,
+        public ActionResult OnPostBack(ControllerContext cc, ClaimsPrincipal principal, IIdentifyRequestInformation requestInformation, IDictionary<string, string> input, string contextId,
             string viewName)
         {
             if (cc == null)
@@ -99,6 +100,12 @@ namespace Safewhere.External.Samples
                 throw new ArgumentNullException("input");
             }
 
+            ISessionLoginContext sessionLoginContext = requestInformation.IdentifyLoginContext;
+            dynamic dynamicSessionLoginContext = sessionLoginContext;
+            dynamic contextIdKey = dynamicSessionLoginContext.ContextIdKey;
+            string protocolConnectionEntityId = contextIdKey.ProtocolConnectionEntityId;
+            return protocolConnectionEntityId;
+
             var partner = string.Empty;
             var valueProviderResult = cc.Controller.ValueProvider.GetValue("partners");
             if (valueProviderResult != null
@@ -111,7 +118,7 @@ namespace Safewhere.External.Samples
             //Verify the number
             if (partners.All(n => n != partner.Trim()))
             {
-                return Intercept(cc, principal, input, contextId, viewName);
+                return Intercept(cc, principal, requestInformation, input, contextId, viewName);
             }
 
             ClaimsIdentity identity = ((ClaimsIdentity)principal.Identity);

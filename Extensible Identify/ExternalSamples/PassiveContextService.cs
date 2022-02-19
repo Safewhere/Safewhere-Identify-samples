@@ -85,7 +85,6 @@ namespace Safewhere.External.Samples
             {
                 dynamic temporaryContext = SessionLoginContext;
                 dynamic contextIdKey = temporaryContext.ContextIdKey;
-                string contextId = contextIdKey.ContextId;
                 Guid protocolConnectionId = contextIdKey.ProtocolConnectionId;
                 return protocolConnectionId;
             }
@@ -100,8 +99,6 @@ namespace Safewhere.External.Samples
             {
                 dynamic temporaryContext = SessionLoginContext;
                 dynamic contextIdKey = temporaryContext.ContextIdKey;
-                string contextId = contextIdKey.ContextId;
-                Guid protocolConnectionId = contextIdKey.ProtocolConnectionId;
                 string protocolConnectionEntityId = contextIdKey.ProtocolConnectionEntityId;
                 return protocolConnectionEntityId;
             }
