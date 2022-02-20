@@ -100,12 +100,6 @@ namespace Safewhere.External.Samples
                 throw new ArgumentNullException("input");
             }
 
-            ISessionLoginContext sessionLoginContext = requestInformation.IdentifyLoginContext;
-            dynamic dynamicSessionLoginContext = sessionLoginContext;
-            dynamic contextIdKey = dynamicSessionLoginContext.ContextIdKey;
-            string protocolConnectionEntityId = contextIdKey.ProtocolConnectionEntityId;
-            return protocolConnectionEntityId;
-
             var partner = string.Empty;
             var valueProviderResult = cc.Controller.ValueProvider.GetValue("partners");
             if (valueProviderResult != null
