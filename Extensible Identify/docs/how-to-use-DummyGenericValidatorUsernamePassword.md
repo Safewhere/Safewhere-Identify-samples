@@ -1,6 +1,6 @@
 ﻿# How to use DummyGenericValidatorUsernamePassword
 
-Use the script in Scripts\SQL_DummyUsers_script.sql to create DummyUser table on the database for testing.
+Use the script in Scripts\SQL_DummyUsers_script.sql to create a DummyUser table on the database for testing.
 
 The installed users are:
 1. admin/dummy  -> can login successfully
