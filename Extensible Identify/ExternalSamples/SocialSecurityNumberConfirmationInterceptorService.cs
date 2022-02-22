@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Safewhere.External.Interceptors;
 using Safewhere.External.Model;
+using Safewhere.External.Services;
 
 namespace Safewhere.External.Samples
 {
@@ -46,6 +47,16 @@ namespace Safewhere.External.Samples
             {
                 viewName = "SocialSecurityNumberConfirmationView";
             }
+
+            // Examples for how to use extension methods to access Identify internal data structure
+            // Need to add using Safewhere.External.Services;
+            var sessionLoginContext = requestInformation.IdentifyLoginContext;
+            var endpointContext = requestInformation.GetEndpointContext();
+            string entityId = sessionLoginContext.GetProtocolConnectionEntityId();
+            Guid protocolConnectionId = sessionLoginContext.GetProtocolConnectionId();
+            var authenticationConnectionEntityId = requestInformation.GetAuthenticationConnectionEntityId();
+            Guid authenticationConnectionId = requestInformation.GetAuthenticationConnectionId();
+            Guid authenticationConnectionId2 = sessionLoginContext.GetAuthenticationConnectionId();
 
             var viewResult = new ViewResult
             {
@@ -90,7 +101,7 @@ namespace Safewhere.External.Samples
                 return Intercept(cc, principal, requestInformation, input, contextId, viewName);
             }
 
-            AddConnectionEntityIdentifiers(cc, principal);
+            AddConnectionEntityIdentifiers(cc, principal, requestInformation);
             return null;
         }
 
@@ -99,12 +110,11 @@ namespace Safewhere.External.Samples
             get { return new List<string>(); }
         }
 
-        private void AddConnectionEntityIdentifiers(ControllerContext cc, ClaimsPrincipal claimsPrincipal)
+        private void AddConnectionEntityIdentifiers(ControllerContext cc, ClaimsPrincipal claimsPrincipal, IIdentifyRequestInformation requestInformation)
         {
             ClaimsIdentity identity = (ClaimsIdentity)claimsPrincipal.Identity;
-            var epService = new PassiveContextService(cc.HttpContext);
-            identity.AddClaim(new Claim("urn:SocialSecurityNumberConfirmationInterceptorService:AuthenticationConnectionEntityId", epService.AuthenticationConnectionEntityId));
-            identity.AddClaim(new Claim("urn:SocialSecurityNumberConfirmationInterceptorService:ProtocolConnectionEntityId", epService.ProtocolConnectionEntityId));
+            identity.AddClaim(new Claim("urn:SocialSecurityNumberConfirmationInterceptorService:AuthenticationConnectionEntityId", requestInformation.GetAuthenticationConnectionEntityId()));
+            identity.AddClaim(new Claim("urn:SocialSecurityNumberConfirmationInterceptorService:ProtocolConnectionEntityId", requestInformation.IdentifyLoginContext.GetProtocolConnectionEntityId()));
         }
     }
 }

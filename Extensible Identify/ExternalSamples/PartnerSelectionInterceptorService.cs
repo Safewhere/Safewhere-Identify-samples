@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Safewhere.External.Interceptors;
 using Safewhere.External.Model;
+using Safewhere.External.Services;
 
 namespace Safewhere.External.Samples
 {
@@ -48,7 +49,7 @@ namespace Safewhere.External.Samples
             var partners = GetPartners(principal, input);
             if (partners.Count <= 1)
             {
-                AddConnectionEntityIdentifiers(cc, principal);
+                AddConnectionEntityIdentifiers(cc, principal, requestInformation);
                 return null;
             }
 
@@ -117,7 +118,7 @@ namespace Safewhere.External.Samples
 
             ClaimsIdentity identity = ((ClaimsIdentity)principal.Identity);
             identity.AddClaim(new Claim(destinationClaimType, partner));
-            AddConnectionEntityIdentifiers(cc, principal);
+            AddConnectionEntityIdentifiers(cc, principal, requestInformation);
             return null;
         }
 
@@ -134,12 +135,11 @@ namespace Safewhere.External.Samples
             }
         }
 
-        private void AddConnectionEntityIdentifiers(ControllerContext cc, ClaimsPrincipal claimsPrincipal)
+        private void AddConnectionEntityIdentifiers(ControllerContext cc, ClaimsPrincipal claimsPrincipal, IIdentifyRequestInformation requestInformation)
         {
             ClaimsIdentity identity = (ClaimsIdentity)claimsPrincipal.Identity;
-            var epService = new PassiveContextService(cc.HttpContext);
-            identity.AddClaim(new Claim("urn:PartnerSelectionInterceptorService:AuthenticationConnectionEntityId", epService.AuthenticationConnectionEntityId));
-            identity.AddClaim(new Claim("urn:PartnerSelectionInterceptorService:ProtocolConnectionEntityId", epService.ProtocolConnectionEntityId));
+            identity.AddClaim(new Claim("urn:PartnerSelectionInterceptorService:AuthenticationConnectionEntityId", requestInformation.GetAuthenticationConnectionEntityId()));
+            identity.AddClaim(new Claim("urn:PartnerSelectionInterceptorService:ProtocolConnectionEntityId", requestInformation.IdentifyLoginContext.GetProtocolConnectionEntityId()));
         }
     }
 

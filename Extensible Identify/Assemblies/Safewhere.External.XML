@@ -1003,6 +1003,68 @@
             
             </summary>
         </member>
+        <member name="T:Safewhere.External.Services.RequestInformationExtensions">
+            <summary>
+            Provides a list of extension methods that facility access to Identify's internal data structure
+            </summary>
+        </member>
+        <member name="F:Safewhere.External.Services.RequestInformationExtensions.NullProtocolConnectionId">
+            <summary>
+            Id of a null protocol connection which is set to EndpointContext when a protocol connection is not available
+            </summary>
+        </member>
+        <member name="F:Safewhere.External.Services.RequestInformationExtensions.NullAuthenticationConnectionId">
+            <summary>
+            Id of a null authentication connection which is set to EndpointContext when an authentication connection is not available, e.g. when a request just comes to Identify and no authentication connection has been selectd yet.
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.RequestInformationExtensions.GetEndpointContext(Safewhere.External.Model.IIdentifyRequestInformation)">
+            <summary>
+            Returns a full EndpointContext object. You can use VS' debugger window to examine its content.
+            Notice that the EndpointContext object only exists after a login flow reaches to a certain point.
+            Usually when you use this helper class in a claim transformation, a generic provider or an interceptor,
+            the EndpointContext object should be available.
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.RequestInformationExtensions.GetProtocolConnectionId(Safewhere.External.Model.ISessionLoginContext)">
+            <summary>
+            Returns the id of the protocol connection of the current login request.
+            If you have access to an IIdentifyRequestInformation object, you can use requestInformation.IdentifyLoginContext to get a SessionLoginContext object.
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.RequestInformationExtensions.GetProtocolConnectionEntityId(Safewhere.External.Model.ISessionLoginContext)">
+            <summary>
+            Returns the Entity Identifier of the protocol connection of the current login request. For OAuth 2.0/OpenId Connect connection, the clientid is returned.
+            If you have access to an IIdentifyRequestInformation object, you can use requestInformation.IdentifyLoginContext to get a SessionLoginContext object
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.RequestInformationExtensions.GetAuthenticationConnectionId(Safewhere.External.Model.IIdentifyRequestInformation)">
+            <summary>
+            Returns the id of the authentication connection selected for the current login request.
+            Notice that the authentication connection is only available after an Identity Provider has been chosen to do a login.
+            This methods gets the id from EndpointContext
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.RequestInformationExtensions.GetAuthenticationConnectionId(Safewhere.External.Model.ISessionLoginContext)">
+            <summary>
+            Returns the id of the authentication connection selected for the current login request.
+            Notice that the authentication connection is only available after an Identity Provider has been chosen to do a login.
+            This method gets the id from SessionLoginContext.ContextIdKey
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.RequestInformationExtensions.GetAuthenticationConnectionEntityId(Safewhere.External.Model.IIdentifyRequestInformation)">
+            <summary>
+            Returns the Entity Identifier of the authentication connection selected for the current login request.
+            For OAuth 2.0/OpenId Connect connection, the clientid is returned
+            Notice that the authentication connection is only available after an Identity Provider has been chosen to do a login.
+            This methods gets the identifier from EndpointContext
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.RequestInformationExtensions.GetScopingRequesterId(Safewhere.External.Model.ISessionLoginContext)">
+            <summary>
+            Returns the RequesterId value of the scoping of a SAML 2.0 AuthnRequest message
+            </summary>
+        </member>
         <member name="T:Safewhere.External.Services.IIdentifyProtocolConnectionService">
             <summary>
             
