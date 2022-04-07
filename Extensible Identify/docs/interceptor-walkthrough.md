@@ -46,6 +46,7 @@ In order to develop an interceptor, you need to create a new C# library project 
         /// </summary> 
         /// <param name="cc">The controllercontext object of the current request</param> 
         /// <param name="principal">A claims principal which Identify receives from an upstream Identity Provider</param> 
+        /// <param name="requestInformation">An object of type <see cref="Safewhere.External.Model.IIdentifyRequestInformation"/></param>
         /// <param name="input">Static settings which are configured on the protocol connection UI. Each specific implementation requires different static settings. 
         /// For example, an interceptor which needs to access a database will need a connection string, while one which needs to access an AD store will need to know where the AD server is</param> 
         /// <param name="contextId">Each login a user does with Identify will have a context id.</param> 
@@ -58,7 +59,7 @@ In order to develop an interceptor, you need to create a new C# library project 
         /// When an authentication or a protocol connection is configured to use an interceptor, Identify will call this method of the interceptor. 
         /// This is the chance for the interceptor to do whatever it wants to do before Identify takes control back and proceeds to the next step. 
         /// </remarks> 
-        public ActionResult Intercept(ControllerContext cc, ClaimsPrincipal principal, IDictionary<string, string> input, 
+        public ActionResult Intercept(ControllerContext cc, ClaimsPrincipal principal, IIdentifyRequestInformation requestInformation, IDictionary<string, string> input, 
                                   string contextId, 
                                   string viewName) 
         { 
@@ -122,6 +123,7 @@ In order to develop an interceptor, you need to create a new C# library project 
         /// </summary> 
         /// <param name="cc">The controllercontext object of the current request</param> 
         /// <param name="principal">A claims principal which Identify receives from an upstream Identity Provider</param> 
+        /// <param name="requestInformation">An object of type <see cref="Safewhere.External.Model.IIdentifyRequestInformation"/></param>
         /// <param name="input">Static settings which are configured on the protocol  connection UI. Each specific implementation requires different static settings. 
         /// For example, an interceptor which needs to access a database will need a connection string, while one which needs to access an AD store will need to know where the AD server is</param> 
         /// <param name="contextId">Each login a user does with Identify will have a context id.</param> 
@@ -131,7 +133,7 @@ In order to develop an interceptor, you need to create a new C# library project 
         /// A null value means that this interceptor has done whatever it wants to based on data submitted from the user and the login flow should proceed. 
         /// Otherwise, return an ActionResult to continue to intercept the login flow. 
         /// </returns> 
-        public ActionResult OnPostBack(ControllerContext cc, ClaimsPrincipal principal, 
+        public ActionResult OnPostBack(ControllerContext cc, ClaimsPrincipal principal, IIdentifyRequestInformation requestInformation, 
                                     IDictionary<string, string> input, string contextId, 
                                     string viewName) 
         { 

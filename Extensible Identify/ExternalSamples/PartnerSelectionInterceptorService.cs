@@ -7,6 +7,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Safewhere.External.Interceptors;
+using Safewhere.External.Model;
+using Safewhere.External.Services;
 
 namespace Safewhere.External.Samples
 {
@@ -18,7 +20,7 @@ namespace Safewhere.External.Samples
         private const string DestinationPartnerClaimType = "DestinationPartnerClaimType";
         private const string ValidValueRegEx = "ValidValueRegEx";
 
-        public ActionResult Intercept(ControllerContext cc, ClaimsPrincipal principal, IDictionary<string, string> input, string contextId,
+        public ActionResult Intercept(ControllerContext cc, ClaimsPrincipal principal, IIdentifyRequestInformation requestInformation, IDictionary<string, string> input, string contextId,
         string viewName)
         {
             if (cc == null)
@@ -47,7 +49,7 @@ namespace Safewhere.External.Samples
             var partners = GetPartners(principal, input);
             if (partners.Count <= 1)
             {
-                AddConnectionEntityIdentifiers(cc, principal);
+                AddConnectionEntityIdentifiers(cc, principal, requestInformation);
                 return null;
             }
 
@@ -83,7 +85,7 @@ namespace Safewhere.External.Samples
              .ToList();
         }
 
-        public ActionResult OnPostBack(ControllerContext cc, ClaimsPrincipal principal, IDictionary<string, string> input, string contextId,
+        public ActionResult OnPostBack(ControllerContext cc, ClaimsPrincipal principal, IIdentifyRequestInformation requestInformation, IDictionary<string, string> input, string contextId,
             string viewName)
         {
             if (cc == null)
@@ -111,12 +113,12 @@ namespace Safewhere.External.Samples
             //Verify the number
             if (partners.All(n => n != partner.Trim()))
             {
-                return Intercept(cc, principal, input, contextId, viewName);
+                return Intercept(cc, principal, requestInformation, input, contextId, viewName);
             }
 
             ClaimsIdentity identity = ((ClaimsIdentity)principal.Identity);
             identity.AddClaim(new Claim(destinationClaimType, partner));
-            AddConnectionEntityIdentifiers(cc, principal);
+            AddConnectionEntityIdentifiers(cc, principal, requestInformation);
             return null;
         }
 
@@ -133,12 +135,11 @@ namespace Safewhere.External.Samples
             }
         }
 
-        private void AddConnectionEntityIdentifiers(ControllerContext cc, ClaimsPrincipal claimsPrincipal)
+        private void AddConnectionEntityIdentifiers(ControllerContext cc, ClaimsPrincipal claimsPrincipal, IIdentifyRequestInformation requestInformation)
         {
             ClaimsIdentity identity = (ClaimsIdentity)claimsPrincipal.Identity;
-            var epService = new PassiveContextService(cc.HttpContext);
-            identity.AddClaim(new Claim("urn:PartnerSelectionInterceptorService:AuthenticationConnectionEntityId", epService.AuthenticationConnectionEntityId));
-            identity.AddClaim(new Claim("urn:PartnerSelectionInterceptorService:ProtocolConnectionEntityId", epService.ProtocolConnectionEntityId));
+            identity.AddClaim(new Claim("urn:PartnerSelectionInterceptorService:AuthenticationConnectionEntityId", requestInformation.GetAuthenticationConnectionEntityId()));
+            identity.AddClaim(new Claim("urn:PartnerSelectionInterceptorService:ProtocolConnectionEntityId", requestInformation.IdentifyLoginContext.GetProtocolConnectionEntityId()));
         }
     }
 

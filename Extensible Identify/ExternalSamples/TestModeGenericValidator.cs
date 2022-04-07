@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Safewhere.External.Authentication;
+using Safewhere.External.Services;
 
 namespace Safewhere.External.Samples
 {
@@ -85,12 +86,11 @@ namespace Safewhere.External.Samples
         private void AddConnectionEntityIdentifiers(ControllerContext cc, ClaimsPrincipal claimsPrincipal)
         {
             var epService = new PassiveContextService(cc.HttpContext);
-            Guid protocolConnectionId = epService.ProtocolConnectionId;
-            string protocolConnectionEntityId = epService.ProtocolConnectionEntityId;
+            var requestInformation = epService.RequestInformation;
 
             ClaimsIdentity identity = (ClaimsIdentity)claimsPrincipal.Identity;
-            identity.AddClaim(new Claim("urn:TestModeGenericValidator:AuthenticationConnectionEntityId", epService.AuthenticationConnectionEntityId));
-            identity.AddClaim(new Claim("urn:TestModeGenericValidator:ProtocolConnectionEntityId", epService.ProtocolConnectionEntityId));
+            identity.AddClaim(new Claim("urn:TestModeGenericValidator:AuthenticationConnectionEntityId", requestInformation.GetAuthenticationConnectionEntityId()));
+            identity.AddClaim(new Claim("urn:TestModeGenericValidator:ProtocolConnectionEntityId", requestInformation.IdentifyLoginContext.GetProtocolConnectionEntityId()));
         }
     }
 }

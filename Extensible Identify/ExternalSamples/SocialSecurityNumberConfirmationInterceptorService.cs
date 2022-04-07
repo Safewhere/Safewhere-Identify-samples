@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Safewhere.External.Interceptors;
+using Safewhere.External.Model;
+using Safewhere.External.Services;
 
 namespace Safewhere.External.Samples
 {
@@ -26,7 +28,7 @@ namespace Safewhere.External.Samples
             "1122", "1234", "6678", "0601", "2010"
         };
 
-        public ActionResult Intercept(System.Web.Mvc.ControllerContext cc, System.Security.Claims.ClaimsPrincipal principal, IDictionary<string, string> input, string contextId, string viewName)
+        public ActionResult Intercept(ControllerContext cc, ClaimsPrincipal principal, IIdentifyRequestInformation requestInformation, IDictionary<string, string> input, string contextId, string viewName)
         {
             if (cc == null)
             {
@@ -46,6 +48,16 @@ namespace Safewhere.External.Samples
                 viewName = "SocialSecurityNumberConfirmationView";
             }
 
+            // Examples for how to use extension methods to access Identify internal data structure
+            // Need to add using Safewhere.External.Services;
+            var sessionLoginContext = requestInformation.IdentifyLoginContext;
+            var endpointContext = requestInformation.GetEndpointContext();
+            string entityId = sessionLoginContext.GetProtocolConnectionEntityId();
+            Guid protocolConnectionId = sessionLoginContext.GetProtocolConnectionId();
+            var authenticationConnectionEntityId = requestInformation.GetAuthenticationConnectionEntityId();
+            Guid authenticationConnectionId = requestInformation.GetAuthenticationConnectionId();
+            Guid authenticationConnectionId2 = sessionLoginContext.GetAuthenticationConnectionId();
+
             var viewResult = new ViewResult
             {
                 ViewName = viewName,
@@ -61,7 +73,7 @@ namespace Safewhere.External.Samples
             return viewResult;
         }
 
-        public ActionResult OnPostBack(System.Web.Mvc.ControllerContext cc, System.Security.Claims.ClaimsPrincipal principal, IDictionary<string, string> input, string contextId, string viewName)
+        public ActionResult OnPostBack(ControllerContext cc, ClaimsPrincipal principal, IIdentifyRequestInformation requestInformation, IDictionary<string, string> input, string contextId, string viewName)
         {
             if (cc == null)
             {
@@ -86,10 +98,10 @@ namespace Safewhere.External.Samples
             //Verify the number
             if (!ValidNumbers.Any(n => n == socialnumber.Trim()))
             {
-                return Intercept(cc, principal, input, contextId, viewName);
+                return Intercept(cc, principal, requestInformation, input, contextId, viewName);
             }
 
-            AddConnectionEntityIdentifiers(cc, principal);
+            AddConnectionEntityIdentifiers(cc, principal, requestInformation);
             return null;
         }
 
@@ -98,12 +110,11 @@ namespace Safewhere.External.Samples
             get { return new List<string>(); }
         }
 
-        private void AddConnectionEntityIdentifiers(ControllerContext cc, ClaimsPrincipal claimsPrincipal)
+        private void AddConnectionEntityIdentifiers(ControllerContext cc, ClaimsPrincipal claimsPrincipal, IIdentifyRequestInformation requestInformation)
         {
             ClaimsIdentity identity = (ClaimsIdentity)claimsPrincipal.Identity;
-            var epService = new PassiveContextService(cc.HttpContext);
-            identity.AddClaim(new Claim("urn:SocialSecurityNumberConfirmationInterceptorService:AuthenticationConnectionEntityId", epService.AuthenticationConnectionEntityId));
-            identity.AddClaim(new Claim("urn:SocialSecurityNumberConfirmationInterceptorService:ProtocolConnectionEntityId", epService.ProtocolConnectionEntityId));
+            identity.AddClaim(new Claim("urn:SocialSecurityNumberConfirmationInterceptorService:AuthenticationConnectionEntityId", requestInformation.GetAuthenticationConnectionEntityId()));
+            identity.AddClaim(new Claim("urn:SocialSecurityNumberConfirmationInterceptorService:ProtocolConnectionEntityId", requestInformation.IdentifyLoginContext.GetProtocolConnectionEntityId()));
         }
     }
 }

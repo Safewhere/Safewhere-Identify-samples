@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Security.Claims;
 using System.Web;
 using Safewhere.External.ClaimsTransformation;
+using Safewhere.External.Services;
 
 namespace Safewhere.External.Samples
 {
@@ -69,8 +70,10 @@ namespace Safewhere.External.Samples
             if (HttpContext.Current != null)
             {
                 var epService = new PassiveContextService(new HttpContextWrapper(HttpContext.Current));
-                identity.AddClaim(new Claim("urn:AddDummyClaimTransformation:AuthenticationConnectionEntityId", epService.AuthenticationConnectionEntityId));
-                identity.AddClaim(new Claim("urn:AddDummyClaimTransformation:ProtocolConnectionEntityId", epService.ProtocolConnectionEntityId));
+                var requestInformation = epService.RequestInformation;
+
+                identity.AddClaim(new Claim("urn:AddDummyClaimTransformation:AuthenticationConnectionEntityId", requestInformation.GetAuthenticationConnectionEntityId()));
+                identity.AddClaim(new Claim("urn:AddDummyClaimTransformation:ProtocolConnectionEntityId", requestInformation.IdentifyLoginContext.GetProtocolConnectionEntityId()));
             }
         }
     }
