@@ -1,0 +1,32 @@
+{% extends "SiteLayout" %}
+
+{% block "titleheader" %}
+{{Resources.RuntimeModelResources.RuntimeModelDeleteCookiesView_TitleContent | Escape }}
+{% endblock %}
+
+{% block "content" %}
+<div class="nav-box-50">
+  <div class="form-top">
+    <div class="form-top-left text-left">
+      <h4>
+        {{Resources.RuntimeModelResources.RuntimeModelDeleteCookiesView_TitleContent | Escape }}
+      </h4>
+    </div>
+  </div>
+  <div class="form-bottom">
+    <form role="form" method="post" class="login-form" action="runtime/cookies">
+      {{ Csrf }}
+      <div class="form-group">
+        {% if Model.IsSuccess  %}
+          <p class="ml-3" style="color: Green;">
+            {{ Resources.RuntimeModelResources.RuntimeModelDeleteCookiesView_ResultMessage | Escape }}
+          </p>
+        {% else %}
+          {{ Resources.RuntimeModelResources.RuntimeModelDeleteCookiesView_Description | Escape }}
+          <button type="submit" class="btn mt-3">{{ Resources.RuntimeModelResources.RuntimeModelDeleteCookiesView_DeleteButton | Escape }}</button>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

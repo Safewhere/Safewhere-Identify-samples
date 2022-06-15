@@ -1,0 +1,43 @@
+﻿{% extends "SiteLayout" %}
+
+{% block "titleheader" %}
+{{ Resources.OtpResources.OtpAuthenticationView_TitleHeader | Escape }}
+{% endblock %}
+
+{% block "content" %}
+    <div class="form-box" style="max-width: 600px">
+        <div class="form-top">
+            <div class="form-top-left text-center">
+                <h4>
+                    {{ Resources.OtpResources.WebAuthnFirstFactor_EnterUsername | Escape }}
+                </h4>
+            </div>
+        </div>
+        <div class="form-bottom">
+            {% if Model.ErrorMessage != null and Model.ErrorMessage != ""%}
+            <div class="form-group" style="text-align:center">
+                <span id="authenticationErrorAtClient" for="errorMessageLb" class="text-danger">
+                    {{ Model.ErrorMessage | Escape }}
+                </span>
+            </div>
+            {% endif %}
+
+            <div class="form-group text-center" style="margin-top: 1rem;">
+                <form id="authenticationWebAuth" method="post" action="/runtime/otpauth/firstfactor/username?ici_ci={{ Model.ContextId | Escape }}" style="padding-bottom: 0px">
+                    {{ Csrf }}
+                    <div class="form-group">
+                        <input type="text" name="Username" value="{{ Model.Username | Escape }}" placeholder="{{ Resources.OtpResources.WebAuthnFirstFactor_EnterUsername | Escape }}" class="form-password form-control required" id="form-username">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn">{{ Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginButton | Escape }}</button>
+                    </div>
+                    <hr />
+                    <div class="form-group" style="padding: 0px 28px;">
+                        {{ ReturnToLoginSelectorLink }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
