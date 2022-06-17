@@ -1,0 +1,74 @@
+﻿{% extends "SiteLayout" %}
+
+{% block "titleheader" %}
+{{ Resources.OtpResources.OtpAuthenticationView_TitleHeader | Escape }}
+{% endblock %}
+
+{% block "content" %}
+    <div class="form-box" style="max-width: 600px">
+        <div class="form-top">
+            <div class="form-top-left text-center">
+                <h4>
+                    {{ Resources.OtpResources.OtpWebAuthenticationView_LoginWithWebAuthnViewTitleHeader | Escape }}
+                </h4>
+            </div>
+        </div>
+        <div class="form-bottom">
+            {% if Model.ErrorMessage != null and Model.ErrorMessage != ""%}
+            <div class="form-group" style="text-align:center">
+                <span id="authenticationErrorAtClient" for="errorMessageLb" class="text-danger">
+                    {{Model.ErrorMessage | Escape }}
+                </span>
+            </div>
+            {% endif %}
+
+            <div class="form-group text-center" style="margin-top: 1rem;">
+                <div id="authenticationErrorAtClientSide" class="text-danger" style="display: none">
+                </div>
+                <p class="login-with-webauthn-description" style="padding: 100px 70px 100px 70px;">
+                    {{ Resources.OtpResources.OtpWebAuthenticationView_LoginWithWebAuthnViewDescription | Escape }}
+                </p>
+
+                <form id="authenticationWebAuth" method="post" action="/runtime/otpauth/firstfactor/validate?ici_ci={{ Model.ContextId | Escape }}" style="padding-bottom: 0px">
+                    {{ Csrf }}
+                    <input id="password" name="password" type="hidden" value="" />
+                    {{ FormParameters }}
+                    <button id="btnLogin" class="btn btn-default">
+                        {{ Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginButton | Escape }}
+                    </button>
+                </form>
+
+                <a id="takeAnActionCountDown" style="cursor:default; display: none" href="javascript: void(0)">
+                    {% assign var1 = '{0\}' %} 
+                    {{ Resources.OtpResources.OtpWebAuthenticationView_EnableWebAuthenViewActionCountDown | Replace: var1, "<span id='countdown'></span>" }}
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="/runtime/scripts/plugins/webauth.mfa.helpers.js"></script>
+    <script type="text/javascript" language="JavaScript">
+        //<![CDATA[
+        window.contextIdOfLoginWithWebAuthnViewModel = "{{Model.ContextId | Escape }}";
+        window.authenticationDialogTimeout = parseInt('{{Model.AuthenticationDialogTimeout }}', 10);
+        window.isLoginOnIOSDevice = isIOSDevice();
+        //]]>
+    </script>
+    <script src="/runtime/scripts/plugins/webauth.mfa.login.js"></script>
+    <script type="text/javascript" language="JavaScript">
+        var isIOSDevice = isIOSDevice();
+        if (!isIOSDevice && !window.offerNSkippingDays) {
+            document.getElementById("btnLogin").style.display = 'none';
+        }
+
+        document.addEventListener('readystatechange', (event) => {
+            // when all dependent resources such as stylesheets and images are loaded, we will automatically execute the handleSignInSubmit(); (except the iOS devices)
+            if (document.readyState === 'complete' && !isIOSDevice && window.contextIdOfLoginWithWebAuthnViewModel !== "preview_context") {
+                handleSignInSubmit(true);
+            }
+
+            if (window.isLoginOnIOSDevice) {
+                document.getElementById('authenticationWebAuth').addEventListener('submit', handleSignInSubmit(true));
+            }
+        });
+    </script>
+{% endblock %}
