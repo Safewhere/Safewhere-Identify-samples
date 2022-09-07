@@ -263,6 +263,98 @@
             The <see cref="N:Safewhere.External.ClaimsTransformation"/> namespace contains types which help build external claims transformation rules.
             </summary>
         </member>
+        <member name="T:Safewhere.External.Configuration.PlugInConfiguration">
+            <summary>
+            A configuration object for external plugin
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Configuration.PlugInConfiguration.Instance">
+            <summary>
+            Singleton instance
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Configuration.PlugInConfiguration.IgnoreJwtAuthenticationEndpoints">
+            <summary>
+            Specifies a list of url patterns to ignore Jwt Authentication. By default, it is an empty collection.
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Configuration.SAMLMetadataConfiguration">
+            <summary>
+            A configuration object which is used to customize SAML metadata
+            </summary>
+        </member>
+        <member name="F:Safewhere.External.Configuration.SAMLMetadataConfiguration.Instance">
+            <summary>
+            Singleton instance
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Configuration.SAMLMetadataConfiguration.IncludeArtifactEndpoints">
+            <summary>
+            Specifies whether metadata needs to include Artifact endpoints. Default value is true
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Configuration.SAMLMetadataConfiguration.IncludeAuthenticationContextMethodClasses">
+            <summary>
+            Specifies whether metadata needs to include AuthenticationContextMethodClasses. Default value is true
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Configuration.SAMLMetadataConfiguration.IncludeContactPerson">
+            <summary>
+            Specifies whether metadata needs to include Contact person. Default value is true
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Configuration.SAMLMetadataConfiguration.NameIdentifierFormats">
+            <summary>
+            A list of custom NameIdentifierFormats. If this list is not empty, its content will be used in metadata
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Configuration.SAMLMetadataConfiguration.IdentityProviderSupportedAttributes">
+            <summary>
+            A list of custom supported attributes. If this list is not empty, its content will be used in metadata
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Configuration.SAMLMetadataConfiguration.ServiceProviderRequestedAttributes">
+            <summary>
+            A list of custom requested attributes. If this list is not empty, its content will be used in metadata
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Configuration.SAMLMetadataConfiguration.UseCustomOrganization">
+            <summary>
+            Specifies whether metadata needs to use the custom organization. Default value is true
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Configuration.SAMLMetadataConfiguration.CustomOrganization">
+            <summary>
+            Custom organization to use
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Configuration.ISystemSettings">
+            <summary>
+            An interface which represents Identify core configuration (aka System Setup). However, since system setup has many many settings and new settings are added all the times,
+            defining all the settings here is not practical. As a result, this interface is intentionally let empty.
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Configuration.IPlugInSetup">
+            <summary>
+            An interface which defines a mechanism for plugins or external code to add startup-time initialization code to Identify.
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Configuration.IPlugInSetup.Setup(Safewhere.External.Services.IIdentifyRegistrationContainer,Safewhere.External.Services.IIdentifyContainer,Safewhere.External.Configuration.ISystemSettings)">
+            <summary>
+            This method is called during startup-time (aka Application_Start) to perform necessary initialization.
+            </summary>
+            <param name="identifyRegistrationContainer">A container that can be used to register custom components to Identify's root container.</param>
+            <param name="rootContainer">A container object which is a wrapper around the root container of Identify.</param>
+            <param name="systemSettings">Contains the core configuration object (aka System Setup). Refer to <see cref="T:Safewhere.External.Configuration.ISystemSettings"/> for more details</param>
+        </member>
+        <member name="M:Safewhere.External.Configuration.IPlugInSetup.Update(Safewhere.External.Services.IIdentifyRegistrationContainer,Safewhere.External.Services.IIdentifyContainer,Safewhere.External.Configuration.ISystemSettings)">
+            <summary>
+            This method is called when system set up is changed to give a plugin a chance to update things that were initialized before
+            </summary>
+            <param name="identifyRegistrationContainer">A container that can be used to register custom components to Identify's root container.</param>
+            <param name="rootContainer">A container object which is a wrapper around the root container of Identify.</param>
+            <param name="systemSettings">Contains the core configuration object (aka System Setup). Refer to <see cref="T:Safewhere.External.Configuration.ISystemSettings"/> for more details</param>
+        </member>
         <member name="T:Safewhere.External.ExternalTypeMetadataAttribute">
             <summary>
             This attribute provides two metadata fields to Identify: default display name and text resource key.
@@ -382,9 +474,52 @@
             
             </summary>
         </member>
+        <member name="T:Safewhere.External.Model.IIdentifyRequestInformation">
+            <summary>
+            An interface that gives access to Identify's internal RequestInformation object
+            The RequestInformation object has so many information which makes it impossible to define
+            a fixed Contract object. A "better" approach is to define a simple interface and code can use type-casting
+            to access other pieces of information
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.IIdentifyRequestInformation.ContextId">
+            <summary>
+            Each login a user does with Identify will have a context id.
+            </summary>
+        </member>
+        <member name="P:Safewhere.External.Model.IIdentifyRequestInformation.IdentifyLoginContext">
+            <summary>
+            Each login a user does with Identify will have a LoginContext
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Model.ISessionLoginContext">
+            <summary>
+            An interface that gives access to Identify's internal SessionLoginContext object
+            The SessionLoginContext object has so many information which makes it impossible to define
+            a fixed Contract object. A "better" approach is to define a simple interface and code can use type-casting
+            to access other pieces of information
+            </summary>
+        </member>
         <member name="T:Safewhere.External.Model.ProtocolConnectionContract">
             <summary>
             Currently, ProtocolConnectionContract only contains properties that all connection types have.
+            </summary>
+        </member>
+        <member name="T:Safewhere.External.Model.RequestedSaml2Attribute">
+            <summary>
+            Represent a requested Saml2Attribute in metadata
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Model.RequestedSaml2Attribute.#ctor(System.String,System.Boolean)">
+            <summary>
+            Initiates an instance
+            </summary>
+            <param name="name"></param>
+            <param name="isRequired"></param>
+        </member>
+        <member name="P:Safewhere.External.Model.RequestedSaml2Attribute.IsRequired">
+            <summary>
+            Whether this attribute is required
             </summary>
         </member>
         <member name="T:Safewhere.External.Model.UserContext">
@@ -868,6 +1003,68 @@
             
             </summary>
         </member>
+        <member name="T:Safewhere.External.Services.RequestInformationExtensions">
+            <summary>
+            Provides a list of extension methods that facility access to Identify's internal data structure
+            </summary>
+        </member>
+        <member name="F:Safewhere.External.Services.RequestInformationExtensions.NullProtocolConnectionId">
+            <summary>
+            Id of a null protocol connection which is set to EndpointContext when a protocol connection is not available
+            </summary>
+        </member>
+        <member name="F:Safewhere.External.Services.RequestInformationExtensions.NullAuthenticationConnectionId">
+            <summary>
+            Id of a null authentication connection which is set to EndpointContext when an authentication connection is not available, e.g. when a request just comes to Identify and no authentication connection has been selectd yet.
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.RequestInformationExtensions.GetEndpointContext(Safewhere.External.Model.IIdentifyRequestInformation)">
+            <summary>
+            Returns a full EndpointContext object. You can use VS' debugger window to examine its content.
+            Notice that the EndpointContext object only exists after a login flow reaches to a certain point.
+            Usually when you use this helper class in a claim transformation, a generic provider or an interceptor,
+            the EndpointContext object should be available.
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.RequestInformationExtensions.GetProtocolConnectionId(Safewhere.External.Model.ISessionLoginContext)">
+            <summary>
+            Returns the id of the protocol connection of the current login request.
+            If you have access to an IIdentifyRequestInformation object, you can use requestInformation.IdentifyLoginContext to get a SessionLoginContext object.
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.RequestInformationExtensions.GetProtocolConnectionEntityId(Safewhere.External.Model.ISessionLoginContext)">
+            <summary>
+            Returns the Entity Identifier of the protocol connection of the current login request. For OAuth 2.0/OpenId Connect connection, the clientid is returned.
+            If you have access to an IIdentifyRequestInformation object, you can use requestInformation.IdentifyLoginContext to get a SessionLoginContext object
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.RequestInformationExtensions.GetAuthenticationConnectionId(Safewhere.External.Model.IIdentifyRequestInformation)">
+            <summary>
+            Returns the id of the authentication connection selected for the current login request.
+            Notice that the authentication connection is only available after an Identity Provider has been chosen to do a login.
+            This methods gets the id from EndpointContext
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.RequestInformationExtensions.GetAuthenticationConnectionId(Safewhere.External.Model.ISessionLoginContext)">
+            <summary>
+            Returns the id of the authentication connection selected for the current login request.
+            Notice that the authentication connection is only available after an Identity Provider has been chosen to do a login.
+            This method gets the id from SessionLoginContext.ContextIdKey
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.RequestInformationExtensions.GetAuthenticationConnectionEntityId(Safewhere.External.Model.IIdentifyRequestInformation)">
+            <summary>
+            Returns the Entity Identifier of the authentication connection selected for the current login request.
+            For OAuth 2.0/OpenId Connect connection, the clientid is returned
+            Notice that the authentication connection is only available after an Identity Provider has been chosen to do a login.
+            This methods gets the identifier from EndpointContext
+            </summary>
+        </member>
+        <member name="M:Safewhere.External.Services.RequestInformationExtensions.GetScopingRequesterId(Safewhere.External.Model.ISessionLoginContext)">
+            <summary>
+            Returns the RequesterId value of the scoping of a SAML 2.0 AuthnRequest message
+            </summary>
+        </member>
         <member name="T:Safewhere.External.Services.IIdentifyProtocolConnectionService">
             <summary>
             
@@ -1013,55 +1210,57 @@
             <param name="path"></param>
             <returns></returns>
         </member>
-        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.RedirectWithContextId(System.Web.Mvc.ControllerContext,System.String)">
+        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.RedirectWithContextId(System.Web.Mvc.ControllerContext,System.String,Safewhere.External.Model.ISessionLoginContext)">
             <summary>
             
             </summary>
             <param name="cc"></param>
             <param name="redirectPath"></param>
+            <param name="loginContext"></param>
         </member>
-        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.RedirectWithContextId(System.Web.Mvc.ControllerContext,System.String,System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="cc"></param>
-            <param name="redirectPath"></param>
-            <param name="applyRedirectPath"></param>
-        </member>
-        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.BuildRedirectResultWithContextId(System.Web.Mvc.ControllerContext,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="cc"></param>
-            <param name="redirectPath"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.BuildRedirectResultWithContextId(System.Web.Mvc.ControllerContext,System.String,System.Boolean)">
+        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.RedirectWithContextId(System.Web.Mvc.ControllerContext,System.String,System.Boolean,Safewhere.External.Model.ISessionLoginContext)">
             <summary>
             
             </summary>
             <param name="cc"></param>
             <param name="redirectPath"></param>
             <param name="applyRedirectPath"></param>
-            <returns></returns>
+            <param name="loginContext"></param>
         </member>
-        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.BuildRedirectPathWithContextId(System.Web.Mvc.ControllerContext,System.String,System.Boolean)">
+        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.BuildRedirectResultWithContextId(System.String,Safewhere.External.Model.ISessionLoginContext)">
             <summary>
             
             </summary>
-            <param name="cc"></param>
+            <param name="redirectPath"></param>
+            <param name="loginContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.BuildRedirectResultWithContextId(System.String,System.Boolean,Safewhere.External.Model.ISessionLoginContext)">
+            <summary>
+            
+            </summary>
             <param name="redirectPath"></param>
             <param name="applyRedirectPath"></param>
+            <param name="loginContext"></param>
             <returns></returns>
         </member>
-        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.BuildRedirectPathWithContextId(System.Web.Mvc.ControllerContext,System.String,System.Boolean,System.Guid)">
+        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.BuildRedirectPathWithContextId(System.String,System.Boolean,Safewhere.External.Model.ISessionLoginContext)">
             <summary>
             
             </summary>
-            <param name="cc"></param>
+            <param name="redirectPath"></param>
+            <param name="applyRedirectPath"></param>
+            <param name="loginContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Safewhere.External.Services.IIdentifyRedirectPathService.BuildRedirectPathWithContextId(System.String,System.Boolean,System.Guid,Safewhere.External.Model.ISessionLoginContext)">
+            <summary>
+            
+            </summary>
             <param name="redirectPath"></param>
             <param name="applyRedirectPath"></param>
             <param name="withAuthenticationConnectionId"></param>
+            <param name="loginContext"></param>
             <returns></returns>
         </member>
         <member name="T:Safewhere.External.Services.ClaimDefinitionContractExtensions">
@@ -1282,12 +1481,13 @@
             - Use the token to look up for matched accounts (aka profiles) in the Identify's local user store or in an AD. If there are multiple matches, display a UI which lists all the profiles so that the user can pick one.
             </remarks>
         </member>
-        <member name="M:Safewhere.External.Interceptors.IAuthenticationInterceptorService.Intercept(System.Web.Mvc.ControllerContext,System.Security.Claims.ClaimsPrincipal,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
+        <member name="M:Safewhere.External.Interceptors.IAuthenticationInterceptorService.Intercept(System.Web.Mvc.ControllerContext,System.Security.Claims.ClaimsPrincipal,Safewhere.External.Model.IIdentifyRequestInformation,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
             <summary>
             Intercepts an login flow on the authentication side.
             </summary>
             <param name="cc">The controllercontext object of the current request</param>
             <param name="principal">A claims principal which Identify receives from an upstream Identity Provider</param>
+            <param name="requestInformation">An object of type <see cref="T:Safewhere.External.Model.IIdentifyRequestInformation"/></param>
             <param name="input">Static settings which are configured on the authentication connection UI. Each specific implementation requires different static settings.
             For example, an interceptor which needs to access a database will need a connection string, while one which needs to access an AD store will need to know where the AD server is</param>
             <param name="contextId">Each login a user does with Identify will have a context id.</param>
@@ -1299,12 +1499,13 @@
             This is the chance for the interceptor to do whatever it wants to do before Identify takes control back and proceeds to the next step.
             </remarks>
         </member>
-        <member name="M:Safewhere.External.Interceptors.IAuthenticationInterceptorService.OnPostBack(System.Web.Mvc.ControllerContext,System.Security.Claims.ClaimsPrincipal,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
+        <member name="M:Safewhere.External.Interceptors.IAuthenticationInterceptorService.OnPostBack(System.Web.Mvc.ControllerContext,System.Security.Claims.ClaimsPrincipal,Safewhere.External.Model.IIdentifyRequestInformation,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
             <summary>
             In the event of the login flow was intercepted and a UI is shown to a user, this method is called to handle data which the user submits.
             </summary>
             <param name="cc">The controllercontext object of the current request</param>
             <param name="principal">A claims principal which Identify receives from an upstream Identity Provider</param>
+            <param name="requestInformation">An object of type <see cref="T:Safewhere.External.Model.IIdentifyRequestInformation"/></param>
             <param name="input">Static settings which are configured on the authentication connection UI. Each specific implementation requires different static settings.
             For example, an interceptor which needs to access a database will need a connection string, while one which needs to access an AD store will need to know where the AD server is</param>
             <param name="contextId">Each login a user does with Identify will have a context id.</param>
@@ -1385,12 +1586,13 @@
             - Use the token to look up for matched accounts (aka profiles) in the Identify's local user store or in an AD. If there are multiple matches, display a UI which lists all the profiles so that the user can pick one.
             </remarks>
         </member>
-        <member name="M:Safewhere.External.Interceptors.IProtocolInterceptorService.Intercept(System.Web.Mvc.ControllerContext,System.Security.Claims.ClaimsPrincipal,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
+        <member name="M:Safewhere.External.Interceptors.IProtocolInterceptorService.Intercept(System.Web.Mvc.ControllerContext,System.Security.Claims.ClaimsPrincipal,Safewhere.External.Model.IIdentifyRequestInformation,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
             <summary>
             Intercepts an login flow on the protocol side.
             </summary>
             <param name="cc">The controllercontext object of the current request</param>
             <param name="principal">A claims principal which Identify receives from an upstream Identity Provider</param>
+            <param name="requestInformation">An object of type <see cref="T:Safewhere.External.Model.IIdentifyRequestInformation"/></param>
             <param name="input">Static settings which are configured on the protocol connection UI. Each specific implementation requires different static settings.
             For example, an interceptor which needs to access a database will need a connection string, while one which needs to access an AD store will need to know where the AD server is</param>
             <param name="contextId">Each login a user does with Identify will have a context id.</param>
@@ -1402,12 +1604,13 @@
             This is the chance for the interceptor to do whatever it wants to do before Identify takes control back and proceeds to the next step.
             </remarks>
         </member>
-        <member name="M:Safewhere.External.Interceptors.IProtocolInterceptorService.OnPostBack(System.Web.Mvc.ControllerContext,System.Security.Claims.ClaimsPrincipal,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
+        <member name="M:Safewhere.External.Interceptors.IProtocolInterceptorService.OnPostBack(System.Web.Mvc.ControllerContext,System.Security.Claims.ClaimsPrincipal,Safewhere.External.Model.IIdentifyRequestInformation,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
             <summary>
             In the event of the login flow was intercepted and a UI is shown to a user, this method is called to handle data which the user submits.
             </summary>
             <param name="cc">The controllercontext object of the current request</param>
             <param name="principal">A claims principal which Identify receives from an upstream Identity Provider</param>
+            <param name="requestInformation">An object of type <see cref="T:Safewhere.External.Model.IIdentifyRequestInformation"/></param>
             <param name="input">Static settings which are configured on the protocol  connection UI. Each specific implementation requires different static settings.
             For example, an interceptor which needs to access a database will need a connection string, while one which needs to access an AD store will need to know where the AD server is</param>
             <param name="contextId">Each login a user does with Identify will have a context id.</param>
@@ -1454,33 +1657,6 @@
             <summary>
             Gets the primary service type
             </summary>
-        </member>
-        <member name="T:Safewhere.External.Configuration.ISystemSettings">
-            <summary>
-            An interface which represents Identify core configuration (aka System Setup). However, since system setup has many many settings and new settings are added all the times,
-            defining all the settings here is not practical. As a result, this interface is intentionally let empty.
-            </summary>
-        </member>
-        <member name="T:Safewhere.External.Configuration.IPlugInSetup">
-            <summary>
-            An interface which defines a mechanism for plugins or external code to add startup-time initialization code to Identify.
-            </summary>
-        </member>
-        <member name="M:Safewhere.External.Configuration.IPlugInSetup.Setup(Safewhere.External.Services.IIdentifyRegistrationContainer,Safewhere.External.Services.IIdentifyContainer,Safewhere.External.Configuration.ISystemSettings)">
-            <summary>
-            This method is called during startup-time (aka Application_Start) to perform necessary initialization.
-            </summary>
-            <param name="identifyRegistrationContainer">A container that can be used to register custom components to Identify's root container.</param>
-            <param name="rootContainer">A container object which is a wrapper around the root container of Identify.</param>
-            <param name="systemSettings">Contains the core configuration object (aka System Setup). Refer to <see cref="T:Safewhere.External.Configuration.ISystemSettings"/> for more details</param>
-        </member>
-        <member name="M:Safewhere.External.Configuration.IPlugInSetup.Update(Safewhere.External.Services.IIdentifyRegistrationContainer,Safewhere.External.Services.IIdentifyContainer,Safewhere.External.Configuration.ISystemSettings)">
-            <summary>
-            This method is called when system set up is changed to give a plugin a chance to update things that were initialized before
-            </summary>
-            <param name="identifyRegistrationContainer">A container that can be used to register custom components to Identify's root container.</param>
-            <param name="rootContainer">A container object which is a wrapper around the root container of Identify.</param>
-            <param name="systemSettings">Contains the core configuration object (aka System Setup). Refer to <see cref="T:Safewhere.External.Configuration.ISystemSettings"/> for more details</param>
         </member>
         <member name="T:Safewhere.External.ParameterBag">
             <summary>

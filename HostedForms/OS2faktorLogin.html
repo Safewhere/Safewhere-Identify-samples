@@ -1,31 +1,35 @@
 {% extends "SiteLayout" %}
 
+{% block "titleheader" %}
+{{Resources.OtpResources.OtpAuthenticationView_TitleContent | Escape }}
+{% endblock %}
+
 {% block "content" %}
 <div class="nav-box-50">
         <div class="form-bottom">
-            <form id="loginForm" role="form" method="post" class="login-form" action="/runtime/otpauth/twofactor/validate?ici_ci={{Model.ContextId}}">
+            <form id="loginForm" role="form" method="post" class="login-form" action="/runtime/otpauth/twofactor/validate?ici_ci={{Model.ContextId | Escape }}">
                 {{ Csrf }}
                 <div id="loginArea">
-                    <div class="fieldMargin bigText">{{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLogin}}</div>
+                    <div class="fieldMargin bigText">{{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLogin | Escape }}</div>
 
                     <div id="pageIntroductionText">
                         <span id="outside-browser" style="display: none;">
                             <p> 
-                                {{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginPageIntroductionOutsideBrowser}} <a target="_blank" href="{{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginPageIntroductionOutsideBrowserDocSite}}">{{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginPageIntroductionOutsideBrowserDocSite}}</a>
+                                {{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginPageIntroductionOutsideBrowser | Escape }} <a target="_blank" href="{{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginPageIntroductionOutsideBrowserDocSite | Escape }}">{{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginPageIntroductionOutsideBrowserDocSite | Escape }}</a>
                             </p>
 
-                            <h2 style="width: 150px; margin: 20px auto; padding: 10px 0px; border: 1px solid black; text-align: center;">{{Model.Challenge}}</h2>
+                            <h2 style="width: 150px; margin: 20px auto; padding: 10px 0px; border: 1px solid black; text-align: center;">{{Model.Challenge | Escape }}</h2>
                         </span>
 
                         <span id="inside-browser" style="display: none;">
                             <p>
-                                {{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginPageIntroductionInsideBrowser}}
+                                {{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginPageIntroductionInsideBrowser | Escape }}
                             </p>
 
                             <br />
 
-                            <a href="{{Model.RedirectUrl}}" target="_blank">
-                                <span class="submit">{{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginButton}}</span>
+                            <a href="{{Model.RedirectUrl | Escape }}" target="_blank">
+                                <span class="submit">{{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginButton | Escape }}</span>
                             </a>
                         </span>
                     </div>
@@ -34,16 +38,16 @@
                         <div class="form-group">
                             <label><input type='checkbox' name="dont-ask-for-N-days">
                                 {% assign var1 = '{0\}' %} 
-                                {{ Resources.OtpResources.OtpAuthentication_DontAskAgainForNDays | Replace: var1, Model.NumberOfSkippingDaysString }}
+                                {{ Resources.OtpResources.OtpAuthentication_DontAskAgainForNDays | Replace: var1, Model.NumberOfSkippingDaysString  | Escape }}
                             </label>
                         </div>
                     {% endif %}
 
                     <script type="text/javascript" language="JavaScript">
                         //<![CDATA[
-                        window.pollingUrl = "{{Model.PollingUrl}}";
-                        window.redirectUrl = "{{Model.RedirectUrl}}";
-                        window.pollingTimeout = "{{Model.PollingTimeout}}";
+                        window.pollingUrl = "{{Model.PollingUrl | Escape }}";
+                        window.redirectUrl = "{{Model.RedirectUrl | Escape }}";
+                        window.pollingTimeout = "{{Model.PollingTimeout }}";
                         //]]>
                     </script>
                     <script src="/runtime/scripts/plugins/OS2faktor.js">

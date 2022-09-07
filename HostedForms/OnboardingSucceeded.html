@@ -1,9 +1,11 @@
 ﻿{% extends "SiteLayout" %}
 
+{% block "titleheader" %}
+{{Resources.OtpResources.OtpAuthenticationView_TitleHeader | Escape }}
+{% endblock %}
+
 {% block "initscript"  %}
-
 <script src="runtime/scripts/copy-to-clipboard.js"></script>
-
 {% endblock %}
 
 {% block "content" %}
@@ -12,15 +14,15 @@
             <div class="form-top-left text-left">
                 {% if Model.IsOnboarding %}
                     <h4>
-                        {{Resources.OtpResources.OtpRecoveryCode_AlmostThere}}
+                        {{Resources.OtpResources.OtpRecoveryCode_AlmostThere | Escape }}
                     </h4>
                 {% else %}
                     <h5>
-                        {{Resources.OtpResources.OtpRecoveryCode_NewCodeGenerated}}
+                        {{Resources.OtpResources.OtpRecoveryCode_NewCodeGenerated | Escape }}
                     </h5>
                 {% endif %}
                 <div class="small">
-                    {{Resources.OtpResources.OtpRecoveryCode_AdviceMessage}}
+                    {{Resources.OtpResources.OtpRecoveryCode_AdviceMessage | Escape }}
                 </div>
             </div>
         </div>
@@ -28,22 +30,22 @@
             <form>
                 <div class="form-group" style="border: solid 1px;margin-bottom: 4px;">
                     <h4 id="recovery-code" class="text-center recovery-code-text" style="padding: 8px; margin-top: 8px;">
-                        {{Model.RecoveryCode}}
+                        {{Model.RecoveryCode | Escape }}
                     </h4>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-default btn-copycode"
-                    onclick="copyTextToClipboard('{{Model.RecoveryCode}}'); return false;"
+                    onclick="copyTextToClipboard('{{Model.RecoveryCode | Escape }}'); return false;"
                             style="background: transparent;border: solid 1px;color: #888;border-radius: 0px;">
-                        {{Resources.OtpResources.OtpRecoveryCode_CopyCode}}
+                        {{Resources.OtpResources.OtpRecoveryCode_CopyCode | Escape }}
                     </button>
                 </div>
                 <div class="form-group">
-                    <label><input type='checkbox' onclick='handleClick(this);'> {{Resources.OtpResources.OtpRecoveryCode_ConfirmMessage}}</label>
+                    <label><input type='checkbox' onclick='handleClick(this);'> {{Resources.OtpResources.OtpRecoveryCode_ConfirmMessage | Escape }}</label>
                 </div>
 
                 <div class="form-group">
-                    <button id="continue-btn" onclick='doContinue("{{Model.RedirectPath}}"); return false;' disabled class="btn btn-default">{{Resources.OtpResources.OtpRecoveryCode_Continue}}</button>
+                    <button id="continue-btn" onclick='doContinue("{{Model.RedirectPath | Escape }}"); return false;' disabled class="btn btn-default">{{Resources.OtpResources.OtpRecoveryCode_Continue | Escape }}</button>
                 </div>
 
             </form>
