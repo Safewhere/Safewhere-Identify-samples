@@ -23,8 +23,10 @@
 
             <hr />
 
-            <div class="form-group text-center" style="padding: 0px 28px;">
-                {{ ReturnToLoginSelectorLink }}
-            </div>
+            {% if Model.ShowReturnToLoginSelectorLink %}
+                <div class="form-group" style="padding: 0px 28px;">
+                    {{ ReturnToLoginSelectorLink }}
+                </div>
+            {% endif %}
     </div>
 {% endblock %}
