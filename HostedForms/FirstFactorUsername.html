@@ -33,10 +33,12 @@
                         <button type="submit" class="btn">{{ Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorLoginButton | Escape }}</button>
                     </div>
                     <hr />
-                    <div class="form-group" style="padding: 0px 28px;">
-                        {{ ReturnToLoginSelectorLink }}
-                    </div>
                 </form>
+                {% if Model.ShowReturnToLoginSelectorLink %}
+                <div class="form-group" style="padding: 0px 28px;">
+                    {{ ReturnToLoginSelectorLink }}
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
