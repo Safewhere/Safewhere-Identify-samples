@@ -109,6 +109,7 @@
 {% endblock %} 
 
 {% block "initscript"  %}
+<script src="runtime/scripts/disable-buttons-on-submit-form.js"></script>
 <script type="text/javascript">
     var timeleft = parseInt("{{Model.SecondsUntilUserCanRequestANewOtp }}");
     var downloadTimer = setInterval(function () {
@@ -116,8 +117,10 @@
         timeleft -= 1;
         if (timeleft < 0) {
             clearInterval(downloadTimer);
+            var currentUrl = window.location.href;
+			var url = currentUrl.replace('/validate', '/login');
             document.getElementById("requestOTPLink").innerHTML = "{{Resources.OtpResources.OtpAuthenticationView_RequestNewOTPCode | Escape }}";
-            document.getElementById("requestOTPLink").href = "javascript: location.reload()";
+            document.getElementById("requestOTPLink").href = url;
             document.getElementById("requestOTPLink").style = "cursor:pointer";
         }
     }, 1000);
