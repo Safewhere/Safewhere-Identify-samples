@@ -118,7 +118,7 @@
         if (timeleft < 0) {
             clearInterval(downloadTimer);
             var currentUrl = window.location.href;
-			var url = currentUrl.replace('/validate', '/login');
+	    var url = currentUrl.replace('/validate', '/login');
             document.getElementById("requestOTPLink").innerHTML = "{{Resources.OtpResources.OtpAuthenticationView_RequestNewOTPCode | Escape }}";
             document.getElementById("requestOTPLink").href = url;
             document.getElementById("requestOTPLink").style = "cursor:pointer";
