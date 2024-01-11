@@ -1,0 +1,282 @@
+{% extends "IdentifyMeSiteLayout" %}
+{% block "titleheader" %}{{ Resources.MyProfile_MyDetail_Title | Escape }}{% endblock %}
+{% block "initscript" %}
+<link rel="stylesheet" href="/selfservice/css/semantic.min.css" />
+{% endblock %}
+{% block "scripts" %}
+<script src="/selfservice/js/semantic.min.js"></script>
+<script src="/selfservice/js/multiple-select-items.js"></script>
+{% endblock %}
+{% block "content" %}
+<div class="form-box">
+    <div class="form-top">
+        <div class="form-top-left text-left">
+            <h4>{{ Resources.MyProfile_MyDetail | Escape }}</h4>
+            <p class="card-text overflow-ellipsis">
+                {{ Resources.Profile_Manage_Your_Profile | Escape }}
+            </p>
+        </div>
+    </div>
+    <br />
+    <div class="form-bottom form-center">
+        <form
+            action="/selfservice/MyProfile/Update"
+            method="post"
+            enctype="multipart/form-data"
+            role="form"
+        >
+            {{ Csrf }}
+            {% if Model.ErrorMessage != null && Model.ErrorMessage != "" %}
+            <div
+                id="form-error-message"
+                class="form-group flex-box text-danger text-center text-break error-bg pt-2 pb-2"
+            >
+                <span for="errorMessageLb"> {{ Model.ErrorMessage | br_to_newline | escape }} </span>
+            </div>
+            {% endif %}
+            {% if Model.InfoMessage != null && Model.InfoMessage != "" %}
+            <div
+                id="form-info"
+                class="form-group flex-box text-info text-center text-break info-bg pt-2 pb-2"
+            >
+                <span> {{ Model.InfoMessage | br_to_newline | escape }} </span>
+            </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="DisplayName">
+                    {{ Resources.CommonTextResources_DisplayName | Escape }}
+                </label>
+                {% if Model.CanEditDisplayName %}
+                <input
+                    autocomplete="off"
+                    class="form-control"
+                    type="text"
+                    data-val="true"
+                    data-val-required="{{ Resources.MyProfile_DisplayName_Required | Escape }}"
+                    id="DisplayName"
+                    name="DisplayName"
+                    value="{{Model.DisplayName | Escape}}"
+                />
+                {% else %}
+                <input
+                    autocomplete="off"
+                    class="form-control"
+                    type="text"
+                    data-val="true"
+                    data-val-required="{{ Resources.MyProfile_DisplayName_Required | Escape }}"
+                    id="DisplayName"
+                    name="DisplayName"
+                    value="{{Model.DisplayName | Escape}}"
+                    readonly
+                />
+                {% endif %}
+            </div>
+
+            {% if Model != null && Model.HasClaims %}
+            <div class="form-group mt-3">
+                <h6 id="my_claims_header" class="title-form">
+                    {{ Resources.MyProfile_MyClaims | Escape }}
+                </h6>
+                {% for claim in Model.DisplayClaimsDefinitions %}
+                <input
+                    data-val="true"
+                    data-val-required="{{ Resources.MyProfile_ClaimType_Required | Escape }}"
+                    id="DisplayClaimsDefinitions_{{claim.Index}}__ClaimType"
+                    name="DisplayClaimsDefinitions[{{claim.Index}}].ClaimType"
+                    type="hidden"
+                    value="{{ claim.ClaimType | Escape }}"
+                />
+                <input
+                    data-val="true"
+                    data-val-required="{{ Resources.MyProfile_FriendlyName_Required | Escape }}"
+                    id="DisplayClaimsDefinitions_{{claim.Index}}__FriendlyName"
+                    name="DisplayClaimsDefinitions[{{claim.Index}}].FriendlyName"
+                    type="hidden"
+                    value="{{ claim.FriendlyName | Escape }}"
+                />
+                <input
+                    data-val="true"
+                    data-val-required="{{ Resources.MyProfile_Name_Required | Escape }}"
+                    id="DisplayClaimsDefinitions_{{claim.Index}}__Name"
+                    name="DisplayClaimsDefinitions[{{claim.Index}}].Name"
+                    type="hidden"
+                    value="{{ claim.Name | Escape }}"
+                />
+                <input
+                    data-val="true"
+                    data-val-required="{{ Resources.MyProfile_Editable_Required | Escape }}"
+                    id="DisplayClaimsDefinitions_{{claim.Index}}__Editable"
+                    name="DisplayClaimsDefinitions[{{claim.Index}}].Editable"
+                    type="hidden"
+                    value="{{ claim.Editable | Escape }}"
+                />
+
+                {% if claim.Name == "GroupClaimDefinition" %}
+                <div class="form-group">
+                    {% if claim.ClaimType == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role" %}
+                    <label
+                        for="display_claim_{{ claim.Index }}_name"
+                        class="control-label vtop"
+                    >
+                        {{ Resources.User_AccessTo_IdentifyAdmin | Escape }}
+                    </label>
+                    {% else %}
+                    <label
+                        for="display_claim_{{ claim.Index }}_name"
+                        class="control-label vtop"
+                        >{{ claim.FriendlyName | Escape }}</label
+                    >
+                    {% endif %}
+                    {% if claim.Editable %}
+                    <select
+                        id="display_claim_{{ claim.Index }}_values"
+                        name="DisplayClaimsDefinitions[{{claim.Index}}].GroupValues"
+                        class="label ui selection fluid dropdown multiple"
+                        multiple=""
+                    >
+                        <option></option>
+                        {% for item in claim.GroupValuesOptionList %}
+                        {% if claim.GroupValues contains item %}
+                        <option value="{{ item | Escape }}" selected>
+                            {{ item | Escape }}
+                        </option>
+                        {% else %}
+                        <option value="{{ item | Escape }}">
+                            {{ item | Escape }}
+                        </option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    {% else %}
+                    <select
+                        disabled
+                        id="display_claim_{{ claim.Index }}_values"
+                        name="DisplayClaimsDefinitions[{{claim.Index}}].GroupValues"
+                        class="label ui selection fluid dropdown multiple"
+                        readonly
+                        multiple=""
+                    >
+                        <option></option>
+                        {% for item in claim.GroupValuesOptionList %}
+                        {% if claim.GroupValues contains item %}
+                        <option value="{{ item | Escape }}" selected>
+                            {{ item | Escape }}
+                        </option>
+                        {% else %}
+                        <option value="{{ item | Escape }}">
+                            {{ item | Escape }}
+                        </option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    {% endif %}
+                </div>
+                {% endif %}
+                {% if claim.Name == "FreeClaimDefinition" %}
+                <div class="form-group">
+                    {% if claim.ClaimType == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name" %}
+                    <label
+                        id="display_claim_{{ claim.Index }}_name"
+                        class="control-label"
+                        for="DisplayClaimsDefinitions[{{claim.Index}}].Value"
+                    >
+                        {{ Resources.CommonTextResources_Name | Escape }}
+                    </label>
+                    {% else %}
+                    <label
+                        id="display_claim_{{ claim.Index }}_name"
+                        class="control-label"
+                        for="DisplayClaimsDefinitions[{{claim.Index}}].Value"
+                    >
+                        {{ claim.FriendlyName | Escape }}
+                    </label>
+                    {% endif %}
+                    {% if claim.Editable %}
+                    <input
+                        data-val="false"
+                        id="display_claim_{{ claim.Index }}_value"
+                        name="DisplayClaimsDefinitions[{{claim.Index}}].Value"
+                        type="text"
+                        value="{{ claim.Value | Escape }}"
+                        class="form-control"
+                    />
+                    {% else %}
+                    <input
+                        id="display_claim_{{ claim.Index }}_value"
+                        name="DisplayClaimsDefinitions[{{claim.Index}}].Value"
+                        type="text"
+                        value="{{ claim.Value | Escape }}"
+                        class="form-control"
+                        readonly
+                    />
+                    {% endif %}
+                </div>
+                {% endif %}
+                {% if claim.Name == "OptionalClaimDefinition" %}
+                <div class="form-group">
+                    <label
+                        id="display_claim_{{ claim.Index }}_name"
+                        class="control-label"
+                        for="DisplayClaimsDefinitions[{{claim.Index}}].Value"
+                    >
+                        {{ claim.FriendlyName | Escape }}
+                    </label>
+                    {% if claim.Editable %}
+                    <select
+                        data-val="false"
+                        id="display_claim_{{ claim.Index }}_value"
+                        name="DisplayClaimsDefinitions[{{claim.Index}}].Value"
+                        class="label ui selection fluid dropdown multiple"
+                        multiple=""
+                    >
+                        <option></option>
+                        {% for item in claim.OptionValuesOptionList %}
+                        {% if claim.Value == item %}
+                        <option value="{{ item | Escape }}" selected>
+                            {{ item | Escape }}
+                        </option>
+                        {% else %}
+                        <option value="{{ item | Escape  }}">
+                            {{ item | Escape }}
+                        </option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    {% else %}
+                    <select
+                        id="display_claim_{{ claim.Index }}_value"
+                        name="DisplayClaimsDefinitions[{{claim.Index}}].Value"
+                        class="label ui selection fluid dropdown multiple"
+                        readonly
+                        multiple=""
+                    >
+                        <option></option>
+                        {% for item in claim.OptionValuesOptionList %}
+                        {% if claim.Value == item %}
+                        <option value="{{ item | Escape }}" selected>
+                            {{ item | Escape }}
+                        </option>
+                        {% else %}
+                        <option value="{{ item | Escape }}">
+                            {{ item | Escape }}
+                        </option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    {% endif %}
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="form-group text-center">
+                <button id="submit" type="submit" class="btn btn-selfservice">
+                    {{ Resources.CommonTextResources_Save | Escape }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
