@@ -1,0 +1,621 @@
+{% extends "IdentifyMeSiteLayout" %}
+{% block "titleheader" %}{{Resources.EnableWebAuthn_TitleHeader | Escape }}{% endblock %}
+{% block "initscript" %}
+<link rel="stylesheet" href="/runtime/assets/css/webauthn-wizards.css" />
+<link rel="stylesheet" href="/selfservice/css/enable-web-authentication.css" />
+<script src="/runtime/scripts/plugins/webauthn-wizards.js"></script>
+{% endblock %}
+{% block "scripts" %}
+<script type="text/javascript" language="JavaScript">
+    window.makeCredentialOptionsEndpoint = "/selfservice/WebAuthentication/MakeCredentialOptions";
+    window.onboardWebAuthnEndpoint = "/selfservice/WebAuthentication/OnBoardWebAuthn";
+    window.userId = `{{Model.SelectedWebAuthnModel.UserId | Escape}}`;
+    window.secondFactorConnectionName = `{{Model.SelectedWebAuthnModel.SecondFactorConnectionName | Escape}}`;
+    window.commonErrorMessage = `{{Resources.EnableWebAuthn_CommonErrorMessage | Escape}}`;
+</script>
+<script src="/selfservice/js/webauth.helpers.js"></script>
+<script src="/selfservice/js/webauthn.register.js"></script>
+{% endblock %}
+{% block "content" %}
+<div class="form-top">
+    <div class="form-top-left text-left">
+        <h4>{{ Resources.WebAuthenticationAdministration_Title | Escape }}</h4>
+    </div>
+</div>
+<div class="wizard-container">
+    <div class="form-bottom form-center">
+        <!-- Step 1: Set up web authentification -->
+        <fieldset id="set-up-web-authentification" class="text-center">
+            <h4>
+                {{ Resources.EnableWebAuthn_Step1SetupWebAuthnHelpText | Escape }}
+            </h4>
+            <div class="margin-content-step full-width-buttons">
+                <div class="wizard-step-description-text">
+                    {{ Resources.EnableWebAuthn_Step1DescriptionHelpText | Escape }}
+                </div>
+                <button id="onboard-with-wizard" type="button" class="btn">
+                    {{ Resources.EnableWebAuthn_Step1WithWizardHelpText | Escape }}
+                </button>
+                <div class="wizard-step-or-text">
+                    {{ Resources.OtpRecoveryCodeView_OR | Escape }}
+                </div>
+                <button id="onboard-without-wizard" type="button" class="btn">
+                    {{ Resources.EnableWebAuthn_Step1WithoutWizardHelpText | Escape }}
+                </button>
+            </div>
+        </fieldset>
+
+        <!-- Step 2: Choose device -->
+        <fieldset id="choose-device" class="text-center">
+            <h4>
+                {{ Resources.EnableWebAuthn_Step2ChooseDeviceHelpText | Escape }}
+            </h4>
+            <div class="margin-content-step full-width-buttons">
+                <div class="wizard-step-description-text">
+                    {{ Resources.EnableWebAuthn_Step2DescriptionHelpText | Escape }}
+                    <br />
+                    {{ Resources.EnableWebAuthn_Step2Description1HelpText | Escape }}
+                </div>
+                <button
+                    id="onboard-with-wizard-windows-pc"
+                    type="button"
+                    class="btn"
+                >
+                    {{ Resources.EnableWebAuthn_Step2ChooseDeviceWindowsPCHelpText | Escape }}
+                    <br />
+                    <span>
+                        {{ Resources.EnableWebAuthn_Step2ChooseDeviceWindowsPCWindows10HelpText | Escape }}
+                    </span>
+                </button>
+                <br /><br />
+                <button
+                    id="onboard-with-wizard-android-smartphone"
+                    type="button"
+                    class="btn"
+                >
+                    {{ Resources.EnableWebAuthn_Step2ChooseDeviceAndroidSmartphoneHelpText | Escape }}
+                    <br />
+                    <span>
+                        {{ Resources.EnableWebAuthn_Step2ChooseDeviceAndroidSmartphoneRecommendedVersionsHelpText | Escape }}
+                    </span>
+                </button>
+                <br /><br />
+                <button
+                    id="onboard-with-wizard-iphone-or-ipad"
+                    type="button"
+                    class="btn"
+                >
+                    {{ Resources.EnableWebAuthn_Step2ChooseDeviceAppleDevicesHelpText | Escape }}
+                    <br />
+                    <span>
+                        {{ Resources.EnableWebAuthn_Step2ChooseDeviceRecommenedAppleDevicesHelpText | Escape }}
+                    </span>
+                </button>
+                <br /><br />
+                <button
+                    id="onboard-with-wizard-fido-keys"
+                    type="button"
+                    class="btn"
+                >
+                    {{ Resources.EnableWebAuthn_Step2ChooseDeviceFIDO2KeysHelpText | Escape }}
+                    <br />
+                    <span>
+                      {{ Resources.EnableWebAuthn_Step2ChooseDeviceFIDO2KeysDevicesThatHaveUSBPortHelpText | Escape }}
+                    </span>
+                </button>
+                <div class="wizard-step-or-text">
+                    {{ Resources.OtpRecoveryCodeView_OR | Escape }}
+                </div>
+                <button
+                    id="onboard-with-wizard-go-back"
+                    type="button"
+                    class="btn btn-previous choose-device"
+                >
+                    {{ Resources.EnableWebAuthn_ChooseDevicesGoBackHelpText | Escape }}
+                </button>
+            </div>
+        </fieldset>
+
+        <!-- Windows PC wizard -->
+        <div id="windows-pc-wizard">
+            <fieldset class="devices-group text-center">
+                <h4>
+                    {{ Resources.EnableWebAuthn_Step3GoToSettingHelpText | Escape }}
+                </h4>
+                <div class="margin-content-step">
+                    <img
+                        src="/runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode | Escape }}/windows-pc-step3.png"
+                        alt="Safewhere"
+                    />
+                    <div class="wizard-step-description-text">
+                        {{ Resources.EnableWebAuthn_WindowsPCStep3ClickStartHelpText | Escape }}
+                        <br />
+                        {{ Resources.EnableWebAuthn_WindowsPCStep3ClickSettingsHelpText | Escape }}
+                        <br />
+                        {{ Resources.EnableWebAuthn_WindowsPCStep3ClickAccountsHelpText | Escape }}
+                    </div>
+                    <div class="wizard-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-previous windows-pc"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}
+                        </button>
+                        <button type="button" class="btn btn-next windows-pc">
+                            {{ Resources.EnableSecondFactorMethod_WizardNextButton | Escape }}
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="devices-group text-center">
+                <h4>
+                    {{ Resources.EnableWebAuthn_WindowsPCStep4AddLoginHelpText | Escape }}
+                </h4>
+                <div class="margin-content-step">
+                    <img
+                        class="img-max-width"
+                        src="/runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode | Escape }}/windows-pc-step4.png"
+                        alt="Safewhere"
+                    />
+                    <div class="wizard-step-description-text">
+                        {{ Resources.EnableWebAuthn_WindowsPCStep4SignInOptionHelpText | Escape }}
+                        <br />
+                        {{ Resources.EnableWebAuthn_WindowsPCStep4ClickSetupHelpText | Escape }}
+                        <br />
+                        {{ Resources.EnableWebAuthn_WindowsPCStep4ClickSetupAndFollowTheInstructionHelpText | Escape }}
+                    </div>
+                    <div class="wizard-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-previous windows-pc"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}
+                        </button>
+                        <button type="button" class="btn btn-next windows-pc">
+                            {{ Resources.EnableSecondFactorMethod_WizardNextButton | Escape }}
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="devices-group text-center">
+                <h4>
+                    {{ Resources.EnableWebAuthn_WindowsPCStep5YourDeviceIsAllSetHelpText | Escape }}
+                </h4>
+                <div class="margin-content-step">
+                    <div class="wizard-step-description-text">
+                        <span class="bolder500">
+                            {{ Resources.EnableWebAuthn_WindowsPCStep5CongratulationsHelpText | Escape }}
+                        </span>
+                        <br />
+                        {{ Resources.EnableWebAuthn_WindowsPCStep5YouAreHaveNowAddedHelpText | Escape }}
+                        <br /><br />
+                        {{ Resources.EnableWebAuthn_WindowsPCStep5LoginFromThisDeviceHelpText | Escape }}
+                        <br /><br />
+                        {{ Resources.EnableWebAuthn_WindowsPCStep5NoteInProcessHelpText | Escape }}
+                    </div>
+                </div>
+                <div class="wizard-buttons">
+                    <button type="button" class="btn btn-previous windows-pc">
+                        {{ Resources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}
+                    </button>
+                    <button type="button" class="btn btn-next windows-pc">
+                        {{ Resources.EnableSecondFactorMethod_WizardNextButton | Escape }}
+                    </button>
+                </div>
+            </fieldset>
+        </div>
+
+        <!-- Android Smartphone wizard -->
+        <div id="android-smart-phone-wizard">
+            <fieldset class="devices-group text-center">
+                <h4>
+                    {{ Resources.EnableWebAuthn_Step3GoToSettingHelpText | Escape }}
+                </h4>
+                <div class="margin-content-step">
+                    <img
+                        src="/runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode | Escape }}/android-smartphone-step3.png"
+                        alt="Safewhere"
+                    />
+                    <div class="wizard-step-description-text">
+                        {{ Resources.EnableWebAuthn_AndroidSmartphoneStep3OpenYourSmartphoneHelpText | Escape }}
+                    </div>
+                    <div class="wizard-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-previous android-smart-phone"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-next android-smart-phone"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardNextButton | Escape }}
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="devices-group text-center">
+                <h4>
+                    {{ Resources.EnableWebAuthn_AndroidSmartphoneStep4OAddFingerprintLoginHelpText | Escape }}
+                </h4>
+                <div class="margin-content-step">
+                    <img
+                        src="/runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode | Escape }}/android-smartphone-step4.png"
+                        alt="Safewhere"
+                    />
+                    <div class="wizard-step-description-text">
+                        {{ Resources.EnableWebAuthn_AndroidSmartphoneStep4OAddSelectFingerprintHelpText | Escape }}
+                    </div>
+                    <div class="wizard-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-previous android-smart-phone"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-next android-smart-phone"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardNextButton | Escape }}
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="devices-group text-center">
+                <h4>
+                    {{ Resources.EnableWebAuthn_AndroidSmartphoneStep5OEnterPasswordHelpText | Escape }}
+                </h4>
+                <div class="margin-content-step">
+                    <img
+                        src="/runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode | Escape }}/android-smartphone-step5.png"
+                        alt="Safewhere"
+                    />
+                    <div class="wizard-step-description-text">
+                        {{ Resources.EnableWebAuthn_AndroidSmartphoneStep5LoginWithYourConfiguredDeviceHelpText | Escape }}
+                    </div>
+                    <div class="wizard-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-previous android-smart-phone"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-next android-smart-phone"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardNextButton | Escape }}
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="devices-group text-center">
+                <h4>
+                    {{ Resources.EnableWebAuthn_AndroidSmartphoneStep6OChangeNameHelpText | Escape }}
+                </h4>
+                <div class="margin-content-step">
+                    <img
+                        src="/runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode | Escape }}/android-smartphone-step6.png"
+                        alt="Safewhere"
+                    />
+                    <div class="wizard-step-description-text">
+                        {{ Resources.EnableWebAuthn_AndroidSmartphoneStep6OptionalHelpText | Escape }}
+                    </div>
+                    <div class="wizard-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-previous android-smart-phone"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-next android-smart-phone"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardNextButton | Escape }}
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="devices-group text-center">
+                <h4>
+                    {{ Resources.EnableWebAuthn_AndroidSmartphoneStep7YourDeviceIsAllSetHelpText | Escape }}
+                </h4>
+                <div class="margin-content-step">
+                    <div class="wizard-step-description-text">
+                        <span class="bolder500">
+                            {{ Resources.EnableWebAuthn_AndroidSmartphoneStep7CongratHelpText | Escape }}
+                        </span>
+                        <br />
+                        {{ Resources.EnableWebAuthn_AndroidSmartphoneStep7CongratAddedFingerprintHelpText | Escape }}
+                        <br /><br />
+                        {{ Resources.EnableWebAuthn_AndroidSmartphoneStep7CongratAddedYouWillOnlyBeAbleToLoginHelpText | Escape }}
+                        <br /><br />
+                        {{ Resources.EnableWebAuthn_AndroidSmartphoneStep7CongratNoteHelpText | Escape }}
+                    </div>
+                </div>
+                <div class="wizard-buttons">
+                    <button
+                        type="button"
+                        class="btn btn-previous android-smart-phone"
+                    >
+                        {{ Resources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-next android-smart-phone"
+                    >
+                        {{ Resources.EnableSecondFactorMethod_WizardNextButton | Escape }}
+                    </button>
+                </div>
+            </fieldset>
+        </div>
+
+        <!-- iPhone or iPad wizard -->
+        <div id="iphone-or-ipad-wizard">
+            <fieldset class="devices-group text-center">
+                <h4>
+                    {{ Resources.EnableWebAuthn_Step3GoToSettingHelpText | Escape }}
+                </h4>
+                <div class="margin-content-step">
+                    <img
+                        src="/runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode | Escape }}/iphone-ipad-step3.png"
+                        alt="Safewhere"
+                    />
+                    <div class="wizard-step-description-text">
+                        {{ Resources.EnableWebAuthn_IphoneIpadStep3OpenYourSmartphoneHelpText | Escape }}
+                    </div>
+                    <div class="wizard-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-previous iphone-or-ipad"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-next iphone-or-ipad"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardNextButton | Escape }}
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="devices-group text-center">
+                <h4>
+                    {{ Resources.EnableWebAuthn_IphoneIpadStep4EnterPasscodeHelpText | Escape }}
+                </h4>
+                <div class="margin-content-step">
+                    <img
+                        src="/runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode | Escape }}/iphone-ipad-step4.png"
+                        alt="Safewhere"
+                    />
+                    <div class="wizard-step-description-text">
+                        {{ Resources.EnableWebAuthn_IphoneIpadStep4OEnterYourPasscodeHelpText | Escape }}
+                    </div>
+                    <div class="wizard-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-previous iphone-or-ipad"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-next iphone-or-ipad"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardNextButton | Escape }}
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="devices-group text-center">
+                <h4>
+                    {{ Resources.EnableWebAuthn_IphoneIpadStep5OAddFingerprintLoginHelpText | Escape }}
+                </h4>
+                <div class="margin-content-step">
+                    <img
+                        src="/runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode | Escape }}/iphone-ipad-step5.png"
+                        alt="Safewhere"
+                    />
+                    <div class="wizard-step-description-text">
+                        {{ Resources.EnableWebAuthn_IphoneIpadStep5AddFingerprintInstructionLoginHelpText | Escape }}
+                    </div>
+                    <div class="wizard-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-previous iphone-or-ipad"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-next iphone-or-ipad"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardNextButton | Escape }}
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="devices-group text-center">
+                <h4>
+                    {{ Resources.EnableWebAuthn_IphoneIpadStep6ChangeNameHelpText | Escape }}
+                </h4>
+                <div class="margin-content-step">
+                    <img
+                        src="/runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode | Escape }}/iphone-ipad-step6.png"
+                        alt="Safewhere"
+                    />
+                    <div class="wizard-step-description-text">
+                        {{ Resources.EnableWebAuthn_IphoneIpadStep6OChangeNameOptionalHelpText | Escape }}
+                    </div>
+                    <div class="wizard-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-previous iphone-or-ipad"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-next iphone-or-ipad"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardNextButton | Escape }}
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="devices-group text-center">
+                <h4>
+                    {{ Resources.EnableWebAuthn_IphoneIpadStep7YourDeviceIsAllSetHelpText | Escape }}
+                </h4>
+                <div class="margin-content-step">
+                    <div class="wizard-step-description-text">
+                        <span class="bolder500">
+                            {{ Resources.EnableWebAuthn_IphoneIpadStep7CongratHelpText | Escape }}
+                        </span>
+                        <br />
+                        {{ Resources.EnableWebAuthn_IphoneIpadStep7CongratAddedFingerprintHelpText | Escape }}
+                        <br /><br />
+                        {{ Resources.EnableWebAuthn_IphoneIpadStep7CongratAddedYouWillOnlyBeAbleToLoginHelpText | Escape }}
+                        <br /><br />
+                        {{ Resources.EnableWebAuthn_IphoneIpadStep7CongratNoteHelpText | Escape }}
+                    </div>
+                </div>
+                <div class="wizard-buttons">
+                    <button
+                        type="button"
+                        class="btn btn-previous iphone-or-ipad"
+                    >
+                        {{ Resources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}
+                    </button>
+                    <button type="button" class="btn btn-next iphone-or-ipad">
+                        {{ Resources.EnableSecondFactorMethod_WizardNextButton | Escape }}
+                    </button>
+                </div>
+            </fieldset>
+        </div>
+
+        <!-- FIDO2 keys wizard -->
+        <div id="fido2-keys-wizard">
+            <fieldset class="devices-group text-center">
+                <h4>
+                    {{ Resources.EnableWebAuthn_FIDO2Keys3PutFIDO2KeyInUSBPortHelpText | Escape }}
+                </h4>
+                <div class="margin-content-step">
+                    <div id="block_container">
+                        <div id="left">
+                            <img
+                                class="img-max-width"
+                                src="/runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode | Escape }}/fido2-keys-step3-left.png"
+                                alt="Safewhere"
+                            />
+                            <br /><br />
+                            <b>{{ Resources.EnableWebAuthn_FIDO2Keys3TitleTextLeft | Escape }}</b>
+                            <br />
+                            <span>{{ Resources.EnableWebAuthn_FIDO2Keys3DescriptionTextLeft | Escape }}</span>
+                        </div>
+                        <div id="right">
+                            <img
+                                class="img-max-width"
+                                src="/runtime/images/secondfactor/webauthn/{{Model.CurrentUILanguageCode | Escape }}/fido2-keys-step3-right.png"
+                                alt="Safewhere"
+                            />
+                            <br /><br />
+                            <b>{{ Resources.EnableWebAuthn_FIDO2Keys3TitleTextRight | Escape}}</b>
+                            <br />
+                            <span>{{ Resources.EnableWebAuthn_FIDO2Keys3DescriptionTextRight | Escape }}</span>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="wizard-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-previous fido2-keys"
+                        >
+                            {{ Resources.EnableSecondFactorMethod_WizardPreviosButton | Escape }}
+                        </button>
+                        <button type="button" class="btn btn-next fido2-keys">
+                            {{ Resources.EnableSecondFactorMethod_WizardNextButton | Escape }}
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <!-- Final step: Log in -->
+        <fieldset id="final-step-login" class="devices-group text-center">
+            <h4>{{ Resources.EnableWebAuthn_LoginHelpText | Escape }}</h4>
+            <a
+                id="takeAnActionCountDown"
+                class="bolder500"
+                href="javascript: void(0)"
+                >You have <span id="countdown"></span> seconds left to take an action.
+            </a>
+            <div
+                id="onboardingErrorAtClientSide"
+                class="text-danger"
+                style="display: none"
+            >
+                error message
+            </div>
+
+            <div class="margin-content-step margin-content-step-final">
+                <div class="wizard-step-description-text">
+                    {{ Resources.EnableWebAuthn_YourSecondAuthenticationMethodWillPopupHelpText | Escape }}
+                    <br />
+                    {{ Resources.EnableWebAuthn_DependOnWhatDeviceYourAreUsingHelpText | Escape }}
+                    <br /><br />
+                    {{ Resources.EnableWebAuthn_DependOnAndroidDeviceYourAreUsingHelpText | Escape }}
+                    <br />
+                    {{ Resources.EnableWebAuthn_DependOnIPhoneDeviceYourAreUsingHelpText | Escape }}
+                    <br />
+                    {{ Resources.EnableWebAuthn_DependOnWindowsPCDeviceYourAreUsingHelpText | Escape }}
+                    <br />
+                    {{ Resources.EnableWebAuthn_DependOnMacBookDeviceYourAreUsingHelpText | Escape }}
+                </div>
+                <form
+                    action="/selfservice/WebAuthentication/GoToRecoveryCode"
+                    id="registerWebAuth"
+                    method="post"
+                    class="no-padding"
+                    enctype="multipart/form-data"
+                    role="form"
+                >
+                    {{ Csrf }}
+                    <input
+                        id="recoveryCode"
+                        name="RecoveryCode"
+                        type="hidden"
+                        value=""
+                        autocomplete="off"
+                    />
+                    <div class="wizard-buttons-final-step">
+                        <button
+                            type="submit"
+                            id="btnRegister"
+                            class="btn btn-next"
+                        >
+                            {{ Resources.OtpWebAuthenticationView_EnableWebAuthenViewRegisterButtonText | Escape }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="wizard-step-description-text">
+                {{ Resources.EnableWebAuthn_OnboardWindowsDoesNotPopupHelpText | Escape }}
+            </div>
+            <div class="wizard-buttons-final-step">
+                <button class="btn btn-go-to-choose-device">
+                    {{ Resources.EnableWebAuthn_GetHelpSettingUpAuthenticatorHelpText | Escape }}
+                </button>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<img id="displayBox" src="/runtime/assets/img/loader.svg">
+{% endblock %}

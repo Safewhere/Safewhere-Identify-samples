@@ -33,7 +33,7 @@
                 {% if Model.ErrorMessage != null and Model.ErrorMessage != ""%}
                     <div class="form-group small">
                         <span for="errorMessageLb" class="text-danger">
-                            {{Model.ErrorMessage | Escape }}
+                            {{ Model.ErrorMessage | br_to_newline | escape }}
                         </span>
                     </div>
                 {% endif %}
@@ -59,6 +59,10 @@
                 {% if Model.SecondsUntilUserCanRequestANewOtp > 0 %}
                     <a id="requestOTPLink" style="cursor:default" href="javascript: void(0)">
                         {{Resources.OtpResources.OtpAuthenticationView_YouCanRequestAnotherOtpIn | Escape }} <span id='countdown'></span> {{Resources.OtpResources.OtpAuthenticationView_Seconds | Escape }}
+                    </a>
+                {% else %}
+                    <a id="requestOTPLink" style="cursor:default" href="javascript: void(0)">
+                        {{Resources.OtpResources.OtpAuthenticationView_RequestNewOTPCode | Escape }}
                     </a>
                 {% endif %}
 
@@ -113,12 +117,15 @@
 <script type="text/javascript">
     var timeleft = parseInt("{{Model.SecondsUntilUserCanRequestANewOtp }}");
     var downloadTimer = setInterval(function () {
-        document.getElementById("countdown").innerHTML = timeleft;
+        if (timeleft > 0) {
+            document.getElementById("countdown").innerHTML = timeleft;
+        }
+
         timeleft -= 1;
         if (timeleft < 0) {
             clearInterval(downloadTimer);
             var currentUrl = window.location.href;
-	    var url = currentUrl.replace('/validate', '/login');
+			var url = currentUrl.replace('/validate', '/login');
             document.getElementById("requestOTPLink").innerHTML = "{{Resources.OtpResources.OtpAuthenticationView_RequestNewOTPCode | Escape }}";
             document.getElementById("requestOTPLink").href = url;
             document.getElementById("requestOTPLink").style = "cursor:pointer";

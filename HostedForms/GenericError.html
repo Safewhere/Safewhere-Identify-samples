@@ -17,7 +17,7 @@
                 <span class="text-danger">
                     <span class="form-group small">
                         <span for="errorMessageLb" class="text-danger">
-                            {{Model.ErrorMessage | Escape }}
+                            {{ Model.ErrorMessage | br_to_newline | escape }}
                         </span>
                     </span>
                 </span>
