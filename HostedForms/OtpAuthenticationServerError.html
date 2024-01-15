@@ -13,7 +13,7 @@
     </div>
     <div class="form-bottom">
         <div class="text-danger os2faktor-error-message">
-            {{ Model.ErrorMessage  | Escape }}
+            {{ Model.ErrorMessage | br_to_newline | Escape }}
         </div>
         {% if Model.IsShowLinkToChooseOtpMethods %}
                  <hr />
