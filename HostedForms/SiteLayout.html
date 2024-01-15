@@ -80,32 +80,6 @@
     <script src="assets/js/placeholder.js"></script>
     <![endif]-->
     {{ MiniProfiler | Escape }}
-    <script>
-        function disableLinks() {
-            var currentUrl = window.location.href;
-            // Check if the current URL contains "/adminv2/content-preview/", so disable all <a> tags and the buttons
-            if (currentUrl.indexOf("/adminv2/content-preview/") !== -1) {
-                var links = document.querySelectorAll('a');
-                links.forEach(function(link) {
-                    if (link.getAttribute('onclick')) {
-                        link.removeAttribute('onclick');
-                    }
-                    link.addEventListener('click', function(event) {
-                        event.preventDefault();
-                    });
-                });
-    
-                var buttons = document.querySelectorAll('button, input[type="button"], input[type="submit"]');
-                buttons.forEach(function(button) {
-                    button.addEventListener('click', function(event) {
-                        event.preventDefault();
-                    });
-                });
-            }
-        }
-    
-        window.onload = disableLinks;
-    </script>
 </body>
 
 </html>
