@@ -131,7 +131,7 @@
                 {% if Model.ErrorMessage != null and Model.ErrorMessage != "" %}
                     <div id="wizard-error-message" class="form-group text-center">
                         <span for="errorMessageLb" class="text-danger">
-                            {{ Model.ErrorMessage | br_to_newline | Escape }}
+                            {{Model.ErrorMessage | Escape }}
                         </span>
                     </div>
                 {% endif %}
@@ -166,7 +166,7 @@
                 {% if Model.ErrorMessage != null and Model.ErrorMessage != "" %}
                     <div id="without-wizard-error-message"  class="form-group text-center">
                         <span for="errorMessageLb" class="text-danger">
-                            {{ Model.ErrorMessage | br_to_newline | Escape }}
+                            {{Model.ErrorMessage | Escape }}
                         </span>
                     </div>
                 {% endif %}
@@ -217,11 +217,11 @@
         </div>
             <script type="text/javascript" language="JavaScript">
                 //<![CDATA[
-                    window.commonErrorMessage = `{{Model.ErrorMessage | Escape }}`;
-                    window.isOnboardWithWizard = `{{Model.IsOboardingWithWizard | Escape }}`;
-                    window.contextIdOfEnableAuthenticatorViewModel = `{{Model.ContextId | Escape }}`;
-                    window.copyCodeButtonTextResource = `{{Resources.OtpResources.OtpRecoveryCode_CopyCode | Escape }}`;
-                    window.copiedCodeButtonTextResource = `{{Resources.OtpResources.OtpRecoveryCode_CopiedCode | Escape }}`;
+                    window.commonErrorMessage = "{{Model.ErrorMessage | Escape }}";
+                    window.isOnboardWithWizard = "{{Model.IsOboardingWithWizard | Escape }}";
+                    window.contextIdOfEnableAuthenticatorViewModel = "{{Model.ContextId | Escape }}";
+                    window.copyCodeButtonTextResource = "{{Resources.OtpResources.OtpRecoveryCode_CopyCode | Escape }}";
+                    window.copiedCodeButtonTextResource = "{{Resources.OtpResources.OtpRecoveryCode_CopiedCode | Escape }}";
                 //]]>
             </script>
             <script src="runtime/scripts/plugins/authenticator-wizards.js"></script>
@@ -249,6 +249,14 @@
                         </p>
                     </div>
                 {% endfor %}
+        {% endif %}
+
+        {% if Model.ContextId == "preview_context" %}
+            <script type="text/javascript" language="JavaScript">
+                $('form').bind('submit', function(e) {
+                    e.preventDefault();
+                });
+            </script>
         {% endif %}
     </div>
 </div>
