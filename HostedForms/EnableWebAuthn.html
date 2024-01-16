@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="runtime/assets/css/webauthn-wizards.css">
 {% endblock %}
 
+
+
 {% block "content" %}
 
 <div class="form-box" style="max-width: 700px; width: fit-content;">
@@ -224,7 +226,7 @@
             {% if Model.ErrorMessage != null and Model.ErrorMessage != "" %}
                 <div id="error-message" class="form-group">
                     <span for="errorMessageLb" class="text-danger">
-                        {{ Model.ErrorMessage | Escape }}
+                        {{Model.ErrorMessage | Escape }}
                     </span>
                 </div>
             {% endif %}
@@ -251,6 +253,28 @@
                 <button class="btn btn-go-to-choose-device">{{Resources.OtpResources.EnableWebAuthn_GetHelpSettingUpAuthenticatorHelpText | Escape }}</button>
             </div>
         </fieldset>
+
+            <script src="/runtime/scripts/plugins/webauthn-wizards.js"></script>
+
+            {% if Model.ContextId != "preview_context" %}
+                <script type="text/javascript" language="JavaScript">
+                    //<![CDATA[
+                        window.contextIdOfEnableWebAuthnViewModel = "{{Model.ContextId | Escape }}";
+                        window.onboardDialogTimeout = parseInt('{{Model.OnboardDialogTimeout }}', 10);
+                        window.commonErrorMessage = "{{Resources.OtpResources.EnableWebauthnView_CommonErrorMessage | Escape }}";
+                    //]]>
+                </script>
+                <script src="/runtime/scripts/plugins/webauth.mfa.helpers.js"></script>
+                <script src="/runtime/scripts/plugins/webauth.mfa.register.js"></script>
+            {% else %}
+                <script type="text/javascript" language="JavaScript">
+                    $('#takeAnActionCountDown').show();
+                    $('#onboardingErrorAtClientSide').show();
+                    $('form').bind('submit', function(e) {
+                        e.preventDefault();
+                    });
+                </script>
+            {% endif %}
 
         {% if Model.IsShowLinkToChooseOtpMethods %}
 
@@ -282,13 +306,5 @@
 
 <img id="displayBox" src="/runtime/assets/img/loader.svg" style="cursor: default; display: none; opacity:0.8">
 
-<script src="/runtime/scripts/plugins/webauthn-wizards.js"></script>
-<script type="text/javascript" language="JavaScript">
-    window.contextIdOfEnableWebAuthnViewModel = "{{ Model.ContextId | Escape }}";
-    window.onboardDialogTimeout = parseInt("{{ Model.OnboardDialogTimeout }}", 10);
-    window.commonErrorMessage = "{{ Resources.OtpResources.EnableWebauthnView_CommonErrorMessage | Escape }}";
-</script>
-<script src="/runtime/scripts/plugins/webauth.mfa.helpers.js"></script>
-<script src="/runtime/scripts/plugins/webauth.mfa.register.js"></script>
 
 {% endblock %}

@@ -24,15 +24,11 @@
                 {% endif %}
                 <div class="small">
                     {{Resources.OtpResources.OtpRecoveryCode_AdviceMessage | Escape }}
-                    <br/>
-                    <br/>
-                    {{Resources.OtpResources.OtpRecoveryCode_ClickToContinueButton | Escape }}
                 </div>
             </div>
         </div>
         <div class="form-bottom">
-            <form method="post" role="form" action="/runtime/otpauth/twofactor/finishonboarding?ici_ci={{Model.ContextId | Escape }}">
-                {{ Csrf }}
+            <form>
                 <div class="form-group" style="border: solid 1px;margin-bottom: 4px;">
                     <h4 id="recovery-code" class="text-center recovery-code-text" style="padding: 8px; margin-top: 8px;">
                         {{Model.RecoveryCode | Escape }}
@@ -50,13 +46,17 @@
                 </div>
 
                 <div class="form-group">
-                    <button id="continue-btn" disabled class="btn btn-default">{{Resources.OtpResources.OtpRecoveryCode_Continue | Escape }}</button>
+                    <button id="continue-btn" onclick='doContinue("{{Model.RedirectPath | Escape }}"); return false;' disabled class="btn btn-default">{{Resources.OtpResources.OtpRecoveryCode_Continue | Escape }}</button>
                 </div>
 
             </form>
             <script type="text/javascript">
                 function handleClick(cb) {
                     $('#continue-btn').prop("disabled", !cb.checked);
+                }
+
+                function doContinue(redirectPath) {
+                    window.location.href = redirectPath;
                 }
 
                 function copyTextToClipboard(text) {
