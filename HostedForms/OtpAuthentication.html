@@ -33,7 +33,7 @@
                 {% if Model.ErrorMessage != null and Model.ErrorMessage != ""%}
                     <div class="form-group small">
                         <span for="errorMessageLb" class="text-danger">
-                            {{ Model.ErrorMessage | br_to_newline | Escape }}
+                            {{ Model.ErrorMessage | Escape }}
                         </span>
                     </div>
                 {% endif %}
@@ -125,7 +125,7 @@
         if (timeleft < 0) {
             clearInterval(downloadTimer);
             var currentUrl = window.location.href;
-			var url = currentUrl.replace('/validate', '/login');
+            var url = currentUrl.replace('/validate', '/login');
             document.getElementById("requestOTPLink").innerHTML = "{{Resources.OtpResources.OtpAuthenticationView_RequestNewOTPCode | Escape }}";
             document.getElementById("requestOTPLink").href = url;
             document.getElementById("requestOTPLink").style = "cursor:pointer";

@@ -32,7 +32,7 @@
                 class="form-group text-center text-break"
             >
                 <span for="errorMessageLb" class="text-danger">
-                    {{ Model.ErrorMessage | br_to_newline | Escape }}
+                    {{ Model.ErrorMessage | Escape }}
                 </span>
             </div>
             {% endif %}

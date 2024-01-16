@@ -19,7 +19,7 @@
             {% if Model.ErrorMessage != null && Model.ErrorMessage != '' %}
                 <div id="form-error-message" class="form-group flex-box text-danger text-center text-break error-bg pt-2 pb-2">
                     <span for="errorMessageLb">
-                        {{ Model.ErrorMessage | br_to_newline | Escape }}
+                        {{ Model.ErrorMessage | Escape }}
                     </span>
                 </div>
             {% endif %}
@@ -27,7 +27,7 @@
             {% if Model.InfoMessage != null && Model.InfoMessage != '' %}
                 <div id="form-info" class="form-group flex-box text-info text-center text-break info-bg pt-2 pb-2">
                     <span>
-                        {{ Model.InfoMessage | br_to_newline | Escape }}
+                        {{ Model.InfoMessage | Escape }}
                     </span>
                 </div>
             {% endif %}

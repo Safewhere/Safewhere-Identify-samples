@@ -236,7 +236,7 @@
                 {% if Model.ErrorMessage != null && Model.ErrorMessage != "" %}
                 <div id="wizard-error-message" class="form-group text-center">
                     <span for="errorMessageLb" class="text-danger">
-                        {{ Model.ErrorMessage | br_to_newline | Escape }}
+                        {{ Model.ErrorMessage | Escape }}
                     </span>
                 </div>
                 {% endif %}
@@ -356,7 +356,7 @@
                     class="form-group text-center"
                 >
                     <span for="errorMessageLb" class="text-danger">
-                        {{ Model.ErrorMessage | br_to_newline | Escape }}
+                        {{ Model.ErrorMessage | Escape }}
                     </span>
                 </div>
                 {% endif %}

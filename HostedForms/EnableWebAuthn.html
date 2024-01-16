@@ -224,7 +224,7 @@
             {% if Model.ErrorMessage != null and Model.ErrorMessage != "" %}
                 <div id="error-message" class="form-group">
                     <span for="errorMessageLb" class="text-danger">
-                        {{ Model.ErrorMessage | br_to_newline | Escape }}
+                        {{ Model.ErrorMessage | Escape }}
                     </span>
                 </div>
             {% endif %}
@@ -284,9 +284,9 @@
 
 <script src="/runtime/scripts/plugins/webauthn-wizards.js"></script>
 <script type="text/javascript" language="JavaScript">
-    window.contextIdOfEnableWebAuthnViewModel = `{{ Model.ContextId | Escape }}`;
-    window.onboardDialogTimeout = parseInt(`{{ Model.OnboardDialogTimeout }}`, 10);
-    window.commonErrorMessage = `{{ Resources.OtpResources.EnableWebauthnView_CommonErrorMessage | Escape }}`;
+    window.contextIdOfEnableWebAuthnViewModel = "{{ Model.ContextId | Escape }}";
+    window.onboardDialogTimeout = parseInt("{{ Model.OnboardDialogTimeout }}", 10);
+    window.commonErrorMessage = "{{ Resources.OtpResources.EnableWebauthnView_CommonErrorMessage | Escape }}";
 </script>
 <script src="/runtime/scripts/plugins/webauth.mfa.helpers.js"></script>
 <script src="/runtime/scripts/plugins/webauth.mfa.register.js"></script>

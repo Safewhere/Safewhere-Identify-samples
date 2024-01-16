@@ -25,7 +25,7 @@
         {% if Model.ErrorMessage != null and Model.ErrorMessage != ""%}
             <div class="form-group" style="text-align:center">
                 <span for="errorMessageLb" class="text-danger">
-                    {{ Model.ErrorMessage | br_to_newline | Escape }}
+                    {{Model.ErrorMessage | Escape }}
                 </span>
             </div>
         {% endif %}
