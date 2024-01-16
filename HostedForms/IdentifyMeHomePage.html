@@ -1,0 +1,138 @@
+{% extends "IdentifyMeSiteLayout" %}
+{% block "titleheader" %}{{Resources.HomePage_IdentifyMe | Escape }}{% endblock %}
+{% block "content" %}
+{% assign var1 = '{0\}' %}
+<h4>
+    {{ Resources.HomePage_Welcome | Replace: var1, UserSession.UserName | Escape }}
+</h4>
+<p>{{ Resources.HomePage_Welcome_Msg | Escape }}</p>
+<br />
+{% assign numberOfFeaturesNotEnabled = 0 %}
+<div class="card-deck text-selfservice">
+    {% if Model.CanManageTOTPAuthenticator %}
+    <div class="card">
+        <div class="card-body text-right">
+            <h5 class="card-title text-left">
+                {{ Resources.HomePage_Authenticator | Escape }}
+            </h5>
+            <p class="card-text text-left overflow-ellipsis">
+                {{ Resources.HomePage_AuthenticatorDescription | Escape }}
+            </p>
+        </div>
+        <div class="card-footer">
+            <a
+                href="/selfservice/Authenticator/AuthenticatorAdministration"
+                class="btn btn-selfservice"
+            >
+                <img
+                    src="/selfservice/images/arrow-right.png"
+                    alt="arrow-right.png"
+                />
+            </a>
+        </div>
+    </div>
+    {% else %}
+    {% assign numberOfFeaturesNotEnabled = numberOfFeaturesNotEnabled + 1 %}
+    {% endif %}
+    {% if Model.CanManageWebAuthn %}
+    <div class="card">
+        <div class="card-body text-right">
+            <h5 class="card-title text-left">
+                {{ Resources.HomePage_WebAuthentication | Escape }}
+            </h5>
+            <p class="card-text text-left overflow-ellipsis">
+                {{ Resources.HomePage_WebAuthenticationDescription | Escape }}
+            </p>
+        </div>
+        <div class="card-footer">
+            <a
+                href="/selfservice/WebAuthentication/WebAuthnAdministration"
+                class="btn btn-selfservice"
+            >
+                <img
+                    src="/selfservice/images/arrow-right.png"
+                    alt="arrow-right.png"
+                />
+            </a>
+        </div>
+    </div>
+    {% else %}
+    {% assign numberOfFeaturesNotEnabled = numberOfFeaturesNotEnabled + 1 %}
+    {% endif %}
+    {% if Model.CanEditUserCertificate %}
+    <div class="card">
+        <div class="card-body text-right">
+            <h5 class="card-title text-left">
+                {{ Resources.HomePage_Certificates | Escape }}
+            </h5>
+            <p class="card-text text-left overflow-ellipsis">
+                {{ Resources.HomePage_CertificatesDescription | Escape }}
+            </p>
+        </div>
+        <div class="card-footer">
+            <a href="/selfservice/Certificate" class="btn btn-selfservice">
+                <img
+                    src="/selfservice/images/arrow-right.png"
+                    alt="arrow-right.png"
+                />
+            </a>
+        </div>
+    </div>
+    {% else %}
+    {% assign numberOfFeaturesNotEnabled = numberOfFeaturesNotEnabled + 1 %}
+    {% endif %}
+    {% if Model.CanResetPassword %}
+    <div class="card">
+        <div class="card-body text-right">
+            <h5 class="card-title text-left">
+                {{ Resources.MyProfile_ResetPassword_Title | Escape }}
+            </h5>
+            <p class="card-text text-left overflow-ellipsis">
+                {{ Resources.MyProfile_ResetPassword_Title | Escape }}
+            </p>
+        </div>
+        <div class="card-footer">
+            <a
+                href="/selfservice/Password/ResetPassword"
+                class="btn btn-selfservice"
+            >
+                <img
+                    src="/selfservice/images/arrow-right.png"
+                    alt="arrow-right.png"
+                />
+            </a>
+        </div>
+    </div>
+    {% elseif Model.CanChangePassword %}
+    <div class="card">
+        <div class="card-body text-right">
+            <h5 class="card-title text-left">
+                {{ Resources.MyProfile_ChangePassword_Title | Escape}}
+            </h5>
+            <p class="card-text text-left overflow-ellipsis">
+                {{ Resources.MyProfile_ChangePassword_Description | Escape }}
+            </p>
+        </div>
+        <div class="card-footer">
+            <a
+                href="/selfservice/Password/ChangePassword"
+                class="btn btn-selfservice"
+            >
+                <img
+                    src="/selfservice/images/arrow-right.png"
+                    alt="arrow-right.png"
+                />
+            </a>
+        </div>
+    </div>
+    {% else %}
+    {% assign numberOfFeaturesNotEnabled = numberOfFeaturesNotEnabled + 1 %}
+    {% endif %}
+    {% for i in (1..numberOfFeaturesNotEnabled) %}
+    <div class="card empty-card"></div>
+    {% endfor %}
+
+    <div class="card empty-card"></div>
+    <div class="card empty-card"></div>
+</div>
+{% endblock %}
