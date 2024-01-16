@@ -1,0 +1,124 @@
+{% extends "IdentifyMeSiteLayout" %}
+{% block "titleheader" %}{{Resources.WebAuthenticationAdministration_Title | Escape }}{% endblock %}
+{% block "initscript" %}
+{% endblock %}
+{% block "scripts" %}
+<script src="/selfservice/js/delete.js"></script>
+{% endblock %}
+{% block "content" %}
+<div class="form-box">
+    <div class="form-top">
+        <div class="form-top-left text-left">
+            <h4>
+                {{ Resources.WebAuthenticationAdministration_Title | Escape }}
+            </h4>
+            <p>
+                {{ Resources.WebAuthenticationAdministration_Description | Escape }}
+            </p>
+        </div>
+    </div>
+    <br />
+    <div class="form-bottom form-center">
+        <form
+            action="/selfservice/WebAuthentication/EnableWebAuthn"
+            id="security_form"
+            role="form"
+            method="post"
+        >
+            {{ Csrf }}
+            {% if Model != null && Model.ErrorMessage != "" %}
+            <div
+                id="form-error-message"
+                class="form-group text-center text-break"
+            >
+                <span for="errorMessageLb" class="text-danger">
+                    {{ Model.ErrorMessage | Escape }}
+                </span>
+            </div>
+            {% endif %}
+            {% if Model.HasNoWebAuthns %}
+            <div id="two_factor_webauthns_header" class="text-center">
+                <div>
+                    {{ Resources.MyProfile_Security_NoWebAuthnsConfigure | Escape }}
+                </div>
+            </div>
+            {% endif %}
+
+            <ul class="list-group list-group-flush">
+                {% for webauthn in Model.WebAuthns %}
+                <input
+                    data-val="true"
+                    data-val-required="The UserId field is required."
+                    id="WebAuthns_{{webauthn.Index}}__UserId"
+                    name="WebAuthns[{{webauthn.Index}}].UserId"
+                    type="hidden"
+                    value="{{ webauthn.UserId | Escape }}"
+                />
+                <input
+                    data-val="true"
+                    data-val-required="The MfaMethod field is required."
+                    id="WebAuthns_{{webauthn.Index}}__MfaMethod"
+                    name="WebAuthns[{{webauthn.Index}}].MfaMethod"
+                    type="hidden"
+                    value="{{ webauthn.MfaMethod | Escape}}"
+                />
+                <input
+                    data-val="true"
+                    data-val-required="The EnabledAuthenticator field is required."
+                    id="WebAuthns_{{webauthn.Index}}__EnabledAuthenticator"
+                    name="WebAuthns[{{webauthn.Index}}].EnabledAuthenticator"
+                    type="hidden"
+                    value="{{ webauthn.EnabledAuthenticator | Escape }}"
+                />
+                <input
+                    data-val="true"
+                    data-val-required="The SecondFactorConnectionName field is required."
+                    id="WebAuthns_{{webauthn.Index}}__SecondFactorConnectionName"
+                    name="WebAuthns[{{webauthn.Index}}].SecondFactorConnectionName"
+                    type="hidden"
+                    value="{{ webauthn.SecondFactorConnectionName | Escape }}"
+                />
+                <input
+                    data-val="true"
+                    data-val-required="The SecondFactorConnectionDescription field is required."
+                    id="WebAuthns_{{webauthn.Index}}__SecondFactorConnectionDescription"
+                    name="WebAuthns[{{webauthn.Index}}].SecondFactorConnectionDescription"
+                    type="hidden"
+                    value="{{ webauthn.SecondFactorConnectionDescription | Escape }}"
+                />
+
+                <li
+                    id="user_activated_webauthns_editor_{{webauthn.Index}}_name"
+                    class="list-group-item list-group-item-action align-items-center gray-bg d-flex justify-content-between"
+                >
+                    {{webauthn.SecondFactorConnectionDescription | Escape}}
+                    {% if webauthn.EnabledAuthenticator %}
+                    <input
+                        id="btnReset"
+                        type="submit"
+                        class="btn btn-selfservice pull-right delete"
+                        data-action-url="/selfservice/WebAuthentication/ResetWebAuthn"
+                        data-index="{{ webauthn.Index }}"
+                        data-redirect-url="/selfservice/WebAuthentication/WebAuthnAdministration"
+                        data-title-message="{{Resources.WebAuthenticationAdministration_Confirmation_Title | Escape }}"
+                        data-body-message="{{Resources.WebAuthenticationAdministration_Confirmation_Message | Escape }}"
+                        data-btn-confirm-text="{{Resources.CommonTextResource_Button_ConfirmationDeleteYes | Escape }}"
+                        data-btn-cancel-text="{{Resources.CommonTextResource_Button_ConfirmationDeleteNo | Escape}}"
+                        value="{{Resources.WebAuthenticationAdministration_Button_Reset | Escape }}"
+                    />
+                    {% else %}
+                    <input
+                        id="btnEnable"
+                        type="submit"
+                        formaction="/selfservice/WebAuthentication/EnableWebAuthn?index={{webauthn.Index}}"
+                        class="btn btn-selfservice pull-right"
+                        value="{{Resources.WebAuthenticationAdministration_Button_Register | Escape }}"
+                    />
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -12,7 +12,11 @@
             </div>
         </div>
         <div class="form-bottom text-center text-danger">
-            {{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorErrorViewErrorContent | Escape }}
+            {% if Model != null and Model.ErrorMessage != null and Model.ErrorMessage != ""%}
+                {{ Model.ErrorMessage | Escape }}
+            {% else %}
+                {{Resources.OtpResources.OtpAuthenticationFailedView_OS2faktorErrorViewErrorContent | Escape }}
+            {% endif %}            
         </div>
     </div>
 {% endblock %} 
