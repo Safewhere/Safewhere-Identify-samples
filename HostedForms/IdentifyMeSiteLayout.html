@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <link rel="shortcut icon" href="runtime/assets/ico/safewhere.ico" />
+
+        <title>{% block "titleheader" %} {% endblock %}</title>
+
+        <base href="{{ VirtualDirectory }}/" />
+
+        <!-- CSS -->
+        <link
+            rel="stylesheet"
+            href="/runtime/assets/bootstrap/css/bootstrap.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="/runtime/assets/font-awesome/css/font-awesome.min.css"
+        />
+        <link rel="stylesheet" href="/selfservice/css/roboto-font.css" />
+        <link rel="stylesheet" href="/selfservice/css/site.css" />
+        <link
+            rel="stylesheet"
+            href="/selfservice/lib/font-awesome-4.7.0/css/font-awesome.min.css"
+        />
+        <script src="/runtime/assets/js/jquery-3.5.0.min.js"></script>
+        <script src="/runtime/assets/bootstrap/js/popper.min.js"></script>
+        <script src="/runtime/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/runtime/assets/js/scripts.js"></script>
+        <script src="/selfservice/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="/selfservice/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+        {% block "initscript" %}
+        {% endblock %}
+    </head>
+
+    <body class="d-flex flex-column">
+        <div class="acms-header-loginmethod">
+            {% block "linktologinselector"  %}
+            {% endblock %}
+        </div>
+
+        <div class="acms-header">
+            {% block "titlecontent"  %}
+            {% endblock %}
+        </div>
+        <header class="header">
+            <div class="container border-bottom box-shadow">
+                <div class="row align-items-center">
+                    <div class="col d-flex justify-content">
+                        <div class="mr-auto">
+                            <a href="/selfservice">
+                                <figure class="figure text-center">
+                                    <img
+                                        src="/runtime/assets/ico/safewhere.ico"
+                                        class="figure-img img-fluid rounded img-self-service"
+                                        alt="safewhere.ico"
+                                    />
+                                    <figcaption class="figure-caption">
+                                        {{ Resources.LoginPartial_IdentifyMe | Escape }}
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+
+                        {% if UserSession != null and UserSession.UserName != "" %}
+                        <div id="profileIcon" class="text-center pr-3">
+                            {% if UserSession.CanEditUserProfile and IsNotAccessDeniedPage %}
+                            <figure class="figure text-center">
+                                <a href="/selfservice/MyProfile">
+                                    <img
+                                        id="gravatar_icon"
+                                        src="/selfservice/images/g-avatar.jpg"
+                                        alt="userName"
+                                        class="btn-circle img-self-service"
+                                    />
+                                    <figcaption class="figure-caption">
+                                        {{ UserSession.UserName | Escape }}
+                                    </figcaption>
+                                </a>
+                            </figure>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                        <div class="dropdown">
+                            <figure
+                                class="figure text-center"
+                                id="dropdownMenuButton"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                            >
+                                <img
+                                    src="/selfservice/images/Menu.svg"
+                                    class="figure-img img-fluid rounded img-self-service"
+                                    alt="Menu.svg"
+                                />
+                                <figcaption class="figure-caption">
+                                    {{ Resources.LoginPartial_Menu | Escape }}
+                                </figcaption>
+                            </figure>
+                            <div
+                                class="dropdown-menu dropdown-menu-right text-right"
+                                aria-labelledby="dropdownMenuButton"
+                            >
+                                {% if UserSession != null and UserSession.UserName != "" %}
+                                    {% if UserSession.CanManageTOTPAuthenticator and IsNotAccessDeniedPage %}
+                                    <a
+                                        class="dropdown-item"
+                                        href="/selfservice/Authenticator/AuthenticatorAdministration"
+                                        >{{ Resources.HomePage_Authenticator | Escape }}</a
+                                    >
+                                    {% endif %}
+                                    {% if UserSession.CanManageWebAuthn and IsNotAccessDeniedPage %}
+                                    <a
+                                        class="dropdown-item"
+                                        href="/selfservice/WebAuthentication/WebAuthnAdministration"
+                                        >{{ Resources.HomePage_WebAuthentication | Escape }}</a
+                                    >
+                                    {% endif %}
+                                    {% if UserSession.CanEditUserCertificate and IsNotAccessDeniedPage %}
+                                    <a
+                                        class="dropdown-item"
+                                        href="/selfservice/Certificate"
+                                        >{{ Resources.HomePage_Certificates | Escape }}</a
+                                    >
+                                    {% endif %}
+                                    {% if UserSession.CanResetPassword and IsNotAccessDeniedPage %}
+                                    <a
+                                        class="dropdown-item"
+                                        href="/selfservice/Password/ResetPassword"
+                                        >{{ Resources.MyProfile_ResetPassword_Title | Escape }}</a
+                                    >
+                                    <div class="dropdown-divider"></div>
+                                    {% elseif UserSession.CanChangePassword and IsNotAccessDeniedPage %}
+                                    <a
+                                        class="dropdown-item"
+                                        href="/selfservice/Password/ChangePassword"
+                                        >{{ Resources.MyProfile_ChangePassword_Title | Escape }}</a
+                                    >
+                                    <div class="dropdown-divider"></div>
+                                    {% endif %}
+                                {% endif %}
+                                <a
+                                    class="dropdown-item"
+                                    href="/selfservice/Account/SignOut"
+                                    >{{ Resources.CommonTextResources_LogOut | Escape }}</a
+                                >
+                            </div>
+                        </div>
+                        {% if UserSession != null and UserSession.UserName != "" %}
+                        <div>
+                            <iframe
+                                frameborder="0"
+                                allowtransparency="true"
+                                height="0"
+                                width="0"
+                                src="/selfservice/Account/RPIFrame"
+                            ></iframe>
+                            <iframe
+                                frameborder="0"
+                                allowtransparency="true"
+                                height="0"
+                                width="0"
+                                src="{{ApplicationConfigurations.CheckSessionIframeUri | Escape}}"
+                                id="opIFrame"
+                            ></iframe>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main role="main" class="container-fluid flex-fill content">
+            <div class="page-content-wrapper">
+                <br />
+                {% block "content" %} {% endblock %}
+            </div>
+        </main>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-9 text-right">
+                        <small class="footer-text">
+                            Copyrights by Safewhere©2023
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        {% block "scripts" %}
+        {% endblock %}
+        <script>
+            function disableLinks() {
+                var currentUrl = window.location.href;
+                // Check if the current URL contains "/adminv2/content-preview/", so disable all <a> tags and the buttons
+                if (currentUrl.indexOf("/adminv2/content-preview/") !== -1) {
+                    var links = document.querySelectorAll('a');
+                    links.forEach(function(link) {
+                        if (link.getAttribute('onclick')) {
+                            link.removeAttribute('onclick');
+                        }
+                        link.addEventListener('click', function(event) {
+                            event.preventDefault();
+                        });
+                    });
+    
+                    var buttons = document.querySelectorAll('button, input[type="button"], input[type="submit"]');
+                    buttons.forEach(function(button) {
+                        button.addEventListener('click', function(event) {
+                            event.preventDefault();
+                        });
+                    });
+    
+                    $(document).ready(function() {
+                        $('form').submit(function(event) {
+                            event.preventDefault();
+                        });
+                    });
+
+                    var allElements = document.querySelectorAll('*');
+                    allElements.forEach(function(element) {
+                        element.onclick = null;
+                    });
+                }
+            }
+    
+            window.onload = disableLinks;
+        </script>
+    </body>
+</html>

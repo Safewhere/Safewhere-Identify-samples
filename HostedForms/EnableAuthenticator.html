@@ -250,14 +250,6 @@
                     </div>
                 {% endfor %}
         {% endif %}
-
-        {% if Model.ContextId == "preview_context" %}
-            <script type="text/javascript" language="JavaScript">
-                $('form').bind('submit', function(e) {
-                    e.preventDefault();
-                });
-            </script>
-        {% endif %}
     </div>
 </div>
 {% endblock %} 
