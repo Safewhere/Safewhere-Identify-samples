@@ -1,0 +1,69 @@
+// The Postman script to get a list of connections from the /api/rest/v2/connections endpoint and add new key-value pair settings to the AuthenticationConnectionConfigurationSection.InterceptorService.AdditionalSettings of each connection.
+
+const accessToken = 'input your access token'; // Replace with your access token
+const idpUrl = 'https://identify-demo.safewhere.local/admin/api/rest/v2/Connections/'; // Replace with your API endpoint
+const newAdditionalSetting = {
+    "Key": "newKey3", //Replace with the new key name
+    "Value": "newValue3" //Replace with value of the key
+}
+
+
+const preRequestOptions = {
+    url: idpUrl,
+    method: 'GET',
+    header: {
+        'Authorization': `${accessToken}`,
+        'Content-Type': 'application/json',
+    },
+};
+
+
+
+pm.sendRequest(preRequestOptions, function (err, response) {
+    if (err) {
+        console.log('GET error', err);
+    } else if (response.code === 200) {
+        // get list of connections
+
+        var connections = response.json().resources;
+
+        // add new setting key for each connection
+        for (let i = 0; i < connections.length; i++) {
+            
+            var connection = connections[i];        
+            var interceptorService = connection.configurations[0].interceptorService;
+            // only update InterceptorServiceConfiguration if it exists and has a value in the first index
+            if (connection.configurations.length > 0 && interceptorService != null
+            && interceptorService.interceptorService != 'None' 
+            && interceptorService.useInterceptor === true
+            ) {
+                connection.configurations[0].interceptorService.additionalSettings.push(newAdditionalSetting);
+                console.log('Update connection:', connection.name);
+
+                // update connection object in web api
+                pm.sendRequest({
+                    url: idpUrl, 
+                    method: 'PUT',
+                    header: {
+                        'Authorization': `${accessToken}`, 
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(connection)
+                }, function (err, response) {
+                    if (err) {
+                        console.log(err);
+                    } else if (response.code === 200) {
+                        console.log("Object updated successfully");
+                    } else {
+                        console.log("Error updating object in web api");
+                    }
+                });
+            } else {
+                console.log('Skip:', connection.name);
+                continue; // proceed to the next connection
+            }            
+        }
+    } else {
+        console.log("Error getting list of connections from web api");
+    }
+});

@@ -1,0 +1,55 @@
+// The Postman script to get a specific connection of the **/api/rest/v2/connections** endpoint and add new key-value pair settings to the AuthenticationConnectionConfigurationSection.InterceptorService.AdditionalSettings of the connection
+
+const accessToken = 'input access token'; // Replace with your access token
+const idpUrl = 'https://identify-demo.safewhere.local/admin/api/rest/v2/Connections/'; // Replace with your API endpoint
+const connectionName = 'saml2 authen'; // Replace with your connection
+const newAdditionalSetting = {
+    "Key": "anotherkey", //Replace with the new key name
+    "Value": "anothervalue" //Replace with value of the key
+}
+
+const urlWithConnectionName = idpUrl + connectionName;
+
+const preRequestOptions = {
+    url: urlWithConnectionName,
+    method: 'GET',
+    header: {
+        'Authorization': `${accessToken}`,
+        'Content-Type': 'application/json',
+    },
+};
+
+pm.sendRequest(preRequestOptions, function (err, response) {
+    if (err) {
+        console.log('GET error:', err);
+    } else if (response.code === 200) {
+        // get connection object
+        var connection = response.json();
+		
+        // update AdditionalSettings with new key-value pair
+        var additionalSettings = connection.configurations[0].interceptorService.additionalSettings;
+        additionalSettings.push(newAdditionalSetting);
+        console.log('Modify connection:', connection);
+
+        // update object in web api
+        pm.sendRequest({
+            url: idpUrl,
+            method: 'PUT',
+            header: {
+                'Authorization': `${accessToken}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(connection)
+        }, function (err, response) {
+            if (err) {
+                console.log('PUT error', err);
+            } else if (response.code === 200) {
+                console.log("Object updated successfully");
+            } else {
+                console.log("Error updating object in web api");
+            }
+        });
+    } else {
+        console.log("Error getting object from web api");
+    }
+});
