@@ -1,0 +1,21 @@
+{
+  "logTargets": [
+    "SerilogSinks"
+  ],
+  "logFilterPreset": "LogFilterSilentPreset",
+  "logFilterRulesets": "[{\"Name\": \"Silent\", \"Include\": \"9000,8000\", \"Exclude\": \"*\"}]",
+  "auditUserRequestLogToSqlStore": false,
+  "auditUserRequestLogToWindowsEventStore": false,
+  "auditUserRequestLogToCommonLoggingStore": false,
+  "logLevelRuntime": "Error",
+  "logLevelAdmin": "Error",
+  "enableWcfTracingRuntime": false,
+  "enableWcfTracingAdmin": false,
+  "enableRestApiVerboseErrorToClient": false,
+  "enableIdentifyStsVerboseErrorToClient": false,
+  "enableAuditLog": false,
+  "enableSecurityLog": true,
+  "enableBillingLog": false,
+  "enableRevisionLog": false,
+  "enableAnalysisLog": false
+}

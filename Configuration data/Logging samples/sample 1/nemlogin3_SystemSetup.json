@@ -1,0 +1,21 @@
+{
+  "logTargets": [
+    "SerilogSinks"
+  ],
+  "logFilterPreset": "LogFilterDefaultPreset",
+  "logFilterRulesets": "[{\"Name\": \"Default\", \"Include\": \"*\"}]",
+  "auditUserRequestLogToSqlStore": false,
+  "auditUserRequestLogToWindowsEventStore": false,
+  "auditUserRequestLogToCommonLoggingStore": false,
+  "logLevelRuntime": "Information",
+  "logLevelAdmin": "Information",
+  "enableWcfTracingRuntime": false,
+  "enableWcfTracingAdmin": false,
+  "enableRestApiVerboseErrorToClient": false,
+  "enableIdentifyStsVerboseErrorToClient": false,
+  "enableAuditLog": true,
+  "enableSecurityLog": true,
+  "enableBillingLog": true,
+  "enableRevisionLog": true,
+  "enableAnalysisLog": true
+}
