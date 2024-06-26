@@ -248,49 +248,7 @@
                     enctype="multipart/form-data"
                     role="form"
                 >
-                    <input
-                        type="hidden"
-                        name="Secret"
-                        value="{{ Model.Secret | Escape }}"
-                    />
-                    <input
-                        type="hidden"
-                        name="AuthenticatorUri"
-                        value="{{ Model.AuthenticatorUri | Escape }}"
-                    />
-                    <input
-                        type="hidden"
-                        name="CurrentUILanguageCode"
-                        value="{{ Model.CurrentUILanguageCode | Escape }}"
-                    />
-                    <input
-                        type="hidden"
-                        name="SharedKey"
-                        value="{{ Model.SharedKey | Escape }}"
-                    />
-
-                    {% if Model.HasSelectedAuthenticator %}
-                    <input
-                        type="hidden"
-                        name="SelectedAuthenticator.EnabledAuthenticator"
-                        value="{{ Model.SelectedAuthenticator.EnabledAuthenticator | Escape }}"
-                    />
-                    <input
-                        type="hidden"
-                        name="SelectedAuthenticator.SecondFactorConnectionName"
-                        value="{{ Model.SelectedAuthenticator.SecondFactorConnectionName | Escape }}"
-                    />
-                    <input
-                        type="hidden"
-                        name="SelectedAuthenticator.MfaMethod"
-                        value="{{ Model.SelectedAuthenticator.MfaMethod | Escape }}"
-                    />
-                    <input
-                        type="hidden"
-                        name="SelectedAuthenticator.UserId"
-                        value="{{ Model.SelectedAuthenticator.UserId | Escape }}"
-                    />
-                    {% endif %}
+                    {{ Csrf }}
                     <div
                         class="form-group text-center bolder500 margin-content-step"
                     >
@@ -401,50 +359,6 @@
                     class="wizard no-padding"
                 >
                     {{ Csrf }}
-                    <input
-                        type="hidden"
-                        name="Secret"
-                        value="{{ Model.Secret | Escape }}"
-                    />
-                    <input
-                        type="hidden"
-                        name="AuthenticatorUri"
-                        value="{{ Model.AuthenticatorUri | Escape }}"
-                    />
-                    <input
-                        type="hidden"
-                        name="CurrentUILanguageCode"
-                        value="{{ Model.CurrentUILanguageCode | Escape }}"
-                    />
-                    <input
-                        type="hidden"
-                        name="SharedKey"
-                        value="{{ Model.SharedKey | Escape }}"
-                    />
-
-                    {% if Model.HasSelectedAuthenticator %}
-                    <input
-                        type="hidden"
-                        name="SelectedAuthenticator.EnabledAuthenticator"
-                        value="{{ Model.SelectedAuthenticator.EnabledAuthenticator | Escape }}"
-                    />
-                    <input
-                        type="hidden"
-                        name="SelectedAuthenticator.SecondFactorConnectionName"
-                        value="{{ Model.SelectedAuthenticator.SecondFactorConnectionName | Escape }}"
-                    />
-                    <input
-                        type="hidden"
-                        name="SelectedAuthenticator.MfaMethod"
-                        value="{{ Model.SelectedAuthenticator.MfaMethod | Escape }}"
-                    />
-                    <input
-                        type="hidden"
-                        name="SelectedAuthenticator.UserId"
-                        value="{{ Model.SelectedAuthenticator.UserId | Escape }}"
-                    />
-                    {% endif %}
-
                     <div class="form-group">
                         <input
                             type="checkbox"
