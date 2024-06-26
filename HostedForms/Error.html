@@ -58,23 +58,28 @@
                         </div>
                     </form>
                     {% else %}
-                    <p>
                         <h4>
                             {{Resources.RuntimeModelResources.RuntimeModelUserReportCorrelationErrorComplete | Escape }}
                         </h4>
+                        
                         <h4>
                             {{Resources.RuntimeModelResources.RuntimeModelCorrelationId | Escape }}
+                        
                         </h4>
-                
-                        {{Model.CorrelationError.CorrelationId }}
+                        
+                        <p>
+                            {{Model.CorrelationError.CorrelationId }}
+                        </p>
+                        
                         <br />
                 
                         <h4>
                             {{Resources.RuntimeModelResources.RuntimeModelIssuedDate | Escape }}
                         </h4>
                 
-                        {{Model.CorrelationError.IssuedDate | Escape }}
-                    </p>
+                        <p>
+                            {{Model.CorrelationError.IssuedDate | Escape }}
+                        </p>
                     {% endif %}
                 </div>
         </div>
