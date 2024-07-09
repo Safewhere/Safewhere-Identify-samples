@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
-using System.Net;
 using System.Text;
 using Microsoft.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
@@ -12,8 +11,6 @@ namespace Safewhere.Samples.EventFramework
     {
         static void Main(string[] args)
         {
-            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
-
             string connectionString =
                 ConfigurationManager.ConnectionStrings["AzureServiceBus"].ConnectionString;
             string topic = ConfigurationManager.AppSettings["Topic"];
